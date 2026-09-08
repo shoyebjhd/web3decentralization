@@ -48,22 +48,21 @@ composite = 0.30*infra + 0.25*capital + 0.25*governance + 0.20*software
 
 | Chain | Infra | Capital | Gov | Software | Composite |
 |-------|:-----:|:-------:|:---:|:--------:|:---------:|
-| btc | — | — | — | — | **84.8** |
-| eth | — | — | — | — | **80.8** |
-| dot | — | — | — | — | **72.6** |
-| ada | — | — | — | — | **70.4** |
-| atom | — | — | — | — | **68.0** |
-| arb | — | — | — | — | **62.7** |
-| near | — | — | — | — | **60.3** |
-| avax | — | — | — | — | **57.2** |
-| sol | — | — | — | — | **53.2** |
-| sui | — | — | — | — | **49.2** |
-| apt | — | — | — | — | **49.1** |
-| xrp | — | — | — | — | **43.2** |
+| btc | 92 | 78 | 95 | 70 | **84.8** |
+| eth | 84 | 72 | 80 | 88 | **80.8** |
+| dot | 75 | 64 | 82 | 68 | **72.6** |
+| ada | 78 | 68 | 72 | 60 | **70.4** |
+| cosmos | 70 | 58 | 78 | 65 | **68.0** |
+| arb | 64 | 58 | 68 | 60 | **62.7** |
+| near | 66 | 56 | 62 | 55 | **60.3** |
+| avax | 62 | 55 | 58 | 52 | **57.2** |
+| sol | 58 | 48 | 55 | 50 | **53.2** |
+| sui | 54 | 46 | 50 | 45 | **49.2** |
+| apt | 56 | 45 | 48 | 45 | **49.1** |
+| xrp | 45 | 35 | 40 | 55 | **43.2** |
 
-> Pillar-level numbers are published in the interactive terminal and the
-> per-chain audits. This table is a summary; full pillar breakdowns live in
-> `content/chains/`.
+> Pillar scores extracted from the published chain audits (2026-09). Updated
+> per-chain audits live in `content/chains/` and the interactive terminal.
 
 ## Reproducibility
 
