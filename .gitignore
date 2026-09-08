@@ -44,6 +44,10 @@ New Text Document.txt
 # ===== Deploy temp payload artifacts =====
 chains/payload_*.html
 
+# ===== Build outputs =====
+build/
+demo/
+
 # ===== OS / editor =====
 Thumbs.db
 .DS_Store
