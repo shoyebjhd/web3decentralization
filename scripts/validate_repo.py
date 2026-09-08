@@ -98,6 +98,8 @@ def main():
         path = root / rel
         if not path.is_file() or path.suffix not in {".md", ".py", ".js", ".sh", ".php", ".csv"}:
             continue
+        if path.resolve() == Path(__file__).resolve():
+            continue  # don't flag this script's own sentinel literals
         try:
             if secret_pat.search(path.read_text(encoding="utf-8", errors="ignore")):
                 errors.append(f"possible secret in tracked file: {rel}")
