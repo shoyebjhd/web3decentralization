@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decentralization-Adjusted Crypto Staking Yield Calculator — W3D</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0b1020;
+    color: #e7ebf5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .card {
+    background: #11182f;
+    border: 1px solid #1e294b;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 680px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e294b;
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .header h1 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    background: #1e3a8a;
+    color: #93c5fd;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 580px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 6px;
+  }
+  .field select, .field input {
+    width: 100%;
+    background: #090d1a;
+    border: 1px solid #27355e;
+    color: #ffffff;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field select:focus, .field input:focus {
+    border-color: #3b82f6;
+  }
+  .slider-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #cbd5e1;
+    margin-top: 4px;
+  }
+  .results {
+    background: #090d1a;
+    border: 1px solid #1e294b;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 18px;
+  }
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    text-align: center;
+  }
+  @media (max-width: 500px) {
+    .res-grid { grid-template-columns: 1fr; }
+  }
+  .res-item .val {
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 4px;
+  }
+  .res-item .lbl {
+    font-size: 11px;
+    color: #8fa3c9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .green { color: #10b981; }
+  .blue { color: #38bdf8; }
+  .amber { color: #f59e0b; }
+  .purple { color: #a855f7; }
+
+  .risk-box {
+    background: #141d3b;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .risk-info {
+    font-size: 12px;
+  }
+  .risk-score {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .bar-track {
+    background: #090d1a;
+    border-radius: 4px;
+    height: 6px;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .footer {
+    border-top: 1px solid #1e294b;
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #64748b;
+  }
+  .footer a {
+    color: #60a5fa;
+    text-decoration: none;
+  }
+  .footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <h1>⚡ Real Staking APY &amp; Risk Calculator</h1>
+    <span class="badge">W3D Terminal</span>
+  </div>
+
+  <div class="grid">
+    <div class="field">
+      <label for="chain">Select Staking Network</label>
+      <select id="chain">
+        <option value="eth">Ethereum (ETH) — Score 80.8</option>
+        <option value="dot">Polkadot (DOT) — Score 72.6</option>
+        <option value="ada">Cardano (ADA) — Score 70.4</option>
+        <option value="cosmos">Cosmos Hub (ATOM) — Score 68.0</option>
+        <option value="arb">Arbitrum (ARB DAO) — Score 62.7</option>
+        <option value="near" selected>Near Protocol (NEAR) — Score 60.3</option>
+        <option value="avax">Avalanche (AVAX) — Score 57.2</option>
+        <option value="sol">Solana (SOL) — Score 53.2</option>
+        <option value="sui">Sui (SUI) — Score 49.2</option>
+        <option value="apt">Aptos (APT) — Score 49.1</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="amount">Staking Principal (USD)</label>
+      <input type="number" id="amount" value="5000" min="10" step="100">
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="field">
+      <label for="fee">Validator Fee / Commission: <span id="fee-val">5%</span></label>
+      <input type="range" id="fee" min="0" max="20" value="5" step="0.5">
+      <div class="slider-row"><span>0% (Zero-Fee)</span><span>20% (High Fee)</span></div>
+    </div>
+    <div class="field">
+      <label for="period">Staking Duration</label>
+      <select id="period">
+        <option value="1">1 Year</option>
+        <option value="0.5">6 Months</option>
+        <option value="2">2 Years</option>
+        <option value="3">3 Years</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="results">
+    <div class="res-grid">
+      <div class="res-item">
+        <div class="lbl">Gross Nominal APY</div>
+        <div class="val blue" id="res-apy">7.80%</div>
+      </div>
+      <div class="res-item">
+        <div class="lbl">Inflation Drag</div>
+        <div class="val amber" id="res-inf">-4.50%</div>
+      </div>
+      <div class="res-item">
+        <div class="lbl">Real Adjusted Yield</div>
+        <div class="val green" id="res-real">+2.91%</div>
+      </div>
+    </div>
+
+    <div class="risk-box">
+      <div style="flex: 1; margin-right: 16px;">
+        <div class="risk-info"><strong>Decentralization Health:</strong> <span id="res-risk-tier">Moderate Resilience</span></div>
+        <div class="bar-track"><div class="bar-fill" id="res-bar" style="width: 60.3%; background: #00ec97;"></div></div>
+      </div>
+      <div class="risk-score" id="res-score">60.3 / 100</div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-bottom: 14px; font-size: 13px;">
+    Estimated Net Real Return: <strong class="green" id="res-usd">$145.50</strong> <span id="res-note">(after validator fee &amp; network dilution)</span>
+  </div>
+
+  <div class="footer">
+    <span>Data: <a id="chain-audit-link" href="https://web3decentralization.com/chains/near/" target="_blank">Near Protocol Audit &amp; Nakamoto Score</a></span>
+    <a href="https://web3decentralization.com/terminal/" target="_blank">Open Full Terminal →</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DATA = {
+    eth:    { name: "Ethereum",       apy: 3.2, inf: 0.6, score: 80.8, col: "#627eea", tier: "High Decentralization", slug: "eth" },
+    dot:    { name: "Polkadot",       apy: 11.8, inf: 6.5, score: 72.6, col: "#e6007a", tier: "Strong Multi-Validator", slug: "dot" },
+    ada:    { name: "Cardano",        apy: 3.0, inf: 1.8, score: 70.4, col: "#2a42a3", tier: "High Stake Dispersion", slug: "ada" },
+    cosmos: { name: "Cosmos Hub",     apy: 13.5, inf: 9.8, score: 68.0, col: "#5068a2", tier: "Moderate-High", slug: "cosmos" },
+    arb:    { name: "Arbitrum",       apy: 4.5, inf: 2.0, score: 62.7, col: "#28a0f0", tier: "L1 Inherited Security", slug: "arb" },
+    near:   { name: "Near Protocol",  apy: 7.8, inf: 4.5, score: 60.3, col: "#00ec97", tier: "Sharded Validator Set", slug: "near" },
+    avax:   { name: "Avalanche",      apy: 7.5, inf: 4.8, score: 57.2, col: "#e84142", tier: "Moderate Subnet Balance", slug: "avax" },
+    sol:    { name: "Solana",         apy: 6.8, inf: 5.2, score: 53.2, col: "#14f195", tier: "Cloud-Concentrated Set", slug: "sol" },
+    sui:    { name: "Sui",            apy: 6.5, inf: 5.5, score: 49.2, col: "#4da2ff", tier: "High-Speed / Clustered", slug: "sui" },
+    apt:    { name: "Aptos",          apy: 7.0, inf: 6.2, score: 49.1, col: "#2ed3b7", tier: "Enterprise-Weighted", slug: "apt" }
+  };
+
+  var selChain = document.getElementById("chain");
+  var inputAmount = document.getElementById("amount");
+  var inputFee = document.getElementById("fee");
+  var feeVal = document.getElementById("fee-val");
+  var selPeriod = document.getElementById("period");
+
+  function calc() {
+    var cKey = selChain.value;
+    var d = DATA[cKey] || DATA.near;
+    var amt = parseFloat(inputAmount.value) || 0;
+    var feePct = parseFloat(inputFee.value) || 0;
+    var years = parseFloat(selPeriod.value) || 1;
+
+    feeVal.textContent = feePct + "%";
+
+    var netNominalApy = d.apy * (1 - (feePct / 100));
+    var realApy = ((1 + (netNominalApy / 100)) / (1 + (d.inf / 100)) - 1) * 100;
+    var totalRealMultiplier = Math.pow(1 + (realApy / 100), years);
+    var netReturnUsd = amt * (totalRealMultiplier - 1);
+
+    document.getElementById("res-apy").textContent = netNominalApy.toFixed(2) + "%";
+    document.getElementById("res-inf").textContent = "-" + d.inf.toFixed(2) + "%";
+    
+    var realEl = document.getElementById("res-real");
+    realEl.textContent = (realApy >= 0 ? "+" : "") + realApy.toFixed(2) + "%";
+    realEl.className = "val " + (realApy >= 0 ? "green" : "amber");
+
+    document.getElementById("res-score").textContent = d.score.toFixed(1) + " / 100";
+    document.getElementById("res-risk-tier").textContent = d.tier;
+    
+    var bar = document.getElementById("res-bar");
+    bar.style.width = d.score + "%";
+    bar.style.background = d.col;
+
+    document.getElementById("res-usd").textContent = (netReturnUsd >= 0 ? "+$" : "-$") + Math.abs(netReturnUsd).toFixed(2);
+    
+    var auditLink = document.getElementById("chain-audit-link");
+    auditLink.textContent = d.name + " Audit & Scorecard";
+    auditLink.href = "https://web3decentralization.com/chains/" + d.slug + "/";
+  }
+
+  selChain.addEventListener("change", calc);
+  inputAmount.addEventListener("input", calc);
+  inputFee.addEventListener("input", calc);
+  selPeriod.addEventListener("change", calc);
+
+  calc();
+})();
+</script>
+</body>
+</html>

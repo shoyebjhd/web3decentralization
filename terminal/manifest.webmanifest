@@ -1,0 +1,13 @@
+{
+  "name": "W3D Terminal — Web3 Decentralization Intelligence",
+  "short_name": "W3D Terminal",
+  "description": "Institutional-grade decentralization audits for major L1 networks. By The W3D Team.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#010204",
+  "theme_color": "#010204",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

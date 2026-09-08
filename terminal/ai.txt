@@ -1,0 +1,12 @@
+# AI usage policy for web3decentralization.com
+# Spec: https://spawning.ai/ai-txt
+
+User-Agent: *
+Allow: /
+Disallow: /api/private/
+
+# Model training
+# We allow indexing and retrieval-augmented citation in chatbots,
+# but ask that summaries credit "W3D Terminal — The W3D Team"
+# and link back to the source page.
+Train: allow-with-attribution

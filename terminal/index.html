@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>Web3 Decentralization Intelligence Terminal · The W3D Team</title>
+    <meta name="description" content="Institutional-grade decentralization audits for 8 Layer-1 networks — Bitcoin, Ethereum, Solana, Cardano, Avalanche, Polkadot, Cosmos and XRP. Nakamoto Coefficient across infrastructure, capital, governance and software. Built and maintained by The W3D Team." />
+    <meta name="author" content="The W3D Team" />
+    <meta name="theme-color" content="#010204" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://web3decentralization.com/terminal/" />
+
+    <!-- Favicon system -->
+    <link rel="icon" type="image/svg+xml" href="/terminal/favicon.svg" />
+    <link rel="alternate icon" href="/terminal/logo.svg" />
+    <link rel="apple-touch-icon" href="/terminal/logo.svg" />
+    <link rel="manifest" href="/terminal/manifest.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="W3D Terminal" />
+    <meta property="og:title" content="Web3 Decentralization Intelligence Terminal" />
+    <meta property="og:description" content="Nakamoto Coefficient · Blackout Simulator · Audit-grade PDF reports for L1 networks." />
+    <meta property="og:url" content="https://web3decentralization.com/terminal/" />
+    <meta property="og:image" content="https://web3decentralization.com/terminal/og-cover.png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="672" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Web3 Decentralization Intelligence Terminal" />
+    <meta name="twitter:description" content="Stress-test L1 networks. Quantify Sybil resistance. Export audit-grade PDFs." />
+    <meta name="twitter:image" content="https://web3decentralization.com/terminal/og-cover.png" />
+    <meta name="twitter:creator" content="@web3decentralization" />
+
+    <!-- Generative SEO hints -->
+    <link rel="alternate" type="text/plain" title="LLM site summary" href="/terminal/llms.txt" />
+
+    <link rel="preload" as="image" href="/terminal/og-cover.png" />
+
+    <!-- Content Security Policy: tight default; allow framer-motion/recharts inline styles, self scripts only -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:;" />
+
+    <!--
+      This app is built with the React Router rooted at "/". When deployed under
+      /terminal/ the router otherwise receives "/terminal/" and falls into the
+      catch-all 404. Shift the visible path to the app root before boot so the
+      dashboard renders, and so deep links (/terminal/chains/btc) map in-app.
+    -->
+    <script>
+    (function () {
+      try {
+        var path = window.location.pathname;
+        if (path.indexOf('/terminal') === 0) {
+          var rest = path.slice('/terminal'.length);
+          rest = rest === '' ? '/' : rest;
+          window.history.replaceState(window.history.state, '', rest + window.location.search + window.location.hash);
+        }
+      } catch (e) {}
+    })();
+    </script>
+
+    <!--
+      W3D Terminal is a free platform. Unlock every feature (historical data,
+      CSV export, audit-grade PDFs, stress simulator) for all visitors by
+      marking a Pro session captured before the app bundle boots. Also hides the
+      redundant "Get Pro" upsell badge in the nav.
+    -->
+    <style>
+      a[href="/contact?plan=pro"] { display: none !important; }
+      div.glass:has(.lucide-shield-check) { display: none !important; }
+      a[href="/pricing"] { display: none !important; }
+    </style>
+    <script>
+    (function () {
+      try { window.localStorage.setItem('w3d_pro_lead', 'captured'); } catch (e) {}
+    })();
+    </script>
+
+    <script type="module" crossorigin src="/terminal/assets/index-w3d-gatefree.js"></script>
+    <link rel="stylesheet" crossorigin href="/terminal/assets/index-Z8DHnOxV.css">
+  </head>
+
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

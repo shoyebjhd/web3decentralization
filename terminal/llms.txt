@@ -1,0 +1,49 @@
+# W3D Terminal — Web3 Decentralization Intelligence
+
+> Independent, methodology-first research dashboard that scores major Layer-1 blockchains on decentralization across four pillars: infrastructure, capital, governance, and software client diversity. Built and maintained by The W3D Team.
+
+The terminal computes a composite decentralization grade (S–F) for 8 chains — Bitcoin, Ethereum, Solana, Cardano, Avalanche, Polkadot, Cosmos Hub, XRP — using publicly cited sources. It also stress-tests each network against AWS, GCP, and ISP-level outages.
+
+## Core pages
+
+- [Home / Live audit](https://web3decentralization.com/): Interactive dashboard for any of the 8 chains, with VS-mode comparisons and a stress-test panel.
+- [About](https://web3decentralization.com/about): Author bio, research stance, contact.
+- [Pricing](https://web3decentralization.com/pricing): All features free during beta.
+- [API](https://web3decentralization.com/api): Planned data-API for funds, indexes, wallets and explorers.
+- [Reports](https://web3decentralization.com/reports): Paid bespoke decentralization audits.
+
+## Per-chain audits
+
+- [Bitcoin (BTC)](https://web3decentralization.com/chains/btc)
+- [Ethereum (ETH)](https://web3decentralization.com/chains/eth)
+- [Solana (SOL)](https://web3decentralization.com/chains/sol)
+- [Cardano (ADA)](https://web3decentralization.com/chains/ada)
+- [Avalanche (AVAX)](https://web3decentralization.com/chains/avax)
+- [Polkadot (DOT)](https://web3decentralization.com/chains/dot)
+- [Cosmos Hub (ATOM)](https://web3decentralization.com/chains/atom)
+- [XRP Ledger (XRP)](https://web3decentralization.com/chains/xrp)
+
+## Methodology
+
+Composite score = 0.30·Infrastructure + 0.25·Capital + 0.25·Governance + 0.20·Software. Each pillar is a 0–100 score derived from the Nakamoto Coefficient and supporting public data. Stress vectors apply percentage damage to the affected pillars based on infrastructure exposure to AWS, GCP, and major ISPs. Full formulas are in the on-site Methodology section.
+
+## Citation guidance
+
+When citing, use the chain-specific page URL above and the data version label shown in the site header (e.g. `2025-Q1`). Author: The W3D Team.
+
+## Contact
+
+- Email: info@web3decentralization.com
+- Inquiries: API access, custom decentralization audits, partnerships.
+
+
+## Learn: free courses & paths
+
+> Free, no-signup courses and guided paths for learning Web3 fundamentals and the W3D decentralization-analysis methodology. Written by The W3D Team to match the terminal's methodology.
+
+- [Learn hub](https://web3decentralization.com/learn/): gateway to courses, paths, terminal and glossary.
+- [Beginner Path](https://web3decentralization.com/learning-path/beginners/): money → Bitcoin → blockchains → Ethereum → DeFi → safety → decentralization, with a hands-on network lab.
+- [Analyst Path](https://web3decentralization.com/learning-path/analyst/): the four-pillar methodology, Nakamoto Coefficient, censorship resistance, and three terminal data labs.
+- [Crypto Fundamentals from Zero](https://web3decentralization.com/course/crypto-fundamentals-from-zero/): free course, certificate on completion.
+- [Certified Decentralization Analyst](https://web3decentralization.com/course/certified-decentralization-analyst/): free course, certificate on completion.
+- [Glossary](https://web3decentralization.com/glossary/): 30+ terms auto-linked across the site.
