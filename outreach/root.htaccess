@@ -1,0 +1,32 @@
+# BEGIN W3D Affiliate Redirects
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^go/binance/?$ https://accounts.binance.com/en/register [R=301,L]
+RewriteRule ^go/bybit/?$ https://www.bybit.com/en [R=301,L]
+RewriteRule ^go/okx/?$ https://www.okx.com/ [R=301,L]
+RewriteRule ^go/mexc/?$ https://www.mexc.com/register [R=301,L]
+RewriteRule ^go/kraken/?$ https://www.kraken.com/sign-up [R=301,L]
+RewriteRule ^go/coinbase/?$ https://www.coinbase.com/join [R=301,L]
+RewriteRule ^go/gate/?$ https://www.gate.io/signup [R=301,L]
+# END W3D Affiliate Redirects
+
+# BEGIN React Terminal SPA
+RewriteRule ^terminal/?$ /terminal/index.html [L]
+RewriteCond %{REQUEST_URI} ^/terminal/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^terminal/.*$ /terminal/index.html [L]
+# END React Terminal SPA
+
+# Serve existing files/directories directly (terminal assets, card/calculator embeds, wp media)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# BEGIN WordPress
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+# END WordPress

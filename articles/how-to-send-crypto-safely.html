@@ -1,0 +1,70 @@
+<!--TITLE:How to Send Crypto Safely: Addresses, Networks & Mistakes to Avoid-->
+<!--CAT:Guides-->
+<!--META:How to send crypto safely in 2026. Networks, wallet addresses, confirmations, test transactions and the mistakes that lose funds.-->
+<article>
+
+<h2>Key Takeaways</h2>
+<ul>
+  <li>Most lost crypto is not stolen from a broken crypto network — it is sent to the wrong address, the wrong network, or the wrong wallet type.</li>
+  <li>Always verify the receiving network matches the currency, and send a small test transaction before any large amount.</li>
+  <li>Address formats differ per network (BTC, ERC-20, SOL, etc.), and some are cross-compatible — which is exactly why the "wrong network" mistake happens.</li>
+  <li>Slow down, copy-paste (never type), and double-check the last few characters of every address.</li>
+</ul>
+
+<h2>Why Sending Crypto Is Where People Lose Money</h2>
+<p>Transfers are the most user-error-prone step in self-custody. The blockchain itself processes what it is told; if you tell it the wrong place, it happily obliges. The three classic fails: (1) sending to a paste-shifted address, (2) sending on the wrong network, (3) sending a token to an incompatible wallet type. Each is preventable with a few seconds of discipline.</p>
+
+<h2>Understanding Addresses and Networks</h2>
+<ul>
+  <li><strong>Bitcoin (BTC):</strong> addresses start with <code>1</code>, <code>3</code>, or <code>bc1</code>. A Bitcoin address is Bitcoin-only.</li>
+  <li><strong>Ethereum (ETH) + all ERC-20 tokens:</strong> addresses start with <code>0x</code> and are shared — one address holds ETH and every ERC-20.</li>
+  <li><strong>Solana (SOL):</strong> base58 strings, often 32–44 characters.</li>
+  <li><strong>Other L1s (BNB, Polygon, Avalanche):</strong> EVM chains reuse <code>0x</code> addresses — which creates the dangerous illusion that an ETH address works for a Polygon or BNB deposit. It syntactically works; the funds can land on the wrong chain and be unrecoverable.</li>
+</ul>
+<p>The golden rule: <strong>the network and the asset must both match.</strong> An ERC-20 USDT needs the Ethereum/ERC-20 network on both sides — not BEP-20, not TRC-20.</p>
+
+<h2>Step-by-Step: How to Send Crypto Without Losing It</h2>
+<ol>
+  <li><strong>Copy the destination address</strong> from the recipient's wallet or exchange withdrawal page — never type it, never trust a chat screenshot.</li>
+  <li><strong>Verify the network on BOTH sides.</strong> The sending wallet's network selector must match the receiving wallet/withdrawal network exactly.</li>
+  <li><strong>Confirm the deposit exchange supports that exact network</strong> for the token you are sending. Exchanges reject or lose deposits on unsupported networks.</li>
+  <li><strong>Send a small test amount first.</strong> A few dollars' worth proves the path. Only then send the remainder.</li>
+  <li><strong>Check the last few characters</strong> of the generated QR/address right before confirming, and re-read your amount.</li>
+  <li><strong>Wait for confirmations.</strong> One confirmation for most chains; Bitcoin may want more. Do not "resend" impatient orders.</li>
+</ol>
+
+<h2>The "Wrong Network" Mistake, Explained</h2>
+<p>Most tokens exist on several networks: USDT lives on Ethereum (ERC-20), BNB Chain (BEP-20) and Tron (TRC-20). Withdrawing USDT and selecting the wrong network means the coins move to a valid address on a chain the recipient did not ask for — often irrecoverable, or recoverable only with specialist help. This single error is responsible for a huge fraction of support-ticket losses. Always confirm the network dropdown says exactly what your destination expects.</p>
+
+<h2>Confirmations and "Is It There Yet?"</h2>
+<ul>
+  <li><strong>Confirmation</strong> = the number of blocks mined on top of your transaction. Exchanges usually credit deposits after 1 (Ethereum) to 3–6 (Bitcoin) confirmations.</li>
+  <li><strong>Pending is normal.</strong> A low fee can leave a transaction pending for hours; it is not lost, just slow. You can often bump the fee with replace-by-fee (RBF).</li>
+  <li><strong>Never send the "same" transaction twice</strong> just because it looks stuck.</li>
+</ul>
+
+<h2>Common Mistakes and How to Avoid Them</h2>
+<ul>
+  <li><strong>Paste-shift errors:</strong> always re-check the first and last characters after pasting.</li>
+  <li><strong>Mixing networks:</strong> treat the network selector like the most important field on the screen.</li>
+  <li><strong>Sending testnet/BNB to a be-address:</strong> beware address cloning scams that swap a real address for one they control.</li>
+  <li><strong>Sending NFTs or non-native tokens to exchange deposits:</strong> many exchanges do not support them; deposits can be stuck.</li>
+  <li><strong>Typing addresses:</strong> never — copy-paste or QR only.</li>
+</ul>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Can I recover crypto sent to the wrong address?</h3>
+<p>Usually no. Blockchain transactions are irreversible. Exchanges can sometimes recover tokens sent to a wrong-but-supported network, but on-chain misaddresses to a wallet you do not control cannot be reversed.</p>
+<h3>What happens if I send USDT on the wrong network?</h3>
+<p>It moves to a valid address on the wrong chain. If the destination is an exchange, it may credit it only if they support that network; otherwise it is stuck or requires manual recovery. This is why a test transaction exists.</p>
+<h3>How many confirmations do I need?</h3>
+<p>One is usually enough for Ethereum and EVM chains; Bitcoin exchanges typically require 3–6. Your destination page will state the requirement.</p>
+<h3>Is it safe to reuse the same address?</h3>
+<p>Generally yes for receiving — modern wallets generate fresh addresses but reuse does not itself cause loss. Just be consistent and verify each time you send.</p>
+
+<h2>Final Verdict</h2>
+<p>Safe crypto transfers are a discipline, not a skill. Match the network exactly, copy-paste addresses, send a test transaction, and double-check before you confirm. Sloppiness — not technology — is what empties wallets. Buy on a regulated exchange, withdraw to self-custody with a test first, and treat every transfer like it is your rent money: it may well be, in whichever <a href="https://web3decentralization.com/best-crypto-wallets/">wallet</a> you choose if you skip these steps.</p>
+
+<p><em>Disclaimer: This article is for educational purposes only and contains affiliate links. We may earn a commission at no extra cost to you. Once sent, crypto cannot be reversed; always verify before confirming.</em></p>
+
+</article>

@@ -1,0 +1,47 @@
+<?php
+/**
+ * Theme footer.
+ *
+ * @package w3d
+ */
+?>
+</main><!-- #w3d-main -->
+
+<footer class="w3d-footer" id="colophon">
+	<div class="w3d-wrap">
+		<div class="w3d-footer-top">
+			<div class="w3d-footer-brand">
+				<?php echo w3d_logo_markup( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<p>Independent decentralization scores, exchange reviews, and beginner Web3 guides. No hype, no pump-talk.</p>
+			</div>
+			<nav class="w3d-footer-nav" aria-label="<?php esc_attr_e( 'Footer', 'w3d' ); ?>">
+				<ul>
+					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/chains/' ) ); ?>">Chain Audits</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/best-crypto-exchanges-2026/' ) ); ?>">Best Exchanges</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About The W3D Team</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/methodology/' ) ); ?>">Methodology</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/terminal/' ) ); ?>">W3D Terminal</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<p class="w3d-footer-disclaimer">
+			Independent educational research by The W3D Team &mdash; not financial or investment advice. Nothing on this site
+			constitutes a recommendation to buy, sell, or hold any digital asset. Some outbound links are affiliate links;
+			they never affect the price you pay or our ratings. Scores follow the published
+			<a href="<?php echo esc_url( home_url( '/methodology/' ) ); ?>">methodology</a> and can be reproduced live in the
+			<a href="<?php echo esc_url( home_url( '/terminal/' ) ); ?>">W3D Terminal</a>.
+		</p>
+
+		<div class="w3d-footer-copy">
+			<span>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> Web3 Decentralization</span>
+			<span>Independent research estimate based on public data.</span>
+		</div>
+	</div>
+</footer>
+
+<?php wp_footer(); ?>
+</body>
+</html>

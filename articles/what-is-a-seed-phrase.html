@@ -1,0 +1,115 @@
+<!--TITLE:What Is a Seed Phrase? How to Protect Your Crypto Recovery Words-->
+<!--CAT:Wallets-->
+<!--META:What is a crypto seed phrase? How it works, how to back it up safely, and the mistakes that lose people their funds.-->
+<article>
+
+<h2>Key Takeaways</h2>
+<ul>
+  <li>A seed phrase is a list of 12 or 24 words that can regenerate all the keys in your wallet — it is the master backup.</li>
+  <li>Anyone with your seed phrase can steal everything; there is no password reset, no customer support, and no reversal.</li>
+  <li>Write it on paper or metal, store it offline, and never photograph it or enter it on any website.</li>
+</ul>
+
+<h2>What a Seed Phrase Is</h2>
+<p>A seed phrase (also called a mnemonic phrase or recovery phrase) is a human-readable set of 12 or 24 English words generated when you first create a crypto wallet. Those words encode the master key from which every private key in the wallet is derived. If you lose your phone, laptop, or hardware wallet, you can restore full access to all your funds on any compatible wallet using just those words.</p>
+
+<p>It was standardized by <strong>BIP-39</strong> (Bitcoin Improvement Proposal 39) and is used by virtually all modern wallets: MetaMask, Trust Wallet, Ledger, Trezor, Phantom, Exodus, and others.</p>
+
+<h2>How It Works Under the Hood</h2>
+<ol>
+  <li>The wallet generates a random sequence of 128–256 bits of entropy.</li>
+  <li>Those bits are converted into 12 or 24 English words using a fixed dictionary of 2,048 words.</li>
+  <li>From those words, a mathematical derivation path produces all private keys and addresses in the wallet.</li>
+  <li>The same seed phrase, entered into any compatible wallet, recreates the exact same keys and balances.</li>
+</ol>
+
+<p>This means the seed phrase is not a "password" for your account — it <strong>is</strong> the account. Lose it, and the funds are gone. Share it, and whoever has it can take everything in seconds.</p>
+
+<h2>Seed Phrase vs Private Key vs Password</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Term</th>
+      <th>What It Is</th>
+      <th>Recovery Possible?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Seed phrase</td>
+      <td>Master backup — 12 or 24 words that generate all keys</td>
+      <td>Only if you saved it</td>
+    </tr>
+    <tr>
+      <td>Private key</td>
+      <td>Long alphanumeric string that signs a transaction for one address</td>
+      <td>Derived from the seed phrase</td>
+    </tr>
+    <tr>
+      <td>Wallet password</td>
+      <td>Local encryption PIN protecting app access on your device</td>
+      <td>Yes — reset via seed phrase</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>How to Back It Up Correctly</h2>
+<ol>
+  <li><strong>Write it on paper immediately</strong> when the wallet generates it. Do not skip this step or "do it later."</li>
+  <li><strong>Use a second backup</strong> in a separate physical location — fireproof safe, safety deposit box, or trusted family member's home.</li>
+  <li><strong>Consider metal backup</strong> — steel plates or capsules (e.g., Cryptosteel, Billfodl) survive fire, water, and corrosion.</li>
+  <li><strong>Verify the backup</strong> by restoring a fresh wallet from your written words. Confirm all balances appear correctly.</li>
+  <li><strong>Update after any significant addition</strong> — if you add new wallets or accounts derived from the same phrase, the original backup still covers them, but verify.</li>
+</ol>
+
+<h2>What Never to Do</h2>
+<ul>
+  <li><strong>Never photograph it</strong> — cameras upload to cloud backups, and phone photos are accessible to malware.</li>
+  <li><strong>Never store it digitally</strong> — no notes app, no Google Doc, no password manager, no email, no screenshot.</li>
+  <li><strong>Never enter it on any website</strong> — if a site asks for your seed phrase, it is a scam. No legitimate service ever needs it.</li>
+  <li><strong>Never share it with "support"</strong> — customer support from MetaMask, Ledger, Binance, or anyone else will never ask for it.</li>
+  <li><strong>Never type it into a text field</strong> — keyloggers and clipboard hijackers can capture it.</li>
+</ul>
+
+<h2>How Many Words and Why It Matters</h2>
+<p>12-word phrases are standard for most software wallets. 24-word phrases offer slightly more entropy (256 bits vs 128 bits), which is marginally more resistant to brute-force attacks, though 12 words is already computationally infeasible to guess. Hardware wallets often default to 24 words for the additional security margin.</p>
+
+<p>Both 12-word and 24-word phrases are deterministic: the same phrase always produces the same keys, regardless of which wallet app you use to restore.</p>
+
+<h2>Common Seed Phrase Mistakes</h2>
+<ul>
+  <li><strong>Reordering words:</strong> the order matters. Entering words in the wrong sequence produces different (wrong) keys.</li>
+  <li><strong>Misspelling:</strong> some words look similar. Use the BIP-39 wordlist to verify ambiguous words (e.g., "angle" vs "angel").</li>
+  <li><strong>Single backup location:</strong> if your only paper backup is in a house that floods, you lose everything.</li>
+  <li><strong>Trusting digital backups:</strong> cloud-synced notes, photo libraries, and password managers are all compromised by malware, phishing, or account takeover.</li>
+  <li><strong>Buying a pre-configured wallet:</strong> if someone gives you a wallet with a seed phrase already written down, they have the keys and can drain it.</li>
+</ul>
+
+<h2>How to Test Your Backup</h2>
+<ol>
+  <li>Install a fresh wallet app on a different device (or reset your existing wallet).</li>
+  <li>Choose "Restore from seed phrase" and enter your written words in the correct order.</li>
+  <li>Verify that your addresses and balances appear correctly.</li>
+  <li>If everything matches, your backup is valid. You can now safely use the wallet with confidence.</li>
+</ol>
+
+<h2>What Happens If You Lose Your Seed Phrase</h2>
+<p>If you lose your seed phrase and the device is lost, damaged, or reset, the funds are permanently unrecoverable. There is no central server to contact, no "forgot password" link, and no way to prove ownership without the key. This is by design — it is what makes crypto censorship-resistant and truly self-sovereign, but it means the responsibility is entirely yours.</p>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Can I change my seed phrase?</strong><br>
+No. You can generate a new wallet (and new seed phrase) and transfer funds to it, but you cannot change the existing one.</p>
+
+<p><strong>Do different wallets use the same seed phrase format?</strong><br>
+Yes. BIP-39 is the standard. A seed phrase from Ledger will work with Trezor, MetaMask, Exodus, and any other BIP-39-compatible wallet.</p>
+
+<p><strong>Is it safe to store my seed phrase in a bank safety deposit box?</strong><br>
+Yes, as long as you have a secondary backup elsewhere. Bank access can be restricted during emergencies, and banks are not crypto-aware custodians.</p>
+
+<p><strong>What if someone else finds my seed phrase?</strong><br>
+They can immediately transfer all funds to their own wallet. There is no way to freeze or reverse the transaction.</p>
+
+<p><strong>How often should I test my backup?</strong><br>
+Once a year is a good practice. Restore on a fresh device, verify balances, and re-secure the backup.</p>
+
+</article>

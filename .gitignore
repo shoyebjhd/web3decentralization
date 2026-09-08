@@ -1,0 +1,63 @@
+# ===== Secrets & credentials (NEVER commit) =====
+.vv-secrets.json
+*.env
+.env.*
+wp-config.php
+*secret*
+
+# ===== Internal operations plans (contain infra/credentials) =====
+PLAN.md
+PLAN-to-earn.md
+PLAN-open-source-hub.md
+
+# ===== Internal deployment scripts (expose server host/user) =====
+deploy_*.py
+deploy_*.sh
+
+# ===== Local AI agent config / context =====
+.opencode/
+.vv-context/
+.vv-project.json
+.aiderrules
+.claude-rules
+.clinerules
+.cursorrules
+.gemini-rules
+QWEN.md
+
+# ===== Temporary / media assets (not source) =====
+.temp/
+temp/
+first-frames/
+output/
+video-clip/
+scenes/
+storyboards/
+subjects/
+ref-img/
+eng.traineddata
+New Text Document.txt
+
+# ===== Video production script (not learning content) =====
+剧本.md
+
+# ===== Deploy temp payload artifacts =====
+chains/payload_*.html
+
+# ===== OS / editor =====
+Thumbs.db
+.DS_Store
+desktop.ini
+*.swp
+*.swo
+
+# ===== Node =====
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# ===== Python =====
+__pycache__/
+*.pyc
+.venv/
+venv/

@@ -1,0 +1,66 @@
+<!--TITLE:Nakamoto Coefficient Explained: What It Is and Why Decentralization Scores Matter-->
+<!--META:Nakamoto Coefficient explained simply. What it measures, how to calculate it by pillar, and how the leading Layer-1 blockchains actually score in 2026.—>
+<article>
+
+<p>"How decentralized is this blockchain?" is a question almost every crypto guide answers with hand-waving. The <strong>Nakamoto Coefficient</strong> is the attempt to turn that vague question into a number. It answers a precise question: <em>how many independent, coordinated actors would you need to stop controlling before the network stops functioning properly?</em></p>
+
+<p>In this guide we explain the Nakamoto Coefficient in plain English, show you how it breaks down across the different parts of a network, and then apply three of the leading examples with live data from our <a href="https://web3decentralization.com/terminal/">Web3 Decentralization Intelligence Terminal</a> — the version here is our working estimate, grounded in the same methodology as our <a href="https://web3decentralization.com/chains/">decentralization scores hub</a>.</p>
+
+<h2>What Is the Nakamoto Coefficient?</h2>
+<p>The concept was popularized by Balaji Srinivasan in 2017, inspired by the Lorenz curve and the Gini coefficient used by economists to measure wealth inequality. In crypto, the Gini coefficient ranks how concentrated a resource is among holders. The Nakamoto Coefficient inverts that idea: instead of "how skewed is the distribution," it asks "how many entities must collude to gain majority control?"</p>
+
+<p>Think of it as a <strong>break-even number</strong>. If you remove the top <code>n</code> actors and the network stops working, then the Nakamoto Coefficient is <code>n</code>. The higher the number, the more actors a hostile group would have to compromise — and the more decentralized the system.</p>
+
+<p>Concretely, it's often computed as the minimum group of entities needed to reach a given threshold — commonly the share required to disrupt the subsystem, taken as a fraction where the coefficient equals the number of entities whose combined resource share first exceeds the disruption threshold (for example <code>1/3</code> or <code>1/2</code> of a given resource).</p>
+
+<h2>Why One Number Isn't Enough</h2>
+<p>A blockchain is not a single thing. Different parts can be decentralized to very different degrees. A network can have thousands of miners (decentralized) yet run on a handful of software client implementations, or have no on-chain governance yet run most of its nodes on Amazon Web Services. So a single coefficient hides more than it reveals.</p>
+
+<p>We solve this by splitting decentralization into four pillars, each measured by its own coefficient, then weighting them into one composite score with the framework on our <a href="https://web3decentralization.com/methodology/">methodology page</a>:</p>
+
+<table>
+  <thead>
+    <tr><th>Pillar</th><th>What it measures</th><th>Weight</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Infrastructure</td><td>Nodes, miners, and the hosting/cloud/ISP split</td><td>30%</td></tr>
+    <tr><td>Capital</td><td>Coin and validation-power distribution (Gini, top holders)</td><td>25%</td></tr>
+    <tr><td>Governance</td><td>Who can change the rules; on-chain vs off-chain process</td><td>25%</td></tr>
+    <tr><td>Software</td><td>Number and split of client implementations that run the network</td><td>20%</td></tr>
+  </tbody>
+</table>
+
+<h2>How a Score Is Calculated</h2>
+<p>For each pillar we estimate the coefficient (how many actors control that pillar's disruption threshold) and convert it into a 0–100 score, then apply the weight. The composite is a weighted average.</p>
+
+<pre>Composite = 0.30·Infra + 0.25·Capital + 0.25·Governance + 0.20·Software</pre>
+
+<h2>Three Real Examples</h2>
+<h3>Bitcoin — Nakamoto Coefficient and Score</h3>
+<p>Bitcoin's infrastructure is the most dispersed in crypto, with roughly <strong>17,800 reachable nodes across 100+ countries</strong> and comparatively low reliance on a single cloud provider. Its governance requires rough consensus and Bitcoin Improvement Proposals rather than a single on-chain vote. The weak spot is software: <strong>Bitcoin Core dominates ~95%</strong> of client share, so one severe Core bug could be systemic.</p>
+<p>Working score: <strong>84.8 / 100</strong> — the highest in the audited set. Full breakdown: <a href="https://web3decentralization.com/chains/btc/">Bitcoin decentralization audit</a>.</p>
+
+<h3>Ethereum — Nakamoto Coefficient and Score</h3>
+<p>Ethereum scores well on software diversity (multiple client teams implement the consensus layer) but its staking and node distribution and its reliance on large validators pull the capital pillar down. Its governance sits between formal on-chain and informal social process.</p>
+<p>Working score: <strong>80.8 / 100</strong>. Full breakdown: <a href="https://web3decentralization.com/chains/eth/">Ethereum decentralization audit</a>.</p>
+
+<h3>Solana — Nakamoto Coefficient and Score</h3>
+<p>Solana illustrates the speed-vs-decentralization trade-off. Its software split and infrastructure are reasonably broad, but capital and validator concentration pull the score down. That is exactly the trade you accept for high throughput.</p>
+<p>Working score: <strong>53.2 / 100</strong> — the fastest major chain is among the least decentralized. Full breakdown: <a href="https://web3decentralization.com/chains/sol/">Solana decentralization audit</a>.</p>
+
+<p>For the other five audited networks (Cardano, Avalanche, Polkadot, Cosmos, XRP), see our <a href="https://web3decentralization.com/chains/">decentralization scores hub</a> or run any chain live in the <a href="https://web3decentralization.com/terminal/">Terminal</a> and export the audit yourself.</p>
+
+<h2>Limitations to Keep in Mind</h2>
+<ul>
+  <li><strong>It's not a durability metric.</strong> The coefficient is a snapshot; it doesn't score attack resistance over time or social resilience.</li>
+  <li><strong>Threshold choice matters.</strong> Whether you measure at 1/3 or 1/2 changes the number, so coefficients are only comparable under the same rule.</li>
+  <li><strong>Data isn't (always) public.</strong> Sizable estimates rely on node discovery and holder data, so treat last-mile figures as estimates.</li>
+  <li><strong>One number can't capture everything.</strong> That's why we split into four pillars rather than quoting a single figure.</li>
+</ul>
+
+<h2>The Bottom Line</h2>
+<p>The Nakamoto Coefficient is the best single-number proxy for "how hard is this network to take over" — but only if you apply it per subsystem. When you see "Nakamoto Coefficient = N," always ask <em>which subsystem</em> and <em>which threshold</em>. Our composite approach shows why two networks with similar Net Composition can be decentralized in very different ways.</p>
+
+<p><em>Written by Alex Vance (<a href="https://web3decentralization.com/about/">about</a> · <a href="https://web3decentralization.com/methodology/">methodology</a>). Independent research estimate based on public data, not investment advice.</em></p>
+
+</article>

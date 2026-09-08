@@ -1,0 +1,15 @@
+# Disavow file for web3decentralization.com
+# Generated 2026-09-02. Lines starting with '#' are ignored by Google.
+#
+# BACKGROUND
+# The domain was part of the "MistCulture Network" built by EOSITE Digital Inc.
+# (confirmed via archived site footer on 2024-09-22 capture). PBN/network links
+# do not pass real equity and carry manual-action/spam risk in Google.
+#
+# TODO: After Google Search Console verification, export the "Links" report
+# "Top linking sites" and append any confirmed network/irrelevant referring
+# domains here as 'domain:' entries. Re-upload to the Disavow tool.
+
+# Same-network hubs (confirmed in archived footer / network footprint)
+domain:mistculture.com
+domain:eosite.com

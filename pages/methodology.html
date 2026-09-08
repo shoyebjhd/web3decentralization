@@ -1,0 +1,71 @@
+<!--TITLE:Decentralization Methodology — How We Score Networks-->
+<!--META:How Web3Decentralization measures network decentralization: the Nakamoto Coefficient, a four-pillar 30/25/25/20 composite, and AWS/GCP outage stress vectors.-->
+<article>
+
+<h2>Methodology Overview</h2>
+<p>This page documents the exact framework used by the <a href="https://web3decentralization.com/terminal/">Web3 Decentralization Intelligence Terminal</a> and this site's network audits. The goal is a reproducible, quantitative answer to the question: <em>how decentralized is a layer-1 network?</em></p>
+
+<h2>Core Metric: The Nakamoto Coefficient</h2>
+<p>The backbone of the analysis is the <strong>Nakamoto Coefficient</strong> — the minimum number of independent parties that would need to be compromised or coordinated together to halt or manipulate a network. A higher coefficient means a government, cartel, or infrastructure provider would need to control <em>more</em> independent parties to break the network, making it more decentralized in that dimension.</p>
+
+<h2>Four Pillars, Weighted Composite</h2>
+<p>Composite decentralization is not a single number. It is built from four scored pillars, each a 0–100 grade derived from the Nakamoto Coefficient and supporting public data:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Pillar</th>
+      <th>Weight</th>
+      <th>What It Measures</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Infrastructure</td>
+      <td>30%</td>
+      <td>How spread out nodes, hosting, and validating infrastructure are</td>
+    </tr>
+    <tr>
+      <td>Capital</td>
+      <td>25%</td>
+      <td>Distribution of value / stake and economic power</td>
+    </tr>
+    <tr>
+      <td>Governance</td>
+      <td>25%</td>
+      <td>How distributed decision-making and protocol governance are</td>
+    </tr>
+    <tr>
+      <td>Software</td>
+      <td>20%</td>
+      <td>Client diversity — how many independent software implementations run</td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Composite = 0.30 · Infrastructure + 0.25 · Capital + 0.25 · Governance + 0.20 · Software.</strong></p>
+
+<h2>Stress Vectors: Infrastructure Outage Simulation</h2>
+<p>Beyond static scores, the Terminal stress-tests each network against <strong>AWS, GCP, and ISP-level outages</strong>. These vectors apply percentage damage to the pillars based on how exposed the network's infrastructure is to a single provider. This surfaces the practical risk: a network can look decentralized while still depending heavily on one cloud or ISP backbone.</p>
+
+<h2>Networks Audited</h2>
+<ul>
+  <li>Bitcoin (BTC)</li>
+  <li>Ethereum (ETH)</li>
+  <li>Solana (SOL)</li>
+  <li>Cardano (ADA)</li>
+  <li>Avalanche (AVAX)</li>
+  <li>Polkadot (DOT)</li>
+  <li>Cosmos Hub (ATOM)</li>
+  <li>XRP Ledger (XRP)</li>
+</ul>
+<p>Run any of these live and export an audit-grade PDF report in the <a href="https://web3decentralization.com/terminal/">Terminal</a>.</p>
+
+<h2>Data &amp; Reproducibility</h2>
+<ul>
+  <li><strong>Public, cited sources:</strong> each pillar score is derived from publicly available data referenced in the Terminal's per-chain views.</li>
+  <li><strong>Versioned:</strong> data carries a version label (e.g. an annual-quarter label) so analyses can be tracked over time.</li>
+  <li><strong>Transparent assumptions:</strong> methodology and assumptions are stated explicitly so the grades can be challenged and improved.</li>
+</ul>
+
+<p><em>Disclaimer: These scores are independent research and educational estimates, not investment advice. They are meant to sharpen comparison, not to prescribe action.</em></p>
+
+</article>

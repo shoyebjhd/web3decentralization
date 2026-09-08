@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decentralization Score — W3D</title>
+<style>
+  :root{color-scheme:dark}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0b1020;color:#e7ebf5;font:13px/1.5 system-ui,Segoe UI,Roboto,sans-serif;padding:16px}
+  .head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .head .score{margin-left:auto;text-align:right}
+  .head h1{font-size:15px;font-weight:700;letter-spacing:.3px}
+  .head .nk{color:#8fa3c9;font-size:12px}
+  .score .num{font-size:26px;font-weight:800;line-height:1}
+  .score .of{color:#8fa3c9;font-size:11px}
+  .pill{color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px}
+  .bar{margin:10px 0}
+  .bar .row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;color:#c6cfe4}
+  .bar .track{background:#1a2240;border-radius:6px;height:8px;overflow:hidden}
+  .bar .fill{height:100%;border-radius:6px;transition:width .5s}
+  .n{bottom:0}
+  .note{color:#8fa3c9;font-size:11px;margin-top:12px;border-top:1px solid #1c2747;padding-top:8px}
+  .note a{color:#6fb1ff;text-decoration:none}
+  .note a:hover{text-decoration:underline}
+  .who{float:right;font-size:11px;color:#6b7ba0}
+</style>
+</head>
+<body>
+  <div class="head">
+    <div>
+      <h1 id="name">–</h1>
+      <div class="nk" id="nk">–</div>
+    </div>
+    <div class="score">
+      <div class="num" id="num">–</div>
+      <div class="of">/ 100 composite</div>
+    </div>
+  </div>
+  <div id="bars"></div>
+  <div class="note" id="note"></div>
+<script>
+(function(){
+  var DATA = {
+    btc:   {name:"Bitcoin",        img:"https://web3decentralization.com/terminal/og/btc.png",   comp:84.8, nk:"Nakamoto Coefficient ≈ 4 (capital/infrastructure), ≈19e5 addresses (capita)",
+      b:[["Infrastructure",92,"#f7931a"],["Capital",78,"#f7931a"],["Governance",95,"#f7931a"],["Software",70,"#f7931a"]]},
+    eth:   {name:"Ethereum",       img:"https://web3decentralization.com/terminal/og/eth.png",   comp:80.8, nk:"Nakamoto Coefficient ≈ 3 across infra/capital, ≈4 software",
+      b:[["Infrastructure",84,"#627eea"],["Capital",72,"#627eea"],["Governance",80,"#627eea"],["Software",88,"#627eea"]]},
+    sol:   {name:"Solana",         img:"https://web3decentralization.com/terminal/og/sol.png",   comp:53.2, nk:"Nakamoto Coefficient ≈ 19 infra (validator count), ≈2 capital, software projects ≈50",
+      b:[["Infrastructure",58,"#14f195"],["Capital",48,"#14f195"],["Governance",55,"#14f195"],["Software",50,"#14f195"]]},
+    ada:   {name:"Cardano",        img:"https://web3decentralization.com/terminal/og/ada.png",   comp:70.4, nk:"Nakamoto Coefficient ≈ 24 infrastructure, ≈31 capital",
+      b:[["Infrastructure",78,"#2a42a3"],["Capital",68,"#2a42a3"],["Governance",72,"#2a42a3"],["Software",60,"#2a42a3"]]},
+    avax:  {name:"Avalanche",      img:"https://web3decentralization.com/terminal/og/avax.png",  comp:57.2, nk:"Nakamoto Coefficient ≈ 28 infra (validators), ≈5 capital",
+      b:[["Infrastructure",62,"#e84142"],["Capital",55,"#e84142"],["Governance",58,"#e84142"],["Software",52,"#e84142"]]},
+    dot:   {name:"Polkadot",       img:"https://web3decentralization.com/terminal/og/dot.png",   comp:72.6, nk:"Nakamoto Coefficient ≈ 97 infrastructure (100.1) vs ≈9 software",
+      b:[["Infrastructure",75,"#e6007a"],["Capital",64,"#e6007a"],["Governance",82,"#e6007a"],["Software",68,"#e6007a"]]},
+    cosmos:{name:"Cosmos Hub",     img:"https://web3decentralization.com/terminal/og/atom.png",  comp:68,   nk:"Nakamoto Coefficient ≈ 7 infrastructure, ≈8 capital",
+      b:[["Infrastructure",70,"#5068a2"],["Capital",58,"#5068a2"],["Governance",78,"#5068a2"],["Software",65,"#5068a2"]]},
+    xrp:   {name:"XRP Ledger",     img:"https://web3decentralization.com/terminal/og/xrp.png",   comp:43.2, nk:"Nakamoto Coefficient ≈ 3 infra (unique validator count), ≈1 capital",
+      b:[["Infrastructure",45,"#23292f"],["Capital",35,"#23292f"],["Governance",40,"#23292f"],["Software",55,"#23292f"]]},
+    sui:   {name:"Sui",            img:"https://web3decentralization.com/terminal/og/sui.png",   comp:49.2, nk:"Nakamoto Coefficient ≈ 14 infrastructure, ≈3 capital",
+      b:[["Infrastructure",54,"#4da2ff"],["Capital",46,"#4da2ff"],["Governance",50,"#4da2ff"],["Software",45,"#4da2ff"]]},
+    apt:   {name:"Aptos",          img:"https://web3decentralization.com/terminal/og/apt.png",   comp:49.1, nk:"Nakamoto Coefficient ≈ 18 infrastructure, ≈3 capital",
+      b:[["Infrastructure",56,"#2ed3b7"],["Capital",45,"#2ed3b7"],["Governance",48,"#2ed3b7"],["Software",45,"#2ed3b7"]]},
+    near:  {name:"Near Protocol",  img:"https://web3decentralization.com/terminal/og/near.png",  comp:60.3, nk:"Nakamoto Coefficient ≈ 24 infrastructure, ≈7 capital",
+      b:[["Infrastructure",66,"#00ec97"],["Capital",56,"#00ec97"],["Governance",62,"#00ec97"],["Software",55,"#00ec97"]]},
+    arb:   {name:"Arbitrum",       img:"https://web3decentralization.com/terminal/og/arb.png",   comp:62.7, nk:"Nakamoto Coefficient ≈ 4 (L1 DA / Settlement), ≈6 capital",
+      b:[["Infrastructure",64,"#28a0f0"],["Capital",58,"#28a0f0"],["Governance",68,"#28a0f0"],["Software",60,"#28a0f0"]]}
+  };
+  var chain = (location.search.match(/chain=([a-z]+)/i)||[])[1] || "btc";
+  var d = DATA[chain] || DATA.btc;
+  document.title = d.name+" Decentralization Score — W3D";
+  document.getElementById("name").textContent = d.name;
+  document.getElementById("nk").textContent = d.nk;
+  document.getElementById("num").textContent = d.comp;
+  var bars = document.getElementById("bars");
+  d.b.forEach(function(row){
+    var lab = row[0], v = row[1], col = row[2];
+    var el = document.createElement("div"); el.className="bar";
+    el.innerHTML = '<div class="row"><span>'+lab+'</span><span>'+v+'</span></div>'+
+      '<div class="track"><div class="fill n" style="width:0%;background:'+col+'"></div></div>';
+    bars.appendChild(el);
+  });
+  requestAnimationFrame(function(){
+    Array.prototype.forEach.call(document.querySelectorAll(".fill"), function(f){
+      f.style.width = f.parentNode.parentNode.querySelector(".row span:last-child").textContent + "%";
+    });
+  });
+  document.getElementById("note").innerHTML =
+    '<span class="who">W3D Terminal</span>'+
+    'Methodology: 30% infrastructure · 25% capital · 25% governance · 20% software. '+
+    'Live data & citation: <a href="https://web3decentralization.com/chains/'+chain+'/" target="_blank">web3decentralization.com/chains/'+chain+'/</a>';
+})();
+</script>
+</body>
+</html>
