@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    name: Validate repo (assets, data, content, secrets)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run repo validator
+        run: python scripts/validate_repo.py
+
+      - name: Lint theme PHP
+        run: |
+          set -e
+          for f in $(find themes plugins seed -name '*.php' -not -path '*/node_modules/*'); do
+            php -l "$f" >/dev/null
+          done
+        shell: bash
+
+      - name: Verify terminal is served (static smoke)
+        run: |
+          cd terminal
+          python -m http.server 8099 >/dev/null 2>&1 &
+          SERVER=$!
+          sleep 1
+          curl -fsS http://localhost:8099/index.html | grep -q "Web3 Decentralization Intelligence Terminal"
+          curl -fsS http://localhost:8099/llms.txt >/dev/null
+          curl -fsS http://localhost:8099/ai.txt >/dev/null
+          kill $SERVER
