@@ -30,10 +30,15 @@ North-star metrics (6-month targets):
 - [ ] `good first issue` starter tasks
 
 ## Phase 2 — Traffic blitz (Weeks 2–4)
-- [ ] Show HN launch post
-- [ ] Reddit data drops (r/CryptoCurrency, r/ethereum, r/solana, ...)
+- [x] Launch pack prepared: `outreach/launch-blast.md` (Show HN + Reddit +
+      dev.to), `outreach/awesome-lists.md` (submissions + plumbing text)
+- [x] GitHub Pages demo tooling + workflow (deploy once repo exists)
+- [ ] PUSH repo to GitHub (needs `gh auth login`)
+- [ ] Post Show HN
+- [ ] Post Reddit data drops (r/CryptoCurrency, r/ethereum, r/solana, ...)
 - [ ] Awesome-list + directory submissions
 - [ ] StackExchange / Crypto.SE citations
+- [ ] First GA4 visitors trend visible (baseline via GA4 dashboard)
 
 ## Phase 3 — Content scale (Months 1–2)
 - [ ] Add 4 learning paths: Blockchain Basics, Wallets & Security 101,
