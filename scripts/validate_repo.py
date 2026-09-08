@@ -66,6 +66,8 @@ def main():
         text = md.read_text(encoding="utf-8")
         fm = re.match(r"^---\n(.*?)\n---\n", text, re.S)
         if md.parent.name == "glossary":
+            if md.name == "README.md":
+                continue  # navigational index, not a term
             check(fm is not None, f"glossary '{md.name}' missing front matter")
             if fm:
                 check("title:" in fm.group(1), f"glossary '{md.name}' missing title")
