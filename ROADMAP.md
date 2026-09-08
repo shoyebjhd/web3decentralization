@@ -20,9 +20,13 @@ North-star metrics (6-month targets):
 
 ## Phase 1 — Open-source launch (Weeks 1–2)
 - [x] Git repo, licenses (MIT / CC-BY-4.0 / CC0)
-- [ ] Publish terminal app source to `terminal/`
-- [ ] CI (build + lint + test) green
-- [ ] GitHub Pages demo of the terminal
+- [x] Readme/docs: CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, CHANGELOG
+- [x] Terminal production build vendored into `terminal/` (source was not
+      retained on the server — reconstruction tracked separately)
+- [x] CI: repo validator + PHP lint + static smoke test (GitHub Actions)
+- [ ] PUSH repo to GitHub (needs `gh auth login` / repo creation)
+- [ ] GitHub Pages demo of the terminal (needs repo to exist)
+- [ ] Reconstruct React/Vite source (optional but makes contributions easy)
 - [ ] `good first issue` starter tasks
 
 ## Phase 2 — Traffic blitz (Weeks 2–4)

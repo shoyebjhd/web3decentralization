@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `content/` Markdown skeleton for courses, lessons, glossary, guides, and
   chain audits (CC-BY-4.0).
 - `data/` skeleton for chain decentralization datasets + methodology (CC0).
+- `terminal/`: production build of the Decentralization Intelligence Terminal
+  vendored (source not recoverable; reconstruction on roadmap).
+- CI (GitHub Actions): repo validator + PHP lint + static terminal smoke test.
+- Seed glossary: 16 beginner terms under `content/glossary/`.
 
 ## [0.1.0] - 2026-09-06
 
