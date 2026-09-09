@@ -1297,3 +1297,81 @@ function w3d_related_blocks( $content ) {
 		. '</aside>';
 }
 add_filter( 'the_content', 'w3d_related_blocks', 30 );
+
+/**
+ * NotebookLM video-source block (Phase 4 prep).
+ *
+ * Appends a hidden, deterministic 3-bullet summary (hook / concept /
+ * takeaway) to lesson and glossary pages — future feedstock for NotebookLM
+ * Short Video Overviews. No AI, no API: first/middle/last sentences of the
+ * post's own plain text.
+ */
+function w3d_notebooklm_sentences( $post_id ) {
+	$text = wp_strip_all_tags( (string) get_post_field( 'post_content', $post_id ) );
+	$text = trim( preg_replace( '/\s+/', ' ', $text ) );
+	if ( '' === $text ) {
+		return array( '', '', '' );
+	}
+	$parts = preg_split( '/(?<=[.!?])\s+(?=[A-Z0-9"\x{201C}])/u', $text );
+	$parts = array_values( array_filter( array_map( 'trim', (array) $parts ), function ( $s ) {
+		return mb_strlen( $s ) >= 40;
+	} ) );
+	if ( ! $parts ) {
+		$short = mb_substr( $text, 0, 200 );
+		return array( $short, $short, $short );
+	}
+	$n    = count( $parts );
+	$hook = $parts[0];
+	$core = $parts[ (int) floor( $n / 2 ) ];
+	$take = $parts[ $n - 1 ];
+	if ( mb_strlen( $take ) < 25 && $n > 1 ) {
+		$take = $parts[ $n - 2 ];
+	}
+	return array( $hook, $core, $take );
+}
+
+function w3d_notebooklm_source( $content ) {
+	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return $content;
+	}
+	if ( ! is_singular() || ! in_the_loop() || ! is_main_query() ) {
+		return $content;
+	}
+	$type = get_post_type();
+	if ( ! in_array( $type, array( 'lesson', 'llms_glossary' ), true ) ) {
+		return $content;
+	}
+	if ( false !== strpos( $content, 'id="notebooklm-source"' ) ) {
+		return $content;
+	}
+	list( $hook, $core, $take ) = w3d_notebooklm_sentences( get_the_ID() );
+	if ( '' === $hook ) {
+		return $content;
+	}
+	return $content
+		. '<div id="notebooklm-source" hidden aria-hidden="true">'
+		. '<ul>'
+		. '<li><strong>HOOK:</strong> ' . esc_html( $hook ) . '</li>'
+		. '<li><strong>CORE CONCEPT:</strong> ' . esc_html( $core ) . '</li>'
+		. '<li><strong>TAKEAWAY:</strong> ' . esc_html( $take ) . '</li>'
+		. '</ul>'
+		. '</div>';
+}
+add_filter( 'the_content', 'w3d_notebooklm_source', 31 );
+
+/**
+ * VideoObject placeholder schema on lesson pages for the coming
+ * NotebookLM 60-second explainers.
+ */
+function w3d_lesson_video_jsonld( $data ) {
+	if ( ! is_singular( 'lesson' ) ) {
+		return $data;
+	}
+	$data[] = array(
+		'@type'       => 'VideoObject',
+		'name'        => get_the_title() . ' - 60s Explainer Coming Soon',
+		'description' => 'Short video version for NotebookLM',
+	);
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'w3d_lesson_video_jsonld', 25 );
