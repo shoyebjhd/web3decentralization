@@ -14,7 +14,9 @@ The Merge proved blockchains can reinvent their foundations live — and it
 moved Ethereum's security debate from "who burns power" to "who holds stake."
 It didn't lower fees (a common myth) and it concentrated new power in staking
 pools, which is exactly the capital-centralization question W3D now tracks on
-Ethereum.
+Ethereum. For learners, the Merge is the cleanest case study in how consensus
+choices reshape who holds power — proof-of-work miners out, proof-of-stake
+stakers in.
 
 **Related:** [ethereum](ethereum.md) ·
 [proof of stake](proof-of-stake.md) · [proof of work](proof-of-work.md)

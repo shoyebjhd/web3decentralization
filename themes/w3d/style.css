@@ -872,6 +872,7 @@ ul.w3d-sources li a{ font-weight:600; }
 .w3d-related{ margin:44px 0 8px; }
 .w3d-related > h2{ font-size:22px; margin:0 0 16px; }
 .w3d-rel-kind{ margin:0 0 6px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--w3d-dim); }
+.w3d-rel-more{ margin:16px 0 0; font-size:14px; color:var(--w3d-dim); }
 .w3d-rel-card h3{ font-size:16.5px; }
 .w3d-lesson-list{ list-style:none; margin:12px 0 0; padding:0; display:grid; gap:7px; font-size:14.5px; }
 .w3d-toc{ border:1px solid var(--w3d-border); border-radius:12px; padding:16px 20px; margin:0 0 28px; background:var(--w3d-surface); }

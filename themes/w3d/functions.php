@@ -1272,6 +1272,10 @@ function w3d_related_blocks( $content ) {
 	$cards = '';
 	$extra = '';
 	if ( 'lesson' === $type ) {
+		$course_id = (int) get_post_meta( $id, '_llms_parent_course', true );
+		if ( $course_id && 'publish' === get_post_status( $course_id ) ) {
+			$cards .= w3d_rel_card( 'Course', $course_id );
+		}
 		$rel = get_post_meta( $id, '_w3d_related_lessons', true );
 		if ( is_array( $rel ) ) {
 			foreach ( $rel as $rid ) {
@@ -1313,6 +1317,11 @@ function w3d_related_blocks( $content ) {
 		}
 		$heading = 'Used in these lessons';
 		$label   = 'Term usage';
+		$extra  .= '<p class="w3d-rel-more"><a href="' . esc_url( home_url( '/glossary/' ) ) . '">'
+			. esc_html__( 'Browse all glossary terms', 'w3d' )
+			. '</a> · <a href="' . esc_url( home_url( '/learn/' ) ) . '">'
+			. esc_html__( 'Start a free course', 'w3d' )
+			. '</a></p>';
 	} else {
 		$extra .= '<p class="w3d-chain-study">Study the method behind this audit: '
 			. '<a href="' . esc_url( home_url( '/methodology/' ) ) . '">Methodology</a> · '
