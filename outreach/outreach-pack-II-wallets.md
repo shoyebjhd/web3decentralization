@@ -160,3 +160,112 @@ Keep it high-signal: 2-4 sentences + one link. Never a wall of self-promo.
 | C | HN Ask HN | ready | – | community ask + resource |
 | D | Twitter/X | ready | – | 6-tweet thread |
 | E | Crypto.SE answers | ongoing | – | answer-by-citation |
+
+---
+
+## Round 3 — Outreach Posts (PoS / DeFi / Card-Buy)
+
+### Post F — Reddit r/CryptoCurrency or r/cryptotechnology
+
+**Title:** Proof of Stake vs Proof of Work in 2026: the energy-vs-security trade-off nobody's talking about
+
+**Body (markdown):**
+```
+Most people still think "PoW is bad, PoS is green" — but the real trade-off
+is security-model vs energy, and each has its own centralization vector:
+
+- PoW (Bitcoin): burns electricity + hardware as the attack cost. Security is
+  economic and very obvious.
+- PoS (Ethereum post-Merge): locks capital as the attack cost. 99.9% less
+  energy, but introduces "stake centralization" via large pools.
+
+We stress-tested both (and 10 other chains) across 4 pillars:
+https://web3decentralization.com/proof-of-stake-vs-proof-of-work/
+
+The short version: PoW wins on censorship resistance + energy-backed security;
+PoS wins on efficiency + throughput. Neither is "decentralized" by default —
+it depends on validator/staker distribution, which the Nakamoto Coefficient
+measures: https://web3decentralization.com/nakamoto-coefficient/
+
+Which side do you think is safer for a multi-decade store of value?
+```
+
+### Post G — Twitter/X thread (5 tweets)
+
+```
+1/ Most people think "PoS is green, PoW is dirty."
+
+The real trade-off is DIFFERENT.
+
+2/ PoW (Bitcoin): security = electricity + hardware cost.
+To attack, you'd burn real money on ASICs + power.
+
+That's the security model. Simple, transparent, expensive to fool.
+
+3/ PoS (Ethereum): security = staked capital cost.
+To attack, you'd need 1/3 of ALL staked ETH (~15-20B at current prices).
+
+Attack = lose your stake (slashing). Efficient, but capital-heavy.
+
+4/ The hidden trade-off nobody mentions:
+- PoW centralizes → mining pools
+- PoS centralizes → staking pools / Lido
+
+Neither is "decentralized by default." Distribution matters.
+
+5/ Full breakdown + scorecards for 12 chains:
+https://web3decentralization.com/proof-of-stake-vs-proof-of-work/
+
+Nakamoto Coefficient (who controls consensus):
+https://web3decentralization.com/nakamoto-coefficient/
+```
+
+### Post H — Reddit r/defi or r/ethfinance
+
+**Title:** A beginner's DeFi glossary: what you actually need to know before touching a DEX
+
+**Body (markdown):**
+```
+Spent a weekend untangling DeFi jargon so you don't have to. The critical
+concepts, in plain English:
+
+• Smart contract = code that executes finance automatically on a blockchain
+• DEX = trade directly from your wallet, no order book (Uniswap, Jupiter)
+• Stablecoin = a coin pegged 1:1 to USD (USDC, USDT) — the "cash" of DeFi
+• Liquidity pool = you deposit paired tokens, earn a cut of swap fees
+• APY/Yield farming = incentivized returns (often temporary — DYOR)
+
+I also covered the #1 mistake: keeping huge balances on a DEX hot wallet.
+Full guide: https://web3decentralization.com/what-is-defi-decentralized-finance/
+
+Plus wallet safety: https://web3decentralization.com/cold-wallet-vs-hot-wallet/
+```
+
+### Post I — r/CryptoCurrency (card purchase tip)
+
+**Title:** Buying your first $25 of crypto: why a debit card beats a credit card every time
+
+**Body (markdown):**
+```
+If you're buying crypto with a card, DEBIT not CREDIT:
+
+- Credit cards treat crypto as a "cash advance" → 3-5% fee + APR from day 1
+- Debit cards just charge the network fee (1.8-3.5%)
+- Both are instant; debit avoids the cash-advance trap
+
+I ran the numbers across exchanges (Binance, Bybit, Coinbase, Kraken):
+https://web3decentralization.com/how-to-buy-crypto-with-credit-card/
+
+And if anyone tells you "just max your card for more crypto" — that's how
+beginners lose money twice (fees + interest). Buy small, learn, transfer to
+your own wallet. https://web3decentralization.com/how-to-create-a-crypto-wallet/
+```
+
+### Round 3 Tracking
+
+| Post | Channel | Status | Link earned | Notes |
+|------|---------|--------|-------------|-------|
+| F | Reddit r/cryptotechnology | ready | – | ends with engagement Q |
+| G | Twitter/X | ready | – | 5-tweet thread |
+| H | Reddit r/defi | ready | – | glossary + DEX safety |
+| I | Reddit r/CryptoCurrency | ready | – | card vs debit tips |
