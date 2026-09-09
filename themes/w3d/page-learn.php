@@ -70,6 +70,43 @@ get_header();
 		</div>
 	</section>
 
+	<section class="w3d-learn-all">
+		<h2>All lessons, by course</h2>
+		<div class="w3d-learn-grid">
+			<?php
+			foreach ( $courses as $course_post ) :
+				$course_lessons = get_posts(
+					array(
+						'post_type'      => 'lesson',
+						'post_status'    => 'publish',
+						'posts_per_page' => -1,
+						'meta_key'       => '_llms_order',
+						'orderby'        => 'meta_value_num',
+						'order'          => 'ASC',
+						'meta_query'     => array(
+							array(
+								'key'   => '_llms_parent_course',
+								'value' => $course_post->ID,
+							),
+						),
+					)
+				);
+				if ( ! $course_lessons ) {
+					continue;
+				}
+				?>
+				<div class="w3d-learn-card">
+					<h3><a href="<?php echo esc_url( get_permalink( $course_post->ID ) ); ?>"><?php echo esc_html( $course_post->post_title ); ?></a></h3>
+					<ul class="w3d-lesson-list">
+						<?php foreach ( $course_lessons as $lesson_post ) : ?>
+							<li><a href="<?php echo esc_url( get_permalink( $lesson_post->ID ) ); ?>"><?php echo esc_html( $lesson_post->post_title ); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	</section>
+
 	<section class="w3d-learn-tools">
 		<h2>Hands-on tools</h2>
 		<div class="w3d-learn-grid">

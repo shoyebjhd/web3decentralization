@@ -1229,3 +1229,71 @@ function w3d_404_intelligence() {
 		exit;
 	}
 }
+
+/**
+ * Related-content blocks (Phase 2 interlinking).
+ *
+ * Appends precomputed related links (post meta set by w3d_p2_interlink.php):
+ * lessons get 3 same-course lessons + 2 glossary terms; glossary terms get
+ * a "Used in" lesson list. Runs after the glossary auto-linker (19) and the
+ * course meta heading (21). Guards mirror the tutor-widget lesson: never
+ * inside admin/REST/non-main queries.
+ */
+function w3d_rel_card( $kind, $post_id ) {
+	if ( 'publish' !== get_post_status( $post_id ) ) {
+		return '';
+	}
+	return '<div class="w3d-learn-card w3d-rel-card">'
+		. '<p class="w3d-rel-kind">' . esc_html( $kind ) . '</p>'
+		. '<h3><a href="' . esc_url( get_permalink( $post_id ) ) . '">' . esc_html( get_the_title( $post_id ) ) . '</a></h3>'
+		. '</div>';
+}
+
+function w3d_related_blocks( $content ) {
+	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return $content;
+	}
+	if ( ! is_singular() || ! in_the_loop() || ! is_main_query() ) {
+		return $content;
+	}
+	$type = get_post_type();
+	if ( ! in_array( $type, array( 'lesson', 'llms_glossary' ), true ) ) {
+		return $content;
+	}
+	$id    = get_the_ID();
+	$cards = '';
+	if ( 'lesson' === $type ) {
+		$rel = get_post_meta( $id, '_w3d_related_lessons', true );
+		if ( is_array( $rel ) ) {
+			foreach ( $rel as $rid ) {
+				$cards .= w3d_rel_card( 'Lesson', (int) $rid );
+			}
+		}
+		$rel = get_post_meta( $id, '_w3d_related_glossary', true );
+		if ( is_array( $rel ) ) {
+			foreach ( $rel as $rid ) {
+				$cards .= w3d_rel_card( 'Glossary', (int) $rid );
+			}
+		}
+		$heading = 'Keep learning';
+		$label   = 'Related content';
+	} else {
+		$rel = get_post_meta( $id, '_w3d_used_in', true );
+		if ( is_array( $rel ) ) {
+			foreach ( $rel as $rid ) {
+				$cards .= w3d_rel_card( 'Lesson', (int) $rid );
+			}
+		}
+		$heading = 'Used in these lessons';
+		$label   = 'Term usage';
+	}
+	if ( '' === $cards ) {
+		return $content;
+	}
+	return $content
+		. '<aside class="w3d-related" aria-label="' . esc_attr( $label ) . '">'
+		. '<h2>' . esc_html( $heading ) . '</h2>'
+		. '<div class="w3d-learn-grid">' . $cards . '</div>'
+		. '</aside>';
+}
+add_filter( 'the_content', 'w3d_related_blocks', 30 );
