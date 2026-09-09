@@ -17,4 +17,5 @@ low-value use; questionable for life savings. Always ask where the data
 lives, because "validity-proven" answers a different question than "exit-able."
 
 **Related:** [data availability](glossary/data-availability.md) ·
-[ZK rollup](glossary/zk-rollup.md) · [layer 2](glossary/layer-2.md)
+[ZK rollup](glossary/zk-rollup.md) · [layer 2](glossary/layer-2.md) ·
+[validity proof](glossary/validity-proof.md)

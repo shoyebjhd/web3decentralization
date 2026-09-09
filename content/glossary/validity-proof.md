@@ -19,4 +19,4 @@ of power.
 
 **Related:** [ZK rollup](glossary/zk-rollup.md) ·
 [zero-knowledge proof](glossary/zero-knowledge-proof.md) ·
-[fraud proof](glossary/fraud-proof.md)
+[fraud proof](glossary/fraud-proof.md) · [validium](glossary/validium.md)

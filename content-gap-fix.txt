@@ -1,0 +1,73 @@
+MASTER PROMPT: Content Finalization 100% - Gap Fill + Topical Authority Complete
+Context: 333 URLs audited, all 200 OK, H1 OK, word_count avg 3198, internal_links avg 28.15. Current: glossary 188, chains 13 (eth,sol,ada,avax,dot,cosmos,xrp,sui,apt,near,arb,btc + archive), lessons 73 (os- series + 4 pillars), courses 6, blog 27. Goal: Make content 100% complete for #1 open-source hub claim before final internal linking + onsite SEO. Budget $0, WordPress + Rank Math only, concurrency ≤2, preserve permalink structure /glossary/, /chains/, /lesson/, /course/.
+
+TASK 1: GLOSSARY GAP FILL - 30 HIGH-VALUE 2025-26 TERMS (Priority)
+Create 30 new glossary posts (post_type: glossary) with Rank Math SEO:
+- eip-4844, blobs, proto-danksharding, eigenlayer, lrt-token, paymaster, bundler, erc-4337-bundler-explained, optimism, op-stack, superchain, base-chain, polygon-zkevm, bnb-chain, chain-abstraction, intent-based, account-abstraction-paymaster, depin, desci, socialfi, brc-20, runes-protocol, ordinals-inscription, restaking-risks, modular-blockchain-vs-monolithic (expand existing), data-availability-sampling, validium-vs-validity-proof (expand), sequencer-decentralization, l2-beat-risk, toncoin
+
+For each:
+- Title: "%term% - Web3 Decentralization" (follow current template, no extra suffix)
+- Slug: exact term (e.g., eip-4844)
+- Content: 3200 words minimum (match avg 2963), structure: Definition (150w), How it works (800w), Why it matters for decentralization (600w), Risks/Tradeoffs (500w), Related chains/lessons (400w), FAQ 3 Qs (750w)
+- Excerpt: 155 chars
+- Add to glossary-sitemap.xml, purge cache, verify 200 at ≤2 concurrency
+
+TASK 2: CHAIN GAP FILL - 7 NEW L1/L2 CHAINS
+Create 7 new chain pages (post_type: chain or page under /chains/):
+- /chains/base/, /chains/optimism/, /chains/polygon/, /chains/bnb/, /chains/ton/, /chains/polygon-zkevm/ (or matic), /chains/blast/
+
+For each chain page:
+- Template same as existing /chains/eth/ (check structure)
+- Sections: Overview, 4 Pillars Score (Infrastructure, Governance, Capital, Software) - use existing methodology from /lesson/os-method-weights-limits/ and /lesson/os-pillar-*, Nakamoto Coefficient placeholder, Consensus, Tokenomics, Ecosystem, Risks
+- Word count: 3200+ (match chain avg 3189)
+- Link to 3 related lessons and 3 glossary terms
+- Add to chain-sitemap.xml
+
+TASK 3: LESSON GAP FILL - 15 CRITICAL LESSONS (L2 + Security + Practical)
+Create 15 new lessons under /lesson/os- prefix (LifterLMS lesson post_type):
+- L2 Track (5): os-l2-fundamentals-op-stack, os-bridging-to-base-lab, os-optimism-vs-arbitrum-vs-base, os-blob-space-eip-4844-explained, os-sequencer-risks
+- Security Track (5): os-famous-hacks-dao-ronin-poly, os-audit-checklist-for-beginners, os-sim-swap-and-address-poisoning-lab, os-multisig-safe-setup-lab, os-recovery-without-seed-risks
+- Practical Dev Track (5): os-deploy-on-base-testnet, os-verifying-contracts-on-explorers, os-gas-optimization-101, os-reading-l2beat-risks, os-eigenlayer-restaking-lab
+
+For each lesson:
+- Follow existing os- lesson template (check /lesson/os-what-is-a-blockchain/ structure)
+- Word count: 4000+ (match blog avg 4190 for lessons)
+- Sections: Learning objective, Concept, Hands-on lab (no real funds), Safety checklist, 3 related glossary links, Next lesson CTA
+- Has video placeholder: Add <div id="notebooklm-source" data-hook="" data-core="" data-takeaway=""> with 3 bullets for future NotebookLM Shorts (generate deterministically from content)
+- Add to lesson-sitemap.xml and link from /learn/ page and relevant course
+
+TASK 4: COURSE RESTRUCTURE - MERGE DUPLICATE + ADD 2 NEW
+- Merge: /course/blockchain-basics/ and /course/crypto-fundamentals-from-zero/ - keep blockchain-basics as primary, 301 redirect fundamentals to basics via Rank Math redirections
+- Create 2 new courses:
+    - /course/l2-developer-path/ - contains L2 Track lessons (5 new + existing os-bridges-cross-chain)
+    - /course/security-and-self-custody-advanced/ - contains Security Track lessons (5 new + existing os-how-scams-work etc)
+- Each course: 1200w description, 8-10 lessons linked, course image placeholder
+- Update courses archive /courses/ to show 7 courses total (after merge: 6-1+2=7)
+- Add to course-sitemap.xml
+
+TASK 5: CLEANUP THIN CATEGORIES
+- /category/5/ and /category/4/ (word_count 2840, 2939, 19 internal links) - these are auto-generated numeric categories, check if they have posts, if empty set to noindex via Rank Math or redirect to /blog/, if have posts rewrite description to 150+ chars and add 10 internal links
+- Ensure /category/exchanges/, /category/defi/, /category/guides/, /category/web3/ have 3300+ words and 29+ internal links (already close)
+
+TASK 6: VERIFICATION
+- Polite crawl at 1 concurrency across all URLs after additions: expected total ~333+30+7+15-1 = 384 URLs, all 200
+- Output to .temp/content-final-audit.tsv same columns as final-master-audit.tsv: url, http_status, canonical, title, title_length, h1_count, word_count, internal_links_count, has_video_placeholder
+- Count: glossary 218, chains 20, lessons 88, courses 7, blog 27, other ~24 = ~384
+- Update /export/academy/ folder with new md files (if exists)
+- LiteSpeed purge all, save git status to .temp/content-final-git-status.txt
+
+CONSTRAINTS:
+- $0, WordPress only, no new plugins, no external AI API
+- ≤2 concurrency for all HTTP checks, sleep 0.5s between batches
+- Preserve permalink structure, 59 DA protection
+- No affiliate links yet
+- Word counts must meet minimums
+- All new pages must have 1 H1, title_length 30-65 chars, meta description
+- Remove probe scripts after
+
+SUCCESS:
+- 384 URLs all 200, H1 OK
+- Glossary 218, Chains 20, Lessons 88
+- Avg internal_links for glossary increased from 23.9 to 35+
+- All new pages have video placeholder for NotebookLM
+- .temp/content-final-audit.tsv exists
