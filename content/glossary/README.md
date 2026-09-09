@@ -1,6 +1,6 @@
 # Glossary Index
 
-180 plain-English terms, growing. Cross-linked so you can always pull on a
+181 plain-English terms, growing. Cross-linked so you can always pull on a
 thread and find the concept you actually needed.
 
 ## 0–9, A
