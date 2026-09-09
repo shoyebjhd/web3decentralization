@@ -874,6 +874,16 @@ ul.w3d-sources li a{ font-weight:600; }
 .w3d-rel-kind{ margin:0 0 6px; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--w3d-dim); }
 .w3d-rel-card h3{ font-size:16.5px; }
 .w3d-lesson-list{ list-style:none; margin:12px 0 0; padding:0; display:grid; gap:7px; font-size:14.5px; }
+.w3d-toc{ border:1px solid var(--w3d-border); border-radius:12px; padding:16px 20px; margin:0 0 28px; background:var(--w3d-surface); }
+.w3d-toc-title{ margin:0 0 8px; font-family:var(--w3d-font-head); font-weight:600; font-size:15px; }
+.w3d-toc ul{ list-style:none; margin:0; padding:0; display:grid; gap:6px; font-size:14.5px; }
+.w3d-toc-h3{ padding-left:16px; }
+.w3d-lesson-nav-steps{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+.w3d-lesson-nav-steps .w3d-btn{ text-decoration-line:none; }
+.w3d-chain-study{ margin:28px 0 0; color:var(--w3d-dim); font-size:14.5px; }
+.w3d-footer-top{ display:flex; flex-wrap:wrap; gap:32px; }
+.w3d-footer-gloss-title{ margin:0 0 8px; font-family:var(--w3d-font-head); font-weight:600; font-size:15px; }
+.chains-card-pending{ font-size:13px; }
 
 /* ============================================================
    FOOTER

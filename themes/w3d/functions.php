@@ -355,12 +355,19 @@ function w3d_lesson_nav() {
 	}
 
 	$next_id = isset( $ids[ $pos + 1 ] ) ? (int) $ids[ $pos + 1 ] : 0;
+	$prev_id = isset( $ids[ $pos - 1 ] ) ? (int) $ids[ $pos - 1 ] : 0;
 	?>
 	<nav class="w3d-lesson-nav" aria-label="Lesson navigation">
 		<p class="w3d-lesson-nav-course">
 			<a href="<?php echo esc_url( get_permalink( $course_id ) ); ?>"><?php echo esc_html__( 'Course', 'w3d' ); ?>: <?php echo esc_html( get_the_title( $course_id ) ); ?></a>
 			<span class="w3d-lesson-nav-progress"><?php echo esc_html( sprintf( 'Lesson %d of %d', $pos + 1, count( $ids ) ) ); ?></span>
 		</p>
+		<div class="w3d-lesson-nav-steps">
+		<?php if ( $prev_id ) : ?>
+			<a class="w3d-btn w3d-btn-alt w3d-lesson-nav-prev" href="<?php echo esc_url( get_permalink( $prev_id ) ); ?>">
+				&larr; <?php echo esc_html__( 'Previous lesson', 'w3d' ); ?>: <?php echo esc_html( get_the_title( $prev_id ) ); ?>
+			</a>
+		<?php endif; ?>
 		<?php if ( $next_id ) : ?>
 			<a class="w3d-btn w3d-lesson-nav-next" href="<?php echo esc_url( get_permalink( $next_id ) ); ?>">
 				<?php echo esc_html__( 'Next lesson', 'w3d' ); ?>: <?php echo esc_html( get_the_title( $next_id ) ); ?> &rarr;
@@ -370,6 +377,7 @@ function w3d_lesson_nav() {
 				<?php echo esc_html__( 'Finish the course', 'w3d' ); ?> &rarr;
 			</a>
 		<?php endif; ?>
+		</div>
 	</nav>
 	<?php
 }
@@ -1257,11 +1265,12 @@ function w3d_related_blocks( $content ) {
 		return $content;
 	}
 	$type = get_post_type();
-	if ( ! in_array( $type, array( 'lesson', 'llms_glossary' ), true ) ) {
+	if ( ! in_array( $type, array( 'lesson', 'llms_glossary', 'chain' ), true ) ) {
 		return $content;
 	}
 	$id    = get_the_ID();
 	$cards = '';
+	$extra = '';
 	if ( 'lesson' === $type ) {
 		$rel = get_post_meta( $id, '_w3d_related_lessons', true );
 		if ( is_array( $rel ) ) {
@@ -1275,26 +1284,71 @@ function w3d_related_blocks( $content ) {
 				$cards .= w3d_rel_card( 'Glossary', (int) $rid );
 			}
 		}
+		$rel = get_post_meta( $id, '_w3d_related_chains', true );
+		if ( is_array( $rel ) ) {
+			foreach ( $rel as $rid ) {
+				$cards .= w3d_rel_card( 'Chain audit', (int) $rid );
+			}
+		}
 		$heading = 'Keep learning';
 		$label   = 'Related content';
-	} else {
+	} elseif ( 'llms_glossary' === $type ) {
 		$rel = get_post_meta( $id, '_w3d_used_in', true );
 		if ( is_array( $rel ) ) {
 			foreach ( $rel as $rid ) {
 				$cards .= w3d_rel_card( 'Lesson', (int) $rid );
 			}
 		}
+		$rel = get_post_meta( $id, '_w3d_related_terms', true );
+		if ( is_array( $rel ) ) {
+			foreach ( $rel as $rid ) {
+				$cards .= w3d_rel_card( 'Glossary', (int) $rid );
+			}
+		}
+		$rel = get_post_meta( $id, '_w3d_used_in_chains', true );
+		if ( is_array( $rel ) ) {
+			foreach ( $rel as $rid ) {
+				$cards .= w3d_rel_card( 'Chain audit', (int) $rid );
+			}
+		}
 		$heading = 'Used in these lessons';
 		$label   = 'Term usage';
+	} else {
+		$extra .= '<p class="w3d-chain-study">Study the method behind this audit: '
+			. '<a href="' . esc_url( home_url( '/methodology/' ) ) . '">Methodology</a> · '
+			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-infrastructure/' ) ) . '">Infrastructure</a> · '
+			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-capital/' ) ) . '">Capital</a> · '
+			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-governance/' ) ) . '">Governance</a> · '
+			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-software/' ) ) . '">Software</a></p>';
+		$rel = get_post_meta( $id, '_w3d_chain_terms', true );
+		if ( is_array( $rel ) ) {
+			foreach ( $rel as $rid ) {
+				$cards .= w3d_rel_card( 'Glossary', (int) $rid );
+			}
+		}
+		$rel = get_post_meta( $id, '_w3d_chain_lessons', true );
+		if ( is_array( $rel ) ) {
+			foreach ( $rel as $rid ) {
+				$cards .= w3d_rel_card( 'Lesson', (int) $rid );
+			}
+		}
+		$heading = 'Continue learning';
+		$label   = 'Related chain content';
 	}
-	if ( '' === $cards ) {
+	if ( '' === $cards && '' === $extra ) {
 		return $content;
 	}
-	return $content
-		. '<aside class="w3d-related" aria-label="' . esc_attr( $label ) . '">'
-		. '<h2>' . esc_html( $heading ) . '</h2>'
-		. '<div class="w3d-learn-grid">' . $cards . '</div>'
-		. '</aside>';
+	$out = $content;
+	if ( '' !== $extra ) {
+		$out .= $extra;
+	}
+	if ( '' !== $cards ) {
+		$out .= '<aside class="w3d-related" aria-label="' . esc_attr( $label ) . '">'
+			. '<h2>' . esc_html( $heading ) . '</h2>'
+			. '<div class="w3d-learn-grid">' . $cards . '</div>'
+			. '</aside>';
+	}
+	return $out;
 }
 add_filter( 'the_content', 'w3d_related_blocks', 30 );
 
@@ -1375,3 +1429,109 @@ function w3d_lesson_video_jsonld( $data ) {
 	return $data;
 }
 add_filter( 'rank_math/json_ld', 'w3d_lesson_video_jsonld', 25 );
+
+/**
+ * Table of contents for lessons: anchors every H2/H3 and prepends a jump nav.
+ * Runs before the related blocks (28 < 30) so the TOC covers content only.
+ */
+function w3d_lesson_toc( $content ) {
+	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return $content;
+	}
+	if ( ! is_singular( 'lesson' ) || ! in_the_loop() || ! is_main_query() ) {
+		return $content;
+	}
+	if ( false !== strpos( $content, 'w3d-toc' ) ) {
+		return $content;
+	}
+	$counter = 0;
+	$items   = array();
+	$content = preg_replace_callback(
+		'#<(h[23])([^>]*)>(.*?)</\1>#si',
+		function ( $m ) use ( &$counter, &$items ) {
+			$text = trim( wp_strip_all_tags( $m[3] ) );
+			if ( '' === $text ) {
+				return $m[0];
+			}
+			$counter++;
+			$slug = sanitize_title( $text );
+			if ( '' === $slug ) {
+				$slug = 'section';
+			}
+			$id = 'w3d-toc-' . $slug . '-' . $counter;
+			$items[] = array( 'level' => strtolower( $m[1] ), 'id' => $id, 'text' => $text );
+			$attrs = $m[2];
+			if ( preg_match( '/\sid="[^"]*"/i', $attrs ) ) {
+				$attrs = preg_replace( '/\sid="[^"]*"/i', ' id="' . esc_attr( $id ) . '"', $attrs );
+			} else {
+				$attrs .= ' id="' . esc_attr( $id ) . '"';
+			}
+			return '<' . $m[1] . $attrs . '>' . $m[3] . '</' . $m[1] . '>';
+		},
+		$content
+	);
+	if ( count( $items ) < 2 ) {
+		return $content;
+	}
+	$toc = '<nav class="w3d-toc" aria-label="On this page"><p class="w3d-toc-title">On this page</p><ul>';
+	foreach ( $items as $it ) {
+		$toc .= '<li class="w3d-toc-' . esc_attr( $it['level'] ) . '"><a href="#' . esc_attr( $it['id'] ) . '">' . esc_html( $it['text'] ) . '</a></li>';
+	}
+	$toc .= '</ul></nav>';
+	return $toc . $content;
+}
+add_filter( 'the_content', 'w3d_lesson_toc', 28 );
+
+/**
+ * FAQ JSON-LD for glossary terms, derived deterministically from the term's
+ * own content (no new claims): definition + relevance + closing guidance.
+ */
+function w3d_glossary_faq_jsonld( $data ) {
+	if ( ! is_singular( 'llms_glossary' ) ) {
+		return $data;
+	}
+	$post = get_post();
+	if ( ! $post ) {
+		return $data;
+	}
+	foreach ( (array) $data as $node ) {
+		if ( isset( $node['@type'] ) && in_array( 'FAQPage', (array) $node['@type'], true ) ) {
+			return $data;
+		}
+	}
+	$text = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( $post->post_content ) ) );
+	if ( '' === $text ) {
+		return $data;
+	}
+	$title = get_the_title();
+	$split = preg_split( '/(?<=[.!?])\s+(?=[A-Z0-9"\x{201C}])/u', $text );
+	$split = array_values( array_filter( array_map( 'trim', (array) $split ), function ( $s ) {
+		return mb_strlen( $s ) >= 40 && stripos( $s, 'Related terms' ) === false;
+	} ) );
+	if ( count( $split ) < 3 ) {
+		return $data;
+	}
+	$n = count( $split );
+	$data[] = array(
+		'@type'      => 'FAQPage',
+		'mainEntity' => array(
+			array(
+				'@type'          => 'Question',
+				'name'           => 'What is ' . $title . '?',
+				'acceptedAnswer' => array( '@type' => 'Answer', 'text' => mb_substr( $split[0], 0, 300 ) ),
+			),
+			array(
+				'@type'          => 'Question',
+				'name'           => 'Why does ' . $title . ' matter?',
+				'acceptedAnswer' => array( '@type' => 'Answer', 'text' => mb_substr( $split[ (int) floor( $n / 2 ) ], 0, 300 ) ),
+			),
+			array(
+				'@type'          => 'Question',
+				'name'           => 'What should beginners know about ' . $title . '?',
+				'acceptedAnswer' => array( '@type' => 'Answer', 'text' => mb_substr( end( $split ), 0, 300 ) ),
+			),
+		),
+	);
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'w3d_glossary_faq_jsonld', 26 );
