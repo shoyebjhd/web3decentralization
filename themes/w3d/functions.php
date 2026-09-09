@@ -1114,3 +1114,118 @@ function w3d_tutor_widget() {
 	<?php
 }
 add_action( 'lifterlms_after_my_account_navigation', 'w3d_tutor_widget' );
+
+/**
+ * 404 intelligence: CSV logging + smart typo redirects.
+ *
+ * Called from the very top of 404.php (before any output) so a matched
+ * typo can still issue a 301. Logging is append-only to
+ * wp-content/uploads/404-log.csv; the visitor IP is stored only as a
+ * salted SHA-256 hash. No DB reads beyond one slug list; no new tables.
+ */
+function w3d_404_log( $requested_url ) {
+	$uploads = wp_upload_dir();
+	$file    = trailingslashit( $uploads['basedir'] ) . '404-log.csv';
+	$ip      = isset( $_SERVER['REMOTE_ADDR'] ) ? (string) $_SERVER['REMOTE_ADDR'] : '';
+	$row     = array(
+		gmdate( 'c' ),
+		$requested_url,
+		isset( $_SERVER['HTTP_REFERER'] ) ? (string) $_SERVER['HTTP_REFERER'] : '',
+		isset( $_SERVER['HTTP_USER_AGENT'] ) ? (string) $_SERVER['HTTP_USER_AGENT'] : '',
+		hash( 'sha256', $ip . AUTH_KEY ),
+	);
+	$needs_header = ! file_exists( $file );
+	$fh           = fopen( $file, 'ab' );
+	if ( ! $fh ) {
+		return;
+	}
+	if ( flock( $fh, LOCK_EX ) ) {
+		if ( $needs_header ) {
+			fputcsv( $fh, array( 'timestamp', 'requested_url', 'referrer', 'user_agent', 'ip_hash' ) );
+		}
+		fputcsv( $fh, $row );
+		flock( $fh, LOCK_UN );
+	}
+	fclose( $fh );
+}
+
+/**
+ * Find the published slug closest to a mistyped 404 path.
+ *
+ * @return string Permalink URL or empty string.
+ */
+function w3d_404_smart_match( $path ) {
+	$path = trim( $path, '/' );
+	if ( '' === $path ) {
+		return '';
+	}
+	$segments = explode( '/', $path );
+	$needle   = end( $segments );
+	if ( strlen( $needle ) < 4 ) {
+		return '';
+	}
+	global $wpdb;
+	$rows = $wpdb->get_results(
+		"SELECT ID, post_name FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type IN ('post','page','lesson','course','chain','llms_glossary') AND post_name <> ''",
+		ARRAY_A
+	);
+	if ( ! $rows ) {
+		return '';
+	}
+	$best_id   = 0;
+	$best_dist = 4; // accept distance <= 3
+	foreach ( $rows as $row ) {
+		if ( $row['post_name'] === $needle ) {
+			continue; // exact slug exists; not a typo case
+		}
+		$dist = levenshtein( substr( $needle, 0, 200 ), substr( $row['post_name'], 0, 200 ) );
+		if ( $dist >= 0 && $dist < $best_dist ) {
+			$best_dist = $dist;
+			$best_id   = (int) $row['ID'];
+		}
+	}
+	if ( ! $best_id ) {
+		return '';
+	}
+	$url = get_permalink( $best_id );
+	if ( ! $url || untrailingslashit( $url ) === untrailingslashit( home_url( $path ) ) ) {
+		return '';
+	}
+	return $url;
+}
+
+/**
+ * Persist a smart-301 as a Rank Math redirection when the API is present.
+ * Best-effort only: the header redirect is what guarantees behavior.
+ */
+function w3d_404_remember_redirect( $from_path, $to_url ) {
+	try {
+		if ( class_exists( 'RankMath\Redirection\Redirection' ) && method_exists( 'RankMath\Redirection\Redirection', 'add' ) ) {
+			call_user_func(
+				'RankMath\Redirection\Redirection::add',
+				array(
+					'sources'     => array( array( 'pattern' => ltrim( $from_path, '/' ), 'comparison' => 'exact' ) ),
+					'url_to'      => $to_url,
+					'header_code' => 301,
+				)
+			);
+		}
+	} catch ( \Throwable $e ) {
+		// Header redirect still applies; persistence is a nice-to-have.
+	}
+}
+
+/**
+ * Entry point for 404.php. Logs the hit, then 301s on close typo matches.
+ */
+function w3d_404_intelligence() {
+	$requested = home_url( add_query_arg( null, null ) );
+	w3d_404_log( $requested );
+	$path = trim( (string) wp_parse_url( $requested, PHP_URL_PATH ), '/' );
+	$dest = w3d_404_smart_match( $path );
+	if ( $dest ) {
+		w3d_404_remember_redirect( '/' . $path, $dest );
+		wp_redirect( $dest, 301 );
+		exit;
+	}
+}
