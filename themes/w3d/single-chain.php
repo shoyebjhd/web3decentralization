@@ -36,6 +36,9 @@ get_header();
 			$grade = 'C';
 		}
 		?>
+		<?php
+		$has_score = ( '' !== $total && null !== $total );
+		?>
 		<article <?php post_class( 'w3d-chain-single' ); ?> id="post-<?php the_ID(); ?>">
 
 			<header class="chain-dash-head">
@@ -47,9 +50,9 @@ get_header();
 						<h1 class="chain-name"><?php echo esc_html( $name ); ?></h1>
 					</div>
 					<div class="chain-total">
-						<span class="chain-total-score"><?php echo esc_html( $total ); ?></span>
+						<span class="chain-total-score"><?php echo $has_score ? esc_html( $total ) : '&mdash;'; ?></span>
 						<span class="chain-total-label"><?php esc_html_e( 'Composite / 100', 'w3d' ); ?></span>
-						<span class="chain-grade"><?php echo esc_html( sprintf( 'Grade %s', $grade ) ); ?></span>
+						<span class="chain-grade"><?php echo $has_score ? esc_html( sprintf( 'Grade %s', $grade ) ) : esc_html__( 'Grade: pending audit', 'w3d' ); ?></span>
 					</div>
 				</div>
 
