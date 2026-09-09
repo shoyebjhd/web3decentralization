@@ -25,14 +25,14 @@ North-star metrics (6-month targets):
       retained on the server — reconstruction tracked separately)
 - [x] CI: repo validator + PHP lint + static smoke test (GitHub Actions)
 - [ ] PUSH repo to GitHub (needs `gh auth login` / repo creation)
-- [ ] GitHub Pages demo of the terminal (needs repo to exist)
+- [ ] GitHub Pages demo of the terminal — DISABLED per hosting policy (WordPress shared hosting only; terminal lives at /terminal/)
 - [ ] Reconstruct React/Vite source (optional but makes contributions easy)
 - [ ] `good first issue` starter tasks
 
 ## Phase 2 — Traffic blitz (Weeks 2–4)
 - [x] Launch pack prepared: `outreach/launch-blast.md` (Show HN + Reddit +
       dev.to), `outreach/awesome-lists.md` (submissions + plumbing text)
-- [x] GitHub Pages demo tooling + workflow (deploy once repo exists)
+- [x] GitHub Pages demo tooling built, then REMOVED per hosting policy (workflow deleted, Pages site disabled; terminal served from WordPress /terminal/ only)
 - [ ] PUSH repo to GitHub (needs `gh auth login`)
 - [ ] Post Show HN
 - [ ] Post Reddit data drops (r/CryptoCurrency, r/ethereum, r/solana, ...)

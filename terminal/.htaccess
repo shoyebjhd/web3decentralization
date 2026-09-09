@@ -10,7 +10,6 @@ RewriteRule . /terminal/index.html [L]
 </IfModule>
 
 # Hashed build assets are immutable; HTML is always revalidated.
-# (The old Netlify _headers file is ignored on this Apache host.)
 <IfModule mod_headers.c>
 <FilesMatch "\.(js|css|map|woff2?|png|svg|webmanifest|txt)$">
 Header set Cache-Control "public, max-age=31536000, immutable"
