@@ -32,7 +32,10 @@ jobs:
           cd terminal
           python -m http.server 8099 >/dev/null 2>&1 &
           SERVER=$!
-          sleep 1
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8099/index.html 2>/dev/null | grep -q "Web3 Decentralization Intelligence Terminal"; then break; fi
+            sleep 1
+          done
           curl -fsS http://localhost:8099/index.html | grep -q "Web3 Decentralization Intelligence Terminal"
           curl -fsS http://localhost:8099/llms.txt >/dev/null
           curl -fsS http://localhost:8099/ai.txt >/dev/null
