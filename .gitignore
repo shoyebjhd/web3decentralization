@@ -13,6 +13,9 @@ PLAN-open-source-hub.md
 # ===== Internal deployment scripts (expose server host/user) =====
 deploy_*.py
 deploy_*.sh
+/w3d_*.php
+/manifest_*.json
+/payload_*.html
 
 # ===== Local AI agent config / context =====
 .opencode/
