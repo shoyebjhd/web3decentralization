@@ -152,7 +152,10 @@ if (!window.Terminal){
           }
         }
         fullLink.href = SITE + 'terminal/tools/' + encodeURIComponent(t.slug) + '/';
-        try { history.pushState({ tool: t.slug }, '', SITE.replace(/\/$/, '') + '/terminal/?tool=' + encodeURIComponent(t.slug)); } catch (e){}
+        try {
+          var qs = '?tool=' + encodeURIComponent(t.slug) + (chainHint ? '&chain=' + encodeURIComponent(chainHint) : '');
+          history.pushState({ tool: t.slug }, '', SITE.replace(/\/$/, '') + '/terminal/' + qs);
+        } catch (e){}
         println('Opened in preview → ' + t.slug);
       })
       .catch(function(){ println('Could not load tool page (offline?). Try its full page directly.'); });
@@ -214,7 +217,7 @@ if (!window.Terminal){
   function cmdAbout(){
     println('W3D Terminal — open-source decentralization toolkit (MIT).');
     println('Method: 4 pillars (infrastructure 30 / capital 25 / governance 25 / software 20).');
-    println('Code + data: https://github.com/shoyebjhd/web3decentralization');
+    println('Code + data: https://github.com/Web3Decentralization/academy');
     return Promise.resolve();
   }
 
@@ -245,7 +248,7 @@ if (!window.Terminal){
     else if (k.length === 1 && !e.ctrlKey && !e.metaKey){ buf += k; term.write(k); }
   });
 
-  term.writeln('W3D Terminal — type "help" to begin. ' + DATA.tools.length + ' tools loading…');
+  term.writeln('W3D Terminal — type "help" to begin. Loading 15 tools…');
 
   fetch(DATA_URL, { credentials: 'same-origin' })
     .then(function(r){ if (!r.ok) throw 0; return r.json(); })
