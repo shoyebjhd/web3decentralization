@@ -5,6 +5,8 @@ RewriteBase /terminal/
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
+# WordPress CPT tool pages must reach WP, not the SPA shell or a static 404
+RewriteRule ^tools(/|$) /index.php [L]
 # SPA fallback
 RewriteRule . /terminal/index.html [L]
 </IfModule>

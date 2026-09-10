@@ -1,0 +1,493 @@
+{
+    "chains": [
+        {
+            "slug": "btc",
+            "name": "Bitcoin",
+            "score": 84.8,
+            "pillars": {
+                "infrastructure": 92,
+                "capital": 78,
+                "governance": 95,
+                "software": 70
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "eth",
+            "name": "Ethereum",
+            "score": 80.8,
+            "pillars": {
+                "infrastructure": 84,
+                "capital": 72,
+                "governance": 80,
+                "software": 88
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "sol",
+            "name": "Solana",
+            "score": 53.2,
+            "pillars": {
+                "infrastructure": 58,
+                "capital": 48,
+                "governance": 55,
+                "software": 50
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "ada",
+            "name": "Cardano",
+            "score": 70.4,
+            "pillars": {
+                "infrastructure": 78,
+                "capital": 68,
+                "governance": 72,
+                "software": 60
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "avax",
+            "name": "Avalanche",
+            "score": 57.2,
+            "pillars": {
+                "infrastructure": 62,
+                "capital": 55,
+                "governance": 58,
+                "software": 52
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "dot",
+            "name": "Polkadot",
+            "score": 72.6,
+            "pillars": {
+                "infrastructure": 75,
+                "capital": 64,
+                "governance": 82,
+                "software": 68
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "cosmos",
+            "name": "Cosmos Hub",
+            "score": 68,
+            "pillars": {
+                "infrastructure": 70,
+                "capital": 58,
+                "governance": 78,
+                "software": 65
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "xrp",
+            "name": "XRP Ledger",
+            "score": 43.2,
+            "pillars": {
+                "infrastructure": 45,
+                "capital": 35,
+                "governance": 40,
+                "software": 55
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "sui",
+            "name": "Sui",
+            "score": 49.2,
+            "pillars": {
+                "infrastructure": 54,
+                "capital": 46,
+                "governance": 50,
+                "software": 45
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "apt",
+            "name": "Aptos",
+            "score": 49.1,
+            "pillars": {
+                "infrastructure": 56,
+                "capital": 45,
+                "governance": 48,
+                "software": 45
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "near",
+            "name": "Near Protocol",
+            "score": 60.3,
+            "pillars": {
+                "infrastructure": 66,
+                "capital": 56,
+                "governance": 62,
+                "software": 55
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "arb",
+            "name": "Arbitrum",
+            "score": 62.7,
+            "pillars": {
+                "infrastructure": 64,
+                "capital": 58,
+                "governance": 68,
+                "software": 60
+            },
+            "nakamoto": null
+        },
+        {
+            "slug": "base",
+            "name": "Base",
+            "score": null,
+            "pillars": null,
+            "nakamoto": null
+        },
+        {
+            "slug": "optimism",
+            "name": "Optimism",
+            "score": null,
+            "pillars": null,
+            "nakamoto": null
+        },
+        {
+            "slug": "polygon",
+            "name": "Polygon",
+            "score": null,
+            "pillars": null,
+            "nakamoto": null
+        },
+        {
+            "slug": "bnb",
+            "name": "BNB Chain",
+            "score": null,
+            "pillars": null,
+            "nakamoto": null
+        },
+        {
+            "slug": "ton",
+            "name": "Toncoin",
+            "score": null,
+            "pillars": null,
+            "nakamoto": null
+        },
+        {
+            "slug": "polygon-zkevm",
+            "name": "Polygon zkEVM",
+            "score": null,
+            "pillars": null,
+            "nakamoto": null
+        },
+        {
+            "slug": "blast",
+            "name": "Blast",
+            "score": null,
+            "pillars": null,
+            "nakamoto": null
+        }
+    ],
+    "glossary": {
+        "51-percent-attack": "51% Attack",
+        "account-abstraction": "Account Abstraction",
+        "address": "Address",
+        "address-poisoning": "Address Poisoning",
+        "airdrop": "Airdrop",
+        "algorithmic-stablecoin": "Algorithmic Stablecoin",
+        "all-time-high": "All-Time High",
+        "altcoin": "Altcoin",
+        "apy": "APY",
+        "automated-market-maker": "Automated Market Maker",
+        "base-chain": "Base Chain",
+        "base-fee": "Base Fee",
+        "bear-market": "Bear Market",
+        "bitcoin": "Bitcoin",
+        "bitcoin-etf": "Bitcoin ETF",
+        "bitvm": "BitVM",
+        "blobs": "Blobs",
+        "block": "Block",
+        "block-explorer": "Block Explorer",
+        "block-height": "Block Height",
+        "block-reward": "Block Reward",
+        "block-time": "Block Time",
+        "blockchain": "Blockchain",
+        "bnb-chain": "BNB Chain",
+        "bonding-curve": "Bonding Curve",
+        "brc-20": "BRC-20",
+        "bridge": "Bridge",
+        "bull-market": "Bull Market",
+        "bundler": "Bundler",
+        "byzantine-generals-problem": "Byzantine Generals Problem",
+        "cefi": "CeFi",
+        "celestia": "Celestia",
+        "chain-abstraction": "Chain Abstraction",
+        "circulating-supply": "Circulating Supply",
+        "coinbase-transaction": "Coinbase Transaction",
+        "cold-wallet": "Cold Wallet",
+        "collateral": "Collateral",
+        "composability": "Composability",
+        "concentrated-liquidity": "Concentrated Liquidity",
+        "confirmation": "Confirmation",
+        "consensus": "Consensus",
+        "consensus-mechanism": "Consensus Mechanism",
+        "crypto-exchange": "Crypto Exchange",
+        "wallet": "Crypto Wallet",
+        "crypto-backed-stablecoin": "Crypto-Backed Stablecoin",
+        "cryptocurrency": "Cryptocurrency",
+        "cryptoeconomics": "Cryptoeconomics",
+        "cryptography": "Cryptography",
+        "custodial-wallet": "Custodial Wallet",
+        "cypherpunk": "Cypherpunk",
+        "dao": "DAO",
+        "dapp": "DApp",
+        "data-availability": "Data Availability",
+        "data-availability-sampling": "Data Availability Sampling",
+        "decentralization": "Decentralization",
+        "decentralized-exchange": "Decentralized Exchange",
+        "decentralized-ledger": "Decentralized Ledger",
+        "defi": "DeFi",
+        "delegated-proof-of-stake": "Delegated Proof of Stake",
+        "delegation": "Delegation",
+        "depeg": "Depeg",
+        "depin": "DePIN",
+        "desci": "DeSci",
+        "dex": "DEX",
+        "dex-aggregator": "DEX Aggregator",
+        "difficulty-adjustment": "Difficulty Adjustment",
+        "dollar-cost-averaging": "Dollar-Cost Averaging",
+        "double-spend": "Double-Spend",
+        "dusting-attack": "Dusting Attack",
+        "eigenlayer": "EigenLayer",
+        "eip-1559": "EIP-1559",
+        "eip-4844": "EIP-4844",
+        "erc-1155": "ERC-1155",
+        "erc-20": "ERC-20",
+        "erc-4337": "ERC-4337",
+        "erc-721": "ERC-721",
+        "ethereum": "Ethereum",
+        "ethereum-name-service": "Ethereum Name Service",
+        "exchange": "Exchange",
+        "fair-launch": "Fair Launch",
+        "faucet": "Faucet",
+        "fiat-backed-stablecoin": "Fiat-Backed Stablecoin",
+        "finality": "Finality",
+        "flash-loan": "Flash Loan",
+        "floor-price": "Floor Price",
+        "fomo": "FOMO",
+        "fork": "Fork",
+        "fraud-proof": "Fraud Proof",
+        "front-running": "Front-Running",
+        "fud": "FUD",
+        "gas": "Gas",
+        "gas-fees": "Gas Fees",
+        "gas-limit": "Gas Limit",
+        "genesis-block": "Genesis Block",
+        "governance": "Governance",
+        "governance-token": "Governance Token",
+        "gwei": "Gwei",
+        "halving": "Halving",
+        "hard-fork": "Hard Fork",
+        "hardware-wallet": "Hardware Wallet",
+        "hash": "Hash",
+        "hodl": "HODL",
+        "honeypot": "Honeypot",
+        "hot-wallet": "Hot Wallet",
+        "howey-test": "Howey Test",
+        "ico": "ICO",
+        "ido": "IDO",
+        "impermanent-loss": "Impermanent Loss",
+        "intent-based": "Intent-Based",
+        "interoperability": "Interoperability",
+        "kyc": "KYC",
+        "l2beat": "L2Beat",
+        "layer-1": "Layer 1",
+        "layer-2": "Layer 2",
+        "lightning-network": "Lightning Network",
+        "limit-order": "Limit Order",
+        "liquid-staking": "Liquid Staking",
+        "liquidation": "Liquidation",
+        "liquidity": "Liquidity",
+        "liquidity-mining": "Liquidity Mining",
+        "lrt-token": "LRT Token",
+        "mainnet": "Mainnet",
+        "market-cap": "Market Cap",
+        "market-maker": "Market Maker",
+        "max-supply": "Max Supply",
+        "mempool": "Mempool",
+        "merkle-tree": "Merkle Tree",
+        "mev": "MEV",
+        "mev-boost": "MEV-Boost",
+        "mining": "Mining",
+        "modular-blockchain": "Modular Blockchain",
+        "multisig": "Multisig",
+        "nakamoto-coefficient": "Nakamoto Coefficient",
+        "nft": "NFT",
+        "node": "Node",
+        "non-custodial-wallet": "Non-Custodial Wallet",
+        "op-stack": "OP Stack",
+        "optimism": "Optimism",
+        "optimistic-rollup": "Optimistic Rollup",
+        "oracle": "Oracle",
+        "order-book": "Order Book",
+        "ordinals": "Ordinals",
+        "paper-wallet": "Paper Wallet",
+        "paymaster": "Paymaster",
+        "permissionless": "Permissionless",
+        "perpetual-futures": "Perpetual Futures",
+        "phishing": "Phishing",
+        "polygon-zkevm": "Polygon zkEVM",
+        "priority-fee": "Priority Fee",
+        "private-key": "Private Key",
+        "proof-of-history": "Proof of History",
+        "proof-of-reserves": "Proof of Reserves",
+        "proof-of-stake": "Proof of Stake",
+        "proof-of-work": "Proof of Work",
+        "proposer-builder-separation": "Proposer-Builder Separation",
+        "proto-danksharding": "Proto-Danksharding",
+        "public-key": "Public Key",
+        "quadratic-voting": "Quadratic Voting",
+        "reentrancy": "Reentrancy",
+        "restaking": "Restaking",
+        "rollup": "Rollup",
+        "rpc-endpoint": "RPC Endpoint",
+        "rug-pull": "Rug Pull",
+        "runes-protocol": "Runes Protocol",
+        "sandwich-attack": "Sandwich Attack",
+        "satoshi": "Satoshi",
+        "seed-phrase": "Seed Phrase",
+        "segwit": "SegWit",
+        "self-custody": "Self-Custody",
+        "sequencer": "Sequencer",
+        "session-keys": "Session Keys",
+        "sharding": "Sharding",
+        "shared-sequencing": "Shared Sequencing",
+        "sidechain": "Sidechain",
+        "sim-swap": "SIM Swap",
+        "slippage": "Slippage",
+        "smart-contract": "Smart Contract",
+        "smart-contract-audit": "Smart Contract Audit",
+        "snapshot-voting": "Snapshot Voting",
+        "social-recovery": "Social Recovery",
+        "socialfi": "SocialFi",
+        "solo-staking": "Solo Staking",
+        "stablecoin": "Stablecoin",
+        "staking": "Staking",
+        "staking-pool": "Staking Pool",
+        "state-channel": "State Channel",
+        "superchain": "Superchain",
+        "sybil-attack": "Sybil Attack",
+        "synthetic-asset": "Synthetic Asset",
+        "taproot": "Taproot",
+        "tendermint": "Tendermint",
+        "testnet": "Testnet",
+        "the-merge": "The Merge",
+        "token": "Token",
+        "token-unlock": "Token Unlock",
+        "tokenomics": "Tokenomics",
+        "toncoin": "Toncoin",
+        "total-value-locked": "Total Value Locked",
+        "transaction": "Transaction",
+        "treasury": "Treasury",
+        "trustless": "Trustless",
+        "utility-token": "Utility Token",
+        "utxo": "UTXO",
+        "validator": "Validator",
+        "validity-proof": "Validity Proof",
+        "validium": "Validium",
+        "vesting": "Vesting",
+        "ve-token": "veToken",
+        "volatility": "Volatility",
+        "web3": "Web3",
+        "whitepaper": "Whitepaper",
+        "wrapped-token": "Wrapped Token",
+        "yield-farming": "Yield Farming",
+        "yield-vault": "Yield Vault",
+        "zero-knowledge-proof": "Zero-Knowledge Proof",
+        "zk-rollup": "ZK Rollup",
+        "zkvm": "zkVM"
+    },
+    "tools": [
+        {
+            "slug": "address-checker",
+            "title": "Address Checker - W3D Terminal",
+            "category": "calculators"
+        },
+        {
+            "slug": "airdrop-eligibility-checklist",
+            "title": "Airdrop Eligibility Checklist - W3D Terminal",
+            "category": "security"
+        },
+        {
+            "slug": "bridge-risk-score",
+            "title": "Bridge Risk Score - W3D Terminal",
+            "category": "l2"
+        },
+        {
+            "slug": "decentralization-score-explorer",
+            "title": "Decentralization Score Explorer - W3D Terminal",
+            "category": "validators"
+        },
+        {
+            "slug": "impermanent-loss-calculator",
+            "title": "Impermanent Loss Calculator - W3D Terminal",
+            "category": "calculators"
+        },
+        {
+            "slug": "l2-fees-vs-ethereum",
+            "title": "L2 Fees vs Ethereum - W3D Terminal",
+            "category": "l2"
+        },
+        {
+            "slug": "gas-estimator-l2",
+            "title": "L2 Gas Estimator - W3D Terminal",
+            "category": "l2"
+        },
+        {
+            "slug": "multisig-setup-planner",
+            "title": "Multisig Setup Planner - W3D Terminal",
+            "category": "security"
+        },
+        {
+            "slug": "nakamoto-coefficient",
+            "title": "Nakamoto Coefficient Calculator - W3D Terminal",
+            "category": "validators"
+        },
+        {
+            "slug": "nakamoto-coefficient-simulator",
+            "title": "Nakamoto Coefficient Simulator - W3D Terminal",
+            "category": "validators"
+        },
+        {
+            "slug": "seed-phrase-entropy-checker",
+            "title": "Seed Phrase Entropy Checker - W3D Terminal",
+            "category": "security"
+        },
+        {
+            "slug": "self-custody-score",
+            "title": "Self-Custody Score - W3D Terminal",
+            "category": "security"
+        },
+        {
+            "slug": "staking-rewards-compare",
+            "title": "Staking Rewards Compare - W3D Terminal",
+            "category": "validators"
+        },
+        {
+            "slug": "token-unlock-impact",
+            "title": "Token Unlock Impact - W3D Terminal",
+            "category": "calculators"
+        },
+        {
+            "slug": "validator-profit-calculator",
+            "title": "Validator Profit Calculator - W3D Terminal",
+            "category": "validators"
+        }
+    ]
+}
