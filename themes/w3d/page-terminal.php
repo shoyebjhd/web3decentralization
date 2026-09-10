@@ -71,9 +71,9 @@ $data_url = esc_url( get_theme_file_uri( 'assets/w3d-data.json' ) );
 	</section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js" defer></script>
 <script>
-(function(){
+function w3dTermInit(){
 'use strict';
 var DATA_URL = <?php echo wp_json_encode( get_theme_file_uri( 'assets/w3d-data.json' ) ); ?>;
 var SITE = <?php echo wp_json_encode( home_url( '/' ) ); ?>;
@@ -289,7 +289,9 @@ if (!window.Terminal){
     }
   });
 }
-})();
+}
+if (document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', w3dTermInit); }
+else { w3dTermInit(); }
 </script>
 
 <?php

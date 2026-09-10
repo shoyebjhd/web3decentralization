@@ -540,7 +540,7 @@ function w3d_logo_markup( $with_wordmark = true ) {
 	if ( ! $src ) {
 		return '<a href="' . esc_url( home_url( '/' ) ) . '" rel="home" class="w3d-brand-link"><span class="w3d-site-name">Web3 Decentralization</span></a>';
 	}
-	$out = '<img src="' . esc_url( $src ) . '" class="w3d-logo-img" alt="' . ( $with_wordmark ? '' : esc_attr( 'Web3 Decentralization' ) ) . '" decoding="async">';
+	$out = '<img src="' . esc_url( $src ) . '" class="w3d-logo-img" width="64" height="64" alt="' . ( $with_wordmark ? '' : esc_attr( 'Web3 Decentralization' ) ) . '" decoding="async" fetchpriority="high">';
 	if ( $with_wordmark ) {
 		$out .= '<span class="w3d-site-name">Web3 Decentralization</span>';
 	}
