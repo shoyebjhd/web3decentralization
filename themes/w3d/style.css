@@ -921,6 +921,8 @@ ul.w3d-sources li a{ font-weight:600; }
 .w3d-footer-nav a{ color:var(--w3d-muted); text-decoration:none; font-size:14.5px; font-weight:500; }
 .w3d-footer-nav a:hover{ color:var(--w3d-emerald-2); }
 .w3d-footer-nav .current-menu-item a{ color:var(--w3d-emerald-2); }
+.w3d-footer-fork{ margin:18px 0 0; font-size:14px; }
+.w3d-footer-fork a{ color:var(--w3d-emerald-2); }
 .w3d-footer-disclaimer{
 	margin-top:30px;
 	max-width:940px;

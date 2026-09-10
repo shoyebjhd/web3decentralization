@@ -42,6 +42,8 @@
 		</nav>
 		</div>
 
+		<p class="w3d-footer-fork"><a href="https://github.com/shoyebjhd/academy" target="_blank" rel="noopener"><?php esc_html_e( 'Fork on GitHub', 'w3d' ); ?></a> &mdash; <?php esc_html_e( 'the entire academy is MIT licensed.', 'w3d' ); ?></p>
+
 		<p class="w3d-footer-disclaimer">
 			Independent educational research by The W3D Team &mdash; not financial or investment advice. Nothing on this site
 			constitutes a recommendation to buy, sell, or hold any digital asset. Some outbound links are affiliate links;
