@@ -91,10 +91,10 @@ async function fetchLive() {
   return live;
 }
 
-function updateDataJson(live, updated) {
+function updateDataJson(live, candidate) {
   const raw = fs.readFileSync(DATA_JSON, 'utf8');
   const data = JSON.parse(raw);
-  const block = { updated, chains: {} };
+  const block = { chains: {} };
   for (const slug of ['btc', 'atom', 'avax', 'near']) {
     const c = live[slug];
     if (!c || c.error) continue;
@@ -105,11 +105,20 @@ function updateDataJson(live, updated) {
       nakamoto_source: c.nakamoto_33 != null ? 'computed-live' : 'audited',
     };
   }
-  data.live = block;
+  const same = (a, b) =>
+    a && b &&
+    a.validators === b.validators &&
+    a.validators_source === b.validators_source &&
+    a.nakamoto_33 === b.nakamoto_33 &&
+    a.nakamoto_source === b.nakamoto_source;
+  const prev = data.live && data.live.chains;
+  const unchanged = prev && Object.keys(block.chains).every((k) => same(block.chains[k], prev[k]));
+  const updated = unchanged && data.live && data.live.updated ? data.live.updated : candidate;
+  data.live = { updated, chains: block.chains };
   let out = JSON.stringify(data, null, 4);
   if (raw.endsWith('\n') && !out.endsWith('\n')) out += '\n';
   fs.writeFileSync(DATA_JSON, out, 'utf8');
-  return Object.keys(block.chains);
+  return { ok: Object.keys(block.chains), updated };
 }
 
 const MD_FILE = { btc: 'btc', atom: 'cosmos', avax: 'avax', near: 'near' };
@@ -139,12 +148,13 @@ async function main() {
   const live = await fetchLive();
   const problems = Object.entries(live).filter(([, c]) => c.error).map(([k, c]) => `${k}=${c.error}`);
   if (problems.length) console.log('fetch-issues: ' + problems.join(' | '));
-  const okSlugs = updateDataJson(live, new Date().toISOString());
-  const updated = new Date().toISOString();
-  for (const slug of okSlugs) {
-    console.log(`md ${slug}: ` + updateChainMd(slug, live[slug], updated));
+  const res = updateDataJson(live, new Date().toISOString());
+  let updated = res.updated;
+  for (const slug of res.ok) {
+    const r = updateChainMd(slug, live[slug], updated);
+    if (r !== 'ok') { console.log(`md ${slug}: ${r}`); res.ok = res.ok.filter((s) => s !== slug); }
   }
-  console.log('live chains: ' + (okSlugs.join(',') || '(none — kept previous)'));
+  console.log('live chains: ' + (res.ok.join(',') || '(none — kept previous)'));
 }
 
 if (require.main === module) {
