@@ -3,6 +3,12 @@ chain: avax
 name: Avalanche
 consensus: Snowman / Avalanche PoS
 composite: 57.2
+live_validators: 605
+live_validators_source: avax-public-api
+live_nakamoto_33: 24
+live_nakamoto_source: computed
+live_updated: 2026-09-10T07:34:03.305Z
+lastmod: 2026-09-10
 ---
 
 # Avalanche Decentralization Audit

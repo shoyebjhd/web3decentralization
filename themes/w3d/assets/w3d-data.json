@@ -489,5 +489,34 @@
             "title": "Validator Profit Calculator - W3D Terminal",
             "category": "validators"
         }
-    ]
+    ],
+    "live": {
+        "updated": "2026-09-10T07:34:03.302Z",
+        "chains": {
+            "btc": {
+                "validators": 26732,
+                "validators_source": "bitnodes",
+                "nakamoto_33": null,
+                "nakamoto_source": "audited"
+            },
+            "atom": {
+                "validators": 180,
+                "validators_source": "cosmos.directory",
+                "nakamoto_33": 3,
+                "nakamoto_source": "computed-live"
+            },
+            "avax": {
+                "validators": 605,
+                "validators_source": "avax-public-api",
+                "nakamoto_33": 24,
+                "nakamoto_source": "computed-live"
+            },
+            "near": {
+                "validators": 423,
+                "validators_source": "near-public-rpc",
+                "nakamoto_33": 9,
+                "nakamoto_source": "computed-live"
+            }
+        }
+    }
 }

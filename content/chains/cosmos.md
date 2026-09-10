@@ -3,6 +3,12 @@ chain: cosmos
 name: Cosmos
 consensus: CometBFT (Tendermint) PoS
 composite: 68
+live_validators: 180
+live_validators_source: cosmos.directory
+live_nakamoto_33: 3
+live_nakamoto_source: computed
+live_updated: 2026-09-10T07:34:03.305Z
+lastmod: 2026-09-10
 ---
 
 # Cosmos Decentralization Audit

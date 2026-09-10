@@ -1,0 +1,41 @@
+name: Weekly live scores
+
+# Refreshes the additive `live` layer (validator counts + computed Nakamoto-33
+# for chains with free keyless sources: btc/atom/avax/near). Audited scores in
+# w3d-data.json and all post content are NEVER modified by this job.
+# Chains without a free source keep audited values (see scripts/fetch-scores.js).
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Unit tests (Nakamoto math)
+        run: node --test scripts/fetch-scores.test.js
+
+      - name: Fetch live scores
+        run: node scripts/fetch-scores.js
+
+      - name: Commit + push on change
+        run: |
+          git diff --quiet -- themes/w3d/assets/w3d-data.json content/chains/ || (
+            git config user.name "w3d-scores-bot"
+            git config user.email "web3decentralization@gmail.com"
+            git add themes/w3d/assets/w3d-data.json content/chains/
+            git commit -m "Weekly live scores: validator counts + Nakamoto-33 (audited scores untouched)"
+            git push
+          )
+        shell: bash
