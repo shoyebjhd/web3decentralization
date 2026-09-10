@@ -7,7 +7,7 @@ live_validators: 605
 live_validators_source: avax-public-api
 live_nakamoto_33: 24
 live_nakamoto_source: computed
-live_updated: 2026-09-10T07:34:03.305Z
+live_updated: 2026-09-10T07:35:22.996Z
 lastmod: 2026-09-10
 ---
 

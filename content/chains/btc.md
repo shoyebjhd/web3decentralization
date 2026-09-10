@@ -7,7 +7,7 @@ live_validators: 26732
 live_validators_source: bitnodes
 live_nakamoto_33: 
 live_nakamoto_source: audited
-live_updated: 2026-09-10T07:34:03.305Z
+live_updated: 2026-09-10T07:35:22.996Z
 lastmod: 2026-09-10
 ---
 

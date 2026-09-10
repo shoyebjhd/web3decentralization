@@ -7,7 +7,7 @@ live_validators: 423
 live_validators_source: near-public-rpc
 live_nakamoto_33: 9
 live_nakamoto_source: computed
-live_updated: 2026-09-10T07:34:03.305Z
+live_updated: 2026-09-10T07:35:22.996Z
 lastmod: 2026-09-10
 ---
 
