@@ -885,6 +885,25 @@ ul.w3d-sources li a{ font-weight:600; }
 .w3d-footer-top{ display:flex; flex-wrap:wrap; gap:32px; }
 .w3d-footer-gloss-title{ margin:0 0 8px; font-family:var(--w3d-font-head); font-weight:600; font-size:15px; }
 .chains-card-pending{ font-size:13px; }
+.w3d-term-head{ margin:8px 0 20px; }
+.w3d-term-search{ margin:0 0 16px; }
+.w3d-term-search input[type="search"]{ width:100%; max-width:560px; background:var(--w3d-surface); color:var(--w3d-text); border:1px solid var(--w3d-border); border-radius:10px; padding:12px 16px; font-size:15px; }
+.w3d-term-cols{ display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:16px; margin-bottom:34px; }
+@media (max-width:900px){ .w3d-term-cols{ grid-template-columns:1fr; } }
+.w3d-term-left{ background:#0b0e1a; border:1px solid var(--w3d-border); border-radius:12px; overflow:hidden; }
+#w3d-term{ padding:12px; min-height:340px; }
+#w3d-term .xterm{ height:340px; }
+.w3d-term-right{ background:var(--w3d-surface); border:1px solid var(--w3d-border); border-radius:12px; padding:16px 18px; min-width:0; }
+.w3d-term-preview-head{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; font-family:var(--w3d-font-head); font-weight:600; font-size:14px; color:var(--w3d-dim); }
+.w3d-term-preview-head a{ color:var(--w3d-emerald-2); }
+#w3d-term-preview .w3d-toolcalc input[type="text"], #w3d-term-preview .w3d-toolcalc input[type="number"], #w3d-term-preview .w3d-toolcalc textarea, #w3d-term-preview .w3d-toolcalc select{ max-width:100%; }
+.w3d-term-all{ margin:10px 0 30px; }
+.w3d-term-open{ cursor:pointer; }
+.w3d-toolcalc{ background:var(--w3d-surface); border:1px solid var(--w3d-border); border-radius:12px; padding:18px 20px; margin:18px 0; }
+.w3d-toolcalc input[type="text"], .w3d-toolcalc input[type="number"], .w3d-toolcalc textarea, .w3d-toolcalc select{ background:#0b0e1a; color:var(--w3d-text); border:1px solid var(--w3d-border); border-radius:8px; padding:10px 12px; font-size:14.5px; max-width:100%; }
+.w3d-toolcalc button{ background:var(--w3d-btn-grad); color:#fff; border:1px solid transparent; border-radius:10px; padding:10px 20px; font-family:var(--w3d-font-head); font-weight:600; cursor:pointer; margin:4px 8px 4px 0; }
+.w3d-toolcalc button:hover{ background:var(--w3d-btn-grad-hover); }
+.w3d-tool-more{ margin-top:26px; }
 
 /* ============================================================
    FOOTER

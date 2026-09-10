@@ -1,14 +1,15 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /terminal/
-# If the request is a real file/dir, serve it
+# Real files/dirs pass through (embeds, OG images, data files) —
+# except the bare shell root, which must reach WordPress (no static index).
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !^/terminal/?$
 RewriteRule ^ - [L]
-# WordPress CPT tool pages must reach WP, not the SPA shell or a static 404
-RewriteRule ^tools(/|$) /index.php [L]
-# SPA fallback
-RewriteRule . /terminal/index.html [L]
+# Shell root + tool pages + deep links all route to WordPress
+# (no static index remains; the React bundle was retired, see git history)
+RewriteRule ^(.*)$ /index.php [L]
 </IfModule>
 
 # Hashed build assets are immutable; HTML is always revalidated.

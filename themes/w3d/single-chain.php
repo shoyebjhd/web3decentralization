@@ -100,6 +100,9 @@ get_header();
 						<a class="wp-block-button__link" href="<?php echo esc_url( home_url( '/terminal/' ) ); ?>"><?php esc_html_e( 'Open the W3D Terminal', 'w3d' ); ?></a>
 					</div>
 					<div class="wp-block-button is-style-outline">
+						<a class="wp-block-button__link" href="<?php echo esc_url( add_query_arg( array( 'tool' => 'nakamoto-coefficient', 'chain' => get_post_field( 'post_name', get_the_ID() ) ), home_url( '/terminal/' ) ) ); ?>"><?php esc_html_e( 'Run in Terminal', 'w3d' ); ?></a>
+					</div>
+					<div class="wp-block-button is-style-outline">
 						<a class="wp-block-button__link" href="<?php echo esc_url( home_url( '/chains/' ) ); ?>"><?php esc_html_e( 'All chain audits', 'w3d' ); ?></a>
 					</div>
 				</div>
