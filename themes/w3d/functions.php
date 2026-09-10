@@ -1631,3 +1631,34 @@ function w3d_tool_jsonld( $data ) {
 	return $data;
 }
 add_filter( 'rank_math/json_ld', 'w3d_tool_jsonld', 25 );
+
+/**
+ * FAQ JSON-LD for the terminal shell page (matches its on-page FAQ).
+ */
+function w3d_terminal_faq_jsonld( $data ) {
+	if ( ! is_page( 'terminal' ) ) {
+		return $data;
+	}
+	$data[] = array(
+		'@type'      => 'FAQPage',
+		'mainEntity' => array(
+			array(
+				'@type'          => 'Question',
+				'name'           => 'What is the W3D Terminal?',
+				'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'A free, open-source decentralization toolkit: 15 client-side calculators plus live chain data, MIT licensed, no signup.' ),
+			),
+			array(
+				'@type'          => 'Question',
+				'name'           => 'Do I need to connect a wallet or pay?',
+				'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'No. Every tool runs entirely in your browser, free forever, with no wallet connection and nothing sent to any server.' ),
+			),
+			array(
+				'@type'          => 'Question',
+				'name'           => 'How do I use the terminal shell?',
+				'acceptedAnswer' => array( '@type' => 'Answer', 'text' => 'Type help to list commands, open a tool by slug, or deep-link with /terminal/?tool=. Every tool also works as a standalone page under /terminal/tools/.' ),
+			),
+		),
+	);
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'w3d_terminal_faq_jsonld', 26 );

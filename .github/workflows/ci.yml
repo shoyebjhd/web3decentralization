@@ -27,16 +27,27 @@ jobs:
           done
         shell: bash
 
-      - name: Verify terminal is served (static smoke)
+      - name: Functional test calculators (node harness)
         run: |
-          cd terminal
-          python -m http.server 8099 >/dev/null 2>&1 &
-          SERVER=$!
-          for i in $(seq 1 30); do
-            if curl -fsS http://localhost:8099/index.html 2>/dev/null | grep -q "Web3 Decentralization Intelligence Terminal"; then break; fi
-            sleep 1
+          mkdir -p .temp/jscheck
+          python - <<'PYEOF'
+          import re, pathlib
+          out = pathlib.Path('.temp/jscheck')
+          for f in sorted(pathlib.Path('tools').glob('*.html')):
+              m = re.search(r'<script>(.*?)</script>', f.read_text(encoding='utf-8'), re.S)
+              if m:
+                  (out / (f.stem + '.js')).write_text(m.group(1), encoding='utf-8')
+          print('extracted', len(list(out.glob('*.js'))), 'calculator scripts')
+          PYEOF
+          node scripts/test_calculators.js .temp/jscheck
+        shell: bash
+
+      - name: Verify terminal shell template + tool divs
+        run: |
+          grep -q "w3d@terminal" themes/w3d/page-terminal.php
+          for f in tools/*.html; do
+            slug=$(basename "$f" .html)
+            grep -q "id=\"tool-$slug\"" "$f" || (echo "missing div in $f" && exit 1)
           done
-          curl -fsS http://localhost:8099/index.html | grep -q "Web3 Decentralization Intelligence Terminal"
-          curl -fsS http://localhost:8099/llms.txt >/dev/null
-          curl -fsS http://localhost:8099/ai.txt >/dev/null
-          kill $SERVER
+          echo "shell template + 15 tool divs OK"
+        shell: bash

@@ -55,6 +55,7 @@ function bechCheck(addr){
   var vals = [];
   for (var i = 0; i < pos; i++) vals.push(addr.charCodeAt(i) >> 5);
   vals.push(0);
+  for (var h = 0; h < pos; h++) vals.push(addr.charCodeAt(h) & 31);
   for (var k = pos + 1; k < addr.length; k++){
     var d = BECH.indexOf(addr[k]);
     if (d < 0) return false;
