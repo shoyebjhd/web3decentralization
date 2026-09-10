@@ -12,11 +12,13 @@ const ROOT = path.resolve(__dirname, '..');
 const DATA_JSON = path.join(ROOT, 'themes', 'w3d', 'assets', 'w3d-data.json');
 const CHAINS_DIR = path.join(ROOT, 'content', 'chains');
 
+const CHAIN_SLUGS = ['btc', 'sol', 'ada', 'avax', 'cosmos', 'xrp', 'sui', 'apt', 'near'];
+
 // Chains deliberately NOT fetched live (no free keyless source):
-// eth (beaconcha.in key-gated), sol (ankr key-gated), ada (no keyless dist API),
-// dot (no keyless dist API), apt (no keyless validator API), sui (public JSON-RPC
-// deprecated), xrp (no stake concept; UNL count needs rippled, not clio),
-// arb (L2, inherits L1). btc has node counts only (no Nakamoto concept on nodes).
+// eth (beaconcha.in / ankr key-gated, no usable public beacon API),
+// dot (staking storage keys need twox64 hashing; no keyless dist REST),
+// arb (optimistic rollup, no sovereign validator set to count).
+// btc/ada/xrp have counts only (no stake distribution); labeled accordingly.
 
 function nakamoto33(shares) {
   const nums = shares.filter((n) => Number.isFinite(n) && n > 0);
@@ -52,18 +54,40 @@ async function fetchLive() {
 
   try {
     const j = await get('https://bitnodes.io/api/v1/snapshots/latest/');
-    if (Number.isFinite(j.total_nodes)) put('btc', { validators: j.total_nodes, validators_source: 'bitnodes', note: 'reachable nodes, not miners; no Nakamoto concept' });
+    if (Number.isFinite(j.total_nodes)) put('btc', {
+      validators: j.total_nodes, validators_source: 'bitnodes',
+      label: 'illustrative live data — reachable nodes, not miners; no stake/Nakamoto concept',
+    });
     else throw new Error('schema');
   } catch (e) { put('btc', { error: String((e && e.message) || e) }); }
-  await sleep(1500);
+  await sleep(1200);
 
   try {
-    const j = await get('https://rest.cosmos.directory/cosmoshub/cosmos/staking/v1beta1/validators?status=BOND_STATUS_BONDED&pagination.limit=300');
-    const vs = j.validators || [];
-    const stakes = vs.map((v) => Number(v.tokens)).filter((n) => Number.isFinite(n) && n > 0);
-    put('atom', { validators: vs.length, validators_source: 'cosmos.directory', stakes });
-  } catch (e) { put('atom', { error: String((e && e.message) || e) }); }
-  await sleep(1500);
+    const j = await rpc('https://api.mainnet-beta.solana.com', 'getVoteAccounts');
+    const cur = (j.result && j.result.current) || [];
+    const stakes = cur.map((v) => Number(v.activatedStake)).filter((n) => Number.isFinite(n) && n > 0);
+    put('sol', { validators: cur.length, validators_source: 'solana-public-rpc', stakes });
+  } catch (e) { put('sol', { error: String((e && e.message) || e) }); }
+  await sleep(1200);
+
+  try {
+    const pools = [];
+    let offset = 0;
+    const LIMIT = 1000;
+    while (true) {
+      const j = await get(`https://api.koios.rest/api/v1/pool_list?limit=${LIMIT}&offset=${offset}`);
+      if (!Array.isArray(j) || !j.length) break;
+      pools.push(...j);
+      if (j.length < LIMIT) break;
+      offset += LIMIT;
+      await sleep(1200);
+    }
+    put('ada', {
+      validators: pools.length, validators_source: 'koios.rest',
+      label: 'illustrative live data — koios pool-registry count; no keyless stake distribution, Nakamoto from audited snapshot',
+    });
+  } catch (e) { put('ada', { error: String((e && e.message) || e) }); }
+  await sleep(1200);
 
   try {
     const j = await rpc('https://api.avax.network/ext/bc/P', 'platform.getCurrentValidators', [{}]);
@@ -71,7 +95,42 @@ async function fetchLive() {
     const stakes = vs.map((v) => Number(v.weight ?? v.stakeAmount)).filter((n) => Number.isFinite(n) && n > 0);
     put('avax', { validators: vs.length, validators_source: 'avax-public-api', stakes });
   } catch (e) { put('avax', { error: String((e && e.message) || e) }); }
-  await sleep(1500);
+  await sleep(1200);
+
+  try {
+    const j = await get('https://rest.cosmos.directory/cosmoshub/cosmos/staking/v1beta1/validators?status=BOND_STATUS_BONDED&pagination.limit=300');
+    const vs = j.validators || [];
+    const stakes = vs.map((v) => Number(v.tokens)).filter((n) => Number.isFinite(n) && n > 0);
+    put('cosmos', { validators: vs.length, validators_source: 'cosmos.directory', stakes });
+  } catch (e) { put('cosmos', { error: String((e && e.message) || e) }); }
+  await sleep(1200);
+
+  try {
+    const j = await get('https://vl.ripple.com/');
+    const inner = JSON.parse(Buffer.from(j.blob, 'base64').toString('utf8'));
+    const vs = (inner.validators || []).filter((v) => v.validation_public_key);
+    put('xrp', {
+      validators: vs.length, validators_source: 'ripple-official-unl',
+      label: 'illustrative live data — Ripple-published UNL validator list; no stake concept',
+    });
+  } catch (e) { put('xrp', { error: String((e && e.message) || e) }); }
+  await sleep(1200);
+
+  try {
+    const j = await rpc('https://sui.publicnode.com', 'suix_getLatestSuiSystemState');
+    const vs = (j.result && j.result.activeValidators) || [];
+    const stakes = vs.map((v) => Number(v.votingPower)).filter((n) => Number.isFinite(n) && n > 0);
+    put('sui', { validators: vs.length, validators_source: 'sui.publicnode', stakes });
+  } catch (e) { put('sui', { error: String((e && e.message) || e) }); }
+  await sleep(1200);
+
+  try {
+    const j = await get('https://fullnode.mainnet.aptoslabs.com/v1/accounts/0x1/resource/0x1::stake::ValidatorSet');
+    const vs = (j.data && j.data.active_validators) || [];
+    const stakes = vs.map((v) => Number(v.voting_power)).filter((n) => Number.isFinite(n) && n > 0);
+    put('apt', { validators: vs.length, validators_source: 'aptos-public-fullnode', stakes });
+  } catch (e) { put('apt', { error: String((e && e.message) || e) }); }
+  await sleep(1200);
 
   try {
     const j = await rpc('https://rpc.mainnet.near.org', 'validators', [null]);
@@ -82,10 +141,13 @@ async function fetchLive() {
 
   for (const k of Object.keys(live)) {
     const c = live[k];
-    if (c.stakes) {
+    if (c.stakes && c.stakes.length) {
       c.nakamoto_33 = nakamoto33(c.stakes);
-      c.nakamoto_source = 'computed';
+      c.nakamoto_source = 'computed-live';
       delete c.stakes;
+    } else if (c.stakes && !c.stakes.length) {
+      delete c.stakes;
+      c.label = (c.label ? c.label + ' ' : '') + 'illustrative live data — no stake distribution, Nakamoto from audited snapshot';
     }
   }
   return live;
@@ -95,7 +157,7 @@ function updateDataJson(live, candidate) {
   const raw = fs.readFileSync(DATA_JSON, 'utf8');
   const data = JSON.parse(raw);
   const block = { chains: {} };
-  for (const slug of ['btc', 'atom', 'avax', 'near']) {
+  for (const slug of CHAIN_SLUGS) {
     const c = live[slug];
     if (!c || c.error) continue;
     block.chains[slug] = {
@@ -104,13 +166,15 @@ function updateDataJson(live, candidate) {
       nakamoto_33: c.nakamoto_33 ?? null,
       nakamoto_source: c.nakamoto_33 != null ? 'computed-live' : 'audited',
     };
+    if (c.label) block.chains[slug].label = c.label;
   }
   const same = (a, b) =>
     a && b &&
     a.validators === b.validators &&
     a.validators_source === b.validators_source &&
     a.nakamoto_33 === b.nakamoto_33 &&
-    a.nakamoto_source === b.nakamoto_source;
+    a.nakamoto_source === b.nakamoto_source &&
+    (a.label || '') === (b.label || '');
   const prev = data.live && data.live.chains;
   const unchanged = prev && Object.keys(block.chains).every((k) => same(block.chains[k], prev[k]));
   const updated = unchanged && data.live && data.live.updated ? data.live.updated : candidate;
@@ -121,10 +185,8 @@ function updateDataJson(live, candidate) {
   return { ok: Object.keys(block.chains), updated };
 }
 
-const MD_FILE = { btc: 'btc', atom: 'cosmos', avax: 'avax', near: 'near' };
-
 function updateChainMd(slug, info, updated) {
-  const file = path.join(CHAINS_DIR, (MD_FILE[slug] || slug) + '.md');
+  const file = path.join(CHAINS_DIR, slug + '.md');
   if (!fs.existsSync(file)) return 'missing-file';
   const raw = fs.readFileSync(file, 'utf8');
   const eol = raw.includes('\r\n') ? '\r\n' : '\n';
@@ -137,6 +199,7 @@ function updateChainMd(slug, info, updated) {
   set('live_validators_source', info.validators_source || '');
   set('live_nakamoto_33', info.nakamoto_33 ?? '');
   set('live_nakamoto_source', info.nakamoto_source || 'audited');
+  if (info.label) set('live_label', info.label);
   set('live_updated', updated);
   set('lastmod', updated.slice(0, 10));
   const out = `---\n${fm.join('\n')}\n---\n` + text.slice(m[0].length);

@@ -491,24 +491,57 @@
         }
     ],
     "live": {
-        "updated": "2026-09-10T08:05:37.731Z",
+        "updated": "2026-09-10T08:20:26.156Z",
         "chains": {
             "btc": {
-                "validators": 26751,
+                "validators": 26737,
                 "validators_source": "bitnodes",
                 "nakamoto_33": null,
-                "nakamoto_source": "audited"
+                "nakamoto_source": "audited",
+                "label": "illustrative live data — reachable nodes, not miners; no stake/Nakamoto concept"
             },
-            "atom": {
-                "validators": 180,
-                "validators_source": "cosmos.directory",
-                "nakamoto_33": 3,
+            "sol": {
+                "validators": 675,
+                "validators_source": "solana-public-rpc",
+                "nakamoto_33": 18,
                 "nakamoto_source": "computed-live"
+            },
+            "ada": {
+                "validators": 6163,
+                "validators_source": "koios.rest",
+                "nakamoto_33": null,
+                "nakamoto_source": "audited",
+                "label": "illustrative live data — koios pool-registry count; no keyless stake distribution, Nakamoto from audited snapshot"
             },
             "avax": {
                 "validators": 605,
                 "validators_source": "avax-public-api",
                 "nakamoto_33": 24,
+                "nakamoto_source": "computed-live"
+            },
+            "cosmos": {
+                "validators": 180,
+                "validators_source": "cosmos.directory",
+                "nakamoto_33": 3,
+                "nakamoto_source": "computed-live"
+            },
+            "xrp": {
+                "validators": 35,
+                "validators_source": "ripple-official-unl",
+                "nakamoto_33": null,
+                "nakamoto_source": "audited",
+                "label": "illustrative live data — Ripple-published UNL validator list; no stake concept"
+            },
+            "sui": {
+                "validators": 126,
+                "validators_source": "sui.publicnode",
+                "nakamoto_33": 18,
+                "nakamoto_source": "computed-live"
+            },
+            "apt": {
+                "validators": 84,
+                "validators_source": "aptos-public-fullnode",
+                "nakamoto_33": 14,
                 "nakamoto_source": "computed-live"
             },
             "near": {

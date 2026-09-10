@@ -3,11 +3,12 @@ chain: btc
 name: Bitcoin
 consensus: Nakamoto Proof of Work
 composite: 84.8
-live_validators: 26751
+live_validators: 26737
 live_validators_source: bitnodes
 live_nakamoto_33: 
 live_nakamoto_source: audited
-live_updated: 2026-09-10T08:05:37.731Z
+live_label: illustrative live data — reachable nodes, not miners; no stake/Nakamoto concept
+live_updated: 2026-09-10T08:20:26.156Z
 lastmod: 2026-09-10
 ---
 

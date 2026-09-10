@@ -3,6 +3,12 @@ chain: sui
 name: Sui
 consensus: Delegated PoS (Mysticeti / Narwhal-Bullshark)
 composite: 49.2
+live_validators: 126
+live_validators_source: sui.publicnode
+live_nakamoto_33: 18
+live_nakamoto_source: computed-live
+live_updated: 2026-09-10T08:20:26.156Z
+lastmod: 2026-09-10
 ---
 
 # Sui Decentralization Audit
