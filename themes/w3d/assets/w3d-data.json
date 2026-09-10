@@ -491,10 +491,10 @@
         }
     ],
     "live": {
-        "updated": "2026-09-10T07:35:22.995Z",
+        "updated": "2026-09-10T08:05:37.731Z",
         "chains": {
             "btc": {
-                "validators": 26732,
+                "validators": 26751,
                 "validators_source": "bitnodes",
                 "nakamoto_33": null,
                 "nakamoto_source": "audited"
