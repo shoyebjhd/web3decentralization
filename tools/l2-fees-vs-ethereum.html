@@ -1,0 +1,55 @@
+<!--TITLE:L2 Fees vs Ethereum - W3D Terminal-->
+<!--META:Side-by-side fee comparison: Ethereum vs Base, Optimism, Arbitrum and Polygon zkEVM across 5 transaction types. Static illustrative costs.-->
+<!--CAT:l2-->
+<article>
+<h2>What it is</h2>
+<p>Five common transactions, five networks, one table: what a transfer, swap, NFT mint, contract deployment, and token approval cost on Ethereum versus Base, Optimism, Arbitrum, and Polygon zkEVM. Costs use static illustrative figures (a moderately busy day) so the <em>ratios</em> — the durable insight — stay visible regardless of gas weather.</p>
+<p>Use it to answer the only question that matters before bridging: is this activity cheap enough to stay on mainnet, or does it belong on a rollup? For most everyday DeFi, the table ends the debate in one glance.</p>
+<h2>Why decentralization matters</h2>
+<p>Fee levels are access policy written in code: $50 swaps mean Ethereum is a settlement layer for whales while everyone else rents space from centralized exchanges. Every user who moves routine activity to a rollup does two good things at once — reclaims affordable self-custody and leaves scarce L1 block space for those who genuinely need base-layer guarantees. Scaling adoption <em>is</em> a decentralization strategy.</p>
+<h2>How the formula works</h2>
+<p>Figures assume 25 gwei L1 gas and $3,000 ETH (transfer ≈ $1.58, swap ≈ $11, mint ≈ $15, deploy ≈ $75, approval ≈ $4). L2 costs apply illustrative divisors observed in normal conditions (Base ~12x, Optimism ~10x, Arbitrum ~8x, Polygon zkEVM ~15x cheaper). These are snapshots, not quotes — real costs swing with congestion, blob prices, and sequencer fees. Treat ratios as truth, absolutes as weather.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-l2-fees-vs-ethereum">
+<p><button type="button" id="l2f-go">Show fee comparison</button></p>
+<div id="l2f-out" role="status"></div>
+<script>
+(function(){
+var ROWS = [
+  ['Transfer', 1.58, 0.13, 0.16, 0.20, 0.11],
+  ['DEX swap', 11.25, 0.94, 1.13, 1.41, 0.75],
+  ['NFT mint', 15.00, 1.25, 1.50, 1.88, 1.00],
+  ['Contract deploy', 75.00, 6.25, 7.50, 9.38, 5.00],
+  ['Token approval', 3.75, 0.31, 0.38, 0.47, 0.25]
+];
+document.getElementById('l2f-go').addEventListener('click', function(){
+  var r2 = function(x){ return '$' + (Math.round(x*100)/100); };
+  var rows = ROWS.map(function(r){
+    return '<tr><td>' + r[0] + '</td><td>' + r2(r[1]) + '</td><td>' + r2(r[2]) + '</td><td>' + r2(r[3]) + '</td><td>' + r2(r[4]) + '</td><td>' + r2(r[5]) + '</td></tr>';
+  }).join('');
+  document.getElementById('l2f-out').innerHTML =
+    '<table><thead><tr><th>Transaction</th><th>Ethereum</th><th>Base</th><th>Optimism</th><th>Arbitrum</th><th>Polygon zkEVM</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+    '<p>Static illustrative costs (25 gwei, $3,000 ETH). Real fees vary with congestion — check a gas tracker before transacting.</p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>Cheap fees don't make chains safe — every L2 here runs training-wheels operators (centralized sequencers, upgrade keys). And fee tables age: upgrades like EIP-4844 already rewrote these ratios once and will again. Re-check periodically, and never choose a chain on fees alone.</p>
+<h2>Worked example</h2>
+<p>Minting an NFT collection of 100 items at $15 each on mainnet costs $1,500 in gas alone — project-killing for small creators. The same mints on Base (~$1.25 each) total $125, turning impossible economics merely expensive. That 12x multiple is why entire categories (gaming items, social mints, micro-tipping) exist only on L2s: mainnet prices them out of existence, rollups price them into viability. Pick your actual transaction type above and price your own plans before committing to a chain.</p>
+<h2>Key numbers to remember</h2>
+<p>Baseline assumptions behind the table: 25 gwei, $3,000 ETH. Transfer $1.58 vs ~$0.11–0.20; swap $11.25 vs ~$0.75–1.41; mint $15 vs ~$1–1.88; deploy $75 vs ~$5–9.38. Ratios persist across gas regimes even as absolutes swing — that persistence is the table's actual value. Recheck after major upgrades; EIP-4844 already rewrote every row once. For unusual transaction types, scale from the closest row by gas units.</p>
+<h2>Common mistakes</h2>
+<p>Choosing chains on fees while ignoring where your tokens actually have liquidity — the cheapest swap is worthless if slippage eats the savings. Forgetting withdrawal windows and fast-bridge premiums in total-cost math. Assuming today's fee hierarchy is permanent (upgrades reshuffle it yearly). And bridging dust amounts where fixed bridge costs exceed any conceivable savings — batch or stay put.</p>
+<h2>FAQ</h2>
+<p><strong>Cheapest L2 overall?</strong> It rotates with congestion and upgrades — currently zkEVM-class chains lead on pure cost, OP-stack chains on liquidity depth. Re-check quarterly.</p>
+<p><strong>Do L2 fees include bridging?</strong> No — budget one L1 transaction each way on top. Frequent small crossings can erase the savings; batch movements.</p>
+<p><strong>Will L1 fees ever drop?</strong> Only via reduced demand or future scaling; EIP-4844 deliberately cut L2 data costs, not L1 execution. Plan accordingly.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/layer-2/">Layer 2</a> · <a href="https://web3decentralization.com/glossary/rollup/">Rollup</a> · <a href="https://web3decentralization.com/glossary/gas/">Gas</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-blob-space-eip-4844/">Blob Space and EIP-4844</a> · <a href="https://web3decentralization.com/lesson/os-l2-fundamentals-op-stack/">L2 Fundamentals</a></li>
+<li><a href="https://web3decentralization.com/chains/base/">Base profile</a> — the cheapest row, honestly assessed.</li>
+</ul>
+</article>

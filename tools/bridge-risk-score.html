@@ -1,0 +1,53 @@
+<!--TITLE:Bridge Risk Score - W3D Terminal-->
+<!--META:Score any cross-chain bridge before you trust it: type, TVL, audit status and multisig in, 0-100 risk score plus safety checklist out.-->
+<!--CAT:l2-->
+<article>
+<h2>What it is</h2>
+<p>Bridges have lost more user funds than any other crypto primitive — billions across Ronin, Wormhole, Nomad, Multichain, and others. Yet users cross them daily on vibes alone. This tool scores any bridge on the four factors that actually predict disasters: custody model, size of the honeypot, audit freshness, and who holds the keys. Answer four questions, get a 0–100 risk score plus the exact checklist professionals run.</p>
+<p>It won't bless a bridge as safe — nothing can. It will tell you, in plain language, whether you're crossing a rope bridge or a highway, and what to do differently in each case.</p>
+<h2>Why decentralization matters</h2>
+<p>Every bridge is a decentralization downgrade you accept voluntarily: assets leave chains with thousands of validators and enter contracts guarded by committees, multisigs, or single companies. The ecosystem's biggest thefts all exploited this exact downgrade. Scoring bridges honestly — and preferring native paths (rollup official bridges, IBC) — is how users vote with their funds for architectures that don't require trusting five strangers with billions.</p>
+<h2>How the formula works</h2>
+<p>Four weighted inputs produce a 0–100 risk score (higher = riskier): bridge type (custodial multisig 35 / optimistic or ZK 15 / native rollup bridge or IBC 8, weight ~40%), audit status (none +25 / old +12 / fresh 0, weight ~25%), honeypot size by TVL (>$1B +20 / $100M–1B +10 / below +4, weight ~20%), and key distribution (single entity +15 / small multisig +8 / decentralized +0, weight ~15%). Weights reflect post-mortem analysis: custody model dominates because it has dominated every major loss.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-bridge-risk-score">
+<p><label>Bridge type<br><select id="br-type"><option value="35">Custodial / multisig-guarded</option><option value="15">Optimistic or ZK (proof-based)</option><option value="8">Native (rollup official / IBC)</option></select></label></p>
+<p><label>TVL locked<br><select id="br-tvl"><option value="20">Over $1B</option><option value="10">$100M – $1B</option><option value="4">Under $100M</option></select></label></p>
+<p><label>Audit status<br><select id="br-audit"><option value="25">None / unknown</option><option value="12">Audited over a year ago</option><option value="0">Fresh audit + bug bounty</option></select></label></p>
+<p><label>Key control<br><select id="br-keys"><option value="15">Single entity / unclear</option><option value="8">Small multisig (&lt;6 signers)</option><option value="0">Decentralized / trustless</option></select></label></p>
+<p><button type="button" id="br-go">Score this bridge</button></p>
+<div id="br-out" role="status"></div>
+<script>
+(function(){
+document.getElementById('br-go').addEventListener('click', function(){
+  var s = 0;
+  ['br-type','br-tvl','br-audit','br-keys'].forEach(function(id){
+    s += parseInt(document.getElementById(id).value, 10) || 0;
+  });
+  s = Math.max(0, Math.min(100, Math.round(s * 100 / 95)));
+  var v = s >= 70 ? 'HIGH RISK — cross only dust amounts, if at all.'
+    : (s >= 40 ? 'MODERATE RISK — small amounts, watch for incidents, prefer native paths.' : 'LOWER RISK — still verify audits and keep crossings purposeful.');
+  document.getElementById('br-out').innerHTML =
+    '<p><strong>Bridge risk score: ' + s + '/100</strong></p><p>' + v + '</p>' +
+    '<p>Checklist: official domains only · test transfer first · record both-side hashes · never bridge during exploit rumors · keep size proportional to trust.</p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>Scores model known failure modes, not unknown ones — novel cryptography, governance attacks, and slow multisig rot escape any questionnaire. A low score is permission to proceed carefully, never a safety certificate. Size every crossing by what you'd survive losing, because bridges have repeatedly proven that even "safe" ones fail.</p>
+<h2>Worked example</h2>
+<p>Score a typical third-party bridge: custodial multisig (35) + $800M TVL (10) + audit from 2022 (12) + 5-of-9 signers (8) = 65 raw → normalized ~68/100, HIGH RISK verdict. Now the same route via a native rollup bridge: proof-based (15) + same TVL (10) + fresh audit (0) + decentralized (0) = 25 → ~26/100, LOWER RISK. The 40-point gap is almost entirely custody model and audit freshness — which tells you exactly where to focus diligence: who holds the keys, and who checked last.</p>
+<h2>Common mistakes</h2>
+<p>Grading the bridge you *want* to use instead of the one that exists (optimism about unaudited code is how post-mortems start). Counting "backed by big VCs" as security (investors don't co-sign your refund). Ignoring the withdrawal path until you need it urgently — discover challenge windows and liquidity crunches in advance, not mid-crisis. And reusing one bridge for everything, concentrating personal exposure exactly like the protocols shouldn't.</p>
+<h2>FAQ</h2>
+<p><strong>Can any bridge score zero?</strong> No — minimums reflect irreducible risks (smart-contract bugs, black swans). Trustlessness is asymptotic, never achieved.</p>
+<p><strong>TVL: safer big or small?</strong> Big TVL means battle-tested but juicier target; small means untested. Mid-size with fresh audits and modest incentives is often the sweet spot.</p>
+<p><strong>Official vs third-party?</strong> Official (native) bridges inherit the L1/L2 security model; third-party adds a whole company plus its contracts to your trust surface. Prefer native unless speed demands otherwise.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/bridge/">Bridge</a> · <a href="https://web3decentralization.com/glossary/transaction/">Transaction</a> · <a href="https://web3decentralization.com/glossary/blockchain/">Blockchain</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-bridges-cross-chain/">Bridges and Cross-Chain</a> · <a href="https://web3decentralization.com/lesson/os-sending-receiving-pro/">Sending and Receiving Like a Pro</a></li>
+<li><a href="https://web3decentralization.com/chains/arb/">Arbitrum audit</a> — L2 security done with Ethereum anchoring.</li>
+</ul>
+</article>

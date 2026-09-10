@@ -1,0 +1,67 @@
+<!--TITLE:Nakamoto Coefficient Calculator - W3D Terminal-->
+<!--META:Calculate the Nakamoto Coefficient for any chain. Paste validator stakes, get the 33% and 51% thresholds plus a four-pillar breakdown.-->
+<!--CAT:validators-->
+<article>
+<h2>What it is</h2>
+<p>The Nakamoto Coefficient answers one question: how many independent entities must collude to compromise a network? It is the single most useful decentralization number in crypto. A coefficient of 1 means one entity can take over; a coefficient of 24 means you would need 24 independent actors working together. Higher is safer, always.</p>
+<p>This calculator takes a real validator or stake distribution — validator counts plus each entity's share of stake or hash power — and computes the minimum number of entities whose combined control crosses the two thresholds that matter: 33% (enough to halt most BFT networks) and 51% (enough to rewrite history on most chains). It then frames the result across the four W3D pillars so a single number never misleads you into thinking one dimension tells the whole story.</p>
+<h2>Why decentralization matters</h2>
+<p>Node counts and "we have thousands of validators" claims are easy to spin. The coefficient cuts through that by asking the practical question: how much power is actually concentrated, and in how few hands? A chain advertising 10,000 validators where 20 pools control 51% of stake has an effective coefficient near 20, not 10,000. That gap between marketing and measurement is exactly where users get hurt — censored transactions, captured governance, and single points of regulatory failure. Scoring it honestly is the entire point of the W3D Terminal, and this tool puts the same math in your hands for any network you care about, including ones we have not audited yet.</p>
+<h2>How the formula works</h2>
+<p>Rank every entity by share of the measured resource (stake, hash power, validators under one operator), largest first. Walk down the ranking, accumulating shares, until the cumulative total passes the threshold. The count of entities you needed is the coefficient for that threshold. Formally: given shares s1 ≥ s2 ≥ … ≥ sn, the Nakamoto Coefficient at threshold T is the smallest k such that the sum of s1..sk exceeds T. We compute it twice: T = 33% (liveness fault tolerance — the share that can halt finality) and T = 51% (safety fault tolerance — the share that can rewrite history). The four-pillar readout then contextualizes the number: infrastructure (who runs the machines), capital (who owns the stake you just measured), governance (who can change these rules), and software (how many independent clients exist). A strong coefficient on one pillar never excuses a collapsing one — attackers take the path of least resistance.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-nakamoto-coefficient">
+<p><label>Number of validators/entities<br><input id="nakamoto-n" type="number" min="1" max="10000" value="100"></label></p>
+<p><label>Stake shares (comma or space separated — raw numbers or %; leave blank for equal split)<br><textarea id="nakamoto-shares" rows="3" cols="50" placeholder="e.g. 12, 9, 8, 7, 6, 5, ..."></textarea></label></p>
+<p><button type="button" id="nakamoto-go">Calculate coefficient</button></p>
+<div id="nakamoto-out" role="status"></div>
+<script>
+(function(){
+function parseShares(text, n){
+  var parts = text.split(/[\s,;]+/).filter(function(x){ return x.length > 0; });
+  var nums = parts.map(Number).filter(function(x){ return isFinite(x) && x > 0; });
+  if (nums.length === 0) { nums = []; for (var i = 0; i < n; i++) nums.push(1); }
+  while (nums.length < n) nums.push(nums[nums.length - 1] || 1);
+  return nums.slice(0, n);
+}
+function coeff(shares, threshold){
+  var total = shares.reduce(function(a,b){ return a+b; }, 0);
+  var sorted = shares.slice().sort(function(a,b){ return b-a; });
+  var acc = 0;
+  for (var i = 0; i < sorted.length; i++){
+    acc += sorted[i];
+    if (acc / total > threshold) return i + 1;
+  }
+  return sorted.length;
+}
+document.getElementById('nakamoto-go').addEventListener('click', function(){
+  var n = Math.max(1, Math.min(10000, parseInt(document.getElementById('nakamoto-n').value, 10) || 0));
+  var shares = parseShares(document.getElementById('nakamoto-shares').value, n);
+  var c33 = coeff(shares, 0.33), c51 = coeff(shares, 0.51);
+  var verdict = c33 >= 20 ? 'Strong distribution.' : (c33 >= 7 ? 'Moderate concentration — check who the top entities are.' : 'Highly concentrated — a handful of entities control this network.');
+  document.getElementById('nakamoto-out').innerHTML =
+    '<p><strong>Nakamoto Coefficient (33% halt threshold): ' + c33 + '</strong></p>' +
+    '<p><strong>Nakamoto Coefficient (51% rewrite threshold): ' + c51 + '</strong></p>' +
+    '<p>' + verdict + '</p>' +
+    '<p>Four-pillar check: infrastructure (who runs the nodes behind these shares?) · capital (is stake this concentrated?) · governance (who changes the rules?) · software (how many clients?). Compare against audited chains: Bitcoin, Ethereum, Polkadot, Cardano, Cosmos, Arbitrum, Near, Avalanche, Solana, Sui, Aptos, XRP.</p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>A coefficient is only as honest as its input: stake snapshots age fast, exchange-custodied stake hides true ownership, and validator counts double-count operators running many nodes. Sybil entities (one actor, many validators) inflate naive counts — always ask who controls the keys, not how many keys exist. Treat any single number as a starting point, then read the pillars.</p>
+<h2>Worked example</h2>
+<p>Take a small proof-of-stake chain with 10 validators holding 20, 15, 12, 10, 9, 8, 7, 6, 5 and 8 percent of stake. Sorted already, accumulate: 20 stops below 33; 20 + 15 = 35 crosses it — coefficient 2 at the 33% threshold. Keep going: 35 + 12 = 47, still below 51; add 10 for 57 — coefficient 4 at 51%. Two entities can halt this chain; four can rewrite it. Now compare a healthier set of twenty validators at 5% each: seven needed for 33% (35 ≥ 33 at the seventh), eleven for 51%. Same validator count as nothing — distribution is everything, and running both scenarios through the calculator above takes seconds.</p>
+<h2>Common mistakes</h2>
+<p>Counting validators instead of operators — one entity running fifty nodes counts once, and exchange-hosted validators cluster ownership invisibly. Mixing resources — a stake coefficient and a node-count coefficient are different numbers answering different questions; never average them. Using stale snapshots — stake migrates constantly, so recompute with fresh data before citing a number anywhere. And the classic: quoting the coefficient without the threshold, since 33%-coefficients and 51%-coefficients for the same chain routinely differ by 2-3x.</p>
+<h2>FAQ</h2>
+<p><strong>Is a higher coefficient always better?</strong> For the measured resource, yes — with the caveat that different resources (stake vs nodes vs clients) give different numbers, and the weakest one governs real security.</p>
+<p><strong>Why 33% and not just 51%?</strong> Most modern consensus halts when a third goes offline or colludes, so 33% measures liveness attacks while 51% measures history rewrites. A chain can be safe on one and fragile on the other.</p>
+<p><strong>Can the coefficient be gamed?</strong> Easily — Sybil validators, exchange-custodied stake counted as dispersed, dormant whales excluded. Always ask who compiled the distribution and what it hides.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/nakamoto-coefficient/">Nakamoto Coefficient</a> · <a href="https://web3decentralization.com/glossary/decentralization/">Decentralization</a> · <a href="https://web3decentralization.com/glossary/validator/">Validator</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-reading-the-nakamoto-coefficient/">Reading the Nakamoto Coefficient</a> · <a href="https://web3decentralization.com/lesson/os-pillar-infrastructure/">Pillar 1: Infrastructure</a></li>
+<li><a href="https://web3decentralization.com/chains/btc/">Bitcoin audit</a> — compare any result against the benchmark.</li>
+</ul>
+</article>

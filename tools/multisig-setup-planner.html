@@ -1,0 +1,58 @@
+<!--TITLE:Multisig Setup Planner - W3D Terminal-->
+<!--META:Design a multisig wallet correctly: signers, threshold and chain in, recommended setup, quorum analysis and red flags out.-->
+<!--CAT:security-->
+<article>
+<h2>What it is</h2>
+<p>A multisig wallet needs M-of-N keys to move funds — but picking M and N badly recreates the single point of failure you tried to remove. 1-of-3 is theater. 3-of-3 is a lockout waiting for one lost key. This planner takes your signer count, threshold, and chain, then tells you whether the design is sound, what quorum attacks it survives, and what to change.</p>
+<p>It encodes the rules professionals use: thresholds above half but below all, keys across locations and people, hardware for size, and documented recovery that heirs can actually follow.</p>
+<h2>Why decentralization matters</h2>
+<p>Multisig is decentralization applied to your own money — distributing signing power so no person, device, fire, or wrench defeats you alone. Treasuries, DAOs, couples, and serious holders all converge on the same answer because the math is unforgiving: every single-key fortune is one event from zero. Planning the quorum <em>before</em> funding is the difference between a vault and a hope.</p>
+<h2>How the formula works</h2>
+<p>The planner validates structural rules: threshold must not exceed signers; threshold of 1 fails open to any single compromise; threshold equal to signers fails closed on any single loss; recommended zone is floor(N/2)+1 through N−1 with N ≥ 3. It then maps your setup to archetypes (personal vault 2-of-3, team treasury 3-of-5, DAO 4-of-7+) and flags chain-specific notes (Bitcoin native multisig vs EVM Safe contracts vs Solana squads-style programs).</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-multisig-setup-planner">
+<p><label>Total signers (N)<br><input id="ms-n" type="number" min="1" max="15" value="3"></label></p>
+<p><label>Required signatures / threshold (M)<br><input id="ms-m" type="number" min="1" max="15" value="2"></label></p>
+<p><label>Chain<br><select id="ms-chain"><option>Bitcoin</option><option>Ethereum / EVM</option><option>Solana</option><option>Cosmos ecosystem</option></select></label></p>
+<p><button type="button" id="ms-go">Evaluate setup</button></p>
+<div id="ms-out" role="status"></div>
+<script>
+(function(){
+document.getElementById('ms-go').addEventListener('click', function(){
+  var n = Math.max(1, Math.min(15, parseInt(document.getElementById('ms-n').value, 10) || 0));
+  var m = Math.max(1, Math.min(15, parseInt(document.getElementById('ms-m').value, 10) || 0));
+  var chain = document.getElementById('ms-chain').value;
+  var out = '';
+  if (m > n){ out = '<p><strong>Invalid:</strong> threshold cannot exceed signers. A ' + m + '-of-' + n + ' wallet can never move funds.</p>'; }
+  else if (m === 1){ out = '<p><strong>Unsafe:</strong> 1-of-' + n + ' fails open — any single compromised key drains everything. Raise the threshold above half.</p>'; }
+  else if (m === n){ out = '<p><strong>Fragile:</strong> ' + m + '-of-' + n + ' fails closed — one lost key locks funds forever. Lower the threshold below N.</p>'; }
+  else {
+    var arch = n <= 3 ? 'personal vault' : (n <= 5 ? 'team/family treasury' : 'organization/DAO treasury');
+    out = '<p><strong>Sound structure: ' + m + '-of-' + n + ' (' + arch + ') on ' + chain + '.</strong> Survives any single key loss and any single key theft.</p>' +
+      '<p>Rules: distribute keys across locations AND people; use hardware for size; document recovery for heirs (sealed, never emailed); drill recovery before funding.</p>';
+  }
+  document.getElementById('ms-out').innerHTML = out +
+    '<p>Go deeper: <a href="https://web3decentralization.com/lesson/os-advanced-multisig-hardware/">Advanced Multisig &amp; Hardware</a> · <a href="https://web3decentralization.com/lesson/os-multisig-safe-setup-lab/">Multisig Safe Setup Lab</a></p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>The plan is only as good as key hygiene: co-located keys, shared seed backups, signers who approve blindly, and undocumented setups that die with you. Multisig also adds UX friction that tempts workarounds — every "temporary" single-key hot wallet holding multisig funds is the real vault door standing open.</p>
+<h2>Worked example</h2>
+<p>A couple securing joint savings picks 2-of-3: keys on two hardware wallets (home safe, bank box) plus one with a trusted sibling abroad. Either partner plus the sibling recovers everything; a burglarized safe alone yields nothing; a lost device is an inconvenience, not a catastrophe. Contrast the common failure: 2-of-2 with both keys in the same house — one fire ends it. Or 1-of-3 "for convenience" — which is just three single points of failure wearing a multisig costume. Enter your own numbers above; if the verdict isn't an unqualified pass, redesign before funding.</p>
+<h2>Key numbers to remember</h2>
+<p>Minimum viable multisig: 2-of-3. Team standard: 3-of-5. DAO scale: 4-of-7 or better. Key locations should number at least N (never fewer places than keys), spanning jurisdictions for serious treasuries. Recovery drill cadence: yearly. And the number that matters most — one: a single untested assumption (untried recovery, undocumented key, unvetted cosigner) voids the entire structure.</p>
+<h2>Common mistakes</h2>
+<p>Storing two keys in one place "temporarily" for years. Letting one tech-savvy member hold everyone's keys (that's custody with extra steps). Never testing recovery until someone dies or disappears — the most expensive possible moment to discover a broken setup. And choosing exotic M-of-N ratios nobody else uses, guaranteeing zero community wisdom when (not if) something goes wrong.</p>
+<h2>FAQ</h2>
+<p><strong>2-of-3 or 3-of-5?</strong> 2-of-3 for personal/family funds (simple, survivable); 3-of-5+ for teams and treasuries where no two people should move money alone.</p>
+<p><strong>Same brand hardware for all keys?</strong> No — diversify vendors and firmware. A supply-chain or firmware bug hitting all your devices simultaneously defeats the distribution.</p>
+<p><strong>What about inheritance?</strong> Document locations and recovery order where heirs (or a lawyer) will find them, without putting secrets in email or wills. Undocumented multisig is a time-locked donation to nobody.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/multisig/">Multisig</a> · <a href="https://web3decentralization.com/glossary/wallet/">Wallet</a> · <a href="https://web3decentralization.com/glossary/self-custody/">Self-Custody</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-advanced-multisig-hardware/">Advanced Multisig &amp; Hardware</a> · <a href="https://web3decentralization.com/lesson/os-multisig-safe-setup-lab/">Multisig Safe Setup Lab</a></li>
+<li><a href="https://web3decentralization.com/chains/eth/">Ethereum audit</a> — home of the major multisig standards.</li>
+</ul>
+</article>

@@ -1,0 +1,53 @@
+<!--TITLE:Impermanent Loss Calculator - W3D Terminal-->
+<!--META:See what providing liquidity really costs. Enter price change and pool value: impermanent loss vs simply holding, computed instantly.-->
+<!--CAT:calculators-->
+<article>
+<h2>What it is</h2>
+<p>"Provide liquidity and earn fees" sounds like free money until you learn the word <em>impermanent</em> is doing heavy lifting. When the two tokens in a pool change price relative to each other, the pool's automatic rebalancing leaves you with less than if you'd simply held both tokens. This calculator quantifies that gap: enter the price change and your pool share's starting value, and see the loss versus holding, in dollars and percent.</p>
+<p>The loss is called impermanent because it vanishes if prices return to their original ratio — which, in practice, they rarely do. Fees earned can offset it, but usually don't at the scales beginners provide.</p>
+<h2>Why decentralization matters</h2>
+<p>Liquidity providers are the unpaid infrastructure of decentralized trading — without them, DEXes don't function. But the economics quietly transfer wealth from passive LPs to arbitrageurs and informed traders who understand the math. Tools that make the real costs visible level that playing field: informed liquidity is stickier, healthier liquidity, and a DEX ecosystem of clear-eyed providers beats one built on misunderstood APYs.</p>
+<h2>How the formula works</h2>
+<p>For a standard 50/50 constant-product pool where one token's price moves by ratio r relative to the other, impermanent loss equals 2·√r/(1+r) − 1. At r = 2 (one token doubles), IL is about −5.7%; at r = 4, about −20%; at r = 0.25 (75% drop), about −20% as well — the loss is symmetric in ratio space and brutal in both directions. LP value equals starting value times (1 + IL); HODL value stays the starting value. Concentrated-liquidity positions amplify all of this and are excluded — if anything, treat these numbers as the optimistic floor.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-impermanent-loss-calculator">
+<p><label>Price ratio change (e.g. 2 = one token doubled vs the other)<br><input id="il-r" type="number" min="0.01" step="any" value="2"></label></p>
+<p><label>Starting pool value (USD)<br><input id="il-v" type="number" min="0" step="any" value="1000"></label></p>
+<p><button type="button" id="il-go">Calculate IL</button></p>
+<div id="il-out" role="status"></div>
+<script>
+(function(){
+document.getElementById('il-go').addEventListener('click', function(){
+  var r = parseFloat(document.getElementById('il-r').value);
+  var v = parseFloat(document.getElementById('il-v').value);
+  if (!isFinite(r) || r <= 0){ document.getElementById('il-out').innerHTML = '<p>Enter a price ratio above zero.</p>'; return; }
+  if (!isFinite(v) || v < 0) v = 0;
+  var il = 2 * Math.sqrt(r) / (1 + r) - 1;
+  var pct = Math.round(il * 10000) / 100;
+  var lpv = v * (1 + il);
+  var r2 = function(x){ return (Math.round(x * 100) / 100).toString(); };
+  document.getElementById('il-out').innerHTML =
+    '<p><strong>Impermanent loss: ' + pct + '%</strong></p>' +
+    '<p>HODL value: $' + r2(v) + ' · LP value: $' + r2(lpv) + ' · Difference: $' + r2(v - lpv) + '</p>' +
+    '<p>Trading fees earned must exceed $' + r2(v - lpv) + ' just to break even with holding. Concentrated positions lose more.</p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>IL is only the headliner: smart-contract risk, oracle manipulation of thin pools, and rug-pull liquidity removal can each take 100%, not 5%. Never LP a token you haven't audited, never LP your whole stack in one pool, and treat advertised "APY" as marketing until fees-minus-IL math says otherwise.</p>
+<h2>Worked example</h2>
+<p>Deposit $1,000 into an ETH/USDC pool; ETH doubles against the dollar. Ratio r = 2, IL = 2√2/3 − 1 ≈ −5.7%: your position is worth about $1,886 versus $2,000 held — $114 gone to arbitrageurs, before fees. If the pool paid $60 in fees over the period, you're still $54 behind holding. Now run a 4x move: IL hits −20%, and no realistic fee stream covers that on a $1,000 position. The lesson generalizes: IL scales brutally with divergence, fees scale linearly with volume — volatile pairs need enormous volume to justify providing.</p>
+<h2>Common mistakes</h2>
+<p>Counting fees as profit while ignoring that IL already ate them (net, not gross, is the only number). Providing to brand-new pools where the "price change" input is really a slow rug in disguise. Assuming stable pairs can't diverge — depegs happen, and stable-stable IL during a depeg is catastrophic precisely because nobody modeled it. And re-depositing after a loss to "earn it back," doubling exposure to the same misunderstanding.</p>
+<h2>FAQ</h2>
+<p><strong>When does providing beat holding?</strong> Stable/correlated pairs (tiny divergence) with high volume, or positions earning outsized incentives you actually believe will persist. Stable-stable pools are the honest use case.</p>
+<p><strong>Does concentrated liquidity change the math?</strong> It multiplies both fee capture and loss within your range — same formula, narrower band, faster outcomes both ways.</p>
+<p><strong>Is IL ever "gained"?</strong> No — versus holding, divergence always costs. Fees are separate income that may or may not cover it.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/impermanent-loss/">Impermanent Loss</a> · <a href="https://web3decentralization.com/glossary/liquidity/">Liquidity</a> · <a href="https://web3decentralization.com/glossary/automated-market-maker/">Automated Market Maker</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-yield-staking-farming-risks/">Yield, Staking and Farming Risks</a> · <a href="https://web3decentralization.com/lesson/os-dex-trading-masterclass/">DEX Trading Masterclass</a></li>
+<li><a href="https://web3decentralization.com/chains/eth/">Ethereum audit</a> — home of most AMM liquidity.</li>
+</ul>
+</article>

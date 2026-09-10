@@ -1,0 +1,55 @@
+<!--TITLE:Airdrop Eligibility Checklist - W3D Terminal-->
+<!--META:Score your airdrop readiness without connecting a wallet: activity, volume, chains and safety habits in, readiness score plus scam defense out.-->
+<!--CAT:security-->
+<article>
+<h2>What it is</h2>
+<p>Airdrops reward early, genuine users — but "farmers" game them and scammers prey on hunters. This checklist scores your <em>readiness posture</em> (not eligibility for any specific drop, which nobody can promise): on-chain activity breadth, volume realism, chain diversity, and safety habits. No wallet connection, no signatures, no addresses entered — nothing that could possibly drain you, which is itself the first lesson.</p>
+<p>Use the score to decide whether you're positioned for retroactive rewards generally, and use the safety section to survive the hunting season that surrounds every major drop.</p>
+<h2>Why decentralization matters</h2>
+<p>Airdrops are distribution decentralization in action — or its parody. Broad, small-holder distributions (Uniswap, Arbitrum) genuinely dispersed governance; insider-weighted "community" drops just laundered venture allocations through farmers. Understanding what real eligibility looks like (sustained organic usage across time) versus farmable signals (wash volume spikes) makes you both a better-positioned user and a harder scam target.</p>
+<h2>How the formula works</h2>
+<p>Six factors, 0–100: transaction history depth (0–20 by count bands), organic volume vs wash patterns (0–20), chains/protocols diversity (0–15), account age (0–15), governance participation (0–10), and safety hygiene (0–20: hardware wallet, no blind approvals, revocation habits). Hygiene is deliberately overweighted — the expected value of farming collapses the first time a "claim" site drains the wallet.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-airdrop-eligibility-checklist">
+<p><label>On-chain transactions (all time, main wallet)<br><select id="ad-tx"><option value="4">Under 20</option><option value="10">20–100</option><option value="16">100–500</option><option value="20">500+</option></select></label></p>
+<p><label>Volume pattern<br><select id="ad-vol"><option value="16">Steady organic use over months</option><option value="8">Moderate, some bursts</option><option value="2">Recent spike / farming-like</option></select></label></p>
+<p><label>Chains/protocols genuinely used<br><select id="ad-ch"><option value="3">1–2</option><option value="9">3–5</option><option value="15">6+</option></select></label></p>
+<p><label>Wallet age<br><select id="ad-age"><option value="4">Under 3 months</option><option value="9">3–12 months</option><option value="15">Over a year</option></select></label></p>
+<p><label>Governance votes cast<br><select id="ad-gov"><option value="0">None</option><option value="6">A few</option><option value="10">Regular voter</option></select></label></p>
+<p><label>Safety hygiene<br><select id="ad-safe"><option value="4">Basic (hot wallet, few precautions)</option><option value="12">Good (hardware, careful approvals)</option><option value="20">Strict (revocations, separate wallets, hardware)</option></select></label></p>
+<p><button type="button" id="ad-go">Score readiness</button></p>
+<div id="ad-out" role="status"></div>
+<script>
+(function(){
+document.getElementById('ad-go').addEventListener('click', function(){
+  var ids = ['ad-tx','ad-vol','ad-ch','ad-age','ad-gov','ad-safe'], s = 0;
+  ids.forEach(function(id){ s += parseInt(document.getElementById(id).value, 10) || 0; });
+  var v = s >= 75 ? 'Well positioned — sustained organic footprint. Keep habits, ignore hype, verify every claim site ruthlessly.'
+    : (s >= 45 ? 'Developing — build genuine history over months; avoid farming spikes that scream Sybil.'
+    : 'Early stage — focus on real usage and safety foundations first; drops reward patience, not sprints.');
+  document.getElementById('ad-out').innerHTML =
+    '<p><strong>Airdrop readiness: ' + s + '/100</strong></p><p>' + v + '</p>' +
+    '<p>Safety law: real airdrops never ask you to connect-then-pay, never DM first, never deadline you. Anything else is a drainer. Learn the patterns: <a href="https://web3decentralization.com/lesson/os-how-scams-work/">How Crypto Scams Actually Work</a>.</p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>The airdrop hunt is crypto's most concentrated scam environment: fake claim sites, poisoned search ads, Discord DMs, and "eligibility checker" drainers. Farming itself carries opportunity cost and Sybil-filter risk (wash patterns get excluded while looking productive). Never chase a drop with money you need, and never let expected-airdrop math justify reckless approvals.</p>
+<h2>Worked example</h2>
+<p>Score a realistic hunter: 150 transactions (16) + steady organic volume (16) + 4 chains (9) + 8-month wallet (9) + a few votes (6) + hardware with careful approvals (12) = 68/100 — developing-to-positioned. The same activity farmed in three weeks with wash volume scores ~30s: Sybil filters specifically discount recency and burst patterns, which is why sprint-farming before rumored snapshots reliably fails. The tool rewards what protocols reward: duration times authenticity, with safety as the multiplier.</p>
+<h2>Key numbers to remember</h2>
+<p>Meaningful history starts around 100+ organic transactions over 6+ months. Wash patterns flag at velocity spikes 10x your baseline. Score bands: 75+ positioned, 45–74 developing, under 45 early. Revocation cadence: review approvals quarterly. And the only number that matters in a scam: zero — zero upfront payments, zero rushed signatures, zero exceptions.</p>
+<h2>Common mistakes</h2>
+<p>Buying the rumor with size (allocations disappoint far more often than they delight). Farming ten wallets badly instead of using one wallet genuinely — Sybil filters specifically hunt the former. Connecting to every "checker" site that appears in search ads (drainers buy those exact keywords). And mentoring friends into farming without teaching the safety half, multiplying victims instead of winners.</p>
+<h2>FAQ</h2>
+<p><strong>Do referral codes and Discord grinding count?</strong> Rarely for meaningful allocations — on-chain behavior dominates criteria. Social tasks filter bots cheaply, not reward hunters richly.</p>
+<p><strong>Multiple wallets?</strong> Genuine separate usage is fine; scripted Sybil clusters get filtered and occasionally poison the whole cluster. One honest wallet beats ten farmed ones.</p>
+<p><strong>When to stop farming something?</strong> When the time cost exceeds minimum-wage math or the required actions compromise safety (sketchy approvals, unknown contracts). Expected value first, always.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/airdrop/">Airdrop</a> · <a href="https://web3decentralization.com/glossary/phishing/">Phishing</a> · <a href="https://web3decentralization.com/glossary/wallet/">Wallet</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-how-scams-work/">How Crypto Scams Actually Work</a> · <a href="https://web3decentralization.com/lesson/os-staying-safe-scams-self-custody/">Staying Safe</a></li>
+<li><a href="https://web3decentralization.com/chains/arb/">Arbitrum audit</a> — whose airdrop set the distribution standard.</li>
+</ul>
+</article>

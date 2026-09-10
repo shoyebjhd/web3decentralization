@@ -1,0 +1,87 @@
+<!--TITLE:Decentralization Score Explorer - W3D Terminal-->
+<!--META:Interactive four-pillar radar for 12 audited chains. Pick up to 3 networks, compare infrastructure, capital, governance and software visually.-->
+<!--CAT:validators-->
+<article>
+<h2>What it is</h2>
+<p>Twelve audited chains, four pillars each, one radar chart. Pick up to three networks and watch their decentralization shapes overlap: Bitcoin's towering governance against Solana's infrastructure dent, Polkadot's validator breadth against XRP's concentrated core. Shapes beat spreadsheets for grasping trade-offs — a glance shows you what paragraphs of scores struggle to convey.</p>
+<p>Data is the published W3D audit set (same numbers as the chain pages), embedded statically — no fetch, no API, works offline. Chains still under preliminary review are listed but not plotted, honestly labeled.</p>
+<h2>Why decentralization matters</h2>
+<p>Single-number rankings mislead: an 80 built on infrastructure plus software differs profoundly from an 80 built on capital plus governance, and those differences decide which risks you actually bear. Radar comparison forces pillar-level thinking — the habit that separates real analysts from scoreboard readers. When two shapes barely overlap, you're looking at genuinely different security models, not better-or-worse versions of one thing.</p>
+<h2>How the formula works</h2>
+<p>Each chain plots its four audited pillar scores (0–100): infrastructure (30% weight), capital (25%), governance (25%), software (20%). The composite shown is the weighted sum — 0.30·infra + 0.25·capital + 0.25·gov + 0.20·soft — matching the published methodology exactly. Selecting a preliminary chain explains why it can't plot yet instead of inventing numbers.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-decentralization-score-explorer">
+<p><label>Chain A<br><select id="se-a"></select></label> <label>Chain B<br><select id="se-b"></select></label> <label>Chain C<br><select id="se-c"></select></label></p>
+<p><button type="button" id="se-go">Draw radar</button></p>
+<canvas id="se-cv" width="460" height="360" style="max-width:100%;border:1px solid #ccc;"></canvas>
+<div id="se-out" role="status"></div>
+<script>
+(function(){
+var D = {
+  btc:{n:'Bitcoin',s:[92,78,95,70],c:84.8}, eth:{n:'Ethereum',s:[84,72,80,88],c:80.8},
+  dot:{n:'Polkadot',s:[75,64,82,68],c:72.6}, ada:{n:'Cardano',s:[78,68,72,60],c:70.4},
+  atom:{n:'Cosmos',s:[70,58,78,65],c:68.0}, arb:{n:'Arbitrum',s:[64,58,68,60],c:62.7},
+  near:{n:'Near',s:[66,56,62,55],c:60.3}, avax:{n:'Avalanche',s:[62,55,58,52],c:57.2},
+  sol:{n:'Solana',s:[58,48,55,50],c:53.2}, sui:{n:'Sui',s:[54,46,50,45],c:49.2},
+  apt:{n:'Aptos',s:[56,45,48,45],c:49.1}, xrp:{n:'XRP Ledger',s:[45,35,40,55],c:43.2}
+};
+var AX = ['Infrastructure','Capital','Governance','Software'];
+var COL = ['#2980b9','#c0392b','#27ae60'];
+['se-a','se-b','se-c'].forEach(function(id, i){
+  var sel = document.getElementById(id);
+  sel.appendChild(new Option('(none)', ''));
+  Object.keys(D).forEach(function(k){ sel.appendChild(new Option(D[k].n, k)); });
+  sel.selectedIndex = i + 1 > Object.keys(D).length ? 0 : i + 1;
+});
+function pt(i, v, cx, cy, R){
+  var a = -Math.PI/2 + i * Math.PI/2;
+  return [cx + Math.cos(a) * R * v / 100, cy + Math.sin(a) * R * v / 100];
+}
+document.getElementById('se-go').addEventListener('click', function(){
+  var cv = document.getElementById('se-cv'), ctx = cv.getContext('2d');
+  var cx = 150, cy = 180, R = 120;
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  ctx.strokeStyle = '#bbb';
+  [25,50,75,100].forEach(function(r){
+    ctx.beginPath();
+    for (var i = 0; i <= 4; i++){ var p = pt(i % 4, r, cx, cy, R); i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]); }
+    ctx.stroke();
+  });
+  ctx.fillStyle = '#333';
+  var labels = [[cx,cy-R-8,'Infrastructure'],[cx+R+6,cy,'Capital'],[cx,cy+R+14,'Governance'],[cx-R-6,cy,'Software']];
+  labels.forEach(function(l){ ctx.fillText(l[2], l[0]-30, l[1]); });
+  var picks = [document.getElementById('se-a').value, document.getElementById('se-b').value, document.getElementById('se-c').value].filter(function(k){ return k && D[k]; }).slice(0,3);
+  var legend = '';
+  picks.forEach(function(k, j){
+    ctx.strokeStyle = COL[j]; ctx.fillStyle = COL[j];
+    ctx.beginPath();
+    for (var i = 0; i <= 4; i++){ var p = pt(i % 4, D[k].s[i % 4], cx, cy, R); i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]); }
+    ctx.stroke();
+    legend += '<p><strong style="color:' + COL[j] + '">' + D[k].n + ' — composite ' + D[k].c + '</strong> (infra ' + D[k].s[0] + ' · capital ' + D[k].s[1] + ' · gov ' + D[k].s[2] + ' · soft ' + D[k].s[3] + ')</p>';
+  });
+  if (!picks.length) legend = '<p>Select at least one audited chain.</p>';
+  document.getElementById('se-out').innerHTML = legend + '<p>Preliminary chains (Base, Optimism, Polygon, BNB, TON, zkEVM, Blast) are not plotted — scores pending, never invented.</p>';
+});
+document.getElementById('se-go').click();
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>Radar shapes seduce: area isn't meaning, and two similar shapes can hide different failure modes (one weak pillar each, different pillars). Always read the underlying numbers and dates alongside the picture. And remember the dataset ends where audits end — unplotted chains aren't worse, they're unmeasured.</p>
+<h2>Worked example</h2>
+<p>Plot Bitcoin, Solana, and XRP together: Bitcoin's shape sprawls wide on governance and infrastructure; Solana dents inward on capital concentration and cloud reliance; XRP collapses toward the center almost everywhere except a modest software score. Three networks, three completely different risk profiles — visible in one glance, arguable forever in comments. Now swap in Polkadot for XRP and watch the validator-breadth axis stretch: the shape tells you where each chain's decentralization actually lives before you read a single paragraph.</p>
+<h2>Key numbers to remember</h2>
+<p>Composite weights: infrastructure 30%, capital 25%, governance 25%, software 20%. Grade bands roughly: 75+ elite company, 60–75 solid, 45–60 concentrated, below 45 fragile. Spread to watch: the 40-point gap between Bitcoin (~85) and XRP (~43) spans the full spectrum from credibly neutral to effectively permissioned. Re-check chain pages for update stamps — scores age as networks evolve. Save or screenshot comparisons you rely on, since methodology refinements can shift historical numbers.</p>
+<h2>Common mistakes</h2>
+<p>Ranking by composite alone (the radar exists precisely because composites hide pillar stories). Comparing scores across different audit vintages without checking dates. Treating preliminary chains' absence as failure rather than honesty. And using scores to pick investments — decentralization measures security properties, not returns; the most decentralized asset can underperform centralized ones for years.</p>
+<h2>FAQ</h2>
+<p><strong>Bigger area = better?</strong> Roughly but not strictly — area weights all axes equally while real risk concentrates in weak pillars. Read the numbers under the picture.</p>
+<p><strong>Why aren't preliminary chains plotted?</strong> Plotting estimates as data would launder guesses into facts. They join the radar when independently audited — the waiting list is public.</p>
+<p><strong>How fresh is this data?</strong> Synced to the published audits; check each chain page's update stamp for exact vintage. Scores move slowly, structure rarely.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/decentralization/">Decentralization</a> · <a href="https://web3decentralization.com/glossary/blockchain/">Blockchain</a> · <a href="https://web3decentralization.com/glossary/trustless/">Trustless</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-decentralization-is-not-a-buzzword/">Decentralization Is Not a Buzzword</a> · <a href="https://web3decentralization.com/lesson/os-lab-score-a-chain/">Lab: Score a Chain</a></li>
+<li><a href="https://web3decentralization.com/chains/eth/">Ethereum audit</a> — the balanced-shape reference.</li>
+</ul>
+</article>

@@ -1,0 +1,81 @@
+<!--TITLE:Seed Phrase Entropy Checker - W3D Terminal-->
+<!--META:Check a BIP39 seed phrase entirely in your browser: 12/24 words, wordlist validity, entropy bits, real checksum. Nothing is sent anywhere. Ever.-->
+<!--CAT:security-->
+<article>
+<h2>What it is</h2>
+<p>A seed phrase is either a valid BIP39 mnemonic or a future catastrophe wearing twelve innocent words. This checker validates yours completely offline: correct word count (12 or 24), every word present in the official 2048-word English list, correct entropy size (128 or 256 bits), and — the check most tools skip — the real embedded checksum recomputed with SHA-256. A phrase can have twelve valid words and still be broken; only the checksum proves it was generated correctly.</p>
+<p><strong>Privacy guarantee, stated plainly: everything runs in this page. Your words are never transmitted, stored, logged, or analyzed anywhere. No wallet connects, no account exists, no server sees a syllable.</strong> That said, typing a funded wallet's seed into any website — including this one — violates core security practice. Best use: verify <em>newly generated, unfunded</em> phrases and practice wallets, then treat any device that saw real keys as potentially exposed.</p>
+<h2>Why decentralization matters</h2>
+<p>Self-custody concentrates all power and all responsibility in twelve words. The ecosystem's dirty secret is how many losses come not from hackers but from malformed backups — misspelled words, wrong order, phrases that were never valid and only discovered when recovery failed years later. A thirty-second offline check at backup time is the cheapest insurance in crypto. Decentralization means no support desk will ever rescue a bad backup; verification replaces the safety net you gave up.</p>
+<h2>How the formula works</h2>
+<p>BIP39 encodes entropy plus a checksum into words: 12 words carry 128 entropy bits plus a 4-bit checksum; 24 words carry 256 bits plus 8. Each word maps to an 11-bit index in the fixed 2048-word list; concatenated indices split into entropy bits and trailing checksum bits. Validation recomputes SHA-256 over the entropy bytes and requires the leading checksum-length bits to match the trailing bits exactly. This tool fetches the official wordlist once from this site's own static assets (same origin, cached by your browser), then performs every check locally with the Web Crypto API.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-seed-phrase-entropy-checker">
+<p><label>Seed phrase (12 or 24 words, space separated)<br><textarea id="se-words" rows="3" cols="55" placeholder="abandon abandon abandon …" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea></label></p>
+<p><button type="button" id="se-go">Check phrase (offline)</button> <button type="button" id="se-clear">Clear field</button></p>
+<div id="se-out" role="status"></div>
+<script>
+(function(){
+var WORDS = null;
+async function wordlist(){
+  if (WORDS) return WORDS;
+  var r = await fetch('/wp-content/themes/w3d/assets/bip39-english.txt');
+  if (!r.ok) throw new Error('wordlist');
+  var t = await r.text();
+  WORDS = t.split(/\s+/).filter(function(x){ return x.length > 0; });
+  if (WORDS.length !== 2048) throw new Error('wordlist');
+  return WORDS;
+}
+function show(h){ document.getElementById('se-out').innerHTML = h; }
+document.getElementById('se-clear').addEventListener('click', function(){
+  document.getElementById('se-words').value = '';
+  document.getElementById('se-out').innerHTML = '';
+});
+document.getElementById('se-go').addEventListener('click', async function(){
+  var raw = document.getElementById('se-words').value.trim().toLowerCase().split(/\s+/).filter(function(x){ return x.length > 0; });
+  if (raw.length !== 12 && raw.length !== 24){ show('<p><strong>Invalid length:</strong> ' + raw.length + ' words. BIP39 phrases are exactly 12 or 24 words.</p>'); return; }
+  show('<p>Checking locally…</p>');
+  try {
+    var wl = await wordlist();
+    var idx = [];
+    for (var i = 0; i < raw.length; i++){
+      var at = wl.indexOf(raw[i]);
+      if (at < 0){ show('<p><strong>Invalid word #' + (i+1) + ':</strong> "' + raw[i].replace(/[<>&]/g, '') + '" is not in the BIP39 English list. Check spelling and order.</p>'); return; }
+      idx.push(at);
+    }
+    var bits = idx.map(function(x){ var b = x.toString(2); while (b.length < 11) b = '0' + b; return b; }).join('');
+    var entBits = raw.length === 12 ? 128 : 256;
+    var csBits = raw.length === 12 ? 4 : 8;
+    var entBytes = new Uint8Array(entBits / 8);
+    for (var j = 0; j < entBits; j++) if (bits[j] === '1') entBytes[j >> 3] |= 128 >> (j % 8);
+    var digest = new Uint8Array(await crypto.subtle.digest('SHA-256', entBytes));
+    var want = '';
+    for (var k = 0; k < csBits; k++) want += (digest[0] & (128 >> k)) ? '1' : '0';
+    var got = bits.slice(entBits);
+    if (want === got){
+      show('<p><strong>Valid ' + raw.length + '-word BIP39 phrase.</strong> All words in list, ' + entBits + '-bit entropy, checksum verified. This proves correct generation — it says nothing about safe storage. Back it up offline, never share it, never type it into funded-wallet contexts again.</p>');
+    } else {
+      show('<p><strong>Checksum FAILED.</strong> Words are valid individually but the phrase was not generated correctly (wrong order, typo variant, or mixed sources). Do not fund any wallet from it — generate a fresh phrase in your wallet instead.</p>');
+    }
+  } catch (e){ show('<p>Could not load the wordlist — check your connection and retry. Nothing was sent anywhere.</p>'); }
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>The deepest risk is behavioral, not cryptographic: verifying a funded phrase on any internet-connected device exposes it to malware, extensions, and shoulder-surfing. Use this tool for new or test phrases, then treat the checking device accordingly. Also remember what validation cannot do — it cannot tell you whether someone else already holds a copy.</p>
+<h2>Worked example</h2>
+<p>Try the well-known test phrase "abandon" repeated eleven times plus "about" (the standard BIP39 test vector): 12 words, all in-list, 128-bit entropy, checksum valid. Now change the last word to "above" — still twelve valid words, but the checksum fails, because "above" encodes different trailing bits. That single-word difference is the entire point: word validity proves vocabulary, only the checksum proves correct generation. Practice with test phrases until the distinction is muscle memory, then never type real seeds anywhere again.</p>
+<h2>Common mistakes</h2>
+<p>Checking a funded phrase on a daily-use machine (verify-then-burn the device's trustworthiness, or better: only check new phrases). "Correcting" a failed phrase by guessing similar words until something passes — a passing checksum on a guessed phrase proves nothing about your actual backup. Storing the verified phrase digitally "since it's confirmed good now." And verifying once but never testing *recovery* — import the phrase into a second wallet (test funds first) to close the loop.</p>
+<h2>FAQ</h2>
+<p><strong>Is my phrase sent to a server?</strong> No. Fetch the wordlist once (same-origin static file), everything else runs locally. Verify in DevTools network tab: zero requests after load.</p>
+<p><strong>What if my phrase fails checksum?</strong> Do not fund it. Wrong order, a lookalike word, or mixed sources are the usual causes — generate fresh in your wallet instead of debugging money into existence.</p>
+<p><strong>12 or 24 words?</strong> 24 gives 256-bit entropy (larger security margin, more writing to get wrong); 12 with proper storage defeats every realistic attacker. Storage discipline matters more than length.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/seed-phrase/">Seed Phrase</a> · <a href="https://web3decentralization.com/glossary/private-key/">Private Key</a> · <a href="https://web3decentralization.com/glossary/self-custody/">Self-Custody</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-seed-phrase-mastery/">Seed Phrase Mastery</a> · <a href="https://web3decentralization.com/lesson/os-wallets-keys-seed-phrases/">Wallets, Keys &amp; Seed Phrases</a></li>
+<li><a href="https://web3decentralization.com/chains/btc/">Bitcoin audit</a> — the network your keys ultimately control.</li>
+</ul>
+</article>

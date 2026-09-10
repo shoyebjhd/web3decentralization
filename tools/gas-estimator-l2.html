@@ -1,0 +1,60 @@
+<!--TITLE:L2 Gas Estimator - W3D Terminal-->
+<!--META:Estimate Layer-2 transaction costs vs Ethereum L1. Pick a tx type and L2, see costs side by side and savings percent. Static multipliers, no RPC.-->
+<!--CAT:l2-->
+<article>
+<h2>What it is</h2>
+<p>Ethereum mainnet fees price out ordinary use during congestion — Layer 2s exist to fix exactly that. This estimator compares what the same transaction costs on Ethereum versus Base, Optimism, Arbitrum, and Polygon zkEVM using static cost multipliers, so you can see the savings before you bridge. Enter the L1 gas price, pick a transaction type, and get side-by-side dollar estimates plus the percentage you keep.</p>
+<p>No wallet connection, no RPC calls, no tracking: the math runs entirely in your browser from a small built-in table. Because multipliers drift with upgrades and congestion, every figure is labeled illustrative — directionally right, precise never.</p>
+<h2>Why decentralization matters</h2>
+<p>Fees decide who gets to use a chain. When L1 gas hits triple digits, only whales and bots transact — everyone else is priced out of self-custody into custodial exchanges. Cheap L2s democratize access, but only if users actually migrate instead of complaining on mainnet. Understanding the real savings is the nudge: every user who moves routine activity to a rollup lightens L1 congestion for those who truly need base-layer settlement.</p>
+<h2>How the formula works</h2>
+<p>L1 cost equals gas units for the transaction type multiplied by the gas price (in gwei) multiplied by 10^-9 multiplied by the ETH price. L2 cost equals L1 cost divided by that network's static divisor (Base ~12x, Optimism ~10x, Arbitrum ~8x, Polygon zkEVM ~15x — illustrative averages blending sequencer fees and data costs). Transaction gas units used: transfer 21,000; swap ~150,000; NFT mint ~200,000. Savings percent equals one minus L2 cost over L1 cost. Default ETH price $3,000 is editable — set it to the current market price for realistic numbers.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-gas-estimator-l2">
+<p><label>Transaction type<br><select id="ge-type"><option value="21000">Transfer (21k gas)</option><option value="150000">DEX swap (~150k gas)</option><option value="200000">NFT mint (~200k gas)</option></select></label></p>
+<p><label>L1 gas price (gwei)<br><input id="ge-gwei" type="number" min="0" step="any" value="25"></label></p>
+<p><label>ETH price (USD)<br><input id="ge-eth" type="number" min="0" step="any" value="3000"></label></p>
+<p><button type="button" id="ge-go">Estimate costs</button></p>
+<div id="ge-out" role="status"></div>
+<script>
+(function(){
+var L2S = [['Base',12],['Optimism',10],['Arbitrum',8],['Polygon zkEVM',15]];
+document.getElementById('ge-go').addEventListener('click', function(){
+  var units = parseFloat(document.getElementById('ge-type').value) || 21000;
+  var gwei = parseFloat(document.getElementById('ge-gwei').value);
+  var eth = parseFloat(document.getElementById('ge-eth').value);
+  if (!isFinite(gwei) || gwei < 0) gwei = 0;
+  if (!isFinite(eth) || eth < 0) eth = 0;
+  var l1 = units * gwei * 1e-9 * eth;
+  var r2 = function(x){ return (Math.round(x*100)/100).toString(); };
+  var rows = L2S.map(function(l){
+    var c = l1 / l[1];
+    return '<tr><td>' + l[0] + '</td><td>$' + r2(c) + '</td><td>' + Math.round((1 - c/Math.max(l1,1e-9))*100) + '%</td></tr>';
+  }).join('');
+  document.getElementById('ge-out').innerHTML =
+    '<p><strong>Ethereum L1 estimate: $' + r2(l1) + '</strong></p>' +
+    '<table><thead><tr><th>Layer 2</th><th>Est. cost</th><th>You save</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+    '<p>Static illustrative multipliers, no live data. Set current gas and ETH price for realistic figures.</p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>Estimates are not quotes: congestion spikes, sequencer fees, and blob-price swings move real costs. Bridging to chase savings adds bridge risk that can dwarf fee savings on large amounts. And cheap fees cut both ways — they subsidize spam, MEV bots, and impulse trades you'll regret at any price.</p>
+<h2>Worked example</h2>
+<p>A $500 DEX swap at 25 gwei and $3,000 ETH costs about $11.25 on mainnet. On Base (~12x cheaper) that's roughly $0.94; on Polygon zkEVM (~15x) about $0.75. The $10+ saved per swap compounds brutally for active traders — a hundred swaps a year is $1,000 kept versus burned. Now add bridging costs (one L1 transaction each way, ~$3–8 total) and the break-even is obvious: two swaps and the bridge has paid for itself. Enter your own gas price above; during gas wars the multiples matter even more.</p>
+<h2>Key numbers to remember</h2>
+<p>Reference gas units: transfer 21,000; swap ~150,000; mint ~200,000. Typical L2 divisors: Base ~12x, Optimism ~10x, Arbitrum ~8x, zkEVM ~15x. Bridge crossings cost one L1 transaction each way — always include both in total-cost math. And the meta-number: at 100+ gas on mainnet, virtually everything except settlement belongs on L2s.</p>
+<h2>Common mistakes</h2>
+<p>Estimating with calm-market gas during a mania — L2 fees spike too, just from lower bases. Forgetting the two bridge transactions that bookend every L2 excursion. Comparing one chain's best case against another's worst case (different congestion moments). And optimizing a $0.30 difference while approving unlimited spending on an unaudited contract — fee discipline without security discipline is theatre.</p>
+<h2>FAQ</h2>
+<p><strong>Why not always use the cheapest L2?</strong> Liquidity depth, token availability, and sequencer trust differ. The cheapest chain with no liquidity for your pair is useless.</p>
+<p><strong>Do L2s have their own gas spikes?</strong> Yes — sequencer congestion and blob-price surges both bite. Watch each network's fee dashboard, not just mainnet's.</p>
+<p><strong>What about withdrawals back to L1?</strong> Optimistic rollups impose ~7-day challenge windows; factor the wait (or fast-bridge fees) into real costs.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/gas/">Gas</a> · <a href="https://web3decentralization.com/glossary/layer-2/">Layer 2</a> · <a href="https://web3decentralization.com/glossary/rollup/">Rollup</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-gas-optimization-101/">Gas Optimization 101</a> · <a href="https://web3decentralization.com/lesson/os-dex-trading-masterclass/">DEX Trading Masterclass</a></li>
+<li><a href="https://web3decentralization.com/chains/arb/">Arbitrum audit</a> — what L2 security really rests on.</li>
+</ul>
+</article>

@@ -1,0 +1,56 @@
+<!--TITLE:Token Unlock Impact - W3D Terminal-->
+<!--META:Model what a token unlock does to supply and price pressure. Enter unlock size and supplies, get dilution math plus holder guidance.-->
+<!--CAT:calculators-->
+<article>
+<h2>What it is</h2>
+<p>Most tokens launch with a fraction circulating and the rest locked for teams, investors, and treasuries — then unlock on schedule, expanding supply on fixed dates. This calculator models the math: enter the unlock size plus current circulating and total supplies, and see the new float, the dilution percentage, and what it implies for holders.</p>
+<p>Unlocks are crypto's most predictable price events, published in advance, ignored by most buyers. Checking the calendar before buying is free alpha that requires no prediction whatsoever.</p>
+<h2>Why decentralization matters</h2>
+<p>Unlock schedules reveal who a token really serves: broad, gradual community emissions decentralize over time, while cliff unlocks to insiders centralize selling power on calendar dates. A token 20% floated with monthly insider unlocks is a two-year distribution program <em>from</em> the public, whatever the website claims. Reading unlocks is reading the actual, on-chain ownership trajectory — the capital pillar in miniature.</p>
+<h2>How the formula works</h2>
+<p>New circulating supply equals current circulating plus unlock amount. Dilution percent equals unlock amount divided by new circulating, times one hundred — the share of the post-unlock float that didn't exist as tradable supply before. Unlock amount can be entered directly or derived from a percent-of-total-supply figure. The model assumes constant demand (generous — unlocks usually coincide with weaker demand), so treat dilution as the <em>minimum</em> expected price pressure, all else equal.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-token-unlock-impact">
+<p><label>Current circulating supply (tokens)<br><input id="tu-circ" type="number" min="0" step="any" value="200000000"></label></p>
+<p><label>Unlock amount (tokens)<br><input id="tu-amt" type="number" min="0" step="any" value="50000000"></label></p>
+<p><button type="button" id="tu-go">Model the unlock</button></p>
+<div id="tu-out" role="status"></div>
+<script>
+(function(){
+document.getElementById('tu-go').addEventListener('click', function(){
+  var circ = parseFloat(document.getElementById('tu-circ').value);
+  var amt = parseFloat(document.getElementById('tu-amt').value);
+  if (!isFinite(circ) || circ < 0) circ = 0;
+  if (!isFinite(amt) || amt < 0) amt = 0;
+  var ncirc = circ + amt;
+  var dil = ncirc > 0 ? amt / ncirc * 100 : 0;
+  var r2 = function(x){ return (Math.round(x*100)/100).toLocaleString(); };
+  var v = dil >= 20 ? 'Severe overhang — expect major sell pressure into the event. Avoid fresh exposure beforehand.'
+    : (dil >= 10 ? 'Material dilution — position smaller, or wait until after absorption.'
+    : (dil >= 3 ? 'Noticeable but absorbable by healthy demand.' : 'Negligible supply impact.'));
+  document.getElementById('tu-out').innerHTML =
+    '<p><strong>New circulating: ' + r2(ncirc) + ' tokens · Dilution: ' + (Math.round(dil*100)/100) + '%</strong></p><p>' + v + '</p>' +
+    '<p>Assumes flat demand (optimistic). Check who receives unlocked tokens — team/VC unlocks sell harder than ecosystem funds. See <a href="https://web3decentralization.com/glossary/vesting/">vesting</a> and <a href="https://web3decentralization.com/glossary/tokenomics/">tokenomics</a>.</p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>Models understate reality: unlock recipients often hedged or pre-sold via OTC, market makers step back into known supply events, and reflexive sentiment turns dilution into capitulation. Also confirm <em>which</em> unlock you're modeling — team cliffs, investor tranches, and ecosystem releases hit differently and sometimes stack on the same date.</p>
+<h2>Worked example</h2>
+<p>A token with 200M circulating unlocks 50M for early investors: new float 250M, dilution 20% — one-fifth of every post-unlock token didn't exist as sellable supply before. If recipients sell even half, that's 25M tokens of pressure against whatever demand exists that week. Now layer vesting: the same project unlocks monthly for two years, each event 3–5%. Individually absorbable, cumulatively a permanent headwind — the price must climb continuous selling just to stand still. Enter any real unlock above and feel the arithmetic before the market teaches it.</p>
+<h2>Key numbers to remember</h2>
+<p>Dilution danger bands: under 3% negligible, 3–10% absorbable, 10–20% material, over 20% severe. Typical vesting: 1-year cliff then 2–3 year linear for teams; investors often shorter with earlier cliffs. Float ratio to watch: circulating ÷ total supply — under 30% means the unlock calendar dominates the investment case for years. Calendar first, chart second.</p>
+<h2>Common mistakes</h2>
+<p>Reading "MCAP" headlines that use circulating supply while ignoring the fully-diluted overhang (the oldest trick in token marketing). Assuming unlocks are "priced in" — they rarely fully are, because recipients' selling behavior isn't public. Confusing linear vesting (absorbable drip) with cliff unlocks (event shocks). And holding through a major team unlock out of loyalty while insiders diversify — loyalty isn't a position-sizing strategy.</p>
+<h2>FAQ</h2>
+<p><strong>Do unlocks always crash price?</strong> No — strong demand absorbs them, and some unlocks go to locked stakers or long-term treasuries. But the base rate favors pressure; "priced in" is claimed far more often than true.</p>
+<p><strong>Team vs investor unlocks?</strong> Team unlocks signal confidence when staked/locked further, danger when sold. Investor unlocks after long lockups sell at high rates — their cost basis is fractions of yours.</p>
+<p><strong>Where are unlock schedules published?</strong> Vesting dashboards, project docs, and increasingly CEX research pages. Cross-check at least two sources; schedules change via governance.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/token-unlock/">Token Unlock</a> · <a href="https://web3decentralization.com/glossary/vesting/">Vesting</a> · <a href="https://web3decentralization.com/glossary/market-cap/">Market Cap</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-dex-trading-masterclass/">DEX Trading Masterclass</a> · <a href="https://web3decentralization.com/lesson/os-what-is-defi-dex-walkthrough/">What Is DeFi? Walkthrough</a></li>
+<li><a href="https://web3decentralization.com/chains/sol/">Solana audit</a> — emission schedules meet validator economics.</li>
+</ul>
+</article>

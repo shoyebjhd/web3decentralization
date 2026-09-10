@@ -1544,3 +1544,90 @@ function w3d_glossary_faq_jsonld( $data ) {
 	return $data;
 }
 add_filter( 'rank_math/json_ld', 'w3d_glossary_faq_jsonld', 26 );
+
+/**
+ * W3D Tools CPT + category taxonomy (Terminal rebuild: hybrid model).
+ *
+ * Each tool is an indexable page at /terminal/tools/{slug}/ with a
+ * client-side vanilla-JS calculator. No external APIs, no RPC, no wallets.
+ */
+function w3d_register_tool_cpt() {
+	register_post_type(
+		'w3d_tool',
+		array(
+			'labels'             => array(
+				'name'               => __( 'Tools', 'w3d' ),
+				'singular_name'      => __( 'Tool', 'w3d' ),
+				'menu_name'          => __( 'Tools', 'w3d' ),
+				'add_new_item'       => __( 'Add New Tool', 'w3d' ),
+				'edit_item'          => __( 'Edit Tool', 'w3d' ),
+				'new_item'           => __( 'New Tool', 'w3d' ),
+				'view_item'          => __( 'View Tool', 'w3d' ),
+				'search_items'       => __( 'Search Tools', 'w3d' ),
+				'not_found'          => __( 'No tools found', 'w3d' ),
+				'not_found_in_trash' => __( 'No tools found in Trash', 'w3d' ),
+			),
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'show_in_rest'       => true,
+			'menu_icon'          => 'dashicons-performance',
+			'menu_position'      => 6,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'terminal/tools', 'with_front' => false ),
+			'capability_type'    => 'page',
+			'has_archive'        => false,
+			'hierarchical'       => false,
+			'supports'           => array( 'title', 'editor', 'excerpt', 'custom-fields', 'revisions' ),
+		)
+	);
+
+	register_taxonomy(
+		'w3d_tool_category',
+		'w3d_tool',
+		array(
+			'labels'            => array(
+				'name'          => __( 'Tool Categories', 'w3d' ),
+				'singular_name' => __( 'Tool Category', 'w3d' ),
+			),
+			'public'            => true,
+			'hierarchical'      => true,
+			'show_ui'           => true,
+			'show_in_rest'      => true,
+			'rewrite'           => array( 'slug' => 'terminal/tool-category', 'with_front' => false ),
+		)
+	);
+}
+add_action( 'init', 'w3d_register_tool_cpt' );
+
+/**
+ * SoftwareApplication JSON-LD for tool pages.
+ */
+function w3d_tool_jsonld( $data ) {
+	if ( ! is_singular( 'w3d_tool' ) ) {
+		return $data;
+	}
+	$post = get_post();
+	if ( ! $post ) {
+		return $data;
+	}
+	$excerpt = wp_strip_all_tags( get_the_excerpt() );
+	if ( '' === $excerpt ) {
+		$excerpt = wp_trim_words( wp_strip_all_tags( get_post_field( 'post_content', $post->ID ) ), 40 );
+	}
+	$data[] = array(
+		'@type'                 => 'SoftwareApplication',
+		'name'                  => get_the_title(),
+		'description'           => $excerpt,
+		'applicationCategory'   => 'EducationalApplication',
+		'operatingSystem'       => 'Web',
+		'offers'                => array(
+			'@type' => 'Offer',
+			'price' => '0',
+		),
+		'isAccessibleForFree'   => true,
+	);
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'w3d_tool_jsonld', 25 );

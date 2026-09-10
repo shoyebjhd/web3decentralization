@@ -1,0 +1,52 @@
+<!--TITLE:Staking Rewards Compare - W3D Terminal-->
+<!--META:Compare staking yield across 9 proof-of-stake chains side by side. Enter an amount, see monthly and yearly returns ranked. Static illustrative APRs.-->
+<!--CAT:validators-->
+<article>
+<h2>What it is</h2>
+<p>One amount, nine chains, instant ranking. Enter how much you'd stake (in USD terms) and this tool projects monthly and yearly returns across Ethereum, Solana, Cardano, Avalanche, Polkadot, Cosmos, Near, Sui, and Aptos — sorted best-first so the trade-offs are visible at a glance. Every figure uses static illustrative APRs and assumes 100% uptime with zero commission, so treat the ranking as directional, then verify live rates and validator terms before moving funds.</p>
+<p>Comparison beats advertisement: staking dashboards show each chain's rosiest number in isolation. Side by side, you see what high APR really costs — usually lockups, volatility, and concentration risk that the headline hides.</p>
+<h2>Why decentralization matters</h2>
+<p>Yield-chasing is the engine of stake centralization. When everyone piles into the highest-APR pool on the same two chains, validator sets narrow and the networks everyone depends on get quietly captured. Comparing <em>net, risk-adjusted</em> returns — and then deliberately spreading stake across independent operators and chains — is how individual choices aggregate into network health. The extra half-percent from the biggest pool is rarely worth what it costs the ecosystem, including your own long-term position in it.</p>
+<h2>How the formula works</h2>
+<p>Yearly return equals amount multiplied by the chain's static APR; monthly divides by twelve. The built-in APRs are illustrative snapshots (ETH 3.5%, SOL 6.8%, ADA 4.2%, AVAX 7.1%, DOT 12.5%, ATOM 14%, NEAR 8.5%, SUI 5.5%, APT 6.2%), deliberately ignoring commission, uptime, lockup length, token volatility, and slashing — all of which drag realized returns below these projections, unevenly per chain. Chains without native staking (Bitcoin, XRP, Arbitrum) are excluded rather than zero-filled, because a zero would mislead more than an omission.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-staking-rewards-compare">
+<p><label>Amount (USD)<br><input id="sr-amt" type="number" min="0" step="any" value="10000"></label></p>
+<p><button type="button" id="sr-go">Compare chains</button></p>
+<div id="sr-out" role="status"></div>
+<script>
+(function(){
+var APRS = [['Cosmos (ATOM)',14],['Polkadot (DOT)',12.5],['Near (NEAR)',8.5],['Avalanche (AVAX)',7.1],['Solana (SOL)',6.8],['Aptos (APT)',6.2],['Sui (SUI)',5.5],['Cardano (ADA)',4.2],['Ethereum (ETH)',3.5]];
+document.getElementById('sr-go').addEventListener('click', function(){
+  var amt = parseFloat(document.getElementById('sr-amt').value);
+  if (!isFinite(amt) || amt < 0) amt = 0;
+  var rows = APRS.map(function(r){
+    var y = amt * r[1] / 100;
+    return '<tr><td>' + r[0] + '</td><td>' + r[1].toFixed(1) + '%</td><td>' + (Math.round(y*100)/100) + '</td><td>' + (Math.round(y/12*100)/100) + '</td></tr>';
+  }).join('');
+  document.getElementById('sr-out').innerHTML =
+    '<table><thead><tr><th>Chain</th><th>APR*</th><th>Yearly</th><th>Monthly</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+    '<p>*Static illustrative APRs at 100% uptime, zero commission. Real returns are lower and uneven. Verify live rates, lockups, and slashing terms before staking.</p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>APR is not yield until it survives volatility, lockups, commission, downtime, and slashing — high-APR chains concentrate all five risks at once. Never compare chains on APR alone; compare lockup length, validator decentralization, and what happens to your position in a 50% drawdown.</p>
+<h2>Worked example</h2>
+<p>Stake $10,000 across the table: Cosmos at 14% projects $1,400 yearly ($116.67 monthly) against Ethereum's $350 ($29.17) — a 4x headline gap that evaporates under scrutiny once you price Cosmos lockups (21 days), ATOM volatility versus ETH, and validator concentration. The honest comparison pits net-of-everything returns against risk taken, not APR against APR. Run your own amount above, then discount the winner by its lockup and volatility before deciding anything.</p>
+<h2>Key numbers to remember</h2>
+<p>Illustrative APR ladder: ATOM ~14%, DOT ~12.5%, NEAR ~8.5%, AVAX ~7.1%, SOL ~6.8%, APT ~6.2%, SUI ~5.5%, ADA ~4.2%, ETH ~3.5%. Unbonding spans: Cosmos 21 days, Polkadot 28, Solana ~2–3, Ethereum days-to-weeks via exit queue. Commission typicals: 0–10% (pools) to 100% (private validators, avoid). Compare net-of-everything, never headline-to-headline.</p>
+<h2>Common mistakes</h2>
+<p>Sorting by APR and stopping there — the ranking is a question generator, not an answer. Ignoring lockup asymmetry: 21-day unbonding versus instant exits behave like different asset classes in a crash. Forgetting that rewards arrive in the staked token, so a 14% APR in a token that falls 50% is a 43% loss wearing a yield costume. And overlooking minimums and fees that make small positions uneconomical on high-fee chains.</p>
+<h2>FAQ</h2>
+<p><strong>Why do high-APR chains pay more?</strong> Usually inflation (diluting holders to pay stakers), higher risk, or both. Sustainable yield comes from fees; the rest is redistribution wearing a yield costume.</p>
+<p><strong>Should I chase the top of the ranking?</strong> Only after checking lockups, slashing history, and validator spread. The top row is a starting question, never an answer.</p>
+<p><strong>How often do APRs change?</strong> Continuously — issuance schedules, participation rates, and governance votes move them. Re-check quarterly at minimum.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/staking/">Staking</a> · <a href="https://web3decentralization.com/glossary/apy/">APY</a> · <a href="https://web3decentralization.com/glossary/liquid-staking/">Liquid Staking</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-staking-and-earning/">Staking &amp; Earning</a> · <a href="https://web3decentralization.com/lesson/os-yield-staking-farming-risks/">Yield, Staking and Farming Risks</a></li>
+<li><a href="https://web3decentralization.com/chains/sol/">Solana audit</a> — high yield meets cloud concentration.</li>
+</ul>
+</article>

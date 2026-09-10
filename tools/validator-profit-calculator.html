@@ -1,0 +1,59 @@
+<!--TITLE:Validator Profit Calculator - W3D Terminal-->
+<!--META:Estimate validator earnings: stake, APY, commission and uptime in, monthly and yearly net profit out. With slashing and lockup risk notes.-->
+<!--CAT:validators-->
+<article>
+<h2>What it is</h2>
+<p>Running a validator — or delegating to one — earns protocol rewards, but the headline APY is never what lands in your pocket. Commission takes a cut, downtime silently skips your rewards, and lockups trap capital through volatility. This calculator turns gross advertised yield into the net number you actually keep: enter stake, APY, validator commission, and realistic uptime, and get monthly and yearly profit after all haircuts.</p>
+<p>It works for both roles: solo stakers checking whether hardware and effort beat delegating, and delegators comparing validators beyond the advertised rate. Every input is yours alone — nothing leaves the browser, no wallet connects, no account needed.</p>
+<h2>Why decentralization matters</h2>
+<p>Where stake flows decides who secures the network. Chasing the highest advertised APY herds everyone into the same giant pools and exchanges — which is precisely how decentralized validator sets quietly become three companies. A calculator that shows <em>net</em> yield reveals an uncomfortable truth: the gap between a mega-pool and a small independent validator is usually tiny after commission. Choosing the smaller one costs you little and buys the network real decentralization. Your stake is a vote; spend it on operators worth having.</p>
+<h2>How the formula works</h2>
+<p>Gross yearly reward equals stake multiplied by APY. The validator's commission is subtracted from rewards (not principal): net equals gross times one minus commission rate. Uptime scales linearly — 98% uptime means roughly 98% of expected attestations and rewards. Monthly figures divide the uptime-adjusted net yearly reward by twelve. The built-in chain presets use illustrative static APYs (Ethereum ~3.5%, Solana ~6.8%, Cardano ~4.2%, Avalanche ~7.1%, Polkadot ~12.5%, Cosmos ~14%, Near ~8.5%, Sui ~5.5%, Aptos ~6.2%) — verify live network rates before committing funds, as issuance and participation shift constantly.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-validator-profit-calculator">
+<p><label>Chain preset<br><select id="vp-chain"><option value="">Custom APY…</option><option value="3.5">Ethereum (~3.5%)</option><option value="6.8">Solana (~6.8%)</option><option value="4.2">Cardano (~4.2%)</option><option value="7.1">Avalanche (~7.1%)</option><option value="12.5">Polkadot (~12.5%)</option><option value="14">Cosmos (~14%)</option><option value="8.5">Near (~8.5%)</option><option value="5.5">Sui (~5.5%)</option><option value="6.2">Aptos (~6.2%)</option></select></label></p>
+<p><label>Stake amount<br><input id="vp-stake" type="number" min="0" step="any" value="1000"></label></p>
+<p><label>APY %<br><input id="vp-apy" type="number" min="0" max="100" step="any" value="5"></label></p>
+<p><label>Validator commission %<br><input id="vp-comm" type="number" min="0" max="100" step="any" value="5"></label></p>
+<p><label>Uptime %<br><input id="vp-up" type="number" min="0" max="100" step="any" value="99"></label></p>
+<p><button type="button" id="vp-go">Estimate profit</button></p>
+<div id="vp-out" role="status"></div>
+<script>
+(function(){
+function num(id, d){ var v = parseFloat(document.getElementById(id).value); return isFinite(v) ? v : d; }
+document.getElementById('vp-chain').addEventListener('change', function(){
+  if (this.value !== '') document.getElementById('vp-apy').value = this.value;
+});
+document.getElementById('vp-go').addEventListener('click', function(){
+  var stake = Math.max(0, num('vp-stake', 0));
+  var apy = Math.max(0, num('vp-apy', 0)) / 100;
+  var comm = Math.min(100, Math.max(0, num('vp-comm', 0))) / 100;
+  var up = Math.min(100, Math.max(0, num('vp-up', 99))) / 100;
+  var gross = stake * apy;
+  var net = gross * (1 - comm) * up;
+  var r2 = function(x){ return (Math.round(x * 100) / 100).toString(); };
+  document.getElementById('vp-out').innerHTML =
+    '<p><strong>Net yearly: ' + r2(net) + '</strong> (gross ' + r2(gross) + ' minus commission and downtime)</p>' +
+    '<p><strong>Net monthly: ' + r2(net / 12) + '</strong></p>' +
+    '<p>Risk notes: rewards are paid in volatile tokens; unstaking lockups trap capital for days to weeks; misbehaving validators can be slashed (part of stake destroyed); smart-contract risk applies to liquid-staking derivatives. Static APYs are illustrative — verify live rates.</p>';
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>Staking concentrates three risks beginners underestimate: lockup illiquidity during crashes, slashing from validator faults you didn't commit, and the quiet centralization of delegating to whoever advertises loudest. Diversify operators, prefer independent validators when the net-yield gap is small, and never stake funds you'd need to exit in a hurry.</p>
+<h2>Worked example</h2>
+<p>Stake 32 ETH (one full Ethereum validator) at 3.5% APY with a 5% pool commission and 99% uptime: gross yearly is 1.12 ETH, commission takes 0.056, uptime shaves another ~1%, leaving about 1.05 ETH net — roughly 0.088 ETH monthly at current prices. Now the same capital split across two independent small validators at 4% commission versus one giant pool at 10%: the yearly gap is a few hundredths of an ETH — lunch money — while the decentralization contribution differs enormously. Run both configurations above; the math almost always favors spreading.</p>
+<h2>Common mistakes</h2>
+<p>Comparing gross APYs across chains with different lockups, volatility, and slashing regimes as if the percentages were interchangeable. Ignoring commission compounding — a 10% commission doesn't cost 10% of yield in volatile markets where rewards must be sold to cover costs. Forgetting uptime entirely (the default 100% flatters every estimate). And staking the full stack with one operator for a 0.3% edge, concentrating both personal risk and network power for lunch money.</p>
+<h2>FAQ</h2>
+<p><strong>Solo stake or delegate?</strong> Solo keeps full rewards and maximizes decentralization but demands 32 ETH, hardware, and vigilance. Delegating suits smaller stakes; pick independent validators over the biggest pool.</p>
+<p><strong>Does compounding matter?</strong> Yes if rewards auto-restake (liquid staking), modestly otherwise. Restaking rewards manually a few times a year captures most of it.</p>
+<p><strong>What about taxes?</strong> Most jurisdictions tax staking rewards as income when received (or when you gain control). Track everything; this tool is not tax advice.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/staking/">Staking</a> · <a href="https://web3decentralization.com/glossary/validator/">Validator</a> · <a href="https://web3decentralization.com/glossary/delegation/">Delegation</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-staking-and-earning/">Staking &amp; Earning</a> · <a href="https://web3decentralization.com/lesson/os-yield-staking-farming-risks/">Yield, Staking and Farming Risks</a></li>
+<li><a href="https://web3decentralization.com/chains/eth/">Ethereum audit</a> — see how stake concentration scores.</li>
+</ul>
+</article>

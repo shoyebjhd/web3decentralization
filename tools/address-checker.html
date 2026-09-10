@@ -1,0 +1,124 @@
+<!--TITLE:Address Checker - W3D Terminal-->
+<!--META:Validate Bitcoin, Ethereum and Solana addresses in your browser. Real Base58Check and Bech32 checksums for BTC, strict format checks for ETH and SOL. Nothing leaves your device.-->
+<!--CAT:calculators-->
+<article>
+<h2>What it is</h2>
+<p>One wrong character in a crypto address means permanently lost funds — no bank to call, no chargeback to file. This checker validates addresses before you send: Bitcoin gets real cryptographic checksum verification (Base58Check via SHA-256 and native Bech32 validation), Solana gets full Base58 decoding with 32-byte length enforcement, and Ethereum gets strict format validation. Everything runs locally in your browser; pasted addresses are never transmitted anywhere.</p>
+<p>Use it as a pre-flight ritual alongside test transfers: check here, verify on your hardware screen, then send small first. Two minutes of caution against irreversible loss.</p>
+<h2>Why decentralization matters</h2>
+<p>Self-custody means you are the bank's entire quality-control department — there is no fraud team reversing your mistakes. Address verification is the cheapest security habit in crypto precisely because the network offers zero forgiveness. Tools like this one democratize the caution that professionals practice: verify mathematically, not by squinting at first-and-last characters (which address-poisoning attacks specifically exploit).</p>
+<h2>How the formula works</h2>
+<p>Bitcoin legacy addresses (1…/3…) are Base58Check: version byte plus hash plus a 4-byte checksum equal to the first four bytes of double-SHA-256, verified here with the Web Crypto API. Modern addresses (bc1…) use Bech32/Bech32m encoding with a polynomial checksum over a human-readable part, separator, and data — validated character by character. Solana addresses are raw 32-byte ed25519 public keys in Base58 (no checksum exists by design — length plus alphabet is the complete check). Ethereum requires exactly 0x followed by 40 hex characters; note honestly that full EIP-55 mixed-case checksum verification needs Keccak and is not performed here — always confirm checksummed addresses in your wallet before sending.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-address-checker">
+<p><label>Address to check<br><input id="ac-addr" type="text" size="55" placeholder="Paste any BTC, ETH or SOL address" autocomplete="off" spellcheck="false"></label></p>
+<p><button type="button" id="ac-go">Validate address</button></p>
+<div id="ac-out" role="status"></div>
+<script>
+(function(){
+var B58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+function b58decode(s){
+  var bytes = [0];
+  for (var i = 0; i < s.length; i++){
+    var c = B58.indexOf(s[i]);
+    if (c < 0) return null;
+    var carry = c;
+    for (var j = 0; j < bytes.length; j++){ carry += bytes[j] * 58; bytes[j] = carry & 255; carry >>= 8; }
+    while (carry > 0){ bytes.push(carry & 255); carry >>= 8; }
+  }
+  var zeros = 0;
+  while (zeros < s.length && s[zeros] === '1') zeros++;
+  var out = [];
+  for (var k = 0; k < zeros; k++) out.push(0);
+  for (var m = bytes.length - 1; m >= 0; m--) out.push(bytes[m]);
+  return new Uint8Array(out);
+}
+async function sha256d(data){
+  var h1 = await crypto.subtle.digest('SHA-256', data);
+  return await crypto.subtle.digest('SHA-256', h1);
+}
+var BECH = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+function bechPolymod(vals){
+  var GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
+  var chk = 1;
+  for (var i = 0; i < vals.length; i++){
+    var b = chk >> 25;
+    chk = ((chk & 0x1ffffff) << 5) ^ vals[i];
+    for (var j = 0; j < 5; j++) if ((b >> j) & 1) chk ^= GEN[j];
+  }
+  return chk;
+}
+function bechCheck(addr){
+  addr = addr.toLowerCase();
+  var pos = addr.lastIndexOf('1');
+  if (pos < 1 || pos + 7 > addr.length) return false;
+  var vals = [];
+  for (var i = 0; i < pos; i++) vals.push(addr.charCodeAt(i) >> 5);
+  vals.push(0);
+  for (var k = pos + 1; k < addr.length; k++){
+    var d = BECH.indexOf(addr[k]);
+    if (d < 0) return false;
+    vals.push(d);
+  }
+  var p = bechPolymod(vals);
+  return p === 1 || p === 0x2bc830a3;
+}
+function show(html){ document.getElementById('ac-out').innerHTML = html; }
+document.getElementById('ac-go').addEventListener('click', async function(){
+  var a = document.getElementById('ac-addr').value.trim();
+  if (!a){ show('<p>Enter an address first.</p>'); return; }
+  show('<p>Checking…</p>');
+  try {
+    if (/^(bc1|tb1|bcrt1)[qpzry9x8gf2tvdw0s3jn54khce6mua7l]{8,90}$/i.test(a)){
+      show(bechCheck(a)
+        ? '<p><strong>Valid Bitcoin SegWit/Taproot address.</strong> Bech32 checksum verified. Always confirm the full string on your wallet screen before sending.</p>'
+        : '<p><strong>Invalid.</strong> Bech32 checksum failed — do not send. Copy the address fresh from the recipient.</p>');
+      return;
+    }
+    if (/^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/.test(a)){
+      var raw = b58decode(a);
+      if (!raw || raw.length < 4){ show('<p><strong>Invalid.</strong> Bad Base58 characters.</p>'); return; }
+      var body = raw.slice(0, -4), sum = raw.slice(-4);
+      var h = new Uint8Array(await sha256d(body));
+      var ok = sum[0]===h[0] && sum[1]===h[1] && sum[2]===h[2] && sum[3]===h[3];
+      show(ok
+        ? '<p><strong>Valid Bitcoin legacy address.</strong> Base58Check checksum verified (SHA-256d). Confirm on your wallet screen before sending.</p>'
+        : '<p><strong>Invalid.</strong> Checksum mismatch — do not send. Copy the address fresh from the recipient.</p>');
+      return;
+    }
+    if (/^0x[0-9a-fA-F]{40}$/.test(a)){
+      show('<p><strong>Well-formed Ethereum address</strong> (0x + 40 hex chars). Format only — EIP-55 mixed-case checksum is not verified here, so confirm the checksummed form in your wallet before sending.</p>');
+      return;
+    }
+    if (/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(a)){
+      var sraw = b58decode(a);
+      show(sraw && sraw.length === 32
+        ? '<p><strong>Valid Solana address.</strong> Decodes to exactly 32 bytes (ed25519 pubkey). Note: Solana addresses carry no checksum by design — length plus alphabet is the complete check, so verify carefully.</p>'
+        : '<p><strong>Invalid Solana address.</strong> Must decode to exactly 32 bytes.</p>');
+      return;
+    }
+    show('<p><strong>Unrecognized format.</strong> Not a valid BTC, ETH, or SOL address. Never send to it — get a fresh address from the recipient.</p>');
+  } catch (e){ show('<p>Checker error — do not rely on this result; verify in your wallet.</p>'); }
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>No checker replaces wallet confirmation and test transfers: clipboard malware swaps addresses mid-paste, look-alike characters fool eyes, and this tool cannot know whether an address belongs to who you think it does. Ethereum checksum coverage here is format-only by design. Verify full strings on hardware screens for any meaningful amount, every single time.</p>
+<h2>Worked example</h2>
+<p>Paste a Bitcoin address starting with bc1q: the checker lowercases it, splits the human-readable part from the data, runs the Bech32 polynomial, and confirms the checksum constant — all in milliseconds, all locally. Try altering one character and re-checking: it fails instantly, which is exactly the protection checksums exist to provide. Then paste an Ethereum address and notice the honest limitation stated in the output — format verified, checksum deferred to your wallet. That asymmetry (real math for BTC, format-only for ETH) is why the tool explains itself instead of just flashing green.</p>
+<h2>Key numbers to remember</h2>
+<p>Bitcoin legacy: 26–35 chars starting 1 or 3, 4-byte checksum. Bech32: starts bc1, 14–74 chars after the separator for v0/v1 programs. Ethereum: exactly 42 characters (0x + 40 hex) — count them when in doubt. Solana: 32–44 Base58 chars decoding to exactly 32 bytes. Test-transfer threshold: always probe with dust before moving size, regardless of what any checker says.</p>
+<h2>Common mistakes</h2>
+<p>Checking the address but sending on the wrong network — valid address, unreachable funds. Trusting first-and-last characters instead of full strings (address poisoning exists precisely because eyes shortcut). Pasting from chat apps and PDFs that silently alter characters. And the deadliest: verifying once, then getting distracted and sending a *different* transaction to an unverified address from history.</p>
+<h2>FAQ</h2>
+<p><strong>Does a green result mean the address is mine?</strong> No — validity and ownership are unrelated. It proves format, never identity. Confirm ownership out-of-band.</p>
+<p><strong>Why no checksum for Ethereum here?</strong> EIP-55 checksums need Keccak hashing; rather than ship a half-audited implementation, this tool checks strict format and defers checksum duty to wallets, which implement it natively.</p>
+<p><strong>Can I check addresses offline?</strong> Yes — after first load everything (including this page's logic) runs without network. Bookmark it for air-gapped-adjacent workflows.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/address/">Address</a> · <a href="https://web3decentralization.com/glossary/public-key/">Public Key</a> · <a href="https://web3decentralization.com/glossary/wallet/">Wallet</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-sending-receiving-pro/">Sending and Receiving Like a Pro</a> · <a href="https://web3decentralization.com/lesson/os-setting-up-first-wallet/">Setting Up Your First Wallet</a></li>
+<li><a href="https://web3decentralization.com/chains/btc/">Bitcoin audit</a> — the network these checks protect you on.</li>
+</ul>
+</article>

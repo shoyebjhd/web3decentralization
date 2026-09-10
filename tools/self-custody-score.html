@@ -1,0 +1,72 @@
+<!--TITLE:Self-Custody Score - W3D Terminal-->
+<!--META:Grade your crypto self-custody in 2 minutes: 10 questions on backup, multisig and inheritance. Get a score plus exact lessons to fix gaps.-->
+<!--CAT:security-->
+<article>
+<h2>What it is</h2>
+<p>Ten questions, two minutes, one honest number. This quiz grades your self-custody posture across backups, wallet hygiene, multisig, and inheritance — then points you at the exact lessons that fix your weakest areas. No account, no tracking, answers never leave your browser.</p>
+<p>Most holders overrate their setup dramatically ("I have a hardware wallet" while the seed sits photographed in iCloud). An explicit score punctures that comfort usefully — before reality does it expensively.</p>
+<h2>Why decentralization matters</h2>
+<p>Self-custody is where decentralization becomes personal: the network can be perfectly distributed while your coins sit one phishing click from gone. Ecosystem security is the sum of individual setups, and the data says most setups are fragile. Measuring your own posture — then fixing the gaps — is quite literally how the network gets stronger, one holder at a time.</p>
+<h2>How the formula works</h2>
+<p>Ten questions, ten points each, weighted toward what actually loses money: offline backups (20), hardware for size (10), no digital seed copies (10), test transfers (10), approval hygiene (10), multisig at scale (10), recovery drills (10), inheritance docs (10), phishing resistance (5), exchange minimalism (5). 90+ is vault-grade; 70–89 solid with gaps; 40–69 fragile; below 40 is an incident waiting for a date. Each result links the precise lessons for your misses.</p>
+<h2>Calculator</h2>
+<div class="w3d-toolcalc" id="tool-self-custody-score">
+<div id="sc-q"></div>
+<p><button type="button" id="sc-go">Grade my setup</button></p>
+<div id="sc-out" role="status"></div>
+<script>
+(function(){
+var QS = [
+  ['Seed phrase stored offline in 2+ locations?', 0, 20, 'os-seed-phrase-mastery'],
+  ['Hardware wallet for meaningful holdings?', 0, 10, 'os-hot-vs-cold-choosing-setup'],
+  ['Zero digital copies of seeds (no photos/cloud/notes)?', 0, 10, 'os-staying-safe-scams-self-custody'],
+  ['Test transfer before large sends?', 0, 10, 'os-sending-receiving-pro'],
+  ['Token approvals reviewed/revoked regularly?', 0, 10, 'os-dex-trading-masterclass'],
+  ['Multisig for life-changing amounts?', 0, 10, 'os-advanced-multisig-hardware'],
+  ['Recovery drill performed in the last year?', 0, 10, 'os-recovery-inheritance'],
+  ['Heirs could access funds if needed?', 0, 10, 'os-recovery-inheritance'],
+  ['Could you spot a phishing dApp today?', 0, 5, 'os-how-scams-work'],
+  ['Exchange holds only trading float?', 0, 5, 'os-buying-your-first-crypto']
+];
+var box = document.getElementById('sc-q');
+QS.forEach(function(q, i){
+  var p = document.createElement('p');
+  p.innerHTML = '<label><input type="checkbox" id="sc-' + i + '"> ' + q[0] + ' <em>(+' + q[2] + ')</em></label>';
+  box.appendChild(p);
+});
+document.getElementById('sc-go').addEventListener('click', function(){
+  var s = 0, miss = [];
+  QS.forEach(function(q, i){
+    if (document.getElementById('sc-' + i).checked) s += q[2];
+    else miss.push(q);
+  });
+  var grade = s >= 90 ? 'Vault-grade. Maintain it with yearly drills.' : (s >= 70 ? 'Solid with gaps — fix the misses below.' : (s >= 40 ? 'Fragile — treat the misses as urgent homework.' : 'Critical — assume incident-readiness is near zero; start with the first two lessons.'));
+  var rec = miss.slice(0, 4).map(function(q){
+    return '<li><a href="https://web3decentralization.com/lesson/' + q[3] + '/">' + q[3].replace(/-/g, ' ') + '</a></li>';
+  }).join('');
+  document.getElementById('sc-out').innerHTML =
+    '<p><strong>Self-custody score: ' + s + '/100</strong></p><p>' + grade + '</p>' +
+    (rec ? '<p>Fix first:</p><ul>' + rec + '</ul>' : '<p>No gaps found — teach someone else.</p>');
+});
+})();
+</script>
+</div>
+<h2>Risks</h2>
+<p>A quiz measures knowledge and self-reporting, not reality — checking "hardware wallet" while its seed sits in email scores points you haven't earned. Answer adversarially: assume the grader is a thief reading over your shoulder. And re-take yearly; setups rot as habits slip and holdings grow.</p>
+<h2>Worked example</h2>
+<p>Score a typical careful beginner: offline paper backup (20) + hot wallet only, no hardware (0) + no digital copies (10) + test transfers done (10) + never reviewed approvals (0) + no multisig (0) + never drilled recovery (0) + no inheritance plan (0) + decent phishing awareness (5) + everything on one exchange plus the hot wallet (0) = 45/100, Fragile. The fixes that move the needle fastest aren't exotic: hardware (+10), approval hygiene (+10), and a recovery drill (+10) triple the margin with one focused weekend. Retake after each fix and watch the number — and the habits — compound.</p>
+<h2>Key numbers to remember</h2>
+<p>Bands: 90+ vault-grade, 70–89 solid, 40–69 fragile, below 40 critical. Backup locations minimum: two, separate risks. Recovery drill cadence: yearly. Exchange float ceiling: what you'd survive losing outright. And the meta-metric: months since your last full security review — if the answer exceeds twelve, subtract twenty points mentally and schedule the weekend. Scores compound like interest when reviews become ritual.</p>
+<h2>Common mistakes</h2>
+<p>Gaming the quiz (checking boxes aspirationally produces a comforting number and zero protection). Fixing easy points while ignoring the catastrophic gaps (approvals hygiene won't save an unbacked seed). Treating 90+ as permanent (setups decay as holdings grow and habits slip). And stopping at your own score — the ecosystem hardens only when knowledge spreads, so the final question is always who you're teaching next.</p>
+<h2>FAQ</h2>
+<p><strong>Is 100/100 achievable?</strong> Nearly — but perfect scores rot without maintenance. Treat 90+ as a state to defend with yearly drills, not a trophy to shelve.</p>
+<p><strong>Does the quiz store answers?</strong> No. No account, no analytics events on answers, nothing transmitted. Your setup details never leave the tab.</p>
+<p><strong>What first if I score under 40?</strong> In order: offline backup verification, move size off exchanges, hardware wallet, revocation pass. That sequence alone typically adds 40+ points.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="https://web3decentralization.com/glossary/self-custody/">Self-Custody</a> · <a href="https://web3decentralization.com/glossary/cold-wallet/">Cold Wallet</a> · <a href="https://web3decentralization.com/glossary/seed-phrase/">Seed Phrase</a></li>
+<li><a href="https://web3decentralization.com/lesson/os-staying-safe-scams-self-custody/">Staying Safe</a> · <a href="https://web3decentralization.com/lesson/os-recovery-inheritance/">Recovery &amp; Inheritance</a></li>
+<li><a href="https://web3decentralization.com/chains/btc/">Bitcoin audit</a> — self-custody's native territory.</li>
+</ul>
+</article>
