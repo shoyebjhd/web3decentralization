@@ -1,0 +1,50 @@
+name: Daily encrypted backup
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.SSH_BACKUP_KEY }}" > ~/.ssh/backup_key
+          chmod 600 ~/.ssh/backup_key
+          printf 'Host *\n  StrictHostKeyChecking accept-new\n' > ~/.ssh/config
+
+      - name: Pull backup tarball from server
+        run: >
+          ssh -i ~/.ssh/backup_key -p 65002 u435884427@82.29.87.203
+          'bash /home/u435884427/w3d_backup_run.sh' > site-backup.tar.gz
+
+      - name: Encrypt bundle
+        env:
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          test -s site-backup.tar.gz || (echo EMPTY-BUNDLE && exit 1)
+          DATE=$(date -u +%Y%m%d)
+          openssl enc -aes-256-cbc -pbkdf2 -pass env:BACKUP_PASSPHRASE \
+            -in site-backup.tar.gz -out "site-backup-${DATE}.tar.gz.enc"
+          rm -f site-backup.tar.gz
+          ls -la site-backup-*.enc
+
+      - name: Push to private backup repo
+        env:
+          GIT_SSH_COMMAND: 'ssh -i ~/.ssh/backup_key -o StrictHostKeyChecking=accept-new'
+        run: |
+          DATE=$(date -u +%Y%m%d)
+          rm -rf w3d-backup && mkdir w3d-backup && cd w3d-backup
+          git init -b main -q
+          git remote add origin git@github.com:shoyebjhd/w3d-backup.git
+          git fetch origin main 2>/dev/null || true
+          git reset --hard origin/main 2>/dev/null || true
+          git config user.name "w3d-backup-bot"
+          git config user.email "web3decentralization@gmail.com"
+          cp "../site-backup-${DATE}.tar.gz.enc" .
+          git add "site-backup-${DATE}.tar.gz.enc"
+          git commit -qm "backup ${DATE}" || echo "nothing new"
+          git push -u origin main
