@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Validate the repo before CI passes:
-- terminal/index.html references only existing assets
+- WP terminal shell template exists with xterm wiring + tool grid
+- every tools/*.html has a matching calculator div id
+- theme data JSON parses with 19 chains / glossary / 15 tools
 - data/chains.csv is parseable and matches the methodology table's chains
 - content markdown files have well-formed front matter
 - glossary related links point to existing files
 """
 import csv
+import json
 import os
 import re
 import sys
@@ -23,20 +26,32 @@ def check(cond, msg):
 def main():
     root = ROOT
 
-    # 1. terminal asset integrity
-    index = root / "terminal" / "index.html"
-    if index.exists():
-        html = index.read_text(encoding="utf-8", errors="replace")
-        refs = re.findall(r'(?:src|href)="(/terminal/[^"?#]+)', html)
-        for ref in refs:
-            rel = ref.removeprefix("/terminal/")
-            target = root / "terminal" / rel
-            check(target.exists(), f"terminal/index.html references missing asset: {ref}")
-
-        for boot in ("replaceState",):
-            check(boot in html, f"terminal/index.html missing boot shim: {boot}")
+    # 1. terminal shell + tools integrity (WP-native rebuild)
+    shell = root / "themes" / "w3d" / "page-terminal.php"
+    check(shell.exists(), "themes/w3d/page-terminal.php missing")
+    if shell.exists():
+        html = shell.read_text(encoding="utf-8", errors="replace")
+        for needle in ("w3d@terminal", "xterm.js", "w3d-term-grid", "?tool="):
+            check(needle in html, f"page-terminal.php missing: {needle}")
+    tools_dir = root / "tools"
+    tool_files = sorted(tools_dir.glob("*.html")) if tools_dir.exists() else []
+    check(len(tool_files) == 15, f"expected 15 tool files, found {len(tool_files)}")
+    for f in tool_files:
+        text = f.read_text(encoding="utf-8", errors="replace")
+        check(f'id="tool-{f.stem}"' in text, f"{f.name} missing calculator div id")
+        check(re.search(r"<!--TITLE:.+?-->", text) and re.search(r"<!--META:.+?-->", text),
+              f"{f.name} missing TITLE/META comments")
+    data_json = root / "themes" / "w3d" / "assets" / "w3d-data.json"
+    if data_json.exists():
+        try:
+            dj = json.loads(data_json.read_text(encoding="utf-8"))
+            check(len(dj.get("chains", [])) == 19, "w3d-data.json chains != 19")
+            check(len(dj.get("tools", [])) == 15, "w3d-data.json tools != 15")
+            check(len(dj.get("glossary", {})) >= 200, "w3d-data.json glossary < 200")
+        except (ValueError, AttributeError) as e:
+            errors.append(f"w3d-data.json invalid: {e}")
     else:
-        errors.append("terminal/index.html missing")
+        errors.append("themes/w3d/assets/w3d-data.json missing")
 
     # 2. chains.csv parseable + methodology consistency
     csv_path = root / "data" / "chains.csv"
@@ -113,7 +128,7 @@ def main():
         for e in errors:
             print(f"  - {e}")
         sys.exit(1)
-    print(f"OK: terminal, data, content validated ({len(list((root / 'content').rglob('*.md')))} markdown files)")
+    print(f"OK: shell, tools, data, content validated ({len(list((root / 'content').rglob('*.md')))} markdown files)")
 
 
 if __name__ == "__main__":
