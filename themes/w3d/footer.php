@@ -40,6 +40,31 @@
 				<li><a href="<?php echo esc_url( home_url( '/glossary/nakamoto-coefficient/' ) ); ?>">Nakamoto Coefficient</a></li>
 			</ul>
 		</nav>
+		<nav class="w3d-footer-nav w3d-footer-trending" aria-label="<?php esc_attr_e( 'Trending topics', 'w3d' ); ?>">
+			<p class="w3d-footer-gloss-title"><?php esc_html_e( 'Trending topics', 'w3d' ); ?></p>
+			<ul>
+				<li><a href="<?php echo esc_url( home_url( '/terminal/tools/nakamoto-coefficient/' ) ); ?>">Nakamoto Calculator</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/eip-4844/' ) ); ?>">EIP-4844</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/paymaster/' ) ); ?>">Paymaster</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/bundler/' ) ); ?>">Bundler</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/op-stack/' ) ); ?>">OP Stack</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/depin/' ) ); ?>">DePIN</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/restaking/' ) ); ?>">Restaking</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/blobs/' ) ); ?>">Blobs</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/session-keys/' ) ); ?>">Session Keys</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/chains/base/' ) ); ?>">Base Chain</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/superchain/' ) ); ?>">Superchain</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/shared-sequencing/' ) ); ?>">Shared Sequencing</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/erc-4337/' ) ); ?>">ERC-4337</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/intent-based/' ) ); ?>">Intent-Based</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/nakamoto-coefficient/' ) ); ?>">Nakamoto Coefficient</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/l2beat/' ) ); ?>">L2Beat</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/lrt-token/' ) ); ?>">LRT Token</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/chains/blast/' ) ); ?>">Blast Chain</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/mev-boost/' ) ); ?>">MEV Boost</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/glossary/data-availability-sampling/' ) ); ?>">DA Sampling</a></li>
+			</ul>
+		</nav>
 		</div>
 
 		<p class="w3d-footer-fork"><a href="https://github.com/Web3Decentralization/academy" target="_blank" rel="noopener"><?php esc_html_e( 'Fork on GitHub', 'w3d' ); ?></a> &mdash; <?php esc_html_e( 'the entire academy is MIT licensed.', 'w3d' ); ?></p>
