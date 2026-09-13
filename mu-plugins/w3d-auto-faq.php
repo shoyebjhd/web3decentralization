@@ -6,6 +6,23 @@
  */
 add_action('wp_head', 'w3d_auto_faq_schema', 9999);
 
+add_action('wp_head', 'w3d_home_breadcrumb_schema', 9998);
+
+function w3d_home_breadcrumb_schema() {
+    if (!is_front_page() || is_admin() || is_feed()) return;
+
+    $schema = array(
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => array(
+            array('@type' => 'ListItem', 'position' => 1, 'name' => 'Web3 Decentralization', 'item' => home_url('/')),
+        ),
+    );
+
+    echo "\n<!-- W3D Home Breadcrumb -->\n";
+    echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "</script>\n";
+}
+
 function w3d_auto_faq_schema() {
     if (is_admin() || is_feed()) return;
 
