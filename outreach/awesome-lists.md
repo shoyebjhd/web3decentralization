@@ -2,18 +2,24 @@
 
 Permanent authority + SEO backlinks, ~30 min of work, no gatekeeper.
 
+> **Updated 2026-09-14:** several repos below are **dead** (GitHub API 404 verified):
+> `vimvb/awesome-blockchain`, `lkiesow/awesome-cryptocurrency`,
+> `vishal-xl/awesome-web3`, `TheLazarov/awesome-blockchain`. Live replacements +
+> paste-ready insertion blocks are in **`outreach/awesome-lists-pr-prep.md`** — start there.
+
 ## Priority order
 
 | # | Target | Why | Effort |
 |---|--------|-----|--------|
-| 1 | `vimvb/awesome-blockchain` (or fork `iffy/awesome-blockchain`) | High-authority blockchain list, fast turnaround | PR |
-| 2 | `lkiesow/awesome-cryptocurrency` | Direct crypto fit, active | PR |
-| 3 | `vishal-xl/awesome-web3` | Exactly our space | PR |
-| 4 | `vinsgo/awesome-ethereum` | ETH section | PR |
-| 5 | `coallaoh/awesome-blockchain` | Wide blockchain list (CN/EN) | PR |
-| 6 | `TheLazarov/awesome-blockchain` | EEA-backed list | PR |
-| 7 | **Alternative.me / CryptoSlate / TheEcosystems.io** | Crypto project directories | form |
-| 8 | `r3bl-org/awesome...` etc. | Skip unless free time | — |
+| 1 | `yjjnls/awesome-blockchain` (★3,629) | Live general list; add "Courses & Guides" | PR |
+| 2 | `openblockchains/awesome-blockchains` (★3,780) | Live; add under "Blockchain Articles" | PR |
+| 3 | `ahmet/awesome-web3` (★892) | Live + exact list-format fit ("Reference") | PR |
+| 4 | `vinsgo/awesome-ethereum` | ETH section ("Tutorials") — repo stale, optional | PR |
+| 5 | ~~`vimvb/awesome-blockchain`~~ | DEAD (404) | — |
+| 6 | ~~`lkiesow/awesome-cryptocurrency`~~ | DEAD (404) | — |
+| 7 | ~~`vishal-xl/awesome-web3`~~ | DEAD (404) | — |
+| 8 | ~~`TheLazarov/awesome-blockchain`~~ | DEAD (404) | — |
+| 9 | **Alternative.me / CryptoSlate / TheEcosystems.io** | Crypto project directories | form |
 
 ## How to submit to an Awesome list (the standard way)
 
