@@ -491,30 +491,30 @@
         }
     ],
     "live": {
-        "updated": "2026-09-10T08:20:26.156Z",
+        "updated": "2026-09-14T12:22:36.465Z",
         "chains": {
             "btc": {
-                "validators": 26737,
+                "validators": 26655,
                 "validators_source": "bitnodes",
                 "nakamoto_33": null,
                 "nakamoto_source": "audited",
                 "label": "illustrative live data — reachable nodes, not miners; no stake/Nakamoto concept"
             },
             "sol": {
-                "validators": 675,
+                "validators": 676,
                 "validators_source": "solana-public-rpc",
                 "nakamoto_33": 18,
                 "nakamoto_source": "computed-live"
             },
             "ada": {
-                "validators": 6163,
+                "validators": 6164,
                 "validators_source": "koios.rest",
                 "nakamoto_33": null,
                 "nakamoto_source": "audited",
                 "label": "illustrative live data — koios pool-registry count; no keyless stake distribution, Nakamoto from audited snapshot"
             },
             "avax": {
-                "validators": 605,
+                "validators": 593,
                 "validators_source": "avax-public-api",
                 "nakamoto_33": 24,
                 "nakamoto_source": "computed-live"
@@ -545,9 +545,9 @@
                 "nakamoto_source": "computed-live"
             },
             "near": {
-                "validators": 423,
+                "validators": 416,
                 "validators_source": "near-public-rpc",
-                "nakamoto_33": 9,
+                "nakamoto_33": 8,
                 "nakamoto_source": "computed-live"
             }
         }
