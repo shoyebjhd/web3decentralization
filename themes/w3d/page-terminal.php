@@ -1,28 +1,26 @@
 <?php
 /**
- * Template Name: Terminal Shell
- *
  * /terminal/ — interactive xterm.js shell over the 15 W3D tools.
- * Same-origin only: tool pages, glossary excerpts, local data JSON.
+ *
+ * Falls back to a lightweight DOM line-shell if the xterm CDN is blocked,
+ * so the terminal is always interactive.
  *
  * @package w3d
  */
 
 get_header();
 
-$tools = get_posts(
-	array(
-		'post_type'      => 'w3d_tool',
-		'post_status'    => 'publish',
-		'posts_per_page' => -1,
-		'orderby'        => 'title',
-		'order'          => 'ASC',
-	)
-);
+$tools = get_posts( array(
+	'post_type'      => 'w3d_tool',
+	'post_status'    => 'publish',
+	'posts_per_page' => -1,
+	'orderby'        => 'title',
+	'order'          => 'ASC',
+) );
 $data_url = esc_url( get_theme_file_uri( 'assets/w3d-data.json' ) );
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css">
-<div class="w3d-wrap">
+<div class="w3d-wrap w3d-term-outer">
 	<?php w3d_breadcrumbs(); ?>
 	<header class="w3d-term-head">
 		<p class="w3d-sec-label"><?php esc_html_e( 'Open Source (MIT)', 'w3d' ); ?></p>
@@ -40,7 +38,7 @@ $data_url = esc_url( get_theme_file_uri( 'assets/w3d-data.json' ) );
 
 	<div class="w3d-term-search">
 		<label class="screen-reader-text" for="w3d-term-filter"><?php esc_html_e( 'Filter tools', 'w3d' ); ?></label>
-		<input type="search" id="w3d-term-filter" placeholder="<?php esc_attr_e( 'Filter tools as you type… (Enter opens top match)', 'w3d' ); ?>" autocomplete="off">
+		<input type="search" id="w3d-term-filter" placeholder="<?php esc_attr_e( 'Filter 15 tools, e.g. nakamoto, gas, staking…', 'w3d' ); ?>" autocomplete="off">
 	</div>
 
 	<div class="w3d-term-cols">
@@ -51,13 +49,15 @@ $data_url = esc_url( get_theme_file_uri( 'assets/w3d-data.json' ) );
 				<span class="w3d-term-dot w3d-term-dot-green"></span>
 				<span class="w3d-term-shell-title">w3d@terminal:~$</span>
 			</div>
-			<div id="w3d-term" aria-label="<?php esc_attr_e( 'W3D terminal', 'w3d' ); ?>"></div>
-			<noscript><p><?php esc_html_e( 'The interactive shell needs JavaScript. Browse all tools below instead.', 'w3d' ); ?></p></noscript>
+			<div id="w3d-term" aria-label="<?php esc_attr_e( 'W3D terminal', 'w3d' ); ?>">
+				<div id="w3d-terminal-loading" role="status"><?php esc_html_e( 'Loading 15 tools…', 'w3d' ); ?></div>
+			</div>
+			<noscript><p class="w3d-term-noscript"><?php esc_html_e( 'The interactive shell needs JavaScript. Browse all tools below instead.', 'w3d' ); ?></p></noscript>
 		</div>
 		<div class="w3d-term-right">
 			<div class="w3d-term-preview-head">
 				<span><?php esc_html_e( 'Live preview', 'w3d' ); ?></span>
-				<a id="w3d-term-full" href="<?php echo esc_url( home_url( '/terminal/tools/nakamoto-coefficient/' ) ); ?>"><?php esc_html_e( 'Open full page', 'w3d' ); ?></a>
+				<a id="w3d-term-full" href="<?php echo esc_url( home_url( '/terminal/tools/nakamoto-coefficient/' ) ); ?>"><?php esc_html_e( 'Open full page', 'w3d' ); ?> &rarr;</a>
 			</div>
 			<div id="w3d-term-preview"><p><?php esc_html_e( 'Type "help" in the terminal, or click a tool below.', 'w3d' ); ?></p></div>
 		</div>
@@ -65,7 +65,7 @@ $data_url = esc_url( get_theme_file_uri( 'assets/w3d-data.json' ) );
 
 	<section class="w3d-term-all" aria-label="<?php esc_attr_e( 'All tools', 'w3d' ); ?>">
 		<h2><?php esc_html_e( 'All 15 tools', 'w3d' ); ?></h2>
-		<div class="w3d-learn-grid" id="w3d-term-grid">
+		<div class="w3d-learn-grid w3d-tool-grid" id="w3d-term-grid">
 			<?php foreach ( $tools as $tool_post ) : ?>
 				<div class="w3d-learn-card" data-slug="<?php echo esc_attr( $tool_post->post_name ); ?>" data-title="<?php echo esc_attr( $tool_post->post_title ); ?>">
 					<h3><a href="<?php echo esc_url( get_permalink( $tool_post->ID ) ); ?>"><?php echo esc_html( $tool_post->post_title ); ?></a></h3>
@@ -86,216 +86,250 @@ var DATA_URL = <?php echo wp_json_encode( get_theme_file_uri( 'assets/w3d-data.j
 var SITE = <?php echo wp_json_encode( home_url( '/' ) ); ?>;
 var DATA = { tools: [], chains: [], glossary: {} };
 
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
-
 var termBox = document.getElementById('w3d-term');
 var preview = document.getElementById('w3d-term-preview');
 var fullLink = document.getElementById('w3d-term-full');
 var filter = document.getElementById('w3d-term-filter');
 var grid = document.getElementById('w3d-term-grid');
+var loading = document.getElementById('w3d-terminal-loading');
 
-if (!window.Terminal){
-  termBox.innerHTML = '<p>Terminal engine failed to load. Use the tool cards below — every tool works as a standalone page.</p>';
-} else {
+var PROMPT = 'w3d@terminal:~$ ';
+var buf = '', hist = [], hi = -1;
+var pending = Promise.resolve();
+
+var view = { write: function(){}, writeln: function(){}, clear: function(){}, focus: function(){} };
+function println(s){ view.writeln(s || ''); }
+function printPrompt(){ view.write('\r\n' + PROMPT + buf); }
+
+var useXterm = !!window.Terminal;
+if (useXterm){
   var term = new Terminal({
     cursorBlink: true, fontFamily: 'ui-monospace, Menlo, Consolas, monospace', fontSize: 14,
     theme: { background: '#0b0e1a', foreground: '#d5dbe8', cursor: '#14B8A6', selectionBackground: '#14B8A655' }
   });
   term.open(termBox);
-  var PROMPT = 'w3d@terminal:~$ ';
-  var buf = '', hist = [], hi = -1;
+  view.write = function(s){ term.write(s); };
+  view.writeln = function(s){ term.writeln(s || ''); };
+  view.clear = function(){ term.clear(); };
+  view.focus = function(){ term.focus(); };
+  term.onKey(function(ev){
+    var k = ev.key, e = ev.domEvent;
+    if (e.key === 'Enter'){ view.write('\r\n'); var line = buf; buf = ''; if (line.trim()){ hist.unshift(line); hi = -1; } run(line); }
+    else if (e.key === 'Backspace'){ if (buf.length){ buf = buf.slice(0, -1); view.write('\b \b'); } }
+    else if (e.key === 'ArrowUp'){ if (hi + 1 < hist.length){ hi++; buf = hist[hi]; view.write('\r\x1b[K' + PROMPT + buf); } }
+    else if (e.key === 'ArrowDown'){ hi = Math.max(-1, hi - 1); buf = hi >= 0 ? hist[hi] : ''; view.write('\r\x1b[K' + PROMPT + buf); }
+    else if (e.key === 'l' && e.ctrlKey){ view.clear(); view.write(PROMPT + buf); }
+    else if (e.key === 'c' && e.ctrlKey){ buf = ''; view.write('^C\r\n' + PROMPT); }
+    else if (k.length === 1 && !e.ctrlKey && !e.metaKey){ buf += k; view.write(k); }
+  });
+} else {
+  var fb = document.createElement('div'); fb.className = 'w3d-term-fallback';
+  var fbOut = document.createElement('pre'); fbOut.className = 'w3d-term-fb-out';
+  var fbLine = document.createElement('div'); fbLine.className = 'w3d-term-fb-line';
+  var fbPrompt = document.createElement('span'); fbPrompt.className = 'w3d-term-fb-prompt'; fbPrompt.textContent = PROMPT;
+  var fbInput = document.createElement('input'); fbInput.type = 'text'; fbInput.autocomplete = 'off'; fbInput.spellcheck = false;
+  fbLine.appendChild(fbPrompt); fbLine.appendChild(fbInput);
+  fb.appendChild(fbOut); fb.appendChild(fbLine);
+  termBox.appendChild(fb);
+  view.write = function(s){ if (s){ fbOut.textContent += String(s); } fbOut.scrollTop = fbOut.scrollHeight; };
+  view.writeln = function(s){ fbOut.textContent += String(s || '') + '\n'; fbOut.scrollTop = fbOut.scrollHeight; };
+  view.clear = function(){ fbOut.textContent = ''; };
+  view.focus = function(){ fbInput.focus(); };
+  fbInput.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter'){ return; }
+    var line = fbInput.value; fbInput.value = '';
+    fbOut.textContent += PROMPT + line + '\n';
+    if (line.trim()){ hist.unshift(line); hi = -1; }
+    run(line);
+    fbOut.scrollTop = fbOut.scrollHeight;
+  });
+}
 
-  function println(s){ term.writeln(s || ''); }
-  function printPrompt(){ term.write('\r\n' + PROMPT + buf); }
+function run(line){
+  pending = pending.then(function(){ return exec(line); }).then(printPrompt);
+}
 
-  function toolBySlug(slug){
-    slug = (slug || '').toLowerCase();
-    for (var i = 0; i < DATA.tools.length; i++) if (DATA.tools[i].slug === slug) return DATA.tools[i];
-    return null;
+function toolBySlug(slug){
+  slug = (slug || '').toLowerCase();
+  for (var i = 0; i < DATA.tools.length; i++) if (DATA.tools[i].slug === slug) return DATA.tools[i];
+  return null;
+}
+
+function runScripts(container){
+  var scripts = container.querySelectorAll('script');
+  scripts = Array.prototype.slice.call(scripts);
+  scripts.forEach(function(old){
+    var s = document.createElement('script');
+    if (old.src){ s.src = old.src; } else { s.textContent = old.textContent; }
+    old.parentNode.replaceChild(s, old);
+  });
+}
+
+function openTool(slug, chainHint){
+  var t = toolBySlug(slug);
+  if (!t){
+    println('Unknown tool "' + slug + '". Try "list".');
+    return Promise.resolve();
   }
-
-  function runScripts(container){
-    var scripts = container.querySelectorAll('script');
-    scripts = Array.prototype.slice.call(scripts);
-    scripts.forEach(function(old){
-      var s = document.createElement('script');
-      if (old.src){ s.src = old.src; } else { s.textContent = old.textContent; }
-      old.parentNode.replaceChild(s, old);
-    });
-  }
-
-  function openTool(slug, chainHint){
-    var t = toolBySlug(slug);
-    if (!t){
-      println('Unknown tool "' + slug + '". Try "list".');
-      return Promise.resolve();
-    }
-    println('Loading ' + t.slug + ' …');
-    return fetch(SITE + 'terminal/tools/' + encodeURIComponent(t.slug) + '/', { credentials: 'same-origin' })
-      .then(function(r){ if (!r.ok) throw 0; return r.text(); })
-      .then(function(html){
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        var src = doc.querySelector('#tool-' + CSS.escape(t.slug));
-        preview.innerHTML = '';
-        if (!src){ preview.innerHTML = '<p>Calculator unavailable here — <a href="' + SITE + 'terminal/tools/' + encodeURIComponent(t.slug) + '/">open the full page</a>.</p>'; }
-        else {
-          var h = document.createElement('h2'); h.textContent = t.title;
-          var link = document.createElement('p');
-          var a = document.createElement('a'); a.href = SITE + 'terminal/tools/' + encodeURIComponent(t.slug) + '/'; a.textContent = 'Open full page';
-          link.appendChild(a);
-          preview.appendChild(h); preview.appendChild(link);
-          var body = document.createElement('div');
-          body.innerHTML = src.innerHTML;
-          preview.appendChild(body);
-          runScripts(preview);
-          if (chainHint){
-            var sels = preview.querySelectorAll('select');
-            for (var i = 0; i < sels.length; i++){
-              var opts = sels[i].options;
-              for (var j = 0; j < opts.length; j++){
-                if (opts[j].text.toLowerCase().indexOf(String(chainHint).toLowerCase()) >= 0){ sels[i].selectedIndex = j; break; }
-              }
+  println('Loading ' + t.slug + ' …');
+  return fetch(SITE + 'terminal/tools/' + encodeURIComponent(t.slug) + '/', { credentials: 'same-origin' })
+    .then(function(r){ if (!r.ok) throw 0; return r.text(); })
+    .then(function(html){
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var src = doc.querySelector('#tool-' + CSS.escape(t.slug));
+      preview.innerHTML = '';
+      if (!src){ preview.innerHTML = '<p>Calculator unavailable here — <a href="' + SITE + 'terminal/tools/' + encodeURIComponent(t.slug) + '/">open the full page</a>.</p>'; }
+      else {
+        var h = document.createElement('h2'); h.textContent = t.title;
+        var link = document.createElement('p');
+        var a = document.createElement('a'); a.href = SITE + 'terminal/tools/' + encodeURIComponent(t.slug) + '/'; a.textContent = 'Open full page';
+        link.appendChild(a);
+        preview.appendChild(h); preview.appendChild(link);
+        var body = document.createElement('div');
+        body.innerHTML = src.innerHTML;
+        preview.appendChild(body);
+        runScripts(preview);
+        if (chainHint){
+          var sels = preview.querySelectorAll('select');
+          for (var i = 0; i < sels.length; i++){
+            var opts = sels[i].options;
+            for (var j = 0; j < opts.length; j++){
+              if (opts[j].text.toLowerCase().indexOf(String(chainHint).toLowerCase()) >= 0){ sels[i].selectedIndex = j; break; }
             }
           }
         }
-        fullLink.href = SITE + 'terminal/tools/' + encodeURIComponent(t.slug) + '/';
-        try {
-          var qs = '?tool=' + encodeURIComponent(t.slug) + (chainHint ? '&chain=' + encodeURIComponent(chainHint) : '');
-          history.pushState({ tool: t.slug }, '', SITE.replace(/\/$/, '') + '/terminal/' + qs);
-        } catch (e){}
-        println('Opened in preview → ' + t.slug);
-      })
-      .catch(function(){ println('Could not load tool page (offline?). Try its full page directly.'); });
-  }
-
-  function cmdGlossary(term){
-    term = (term || '').trim().toLowerCase().replace(/\s+/g, '-');
-    if (!term){ println('Usage: glossary <term>   e.g. glossary staking'); return Promise.resolve(); }
-    println('Fetching /glossary/' + term + '/ …');
-    return fetch(SITE + 'glossary/' + encodeURIComponent(term) + '/', { credentials: 'same-origin' })
-      .then(function(r){ if (!r.ok) throw 0; return r.text(); })
-      .then(function(html){
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        var d = doc.querySelector('meta[name="description"]');
-        var txt = d ? d.getAttribute('content') : '';
-        if (!txt){
-          var p = doc.querySelector('.entry-content p, .w3d-content p');
-          txt = p ? p.textContent : '';
-        }
-        txt = txt.replace(/\s+/g, ' ').trim().slice(0, 400);
-        println(txt ? txt : 'No excerpt found.');
-        println('Full page: ' + SITE + 'glossary/' + encodeURIComponent(term) + '/');
-      })
-      .catch(function(){ println('Term not found. Try "list" for tools or check spelling.'); });
-  }
-
-  function cmdChain(slug){
-    slug = (slug || '').toLowerCase();
-    var found = null;
-    for (var i = 0; i < DATA.chains.length; i++){
-      if (DATA.chains[i].slug === slug){ found = DATA.chains[i]; break; }
-    }
-    if (!found){ println('Unknown chain. Try: ' + DATA.chains.map(function(c){ return c.slug; }).join(', ')); return Promise.resolve(); }
-    if (found.score === null || found.score === undefined){
-      println(found.name + ': preliminary profile — full audit pending. See ' + SITE + 'chains/' + found.slug + '/');
-    } else {
-      var p = found.pillars || {};
-      println(found.name + ' — composite ' + found.score + '/100  (infra ' + (p.infrastructure ?? '?') + ' · capital ' + (p.capital ?? '?') + ' · gov ' + (p.governance ?? '?') + ' · soft ' + (p.software ?? '?') + ')');
-      println('Full audit: ' + SITE + 'chains/' + found.slug + '/');
-    }
-    return Promise.resolve();
-  }
-
-  function cmdHelp(){
-    println('Commands: help · list · open <slug> · glossary <term> · chain <slug> · clear · about');
-    println('Tools (' + DATA.tools.length + '):');
-    DATA.tools.forEach(function(t){ println('  ' + t.slug + '  — ' + t.title); });
-    return Promise.resolve();
-  }
-
-  function cmdList(){
-    DATA.tools.forEach(function(t){
-      var cat = t.category ? ' [' + t.category + ']' : '';
-      println('  ' + t.slug + cat + '  — ' + t.title);
-    });
-    return Promise.resolve();
-  }
-
-  function cmdAbout(){
-    println('W3D Terminal — open-source decentralization toolkit (MIT).');
-    println('Method: 4 pillars (infrastructure 30 / capital 25 / governance 25 / software 20).');
-    println('Code + data: https://github.com/Web3Decentralization/academy');
-    return Promise.resolve();
-  }
-
-  var pending = Promise.resolve();
-  function exec(line){
-    var parts = line.trim().split(/\s+/).filter(Boolean);
-    if (!parts.length) return Promise.resolve();
-    var c = parts[0].toLowerCase(), arg = parts.slice(1).join(' ');
-    if (c === 'help') return cmdHelp();
-    if (c === 'list' || c === 'ls') return cmdList();
-    if (c === 'open' || c === 'tool'){ if (!arg){ println('Usage: open <slug>'); return Promise.resolve(); } return openTool(arg.split(/\s+/)[0]); }
-    if (c === 'glossary' || c === 'g') return cmdGlossary(arg);
-    if (c === 'chain' || c === 'c') return cmdChain(arg.split(/\s+/)[0]);
-    if (c === 'clear' || c === 'cls'){ term.clear(); return Promise.resolve(); }
-    if (c === 'about') return cmdAbout();
-    println('Unknown command "' + parts[0] + '". Try "help".');
-    return Promise.resolve();
-  }
-
-  term.onKey(function(ev){
-    var k = ev.key, e = ev.domEvent;
-    if (e.key === 'Enter'){ term.write('\r\n'); var line = buf; buf = ''; if (line.trim()){ hist.unshift(line); hi = -1; } pending = pending.then(function(){ return exec(line); }).then(printPrompt); }
-    else if (e.key === 'Backspace'){ if (buf.length){ buf = buf.slice(0, -1); term.write('\b \b'); } }
-    else if (e.key === 'ArrowUp'){ if (hi + 1 < hist.length){ hi++; buf = hist[hi]; term.write('\r\x1b[K' + PROMPT + buf); } }
-    else if (e.key === 'ArrowDown'){ hi = Math.max(-1, hi - 1); buf = hi >= 0 ? hist[hi] : ''; term.write('\r\x1b[K' + PROMPT + buf); }
-    else if (e.key === 'l' && e.ctrlKey){ term.clear(); term.write(PROMPT + buf); }
-    else if (e.key === 'c' && e.ctrlKey){ buf = ''; term.write('^C\r\n' + PROMPT); }
-    else if (k.length === 1 && !e.ctrlKey && !e.metaKey){ buf += k; term.write(k); }
-  });
-
-  term.writeln('W3D Terminal — type "help" to begin. Loading 15 tools…');
-
-  fetch(DATA_URL, { credentials: 'same-origin' })
-    .then(function(r){ if (!r.ok) throw 0; return r.json(); })
-    .then(function(j){ DATA = j; term.writeln(DATA.tools.length + ' tools ready. Try: open nakamoto-coefficient'); })
-    .catch(function(){ term.writeln('Data file unreachable — tool pages still work directly.'); })
-    .then(function(){
-      var q = new URLSearchParams(window.location.search);
-      var t0 = q.get('tool');
-      if (t0){ openTool(t0, q.get('chain')).then(printPrompt); }
-      else { printPrompt(); }
-    });
-
-  termBox.addEventListener('click', function(){ term.focus(); });
-
-  grid.addEventListener('click', function(e){
-    var b = e.target.closest ? e.target.closest('.w3d-term-open') : null;
-    if (!b) return;
-    term.focus();
-    pending = pending.then(function(){ return openTool(b.getAttribute('data-slug')); }).then(printPrompt);
-  });
-
-  filter.addEventListener('input', function(){
-    var q = filter.value.trim().toLowerCase();
-    var cards = grid.querySelectorAll('.w3d-learn-card');
-    var first = null;
-    cards.forEach(function(card){
-      var hit = !q || (card.getAttribute('data-slug') + ' ' + card.getAttribute('data-title')).toLowerCase().indexOf(q) >= 0;
-      card.style.display = hit ? '' : 'none';
-      if (hit && !first) first = card;
-    });
-    filter.dataset.top = first ? first.getAttribute('data-slug') : '';
-  });
-  filter.addEventListener('keydown', function(e){
-    if (e.key === 'Enter' && filter.dataset.top){
-      term.focus();
-      var slug = filter.dataset.top;
-      pending = pending.then(function(){ return openTool(slug); }).then(printPrompt);
-    }
-  });
+      }
+      fullLink.href = SITE + 'terminal/tools/' + encodeURIComponent(t.slug) + '/';
+      try {
+        var qs = '?tool=' + encodeURIComponent(t.slug) + (chainHint ? '&chain=' + encodeURIComponent(chainHint) : '');
+        history.pushState({ tool: t.slug }, '', SITE.replace(/\/$/, '') + '/terminal/' + qs);
+      } catch (e){}
+      println('Opened in preview → ' + t.slug);
+    })
+    .catch(function(){ println('Could not load tool page (offline?). Try its full page directly.'); });
 }
+
+function cmdGlossary(term){
+  term = (term || '').trim().toLowerCase().replace(/\s+/g, '-');
+  if (!term){ println('Usage: glossary <term>   e.g. glossary staking'); return Promise.resolve(); }
+  println('Fetching /glossary/' + term + '/ …');
+  return fetch(SITE + 'glossary/' + encodeURIComponent(term) + '/', { credentials: 'same-origin' })
+    .then(function(r){ if (!r.ok) throw 0; return r.text(); })
+    .then(function(html){
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var d = doc.querySelector('meta[name="description"]');
+      var txt = d ? d.getAttribute('content') : '';
+      if (!txt){
+        var p = doc.querySelector('.entry-content p, .w3d-content p');
+        txt = p ? p.textContent : '';
+      }
+      txt = txt.replace(/\s+/g, ' ').trim().slice(0, 400);
+      println(txt ? txt : 'No excerpt found.');
+      println('Full page: ' + SITE + 'glossary/' + encodeURIComponent(term) + '/');
+    })
+    .catch(function(){ println('Term not found. Try "list" for tools or check spelling.'); });
+}
+
+function cmdChain(slug){
+  slug = (slug || '').toLowerCase();
+  var found = null;
+  for (var i = 0; i < DATA.chains.length; i++){
+    if (DATA.chains[i].slug === slug){ found = DATA.chains[i]; break; }
+  }
+  if (!found){ println('Unknown chain. Try: ' + DATA.chains.map(function(c){ return c.slug; }).join(', ')); return Promise.resolve(); }
+  if (found.score === null || found.score === undefined){
+    println(found.name + ': preliminary profile — full audit pending. See ' + SITE + 'chains/' + found.slug + '/');
+  } else {
+    var p = found.pillars || {};
+    println(found.name + ' — composite ' + found.score + '/100  (infra ' + (p.infrastructure ?? '?') + ' · capital ' + (p.capital ?? '?') + ' · gov ' + (p.governance ?? '?') + ' · soft ' + (p.software ?? '?') + ')');
+    println('Full audit: ' + SITE + 'chains/' + found.slug + '/');
+  }
+  return Promise.resolve();
+}
+
+function cmdHelp(){
+  println('Commands: help · list · open <slug> · glossary <term> · chain <slug> · clear · about');
+  println('Tools (' + DATA.tools.length + '):');
+  DATA.tools.forEach(function(t){ println('  ' + t.slug + '  — ' + t.title); });
+  return Promise.resolve();
+}
+
+function cmdList(){
+  DATA.tools.forEach(function(t){
+    var cat = t.category ? ' [' + t.category + ']' : '';
+    println('  ' + t.slug + cat + '  — ' + t.title);
+  });
+  return Promise.resolve();
+}
+
+function cmdAbout(){
+  println('W3D Terminal — open-source decentralization toolkit (MIT).');
+  println('Method: 4 pillars (infrastructure 30 / capital 25 / governance 25 / software 20).');
+  println('Code + data: https://github.com/Web3Decentralization/academy');
+  return Promise.resolve();
+}
+
+function exec(line){
+  var parts = line.trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return Promise.resolve();
+  var c = parts[0].toLowerCase(), arg = parts.slice(1).join(' ');
+  if (c === 'help') return cmdHelp();
+  if (c === 'list' || c === 'ls') return cmdList();
+  if (c === 'open' || c === 'tool'){ if (!arg){ println('Usage: open <slug>'); return Promise.resolve(); } return openTool(arg.split(/\s+/)[0]); }
+  if (c === 'glossary' || c === 'g') return cmdGlossary(arg);
+  if (c === 'chain' || c === 'c') return cmdChain(arg.split(/\s+/)[0]);
+  if (c === 'clear' || c === 'cls'){ view.clear(); return Promise.resolve(); }
+  if (c === 'about') return cmdAbout();
+  println('Unknown command "' + parts[0] + '". Try "help".');
+  return Promise.resolve();
+}
+
+if (useXterm){
+  if (loading && loading.parentNode){ loading.parentNode.removeChild(loading); }
+} else if (loading){
+  loading.style.display = 'none';
+  view.focus();
+}
+
+view.writeln('W3D Terminal — type "help" to begin.');
+view.focus();
+
+fetch(DATA_URL, { credentials: 'same-origin' })
+  .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+  .then(function(j){ DATA = j; view.writeln(DATA.tools.length + ' tools ready. Try: open nakamoto-coefficient'); })
+  .catch(function(){ view.writeln('Data file unreachable — tool pages still work directly.'); })
+  .then(function(){
+    var q = new URLSearchParams(window.location.search);
+    var t0 = q.get('tool');
+    printPrompt();
+    if (t0){ openTool(t0, q.get('chain')).then(printPrompt); }
+  });
+
+termBox.addEventListener('click', function(){ view.focus(); });
+grid.addEventListener('click', function(e){
+  var b = e.target.closest ? e.target.closest('.w3d-term-open') : null;
+  if (!b) return;
+  view.focus();
+  openTool(b.getAttribute('data-slug'));
+});
+filter.addEventListener('input', function(){
+  var q = filter.value.trim().toLowerCase();
+  var cards = grid.querySelectorAll('.w3d-learn-card');
+  var first = null;
+  cards.forEach(function(card){
+    var hit = !q || (card.getAttribute('data-slug') + ' ' + card.getAttribute('data-title')).toLowerCase().indexOf(q) >= 0;
+    card.style.display = hit ? '' : 'none';
+    if (hit && !first) first = card;
+  });
+  filter.dataset.top = first ? first.getAttribute('data-slug') : '';
+});
+filter.addEventListener('keydown', function(e){
+  if (e.key === 'Enter' && filter.dataset.top){
+    view.focus();
+    var slug = filter.dataset.top;
+    openTool(slug);
+  }
+});
 }
 if (document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', w3dTermInit); }
 else { w3dTermInit(); }

@@ -2,6 +2,10 @@
 /**
  * Single template for the "glossary" custom post type.
  *
+ * Some terms store their body in an ACF field instead of post_content.
+ * This template always renders: definition box + full content + FAQ +
+ * related cards. Never render blank.
+ *
  * @package w3d
  */
 
@@ -10,14 +14,35 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 
-	$def_text = trim( wp_strip_all_tags( get_the_content() ) );
-	$def_text = (string) preg_replace( '/\s+/u', ' ', $def_text );
-	$words    = preg_split( '/\s+/u', $def_text );
+	$content_html = (string) get_the_content();
+
+	$acf_def = get_field( 'definition' );
+	if ( empty( $acf_def ) ) {
+		$acf_def = get_field( 'w3d_glossary_content' );
+	}
+	if ( empty( $acf_def ) ) {
+		$acf_def = get_field( 'content' );
+	}
+	$acf_def = (string) $acf_def;
+
+	$acf_faq = get_field( 'faq' );
+
+	$def_source = trim( wp_strip_all_tags( $content_html ) );
+	if ( '' === $def_source ) {
+		$def_source = trim( wp_strip_all_tags( $acf_def ) );
+	}
+	$def_source = (string) preg_replace( '/\s+/u', ' ', $def_source );
+
 	$def_lead = '';
 	$def_rest = '';
-	if ( count( $words ) > 100 ) {
-		$def_lead = implode( ' ', array_slice( $words, 0, 100 ) );
-		$def_rest = implode( ' ', array_slice( $words, 100 ) );
+	if ( '' !== $def_source ) {
+		$words    = preg_split( '/\s+/u', $def_source );
+		if ( count( $words ) > 100 ) {
+			$def_lead = implode( ' ', array_slice( $words, 0, 100 ) );
+			$def_rest = implode( ' ', array_slice( $words, 100 ) );
+		} else {
+			$def_lead = $def_source;
+		}
 	}
 	?>
 	<div class="w3d-wrap glossary-single-wrap">
@@ -45,8 +70,34 @@ while ( have_posts() ) :
 			<?php endif; ?>
 
 			<div class="glossary-term-body w3d-content">
-				<?php the_content(); ?>
+				<?php
+				if ( trim( wp_strip_all_tags( $content_html ) ) !== '' ) {
+					the_content();
+				} elseif ( '' !== trim( $acf_def ) ) {
+					echo wpautop( $acf_def ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- ACF field may hold trusted HTML.
+				}
+				?>
 			</div>
+
+			<?php if ( is_array( $acf_faq ) && ! empty( $acf_faq ) ) : ?>
+				<section class="w3d-faq">
+					<h2><?php esc_html_e( 'Frequently asked questions', 'w3d' ); ?></h2>
+					<?php foreach ( $acf_faq as $faq_item ) : ?>
+						<?php
+						$faq_item = (array) $faq_item;
+						$q        = isset( $faq_item['question'] ) ? (string) $faq_item['question'] : '';
+						$a        = isset( $faq_item['answer'] ) ? (string) $faq_item['answer'] : '';
+						if ( '' === $q && '' === $a ) {
+							continue;
+						}
+						?>
+						<div class="schema-faq-section">
+							<h3 class="schema-faq-question"><?php echo esc_html( $q ); ?></h3>
+							<div class="schema-faq-answer"><?php echo wp_kses_post( wpautop( $a ) ); ?></div>
+						</div>
+					<?php endforeach; ?>
+				</section>
+			<?php endif; ?>
 		</article>
 	</div>
 <?php endwhile; ?>

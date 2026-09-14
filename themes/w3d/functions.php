@@ -1268,13 +1268,30 @@ function w3d_404_remember_redirect( $from_path, $to_url ) {
 }
 
 /**
+ * Curated 404 → canonical aliases (exact path, no guesswork).
+ *
+ * @param string $path Request path (leading slash trimmed).
+ * @return string Canonical URL or empty string.
+ */
+function w3d_404_alias_map( $path ) {
+	$aliases = array(
+		'beginner-path' => '/learning-path/beginners/',
+	);
+	$path    = trim( (string) $path, '/' );
+	return isset( $aliases[ $path ] ) ? $aliases[ $path ] : '';
+}
+
+/**
  * Entry point for 404.php. Logs the hit, then 301s on close typo matches.
  */
 function w3d_404_intelligence() {
 	$requested = home_url( add_query_arg( null, null ) );
 	w3d_404_log( $requested );
 	$path = trim( (string) wp_parse_url( $requested, PHP_URL_PATH ), '/' );
-	$dest = w3d_404_smart_match( $path );
+	$dest = w3d_404_alias_map( $path );
+	if ( ! $dest ) {
+		$dest = w3d_404_smart_match( $path );
+	}
 	if ( $dest ) {
 		w3d_404_remember_redirect( '/' . $path, $dest );
 		wp_redirect( $dest, 301 );
@@ -1491,7 +1508,7 @@ function w3d_lesson_toc( $content ) {
 	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
 		return $content;
 	}
-	if ( ! is_singular( array( 'lesson', 'post' ) ) || ! in_the_loop() || ! is_main_query() ) {
+	if ( ! is_singular( array( 'lesson', 'post', 'llms_glossary', 'chain' ) ) || ! in_the_loop() || ! is_main_query() ) {
 		return $content;
 	}
 	if ( false !== strpos( $content, 'w3d-toc' ) ) {

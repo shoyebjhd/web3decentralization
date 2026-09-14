@@ -18,6 +18,19 @@
 
 	ready(function () {
 
+		/* ---------- Responsive tables: wrap in a scroll container ---------- */
+		var tables = document.querySelectorAll('.w3d-content table, .entry-content table');
+		for (var ti = 0; ti < tables.length; ti++) {
+			var tbl = tables[ti];
+			if (!tbl.parentNode || tbl.parentNode.classList.contains('w3d-table-wrap')) {
+				continue;
+			}
+			var wrap = document.createElement('div');
+			wrap.className = 'w3d-table-wrap';
+			tbl.parentNode.insertBefore(wrap, tbl);
+			wrap.appendChild(tbl);
+		}
+
 		/* ---------- Sticky header state ---------- */
 		var header = document.querySelector('.w3d-header');
 		if (header) {
