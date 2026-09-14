@@ -188,5 +188,26 @@
 		}
 	});
 
-	window.w3dUiReady = true;
-})();
+/* ---------- FAQ accordion (Rank Math / Yoast blocks) ---------- */
+		var faqQs = document.querySelectorAll('.w3d-content [class*="faq-question"], .w3d-content [class*="rank-math-question"]');
+		var openFaq = function (q) {
+			var group = q.parentElement;
+			if (!group) { return; }
+			var open = group.classList.toggle('open');
+			q.setAttribute('aria-expanded', open ? 'true' : 'false');
+		};
+		for (var qi = 0; qi < faqQs.length; qi++) {
+			faqQs[qi].setAttribute('tabindex', '0');
+			faqQs[qi].setAttribute('role', 'button');
+			faqQs[qi].setAttribute('aria-expanded', 'false');
+			faqQs[qi].addEventListener('click', function () { openFaq(this); });
+			faqQs[qi].addEventListener('keydown', function (e) {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					openFaq(this);
+				}
+			});
+		}
+
+		window.w3dUiReady = true;
+	})();

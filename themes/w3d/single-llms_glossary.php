@@ -6,14 +6,22 @@
  */
 
 get_header();
-?>
 
-<div class="w3d-wrap glossary-single-wrap">
-	<?php
-		w3d_breadcrumbs();
-	while ( have_posts() ) :
-		the_post();
-		?>
+while ( have_posts() ) :
+	the_post();
+
+	$def_text = trim( wp_strip_all_tags( get_the_content() ) );
+	$def_text = (string) preg_replace( '/\s+/u', ' ', $def_text );
+	$words    = preg_split( '/\s+/u', $def_text );
+	$def_lead = '';
+	$def_rest = '';
+	if ( count( $words ) > 100 ) {
+		$def_lead = implode( ' ', array_slice( $words, 0, 100 ) );
+		$def_rest = implode( ' ', array_slice( $words, 100 ) );
+	}
+	?>
+	<div class="w3d-wrap glossary-single-wrap">
+		<?php w3d_breadcrumbs(); ?>
 		<article <?php post_class( 'w3d-glossary-single' ); ?> id="post-<?php the_ID(); ?>">
 			<nav class="glossary-back">
 				<a href="<?php echo esc_url( home_url( '/glossary/' ) ); ?>">&larr; Back to the glossary</a>
@@ -26,32 +34,22 @@ get_header();
 				<?php endif; ?>
 			</header>
 
+			<?php if ( '' !== $def_lead ) : ?>
+				<div class="w3d-glossary-definition">
+					<p><strong><?php echo esc_html( $def_lead ); ?></strong>
+					<?php if ( '' !== $def_rest ) : ?>
+						<span><?php echo esc_html( $def_rest ); ?></span>
+					<?php endif; ?>
+					</p>
+				</div>
+			<?php endif; ?>
+
 			<div class="glossary-term-body w3d-content">
 				<?php the_content(); ?>
 			</div>
-
-			<?php
-			$peer_posts = get_posts( array(
-				'post_type'      => 'llms_glossary',
-				'posts_per_page' => 3,
-				'post_status'    => 'publish',
-				'orderby'        => 'rand',
-				'exclude'        => array( get_the_ID() ),
-			) );
-			if ( $peer_posts ) :
-				?>
-				<nav class="glossary-related" aria-label="Related glossary terms">
-					<h2><?php esc_html_e( 'Keep exploring', 'w3d' ); ?></h2>
-					<ul>
-						<?php foreach ( $peer_posts as $peer ) : ?>
-							<li><a href="<?php echo esc_url( get_permalink( $peer->ID ) ); ?>"><?php echo esc_html( $peer->post_title ); ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-				</nav>
-			<?php endif; ?>
 		</article>
-	<?php endwhile; ?>
-</div>
+	</div>
+<?php endwhile; ?>
 
 <?php
 get_footer();

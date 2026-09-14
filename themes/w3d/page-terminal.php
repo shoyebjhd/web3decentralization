@@ -45,6 +45,12 @@ $data_url = esc_url( get_theme_file_uri( 'assets/w3d-data.json' ) );
 
 	<div class="w3d-term-cols">
 		<div class="w3d-term-left">
+			<div class="w3d-term-shell-head" aria-hidden="true">
+				<span class="w3d-term-dot w3d-term-dot-red"></span>
+				<span class="w3d-term-dot w3d-term-dot-yellow"></span>
+				<span class="w3d-term-dot w3d-term-dot-green"></span>
+				<span class="w3d-term-shell-title">w3d@terminal:~$</span>
+			</div>
 			<div id="w3d-term" aria-label="<?php esc_attr_e( 'W3D terminal', 'w3d' ); ?>"></div>
 			<noscript><p><?php esc_html_e( 'The interactive shell needs JavaScript. Browse all tools below instead.', 'w3d' ); ?></p></noscript>
 		</div>

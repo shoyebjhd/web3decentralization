@@ -1491,7 +1491,7 @@ function w3d_lesson_toc( $content ) {
 	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
 		return $content;
 	}
-	if ( ! is_singular( 'lesson' ) || ! in_the_loop() || ! is_main_query() ) {
+	if ( ! is_singular( array( 'lesson', 'post' ) ) || ! in_the_loop() || ! is_main_query() ) {
 		return $content;
 	}
 	if ( false !== strpos( $content, 'w3d-toc' ) ) {

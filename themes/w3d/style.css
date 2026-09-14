@@ -50,8 +50,8 @@ Tags: dark, one-column, custom-logo, custom-menu, featured-images, threaded-comm
 	--w3d-card:         #0f121f;
 	--w3d-bg-elevated:  #151a2c;
 	--w3d-surface:      #151a2c;
-	--w3d-surface-2:    #0a1f1a;
-	--w3d-footer-bg:    #0a1f1a;
+--w3d-surface-2:    #0a1f1a;
+	--w3d-footer-bg:    #08140f;
 	--w3d-border:       #1e2635;
 	--w3d-border-2:     rgba(20,184,166,.42);
 	--w3d-border-hover: #14B8A6;
@@ -1745,3 +1745,335 @@ ul.w3d-sources li a{ font-weight:600; }
 	color:#2dd4bf;
 }
 .w3d-btn-wrap{ margin-bottom:0; }
+
+/* ============================================================
+   SINGLE TEMPLATE POLISH (tasks 4-6)
+   ============================================================ */
+
+/* ---- TASK 4a: glossary single ---- */
+.glossary-term-title{ font-size:32px; }
+.w3d-glossary-definition{
+	background:var(--w3d-bg-elevated);
+	border-left:4px solid var(--w3d-teal);
+	border-radius:0 var(--w3d-radius-md) var(--w3d-radius-md) 0;
+	padding:16px 24px;
+	margin:0 0 28px;
+	font-size:16px;
+	line-height:1.7;
+}
+.w3d-glossary-definition p{ margin:0; }
+.w3d-glossary-definition strong{ font-weight:700; color:var(--w3d-text); }
+.w3d-glossary-definition span{ color:var(--w3d-text-muted); }
+.glossary-term-body{ max-width:720px; font-size:16px; line-height:1.7; }
+.glossary-term-body h2{ font-size:24px; }
+.glossary-term-body h3{ font-size:20px; }
+.glossary-term-body pre{
+	background:var(--w3d-bg-card);
+	border:1px solid var(--w3d-border);
+	border-radius:var(--w3d-radius-sm);
+	padding:16px;
+	font-family:var(--w3d-font-mono);
+	font-size:13px;
+	line-height:1.6;
+}
+.w3d-related{ margin:44px 0 8px; }
+.w3d-related > h2{ font-size:22px; margin:0 0 16px; }
+
+/* ---- TASK 4b: chain single ---- */
+.w3d-chain-single .chain-pillars{
+	grid-template-columns:repeat(4,1fr);
+	gap:var(--w3d-space-sm);
+	padding:var(--w3d-space-md);
+	background:var(--w3d-bg-card);
+	border:1px solid var(--w3d-border);
+	border-radius:var(--w3d-radius-md);
+	margin-top:var(--w3d-space-md);
+}
+.w3d-chain-single .chain-pillar{
+	background:var(--w3d-bg-elevated);
+	border:1px solid var(--w3d-border);
+	border-radius:var(--w3d-radius-sm);
+	padding:14px 16px;
+}
+.w3d-chain-single .pillar-track i{ background:var(--w3d-teal); }
+.w3d-chain-single .pillar-score{ font-family:var(--w3d-font-mono); }
+@media (max-width:1024px){
+	.w3d-chain-single .chain-pillars{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:560px){
+	.w3d-chain-single .chain-pillars{ grid-template-columns:1fr; }
+}
+
+/* ---- TASK 4c: tool single ---- */
+.single-w3d_tool .w3d-toolcalc{
+	background:var(--w3d-bg-card);
+	border:1px solid var(--w3d-border);
+	border-radius:var(--w3d-radius-md);
+	padding:var(--w3d-space-md);
+}
+.single-w3d_tool .w3d-toolcalc input[type="text"],
+.single-w3d_tool .w3d-toolcalc input[type="number"],
+.single-w3d_tool .w3d-toolcalc textarea,
+.single-w3d_tool .w3d-toolcalc select{
+	background:var(--w3d-bg);
+	border:1px solid var(--w3d-border);
+	border-radius:var(--w3d-radius-sm);
+	padding:11px 14px;
+	font-size:14px;
+	color:var(--w3d-text);
+	max-width:100%;
+}
+.single-w3d_tool .w3d-toolcalc input:focus-visible,
+.single-w3d_tool .w3d-toolcalc textarea:focus-visible,
+.single-w3d_tool .w3d-toolcalc select:focus-visible{
+	border-color:var(--w3d-teal);
+	outline:none;
+	box-shadow:0 0 0 2px var(--w3d-teal-dim);
+}
+.single-w3d_tool .w3d-toolcalc button{
+	background:var(--w3d-teal);
+	color:var(--w3d-btn-fg);
+	border:1px solid transparent;
+	border-radius:var(--w3d-radius-sm);
+	padding:12px 20px;
+	font-family:var(--w3d-font-head);
+	font-weight:600;
+	font-size:14px;
+	cursor:pointer;
+}
+.single-w3d_tool .w3d-toolcalc button:hover{ background:#0ea296; color:var(--w3d-btn-fg); }
+
+/* ---- TASK 4d: post single layout (sticky TOC rail) ---- */
+.w3d-post-layout{
+	display:grid;
+	grid-template-columns:minmax(0,720px) minmax(0,280px);
+	gap:var(--w3d-space-xl);
+	max-width:1080px;
+	margin:0 auto;
+	align-items:start;
+}
+.w3d-post-layout .w3d-content{ max-width:none; margin:0; }
+.w3d-toc-rail{ position:sticky; top:84px; }
+.w3d-toc-rail .w3d-toc{ margin-top:12px; }
+@media (max-width:1024px){
+	.w3d-post-layout{ grid-template-columns:1fr; gap:var(--w3d-space-sm); }
+	.w3d-toc-rail{ position:static; }
+}
+
+/* ---- TASK 4a: FAQ block accordion ---- */
+.w3d-content .schema-faq-section,
+.w3d-content .rank-math-faq-item{
+	background:var(--w3d-bg-card);
+	border:1px solid var(--w3d-border);
+	border-radius:var(--w3d-radius-sm);
+	margin:12px 0;
+	overflow:hidden;
+}
+.w3d-content .schema-faq-question,
+.w3d-content .rank-math-question{
+	font-size:16px;
+	font-weight:700;
+	color:var(--w3d-text);
+	padding:16px 44px 16px 24px;
+	margin:0;
+	cursor:pointer;
+	position:relative;
+	list-style:none;
+}
+.w3d-content .schema-faq-question::-webkit-details-marker,
+.w3d-content .rank-math-question::-webkit-details-marker{ display:none; }
+.w3d-content .schema-faq-question::after,
+.w3d-content .rank-math-question::after{
+	content:"";
+	position:absolute;
+	right:22px;
+	top:50%;
+	width:10px;
+	height:10px;
+	border-right:2px solid var(--w3d-teal);
+	border-bottom:2px solid var(--w3d-teal);
+	transform:translateY(-70%) rotate(45deg);
+	transition:transform .2s ease;
+}
+.w3d-content .schema-faq-question:focus-visible,
+.w3d-content .rank-math-question:focus-visible{ outline:2px solid var(--w3d-teal); outline-offset:2px; }
+.w3d-content .schema-faq-answer,
+.w3d-content .rank-math-answer{
+	display:none;
+	font-size:14px;
+	line-height:1.6;
+	color:var(--w3d-text-muted);
+	padding:0 24px 16px;
+}
+.w3d-content .schema-faq-section.open .schema-faq-answer,
+.w3d-content .rank-math-faq-item.open .rank-math-answer{ display:block; }
+.w3d-content .schema-faq-section.open .schema-faq-question::after,
+.w3d-content .rank-math-faq-item.open .rank-math-question::after{ transform:translateY(-30%) rotate(-135deg); }
+
+/* ============================================================
+   TASK 5: FOOTER — 4-column system
+   ============================================================ */
+.w3d-footer{ background:var(--w3d-footer-bg); padding:64px 24px 32px; }
+.w3d-footer > .w3d-wrap{ max-width:1280px; }
+.w3d-footer-top{ gap:var(--w3d-space-xl); padding-bottom:var(--w3d-space-xl); }
+.w3d-footer-brand p{
+	max-width:320px;
+	font-size:14px;
+	line-height:1.5;
+	margin:16px 0;
+}
+.w3d-footer-nav ul{ gap:10px; }
+.w3d-footer-nav a,
+.w3d-footer-nav a:hover{ transition:color .15s ease, transform .15s ease; }
+.w3d-footer-nav a:hover{ transform:translateX(2px); }
+.w3d-foot-pills{ gap:8px; }
+.w3d-foot-pills a{
+	background:#102219;
+	border:1px solid #1a3326;
+	border-radius:20px;
+	padding:6px 14px;
+	font-size:13px;
+}
+.w3d-foot-pills a:hover{
+	background:var(--w3d-teal);
+	border-color:var(--w3d-teal);
+	color:#08140f;
+}
+.w3d-footer-fork{
+	display:inline-flex;
+	align-items:center;
+	gap:8px;
+	width:fit-content;
+	background:var(--w3d-teal);
+	color:#08140f !important;
+	padding:12px 20px;
+	border-radius:var(--w3d-radius-sm);
+	font-size:14px;
+	font-weight:600;
+	margin:24px 0;
+	box-shadow:var(--w3d-shadow-card);
+}
+.w3d-footer-fork:hover{
+	background:var(--w3d-teal);
+	color:#08140f !important;
+	filter:brightness(1.1);
+	transform:none;
+}
+.w3d-footer-disclaimer{
+	margin-top:24px;
+	padding-top:24px;
+	border-top:1px solid #132a22;
+	font-size:12px;
+	line-height:1.6;
+	color:#6b7a8a;
+	max-width:800px;
+}
+.w3d-footer-copy{
+	margin-top:32px;
+	padding-top:20px;
+	border-top:1px solid #132a22;
+	font-size:12px;
+	color:var(--w3d-text-muted);
+	display:flex;
+	justify-content:space-between;
+	flex-wrap:wrap;
+	gap:8px;
+}
+@media (max-width:768px){
+	.w3d-footer-top{ grid-template-columns:1fr; gap:var(--w3d-space-lg); }
+	.w3d-footer-copy{ flex-direction:column; }
+}
+
+/* ============================================================
+   TASK 6: TERMINAL PAGE
+   ============================================================ */
+.w3d-term-search input[type="search"]{
+	background:var(--w3d-bg-card);
+	border:1px solid var(--w3d-border);
+	border-radius:var(--w3d-radius-sm);
+	padding:12px 16px;
+	font-size:14px;
+	width:100%;
+	max-width:400px;
+	margin-bottom:var(--w3d-space-sm);
+	color:var(--w3d-text);
+}
+.w3d-term-search input[type="search"]::placeholder{ color:var(--w3d-text-faint); }
+.w3d-term-search input[type="search"]:focus-visible{
+	border-color:var(--w3d-teal);
+	outline:none;
+	box-shadow:0 0 0 2px var(--w3d-teal-dim);
+}
+.w3d-term-left{
+	background:var(--w3d-bg-card);
+	border:1px solid var(--w3d-border);
+	border-radius:var(--w3d-radius-md);
+	overflow:hidden;
+	height:400px;
+	display:flex;
+	flex-direction:column;
+}
+.w3d-term-shell-head{
+	display:flex;
+	align-items:center;
+	gap:8px;
+	padding:12px 16px;
+	background:var(--w3d-bg-elevated);
+	border-bottom:1px solid var(--w3d-border);
+	flex-shrink:0;
+}
+.w3d-term-dot{ width:12px; height:12px; border-radius:50%; display:inline-block; }
+.w3d-term-dot-red{ background:#ff5f57; }
+.w3d-term-dot-yellow{ background:#febc2e; }
+.w3d-term-dot-green{ background:#28c840; }
+.w3d-term-shell-title{
+	margin-left:8px;
+	font-family:var(--w3d-font-mono);
+	font-size:13px;
+	color:var(--w3d-text-muted);
+}
+.w3d-term-left #w3d-term{ flex:1; min-height:0; padding:12px; }
+.w3d-term-left #w3d-term .xterm{ height:100%; }
+.w3d-term-right{
+	background:var(--w3d-bg-card);
+	border:1px solid var(--w3d-border);
+	border-radius:var(--w3d-radius-md);
+	padding:20px;
+	min-height:400px;
+}
+.w3d-term-preview-head a{
+	color:var(--w3d-teal);
+	font-size:13px;
+	text-decoration:none;
+}
+.w3d-term-preview-head a:hover{ text-decoration:underline; text-underline-offset:3px; }
+#w3d-term-grid{ grid-template-columns:repeat(2,1fr); }
+@media (max-width:768px){ #w3d-term-grid{ grid-template-columns:1fr; } }
+#w3d-term-grid .w3d-learn-card{ min-height:0; }
+
+/* ============================================================
+   TASK 7: MOBILE + ACCESSIBILITY
+   ============================================================ */
+@media (max-width:768px){
+	a.w3d-btn,
+	.wp-block-button__link,
+	.w3d-btn,
+	.w3d-nav-toggle,
+	.w3d-term-open{ padding-top:12px; padding-bottom:12px; }
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+	outline:2px solid var(--w3d-teal);
+	outline-offset:2px;
+}
+@media (prefers-reduced-motion: reduce){
+	*, *::before, *::after{
+		animation-duration:.01ms !important;
+		animation-iteration-count:1 !important;
+		transition-duration:.01ms !important;
+		scroll-behavior:auto !important;
+	}
+}
