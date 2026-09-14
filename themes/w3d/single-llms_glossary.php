@@ -45,19 +45,25 @@ while ( have_posts() ) :
 		}
 	}
 	?>
+	<header class="w3d-single-hero">
+		<div class="w3d-hero-inner">
+			<div class="w3d-hero-main">
+				<?php w3d_breadcrumbs(); ?>
+				<header class="glossary-term-head">
+					<h1 class="glossary-term-title"><?php the_title(); ?></h1>
+					<?php if ( has_excerpt() ) : ?>
+						<p class="glossary-term-deck"><?php echo esc_html( get_the_excerpt() ); ?></p>
+					<?php endif; ?>
+				</header>
+			</div>
+		</div>
+	</header>
+
 	<div class="w3d-wrap glossary-single-wrap">
-		<?php w3d_breadcrumbs(); ?>
 		<article <?php post_class( 'w3d-glossary-single' ); ?> id="post-<?php the_ID(); ?>">
 			<nav class="glossary-back">
 				<a href="<?php echo esc_url( home_url( '/glossary/' ) ); ?>">&larr; Back to the glossary</a>
 			</nav>
-
-			<header class="glossary-term-head">
-				<h1 class="glossary-term-title"><?php the_title(); ?></h1>
-				<?php if ( has_excerpt() ) : ?>
-					<p class="glossary-term-deck"><?php echo esc_html( get_the_excerpt() ); ?></p>
-				<?php endif; ?>
-			</header>
 
 			<?php if ( '' !== $def_lead ) : ?>
 				<div class="w3d-glossary-definition">

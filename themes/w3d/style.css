@@ -2446,3 +2446,185 @@ table.wp-block-table{
 }
 .w3d-path-cta{ max-width:720px; margin:0 auto; }
 .w3d-path-cta a.w3d-btn-cta{ font-size:16px; padding:12px 24px; }
+
+/* ============================================================
+   TASK ROUND 3: SINGLE HERO BAND + TABLES + TOC
+   ============================================================ */
+.w3d-single-hero{
+	background:#0f121f;
+	border-bottom:1px solid #1e2635;
+	padding:48px 24px 40px;
+}
+.w3d-hero-inner{
+	max-width:1180px;
+	margin:0 auto;
+	display:grid;
+	grid-template-columns:minmax(0,720px) 1fr;
+	gap:48px;
+	align-items:start;
+}
+.w3d-chain-hero .w3d-hero-inner{ max-width:940px; grid-template-columns:1fr; gap:0; }
+.w3d-chain-hero .chain-dash-head{ margin-bottom:0; }
+
+/* --- Hero breadcrumbs: left-aligned, styled " / " separator ---------- */
+.w3d-single-hero .w3d-crumbs{
+	text-align:left;
+	margin:0 0 16px;
+	font-size:12px;
+	grid-column:1 / -1;
+}
+.w3d-single-hero .w3d-crumbs .rank-math-breadcrumb p{ color:#8a94a8; }
+.w3d-single-hero .w3d-crumbs a{
+	color:#8a94a8;
+	text-decoration:none;
+	text-decoration-thickness:0;
+}
+.w3d-single-hero .w3d-crumbs a:hover{ color:#14B8A6; text-decoration:underline; text-underline-offset:2px; }
+.w3d-single-hero .w3d-crumbs .rank-math-breadcrumb a,
+.w3d-single-hero .w3d-crumbs .rank-math-breadcrumb a:hover{ text-decoration-color:transparent; }
+.w3d-single-hero .w3d-crumbs .rank-math-breadcrumb .separator{
+	display:inline-block;
+	margin:0 8px;
+	color:#33415c;
+}
+.w3d-single-hero .w3d-crumbs .rank-math-breadcrumb .last{ color:#14B8A6; }
+
+/* --- Hero label (category / WEB3 / tool) ------------------------------ */
+.w3d-hero-main .w3d-post-cats{ margin:0 0 14px; }
+.w3d-hero-main .w3d-card-cat{
+	display:inline-block;
+	font-family:var(--w3d-font-head);
+	font-size:11px;
+	font-weight:700;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	color:#14B8A6;
+	background:rgba(20,184,166,.1);
+	border:1px solid rgba(20,184,166,.28);
+	padding:4px 8px;
+	border-radius:4px;
+	margin:0;
+}
+.w3d-single-hero .w3d-sec-label{
+	display:inline-block;
+	text-align:left;
+	font-family:var(--w3d-font-head);
+	font-size:11px;
+	font-weight:700;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	color:#14B8A6;
+	background:rgba(20,184,166,.1);
+	border:1px solid rgba(20,184,166,.28);
+	padding:4px 8px;
+	border-radius:4px;
+	margin:0 0 14px;
+}
+
+/* --- Hero titles + byline --------------------------------------------- */
+.w3d-single-hero h1.w3d-post-title,
+.w3d-single-hero .glossary-term-title{
+	font-size:36px;
+	line-height:1.2;
+	margin:0 0 12px;
+}
+.w3d-single-hero .glossary-term-head{ margin:0 0 0; }
+.w3d-single-hero .glossary-term-deck{ font-size:16px; color:#8a94a8; margin:0; }
+.w3d-single-hero .w3d-post-meta-top{
+	font-size:13px;
+	color:#8a94a8;
+	margin:0;
+}
+.w3d-single-hero .w3d-post-meta-top a{ color:#8a94a8; }
+
+/* --- Content spacing after the band ----------------------------------- */
+.w3d-single-body,
+.glossary-single-wrap{ padding-top:52px; }
+.chain-wrap{ padding-top:48px; }
+
+/* --- Tables: never truncate, always wrap ------------------------------ */
+.w3d-table-wrap table{ min-width:600px; }
+.w3d-content table th,
+.w3d-content table td,
+.entry-content table th,
+.entry-content table td,
+.wp-block-table th,
+.wp-block-table td{
+	white-space:normal;
+	overflow-wrap:break-word;
+	word-break:normal;
+}
+@media (max-width:768px){
+	.entry-content table,
+	.w3d-content table,
+	.wp-block-table,
+	.w3d-table-wrap table{ white-space:normal; }
+}
+@media (max-width:560px){
+	.w3d-table-wrap table{ min-width:480px; }
+}
+
+/* --- ToC card + sticky rail ------------------------------------------- */
+.w3d-toc-rail{ top:88px; }
+.w3d-toc-rail .w3d-toc{
+	background:#0f121f;
+	border:1px solid #1e2635;
+	border-radius:12px;
+	padding:16px;
+	margin-top:12px;
+}
+.w3d-content > .w3d-toc{ background:#0f121f; border:1px solid #1e2635; }
+.w3d-toc .w3d-toc-title{
+	margin:0 0 12px;
+	font-size:12px;
+	font-weight:700;
+	text-transform:uppercase;
+	letter-spacing:.08em;
+	color:#8a94a8;
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	gap:8px;
+	cursor:pointer;
+}
+.w3d-toc ul{ gap:8px; }
+.w3d-toc a{
+	font-size:13px;
+	line-height:1.45;
+	color:#b7bfcc;
+	text-decoration:none;
+	display:block;
+	padding:3px 10px;
+	border-left:2px solid transparent;
+}
+.w3d-toc a:hover{ color:#14B8A6; }
+.w3d-toc a.is-active{
+	color:#14B8A6;
+	border-left-color:#14B8A6;
+	background:rgba(20,184,166,.06);
+}
+.w3d-toc-title::after{
+	content:"\25BE";
+	font-size:11px;
+	color:#5b6577;
+	transition:transform .15s ease;
+}
+.w3d-toc.open .w3d-toc-title::after{ transform:rotate(180deg); }
+
+@media (max-width:768px){
+	.w3d-toc ul{ display:none; }
+	.w3d-toc.open ul{ display:grid; }
+	.w3d-toc-rail{ position:static; margin:0 0 28px; }
+	.w3d-toc-rail .w3d-toc{ margin-top:0; }
+}
+
+@media (max-width:768px){
+	.w3d-single-hero{ padding:32px 16px 28px; }
+	.w3d-hero-inner{ grid-template-columns:1fr; gap:0; }
+	.w3d-single-hero h1.w3d-post-title,
+	.w3d-single-hero .glossary-term-title{ font-size:28px; }
+	.w3d-single-hero .w3d-crumbs{ margin-bottom:12px; }
+	.w3d-single-body,
+	.glossary-single-wrap{ padding-top:32px; }
+	.chain-wrap{ padding-top:28px; }
+}

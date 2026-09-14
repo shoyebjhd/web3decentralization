@@ -147,15 +147,20 @@ add_action( 'wp_default_scripts', 'w3d_drop_jquery_migrate' );
  * simple Home link if Rank Math is unavailable.
  */
 function w3d_breadcrumbs() {
-	if ( ! is_front_page() && ! is_home() ) {
-		echo '<nav class="w3d-crumbs" aria-label="Breadcrumb">';
-		if ( function_exists( 'rank_math_the_breadcrumbs' ) ) {
-			rank_math_the_breadcrumbs();
-		} else {
-			echo '<a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'w3d' ) . '</a>';
-		}
-		echo '</nav>';
+	if ( is_front_page() || is_home() ) {
+		return;
 	}
+	echo '<nav class="w3d-crumbs" aria-label="Breadcrumb">';
+	if ( function_exists( 'rank_math_the_breadcrumbs' ) ) {
+		ob_start();
+		rank_math_the_breadcrumbs();
+		$html = (string) ob_get_clean();
+		$html = preg_replace( '#<span class="separator">[^<]*</span>#', '<span class="separator">/</span>', $html );
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Rank Math breadcrumb markup.
+	} else {
+		echo '<a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'w3d' ) . '</a>';
+	}
+	echo '</nav>';
 }
 
 /**

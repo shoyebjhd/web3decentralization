@@ -31,6 +31,58 @@
 			wrap.appendChild(tbl);
 		}
 
+		/* ---------- ToC: mobile accordion + desktop scrollspy ---------- */
+		var tocs = document.querySelectorAll('.w3d-toc');
+		for (var tc = 0; tc < tocs.length; tc++) {
+			var toc = tocs[tc];
+			var title = toc.querySelector('.w3d-toc-title');
+			var links = toc.querySelectorAll('a');
+			if (!links.length) {
+				continue;
+			}
+			var heads = [];
+			for (var li = 0; li < links.length; li++) {
+				heads.push(document.querySelector(links[li].getAttribute('href')));
+			}
+			if (title) {
+				title.setAttribute('tabindex', '0');
+				title.setAttribute('role', 'button');
+				title.setAttribute('aria-expanded', 'false');
+				title.addEventListener('click', function (t, el) {
+					return function () { toggleToc(t, el); };
+				}(toc, title));
+				title.addEventListener('keydown', function (t, el) {
+					return function (e) {
+						if (e.key === 'Enter' || e.key === ' ') {
+							e.preventDefault();
+							toggleToc(t, el);
+						}
+					};
+				}(toc, title));
+			}
+			if (window.matchMedia('(min-width: 769px)').matches) {
+				var spy = function (t, hs, ls) {
+					return function () {
+						var current = null;
+						for (var i = 0; i < hs.length; i++) {
+							if (hs[i] && hs[i].getBoundingClientRect().top - 110 <= 0) {
+								current = ls[i];
+							}
+						}
+						for (var j = 0; j < ls.length; j++) {
+							ls[j].classList.toggle('is-active', ls[j] === current);
+						}
+					};
+				}(toc, heads, links);
+				window.addEventListener('scroll', spy, { passive: true });
+				spy();
+			}
+		}
+		function toggleToc(toc, title) {
+			var open = toc.classList.toggle('open');
+			title.setAttribute('aria-expanded', open ? 'true' : 'false');
+		}
+
 		/* ---------- Sticky header state ---------- */
 		var header = document.querySelector('.w3d-header');
 		if (header) {

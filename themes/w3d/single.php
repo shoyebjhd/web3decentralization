@@ -26,26 +26,31 @@ while ( have_posts() ) :
 		$main     = str_replace( $m[0], '', $main );
 	}
 	?>
-	<div class="w3d-wrap">
-		<?php w3d_breadcrumbs(); ?>
-		<header class="w3d-post-head">
-			<?php if ( ! empty( $cats ) ) : ?>
-				<div class="w3d-post-cats">
-					<a class="w3d-card-cat" href="<?php echo esc_url( get_category_link( $cats[0] ) ); ?>"><?php echo esc_html( $cats[0]->name ); ?></a>
-				</div>
-			<?php endif; ?>
+	<header class="w3d-single-hero">
+		<div class="w3d-hero-inner">
+			<div class="w3d-hero-main">
+				<?php w3d_breadcrumbs(); ?>
 
-			<h1 class="w3d-post-title"><?php the_title(); ?></h1>
-
-			<p class="w3d-post-meta-top">
-				<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">By <?php the_author(); ?></a>
-				&middot; <?php echo esc_html( get_the_date() ); ?>
-				<?php if ( get_the_modified_time( 'U' ) > get_the_time( 'U' ) ) : ?>
-					&middot; Updated <time datetime="<?php echo esc_attr( get_the_modified_time( 'c' ) ); ?>"><?php echo esc_html( get_the_modified_date() ); ?></time>
+				<?php if ( ! empty( $cats ) ) : ?>
+					<div class="w3d-post-cats">
+						<a class="w3d-card-cat" href="<?php echo esc_url( get_category_link( $cats[0] ) ); ?>"><?php echo esc_html( $cats[0]->name ); ?></a>
+					</div>
 				<?php endif; ?>
-			</p>
-		</header>
 
+				<h1 class="w3d-post-title"><?php the_title(); ?></h1>
+
+				<p class="w3d-post-meta-top">
+					<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">By <?php the_author(); ?></a>
+					&middot; <?php echo esc_html( get_the_date() ); ?>
+					<?php if ( get_the_modified_time( 'U' ) > get_the_time( 'U' ) ) : ?>
+						&middot; Updated <time datetime="<?php echo esc_attr( get_the_modified_time( 'c' ) ); ?>"><?php echo esc_html( get_the_modified_date() ); ?></time>
+					<?php endif; ?>
+				</p>
+			</div>
+		</div>
+	</header>
+
+	<div class="w3d-wrap w3d-single-body">
 		<div class="w3d-post-layout">
 			<div class="w3d-content entry-content">
 				<?php echo $main; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- filters already applied by the_content(). ?>

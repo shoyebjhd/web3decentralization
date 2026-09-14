@@ -10,13 +10,17 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 	?>
-	<div class="w3d-wrap">
-		<?php w3d_breadcrumbs(); ?>
-		<header class="w3d-post-head">
-			<p class="w3d-sec-label"><?php esc_html_e( 'W3D Terminal Tool', 'w3d' ); ?></p>
-			<h1 class="w3d-post-title"><?php the_title(); ?></h1>
-		</header>
+	<header class="w3d-single-hero">
+		<div class="w3d-hero-inner">
+			<div class="w3d-hero-main">
+				<?php w3d_breadcrumbs(); ?>
+				<p class="w3d-sec-label"><?php esc_html_e( 'W3D Terminal Tool', 'w3d' ); ?></p>
+				<h1 class="w3d-post-title"><?php the_title(); ?></h1>
+			</div>
+		</div>
+	</header>
 
+	<div class="w3d-wrap w3d-single-body">
 		<div class="w3d-content entry-content">
 			<?php the_content(); ?>
 		</div>

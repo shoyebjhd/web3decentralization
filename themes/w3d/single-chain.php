@@ -6,40 +6,39 @@
  */
 
 get_header();
-?>
 
-<div class="w3d-wrap chain-wrap">
-	<?php
-		w3d_breadcrumbs();
-	while ( have_posts() ) :
-		the_post();
+while ( have_posts() ) :
+	the_post();
 
-		$symbol  = get_field( 'symbol' );
-		$name    = get_field( 'name' ) ? get_field( 'name' ) : get_the_title();
-		$total   = get_field( 'score_total' );
-		$infra   = get_field( 'score_infrastructure' );
-		$capital = get_field( 'score_capital' );
-		$gov     = get_field( 'score_governance' );
-		$soft    = get_field( 'score_software' );
-		$updated = get_field( 'last_updated' );
-		$summary = get_field( 'summary' );
+	$chain_id = get_the_ID();
 
-		$grade = 'D';
-		$s     = (float) $total;
-		if ( $s >= 88 ) {
-			$grade = 'S';
-		} elseif ( $s >= 75 ) {
-			$grade = 'A';
-		} elseif ( $s >= 60 ) {
-			$grade = 'B';
-		} elseif ( $s >= 45 ) {
-			$grade = 'C';
-		}
-		?>
-		<?php
-		$has_score = ( '' !== $total && null !== $total );
-		?>
-		<article <?php post_class( 'w3d-chain-single' ); ?> id="post-<?php the_ID(); ?>">
+	$symbol  = get_field( 'symbol' );
+	$name    = get_field( 'name' ) ? get_field( 'name' ) : get_the_title();
+	$total   = get_field( 'score_total' );
+	$infra   = get_field( 'score_infrastructure' );
+	$capital = get_field( 'score_capital' );
+	$gov     = get_field( 'score_governance' );
+	$soft    = get_field( 'score_software' );
+	$updated = get_field( 'last_updated' );
+	$summary = get_field( 'summary' );
+
+	$grade = 'D';
+	$s     = (float) $total;
+	if ( $s >= 88 ) {
+		$grade = 'S';
+	} elseif ( $s >= 75 ) {
+		$grade = 'A';
+	} elseif ( $s >= 60 ) {
+		$grade = 'B';
+	} elseif ( $s >= 45 ) {
+		$grade = 'C';
+	}
+
+	$has_score = ( '' !== $total && null !== $total );
+	?>
+	<header class="w3d-single-hero w3d-chain-hero">
+		<div class="w3d-hero-inner">
+			<?php w3d_breadcrumbs(); ?>
 
 			<header class="chain-dash-head">
 				<div class="chain-title-row">
@@ -89,7 +88,11 @@ get_header();
 					</div>
 				<?php endif; ?>
 			</header>
+		</div>
+	</header>
 
+	<div class="w3d-wrap chain-wrap">
+		<article <?php post_class( 'w3d-chain-single' ); ?> id="post-<?php echo esc_attr( $chain_id ); ?>">
 			<div class="chain-body w3d-content">
 				<?php the_content(); ?>
 			</div>
@@ -107,11 +110,9 @@ get_header();
 					</div>
 				</div>
 			</div>
-
 		</article>
-
-	<?php endwhile; ?>
-</div>
+	</div>
+<?php endwhile; ?>
 
 <?php
 get_footer();
