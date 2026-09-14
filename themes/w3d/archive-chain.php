@@ -16,6 +16,19 @@ get_header();
 		<p class="w3d-sec-sub"><?php esc_html_e( 'Live, methodology-first decentralization audits across four pillars: infrastructure, capital, governance, and software. Scores are maintained by The W3D Team.', 'w3d' ); ?> <a href="<?php echo esc_url( home_url( '/methodology/' ) ); ?>"><?php esc_html_e( 'Read the methodology', 'w3d' ); ?></a></p>
 	</header>
 
+	<div class="chains-hub-intro">
+		<p><?php esc_html_e( 'This hub answers one question: how many entities does it take to control a blockchain? Every network below is audited against the same four pillars, using only public, verifiable data — node counts, entity and operator breakdowns, stake and token distribution, proposer and validator influence. Each card shows the chain symbol, its current total score, and a score bar so you can compare networks at a glance.', 'w3d' ); ?></p>
+		<p><?php esc_html_e( 'Scores are maintained by The W3D Team and update as chains change: validator sets grow, staking pools consolidate, governance votes redistribute. Because output depends on methodology, every submission is documented — what data was sampled, at what snapshot, and how each pillar was weighted — so any score can be audited, debated, or rebuilt by anyone who disagrees.', 'w3d' ); ?></p>
+		<p><strong><?php esc_html_e( 'The four pillars:', 'w3d' ); ?></strong></p>
+		<div class="chains-hub-pillars">
+			<span><?php esc_html_e( 'Infrastructure — node & operator reach', 'w3d' ); ?></span>
+			<span><?php esc_html_e( 'Capital — stake/hash concentration', 'w3d' ); ?></span>
+			<span><?php esc_html_e( 'Governance — proposer & vote control', 'w3d' ); ?></span>
+			<span><?php esc_html_e( 'Software — client diversity & teams', 'w3d' ); ?></span>
+		</div>
+		<p><?php esc_html_e( 'Start here:', 'w3d' ); ?><?php esc_html_e( 'New to decentralization? Read the ', 'w3d' ); ?><a href="<?php echo esc_url( home_url( '/glossary/nakamoto-coefficient/' ) ); ?>"><?php esc_html_e( 'Nakamoto Coefficient explainer', 'w3d' ); ?></a><?php esc_html_e( ' first — the number of entities that would have to collude to censor a network. Then compare consensus models in ', 'w3d' ); ?><a href="<?php echo esc_url( home_url( '/proof-of-stake-vs-proof-of-work/' ) ); ?>"><?php esc_html_e( 'Proof of Stake vs Proof of Work', 'w3d' ); ?></a><?php esc_html_e( ', or pull any chain&rsquo;s pillar data yourself in the ', 'w3d' ); ?><a href="<?php echo esc_url( home_url( '/terminal/' ) ); ?>"><?php esc_html_e( 'live terminal', 'w3d' ); ?></a><?php esc_html_e( '. For the full picture across networks, see ', 'w3d' ); ?><a href="<?php echo esc_url( home_url( '/top-layer-1-blockchains-compared/' ) ); ?>"><?php esc_html_e( 'Top Layer-1 Blockchains Compared', 'w3d' ); ?></a><?php esc_html_e( '.', 'w3d' ); ?></p>
+	</div>
+
 	<?php if ( have_posts() ) : ?>
 		<div class="chains-grid">
 			<?php

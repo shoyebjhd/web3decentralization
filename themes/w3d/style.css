@@ -2628,3 +2628,16 @@ table.wp-block-table{
 	.glossary-single-wrap{ padding-top:32px; }
 	.chain-wrap{ padding-top:28px; }
 }
+
+/* TASK ROUND 4: CHAINS HUB INTRO (archive-chain enrich) */
+.chains-hub-intro{ max-width:760px; margin:8px 0 32px; }
+.chains-hub-intro p{ color:#b6c0d4; font-size:16px; line-height:1.7; margin:0 0 16px; }
+.chains-hub-intro a{ color:#38e0c8; }
+.chains-hub-intro a:hover{ color:#7af0dd; }
+.chains-hub-intro strong{ color:#e6ebf4; font-weight:600; }
+.chains-hub-pillars{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 20px; }
+.chains-hub-pillars span{ font-size:12px; letter-spacing:.02em; color:#b6c0d4; background:rgba(20,184,166,.08); border:1px solid #1e2635; border-radius:999px; padding:6px 12px; }
+@media (max-width:768px){
+	.chains-hub-intro{ margin:4px 0 24px; }
+	.chains-hub-intro p{ font-size:15px; }
+}
