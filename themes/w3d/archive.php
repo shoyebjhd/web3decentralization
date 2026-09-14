@@ -46,13 +46,16 @@ $description = get_the_archive_description();
 						<?php esc_html_e( 'Written by', 'w3d' ); ?>
 						<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author"><?php the_author(); ?></a>
 						&middot; <?php echo esc_html( get_the_date() ); ?>
+						&middot; <?php echo esc_html( w3d_reading_minutes() ); ?> min read
 					</p>
 
 					<?php if ( has_excerpt() ) : ?>
-						<p class="w3d-post-excerpt"><?php echo esc_html( wp_strip_all_tags( get_the_excerpt() ) ); ?></p>
+						<p class="w3d-post-excerpt"><?php echo esc_html( w3d_excerpt_chars( get_the_excerpt(), 120 ) ); ?></p>
 					<?php else : ?>
-						<p class="w3d-post-excerpt"><?php echo esc_html( wp_trim_words( wp_strip_all_tags( get_the_content() ), 30 ) ); ?></p>
+						<p class="w3d-post-excerpt"><?php echo esc_html( w3d_excerpt_chars( get_the_content(), 120 ) ); ?></p>
 					<?php endif; ?>
+
+					<a class="w3d-card-go" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Read article &rarr;', 'w3d' ); ?></a>
 
 				</article>
 			<?php endwhile; ?>

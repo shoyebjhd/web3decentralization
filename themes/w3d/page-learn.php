@@ -58,7 +58,7 @@ get_header();
 			foreach ( $courses as $course_post ) :
 				$course          = new LLMS_Course( $course_post->ID );
 				$lesson_count    = $course ? count( $course->get_lessons( 'posts' ) ) : 0;
-				$course_excerpt  = wp_trim_words( wp_strip_all_tags( $course_post->post_content ), 28, ' …' );
+				$course_excerpt  = w3d_excerpt_chars( $course_post->post_content, 120 );
 				?>
 				<div class="w3d-learn-card w3d-course-card">
 					<h3><?php echo esc_html( $course_post->post_title ); ?></h3>

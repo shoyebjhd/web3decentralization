@@ -30,8 +30,8 @@ get_header();
 
 				$excerpt = wp_strip_all_tags( get_the_excerpt() );
 				if ( '' === $excerpt ) {
-					$raw      = wp_strip_all_tags( get_post_field( 'post_content', get_the_ID() ) );
-					$excerpt  = wp_trim_words( $raw, 28 );
+					$raw     = wp_strip_all_tags( get_post_field( 'post_content', get_the_ID() ) );
+					$excerpt = w3d_excerpt_chars( $raw, 120 );
 				}
 				?>
 				<li class="w3d-course-card" id="course-<?php the_ID(); ?>">

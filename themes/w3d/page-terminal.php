@@ -63,8 +63,9 @@ $data_url = esc_url( get_theme_file_uri( 'assets/w3d-data.json' ) );
 			<?php foreach ( $tools as $tool_post ) : ?>
 				<div class="w3d-learn-card" data-slug="<?php echo esc_attr( $tool_post->post_name ); ?>" data-title="<?php echo esc_attr( $tool_post->post_title ); ?>">
 					<h3><a href="<?php echo esc_url( get_permalink( $tool_post->ID ) ); ?>"><?php echo esc_html( $tool_post->post_title ); ?></a></h3>
-					<p><?php echo esc_html( wp_trim_words( wp_strip_all_tags( $tool_post->post_excerpt ? $tool_post->post_excerpt : $tool_post->post_content ), 18 ) ); ?></p>
-					<p><button type="button" class="w3d-btn w3d-term-open" data-slug="<?php echo esc_attr( $tool_post->post_name ); ?>"><?php esc_html_e( 'Open in shell', 'w3d' ); ?></button></p>
+					<p><?php echo esc_html( w3d_excerpt_chars( $tool_post->post_excerpt ? $tool_post->post_excerpt : $tool_post->post_content, 120 ) ); ?></p>
+					<p class="w3d-card-meta"><?php esc_html_e( 'W3D Terminal &middot; MIT licensed &middot; interactive', 'w3d' ); ?></p>
+					<p class="w3d-btn-wrap"><button type="button" class="w3d-btn w3d-term-open" data-slug="<?php echo esc_attr( $tool_post->post_name ); ?>"><?php esc_html_e( 'Open in shell', 'w3d' ); ?></button></p>
 				</div>
 			<?php endforeach; ?>
 		</div>

@@ -555,6 +555,50 @@ function w3d_has_primary_menu() {
 }
 
 /**
+ * Char-based excerpt: clip to $length characters at a word boundary,
+ * appending an ellipsis — never cuts mid-word.
+ */
+function w3d_excerpt_chars( $text, $length = 120 ) {
+	$text = trim( wp_strip_all_tags( (string) $text ) );
+	$text = html_entity_decode( $text, ENT_QUOTES, 'UTF-8' );
+	$text = (string) preg_replace( '/\s+/u', ' ', $text );
+
+	if ( function_exists( 'mb_strlen' ) ) {
+		if ( mb_strlen( $text ) <= $length ) {
+			return $text;
+		}
+		$cut = mb_substr( $text, 0, $length );
+		$pos = mb_strrpos( $cut, ' ' );
+		if ( false !== $pos ) {
+			$cut = mb_substr( $cut, 0, $pos );
+		}
+		return trim( $cut ) . '…';
+	}
+
+	if ( strlen( $text ) <= $length ) {
+		return $text;
+	}
+	$cut = substr( $text, 0, $length );
+	$pos = strrpos( $cut, ' ' );
+	if ( false !== $pos ) {
+		$cut = substr( $cut, 0, $pos );
+	}
+	return trim( $cut ) . '…';
+}
+
+/**
+ * Estimated reading time for a post (200 words per minute).
+ */
+function w3d_reading_minutes( $post_id = 0 ) {
+	$id = $post_id ? (int) $post_id : (int) get_the_ID();
+	if ( ! $id ) {
+		return 1;
+	}
+	$words = str_word_count( (string) wp_strip_all_tags( get_post_field( 'post_content', $id ) ) );
+	return max( 1, (int) ceil( $words / 200 ) );
+}
+
+/**
  * Register the "chain" custom post type.
  * Rewrite slug keeps the legacy /chains/<symbol>/ URLs intact.
  */

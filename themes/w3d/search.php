@@ -37,7 +37,9 @@ get_header();
 					<h2 class="w3d-post-card-title">
 						<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
 					</h2>
-					<p class="w3d-post-meta"><?php echo esc_html( get_the_date() ); ?></p>
+					<p class="w3d-post-meta"><?php echo esc_html( get_the_date() ); ?> &middot; <?php echo esc_html( w3d_reading_minutes() ); ?> min read</p>
+					<p class="w3d-post-excerpt"><?php echo esc_html( w3d_excerpt_chars( get_the_excerpt() ? get_the_excerpt() : get_the_content(), 120 ) ); ?></p>
+					<a class="w3d-card-go" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Read article &rarr;', 'w3d' ); ?></a>
 				</article>
 			<?php endwhile; ?>
 		</div>
