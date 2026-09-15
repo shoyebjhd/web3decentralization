@@ -908,7 +908,10 @@ ul.w3d-sources li a{ font-weight:600; }
 	box-shadow:var(--w3d-shadow);
 	margin-bottom:30px;
 }
-.chain-title-row{ display:flex; justify-content:space-between; gap:18px; align-items:flex-start; flex-wrap:wrap; }
+.chain-title-row{ display:flex; justify-content:space-between; gap:18px; 
+align-items:flex-start; flex-wrap:wrap; }
+.chain-title-main{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.chain-logo{ width:64px; height:64px; flex:0 0 auto; }
 .chain-ticker{
 	display:inline-block;
 	font-family:var(--w3d-font-mono);
@@ -1086,6 +1089,10 @@ ul.w3d-sources li a{ font-weight:600; }
 .w3d-toolcalc button{ background:var(--w3d-btn-grad); color:#fff; border:1px solid transparent; border-radius:10px; padding:10px 20px; font-family:var(--w3d-font-head); font-weight:600; cursor:pointer; margin:4px 8px 4px 0; }
 .w3d-toolcalc button:hover{ background:var(--w3d-btn-grad-hover); }
 .w3d-tool-more{ margin-top:26px; }
+.w3d-tool-icon{ width:48px; height:48px; display:block; margin:0 0 12px; }
+.w3d-term-card-icon{ width:40px; height:40px; display:block; margin:0 0 10px; }
+.chains-card-id{ display:flex; align-items:center; gap:8px; }
+.chains-card-logo{ width:32px; height:32px; flex:0 0 auto; }
 
 /* ============================================================
    FOOTER

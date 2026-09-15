@@ -41,7 +41,7 @@ get_header();
 				?>
 			<a class="chains-card" href="<?php the_permalink(); ?>">
 				<div class="chains-card-top">
-					<span class="chains-card-name"><?php echo esc_html( $name ); ?></span>
+				<span class="chains-card-id"><img class="chains-card-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/logos/chain-' . get_post_field( 'post_name' ) . '.svg' ); ?>" alt="" width="32" height="32" loading="lazy" decoding="async"><span class="chains-card-name"><?php echo esc_html( $name ); ?></span></span>
 					<?php if ( '' !== $total && null !== $total ) : ?>
 						<span class="chains-card-score"><?php esc_html_e( 'Scored:', 'w3d' ); ?> <?php echo esc_html( $total ); ?></span>
 					<?php else : ?>
