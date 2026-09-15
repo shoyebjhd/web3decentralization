@@ -2696,6 +2696,16 @@ body.single-llms_glossary .glossary-term-body{
 	font-size:16px;
 	line-height:1.7;
 }
+body.single-w3d_tool .w3d-content p,
+body.single-w3d_tool .w3d-content ul,
+body.single-w3d_tool .w3d-content ol,
+body.single-w3d_tool .w3d-content blockquote,
+body.single-llms_glossary .glossary-term-body p,
+body.single-llms_glossary .glossary-term-body ul,
+body.single-llms_glossary .glossary-term-body ol,
+body.single-llms_glossary .glossary-term-body blockquote{
+	font-size:16px;
+}
 body.single-w3d_tool .w3d-content h2,
 body.single-llms_glossary .glossary-term-body h2{
 	font-size:24px;
