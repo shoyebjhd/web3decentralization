@@ -161,6 +161,67 @@ function w3d_drop_jquery_migrate( $scripts ) {
 add_action( 'wp_default_scripts', 'w3d_drop_jquery_migrate' );
 
 /**
+ * Inline <script>/<style> blocks (e.g. the terminal calculators) are placed
+ * inside `the_content`. wpautop rewrites bare newlines as paragraphs and
+ * <br> tags, which corrupts JS string literals and kills every calculator
+ * with "SyntaxError: Invalid or unexpected token". Shelf the raw tags before
+ * the content filters run and restore them untouched afterwards.
+ */
+function w3d_shelve_inline_scripts( $content ) {
+	if ( false === strpos( $content, '<script' ) && false === strpos( $content, '<style' ) ) {
+		return $content;
+	}
+	global $w3d_content_shelf;
+	$w3d_content_shelf = array();
+	$content = preg_replace_callback(
+		'#<(script|style)(\s[^>]*)?>.*?</\1>#si',
+		static function ( $m ) {
+			global $w3d_content_shelf;
+			$key                         = "\x01w3d-cn-" . count( $w3d_content_shelf );
+			$w3d_content_shelf[ $key ]   = $m[0];
+			return $key;
+		},
+		$content
+	);
+	if ( ! empty( $w3d_content_shelf ) ) {
+		add_filter( 'the_content', 'w3d_restore_inline_scripts', 99999 );
+	}
+	return $content;
+}
+add_filter( 'the_content', 'w3d_shelve_inline_scripts', 1 );
+
+function w3d_restore_inline_scripts( $content ) {
+	global $w3d_content_shelf;
+	if ( ! empty( $w3d_content_shelf ) && is_array( $w3d_content_shelf ) ) {
+		$content               = strtr( $content, $w3d_content_shelf );
+		$w3d_content_shelf     = array();
+	}
+	return $content;
+}
+
+/**
+ * A few legacy guides start with authoring notes written as
+ * `<!--TITLE:...-->` comments — but terminated with an em-dash ("—>")
+ * instead of the required "--&gt;". The comment therefore never closes and
+ * the browser hides everything after it: the classic "H1 + byline then a
+ * blank column" symptom. Drop those directives entirely so the article body
+ * below them always renders.
+ */
+function w3d_strip_content_directives( $content ) {
+	if ( false === strpos( $content, '<!--' ) ) {
+		return $content;
+	}
+	$content = preg_replace(
+		'#<!--\s*(?:TITLE|META|SUB|DESC|SEOTITLE|SEODESC|KEYWORDS|INTRO|SUMMARY|EXCERPT|FAQ|TAGS|RELATED|CLOSING)[\s\S]*?(?:-->|\x{2014}>)#iu',
+		'',
+		$content
+	);
+	$content = preg_replace( '#<!--\s*(?:TITLE|META|SUB|DESC|SEOTITLE|SEODESC|KEYWORDS|INTRO|SUMMARY|EXCERPT|FAQ|TAGS|RELATED|CLOSING)[^>]*?-->#i', '', $content );
+	return $content;
+}
+add_filter( 'the_content', 'w3d_strip_content_directives', 2 );
+
+/**
  * Renders the Rank Math breadcrumb trail (JSON-LD breadcrumbs are added by
  * Rank Math itself when its breadcrumbs module is enabled). Falls back to a
  * simple Home link if Rank Math is unavailable.
@@ -899,10 +960,10 @@ function w3d_link_glossary_terms( $content ) {
 		return $content;
 	}
 
-	// Shelve non-prose HTML so we only link plain text.
+// Shelve non-prose HTML so we only link plain text.
 	$shelved = array();
 	$content = preg_replace_callback(
-		'#<(a|h[1-6]|pre|code|script|style)(\s[^>]*)?>.*?</\1>#si',
+		'#(<!--.*?-->)|<(a|h[1-6]|pre|code|script|style)(\s[^>]*)?>.*?</\2>#si',
 		static function ( $m ) use ( &$shelved ) {
 			$k = "\x00w3d-" . count( $shelved );
 			$shelved[ $k ] = $m[0];

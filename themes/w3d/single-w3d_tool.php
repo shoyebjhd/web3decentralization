@@ -23,7 +23,20 @@ while ( have_posts() ) :
 
 	<div class="w3d-wrap w3d-single-body">
 		<div class="w3d-content entry-content">
-			<?php the_content(); ?>
+			<?php
+			$tool_body = get_the_content();
+			if ( '' !== trim( wp_strip_all_tags( $tool_body ) ) ) {
+				the_content();
+			} else {
+				$tool_acf = get_field( 'w3d_tool_content' );
+				if ( empty( $tool_acf ) ) {
+					$tool_acf = get_field( 'content' );
+				}
+				if ( ! empty( $tool_acf ) ) {
+					echo wpautop( $tool_acf ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- ACF field may hold trusted HTML.
+				}
+			}
+			?>
 		</div>
 
 		<p class="w3d-tool-more">

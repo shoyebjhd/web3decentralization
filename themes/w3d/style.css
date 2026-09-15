@@ -2466,7 +2466,7 @@ table.wp-block-table{
    TASK ROUND 3: SINGLE HERO BAND + TABLES + TOC
    ============================================================ */
 .w3d-single-hero{
-	background:#0f121f;
+	background:#0a0e1a;
 	border-bottom:1px solid #1e2635;
 	padding:48px 24px 40px;
 }
@@ -2655,4 +2655,73 @@ table.wp-block-table{
 @media (max-width:768px){
 	.chains-hub-intro{ margin:4px 0 24px; }
 	.chains-hub-intro p{ font-size:15px; }
+}
+
+/* ---------------------------------------------------------------------------
+ * TASK ROUND 5: aligned tool + glossary singles.
+ * Hero and body share one 720px centered reading lane and the same #0a0e1a
+ * surface so the band no longer looks detached from the content below it.
+ * ------------------------------------------------------------------------- */
+body.single-w3d_tool .w3d-single-hero,
+body.single-llms_glossary .w3d-single-hero{
+	background:#0a0e1a;
+	border-bottom:1px solid #1e2635;
+	padding:48px 24px 32px;
+	text-align:center;
+}
+body.single-w3d_tool .w3d-single-hero .w3d-hero-inner,
+body.single-llms_glossary .w3d-single-hero .w3d-hero-inner{
+	max-width:720px;
+	grid-template-columns:1fr;
+	gap:0;
+}
+body.single-w3d_tool .w3d-single-hero .w3d-crumbs,
+body.single-llms_glossary .w3d-single-hero .w3d-crumbs{
+	text-align:left;
+}
+body.single-w3d_tool .w3d-single-hero .w3d-tool-icon{
+	margin:0 auto 14px;
+}
+body.single-w3d_tool .w3d-single-body,
+body.single-llms_glossary .glossary-single-wrap{
+	max-width:720px;
+	margin:0 auto;
+	padding:48px 24px 64px;
+}
+body.single-w3d_tool .glossary-back{
+	margin-top:0;
+}
+body.single-w3d_tool .w3d-content,
+body.single-llms_glossary .glossary-term-body{
+	font-size:16px;
+	line-height:1.7;
+}
+body.single-w3d_tool .w3d-content h2,
+body.single-llms_glossary .glossary-term-body h2{
+	font-size:24px;
+	line-height:1.3;
+	margin:48px 0 16px;
+}
+body.single-w3d_tool .w3d-content h3,
+body.single-llms_glossary .glossary-term-body h3{
+	font-size:19px;
+	margin:40px 0 14px;
+}
+body.single-w3d_tool .w3d-toolcalc{
+	margin-top:24px;
+}
+body.single-w3d_tool .w3d-toolcalc [role="status"],
+body.single-w3d_tool .w3d-toolcalc .w3d-output{
+	background:#151a2c;
+	border:1px solid rgba(20,184,166,.2);
+	border-radius:8px;
+	margin-top:16px;
+	padding:16px;
+	font-size:15px;
+}
+@media (max-width:768px){
+	body.single-w3d_tool .w3d-single-hero,
+	body.single-llms_glossary .w3d-single-hero{ padding:32px 16px 24px; }
+	body.single-w3d_tool .w3d-single-body,
+	body.single-llms_glossary .glossary-single-wrap{ padding:32px 16px 48px; }
 }
