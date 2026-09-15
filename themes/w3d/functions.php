@@ -134,6 +134,25 @@ function w3d_strip_llms_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'w3d_strip_llms_assets', 200 );
 
+/**
+ * Server-side responsive table wrapper. Content tables get wrapped at render
+ * time (not via JS) so the scroll container exists in the first paint and can
+ * never shift layout later. w3d-ui.js skips already-wrapped tables.
+ */
+function w3d_wrap_content_tables( $content ) {
+	if ( is_admin() || ! is_main_query() || false === strpos( $content, '<table' ) || false === strpos( $content, '</table>' ) ) {
+		return $content;
+	}
+	return preg_replace_callback(
+		'#<table([^>]*)>(.*?)</table>#is',
+		function ( $m ) {
+			return '<div class="w3d-table-wrap">' . '<table' . $m[1] . '>' . $m[2] . '</table>' . '</div>';
+		},
+		$content
+	);
+}
+add_filter( 'the_content', 'w3d_wrap_content_tables', 12 );
+
 function w3d_drop_jquery_migrate( $scripts ) {
 	if ( ! is_admin() ) {
 		$scripts->remove( 'jquery-migrate' );

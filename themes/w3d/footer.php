@@ -5,6 +5,53 @@
  * @package w3d
  */
 ?>
+<?php
+/**
+ * Footer pills: scale down below-the-fold DOM. Full 20 trending pills only
+ * on the home page; singles/excerpts get 8. Top glossary stays at 8 on every
+ * page so the heavyweight footer stays lean (DOM budget <1200 on all singles).
+ */
+$w3d_home = is_front_page();
+
+$w3d_glossary = array(
+	array( '/glossary/bitcoin/', 'Bitcoin' ),
+	array( '/glossary/ethereum/', 'Ethereum' ),
+	array( '/glossary/defi/', 'DeFi' ),
+	array( '/glossary/staking/', 'Staking' ),
+	array( '/glossary/wallet/', 'Wallet' ),
+	array( '/glossary/blockchain/', 'Blockchain' ),
+	array( '/glossary/smart-contract/', 'Smart Contract' ),
+	array( '/glossary/layer-2/', 'Layer 2' ),
+	array( '/glossary/rollup/', 'Rollup' ),
+	array( '/glossary/nakamoto-coefficient/', 'Nakamoto Coefficient' ),
+);
+
+$w3d_trending = array(
+	array( '/terminal/tools/nakamoto-coefficient/', 'Nakamoto Calculator' ),
+	array( '/glossary/eip-4844/', 'EIP-4844' ),
+	array( '/glossary/paymaster/', 'Paymaster' ),
+	array( '/glossary/bundler/', 'Bundler' ),
+	array( '/glossary/op-stack/', 'OP Stack' ),
+	array( '/glossary/depin/', 'DePIN' ),
+	array( '/glossary/restaking/', 'Restaking' ),
+	array( '/glossary/blobs/', 'Blobs' ),
+	array( '/glossary/session-keys/', 'Session Keys' ),
+	array( '/chains/base/', 'Base Chain' ),
+	array( '/glossary/superchain/', 'Superchain' ),
+	array( '/glossary/shared-sequencing/', 'Shared Sequencing' ),
+	array( '/glossary/erc-4337/', 'ERC-4337' ),
+	array( '/glossary/intent-based/', 'Intent-Based' ),
+	array( '/glossary/nakamoto-coefficient/', 'Nakamoto Coefficient' ),
+	array( '/glossary/l2beat/', 'L2Beat' ),
+	array( '/glossary/lrt-token/', 'LRT Token' ),
+	array( '/chains/blast/', 'Blast Chain' ),
+	array( '/glossary/mev-boost/', 'MEV Boost' ),
+	array( '/glossary/data-availability-sampling/', 'DA Sampling' ),
+);
+
+$w3d_trending = $w3d_home ? $w3d_trending : array_slice( $w3d_trending, 0, 8 );
+$w3d_glossary = array_slice( $w3d_glossary, 0, 8 );
+?>
 </main><!-- #w3d-main -->
 
 <footer class="w3d-footer" id="colophon">
@@ -34,16 +81,9 @@
 			<nav class="w3d-footer-gloss" aria-label="<?php esc_attr_e( 'Top glossary terms', 'w3d' ); ?>">
 				<p class="w3d-footer-title"><?php esc_html_e( 'Top glossary', 'w3d' ); ?></p>
 				<ul class="w3d-foot-pills">
-					<li><a href="<?php echo esc_url( home_url( '/glossary/bitcoin/' ) ); ?>">Bitcoin</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glossary/ethereum/' ) ); ?>">Ethereum</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glossary/defi/' ) ); ?>">DeFi</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glossary/staking/' ) ); ?>">Staking</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glossary/wallet/' ) ); ?>">Wallet</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glossary/blockchain/' ) ); ?>">Blockchain</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glossary/smart-contract/' ) ); ?>">Smart Contract</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glossary/layer-2/' ) ); ?>">Layer 2</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glossary/rollup/' ) ); ?>">Rollup</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glossary/nakamoto-coefficient/' ) ); ?>">Nakamoto Coefficient</a></li>
+					<?php foreach ( $w3d_glossary as $g ) : ?>
+						<li><a href="<?php echo esc_url( home_url( $g[0] ) ); ?>"><?php echo esc_html( $g[1] ); ?></a></li>
+					<?php endforeach; ?>
 				</ul>
 			</nav>
 
@@ -58,26 +98,9 @@
 		<nav class="w3d-footer-trending" aria-label="<?php esc_attr_e( 'Trending topics', 'w3d' ); ?>">
 			<p class="w3d-footer-title"><?php esc_html_e( 'Trending topics', 'w3d' ); ?></p>
 			<ul class="w3d-foot-pills">
-				<li><a href="<?php echo esc_url( home_url( '/terminal/tools/nakamoto-coefficient/' ) ); ?>">Nakamoto Calculator</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/eip-4844/' ) ); ?>">EIP-4844</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/paymaster/' ) ); ?>">Paymaster</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/bundler/' ) ); ?>">Bundler</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/op-stack/' ) ); ?>">OP Stack</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/depin/' ) ); ?>">DePIN</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/restaking/' ) ); ?>">Restaking</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/blobs/' ) ); ?>">Blobs</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/session-keys/' ) ); ?>">Session Keys</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/chains/base/' ) ); ?>">Base Chain</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/superchain/' ) ); ?>">Superchain</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/shared-sequencing/' ) ); ?>">Shared Sequencing</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/erc-4337/' ) ); ?>">ERC-4337</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/intent-based/' ) ); ?>">Intent-Based</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/nakamoto-coefficient/' ) ); ?>">Nakamoto Coefficient</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/l2beat/' ) ); ?>">L2Beat</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/lrt-token/' ) ); ?>">LRT Token</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/chains/blast/' ) ); ?>">Blast Chain</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/mev-boost/' ) ); ?>">MEV Boost</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/glossary/data-availability-sampling/' ) ); ?>">DA Sampling</a></li>
+				<?php foreach ( $w3d_trending as $t ) : ?>
+					<li><a href="<?php echo esc_url( home_url( $t[0] ) ); ?>"><?php echo esc_html( $t[1] ); ?></a></li>
+				<?php endforeach; ?>
 			</ul>
 		</nav>
 
