@@ -119,7 +119,7 @@ function w3d_front_stat( $icon, $num, $label, $sub, $data_count = null ) {
 		<span class="w3d-hero-mesh" aria-hidden="true"></span>
 		<div class="w3d-wrap w3d-hero-inner">
 			<p class="w3d-hero-badge">Free, open-source crypto education — no hype, no paywall</p>
-			<h1 id="w3d-hero-title">Learn Web3. Measure Decentralization. Build with Confidence.</h1>
+			<h1 id="w3d-hero-title"><span class="accent">Learn Web3.</span> Measure Decentralization. Build with Confidence.</h1>
 			<p class="w3d-sub">Independent decentralization scores for <?php echo esc_html( $chain_total ); ?> blockchains, honest exchange reviews, and beginner-friendly Web3 guides — no hype, no pump-talk.</p>
 
 			<div class="w3d-ctas">
