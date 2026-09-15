@@ -2741,3 +2741,39 @@ body.single-w3d_tool .w3d-toolcalc .w3d-output{
 	body.single-w3d_tool .w3d-single-body,
 	body.single-llms_glossary .glossary-single-wrap{ padding:32px 16px 48px; }
 }
+
+/* ---------------------------------------------------------------------------
+ * TASK ROUND 6: left-aligned hero system.
+ * Crumbs, page heads, home hero, hub heads, and every single-hero band now
+ * read flush-left so the whole site shares one visual baseline.
+ * ------------------------------------------------------------------------- */
+.w3d-crumbs{ text-align:left; }
+.w3d-page-head{ text-align:left; }
+
+/* Homepage hero: full reading lane, text/CTAs/stats flush left. */
+.w3d-hero-inner{ max-width:1180px; text-align:left; }
+.w3d-hero h1{ margin-left:0; margin-right:0; }
+.w3d-hero .w3d-sub{ margin:0 0 32px; }
+.w3d-ctas{ justify-content:flex-start; }
+.w3d-stats{ margin-left:0; margin-right:0; }
+
+/* Archive hubs (glossary / chains) inherit the left baseline. */
+.glossary-hub-head{ text-align:left; }
+.glossary-hub-head .w3d-sec-label,
+.glossary-hub-head .w3d-sec-sub{ text-align:left; }
+.glossary-hub-head .w3d-sec-sub{ margin-left:0; margin-right:0; }
+.chains-hub-head{ text-align:left; }
+.chains-hub-head .w3d-sec-sub{ text-align:left; margin:0 auto 0 0; }
+
+/* Tool + glossary singles: band reads left (icon included). */
+body.single-w3d_tool .w3d-single-hero,
+body.single-llms_glossary .w3d-single-hero{ text-align:left; }
+body.single-w3d_tool .w3d-single-hero .w3d-tool-icon{ margin:0 0 14px; }
+
+/* /terminal/ hub head reads left with the tools grid below it. */
+.w3d-term-head{ margin-left:0; margin-right:0; }
+.w3d-term-head .w3d-sec-label{ text-align:left; }
+
+/* /learn/ "Free courses" cards reuse .w3d-course-card (a media card with
+ * padding:0 elsewhere); give them the standard deck padding here. */
+.w3d-learn-courses .w3d-learn-card{ padding:var(--w3d-space-md); }
