@@ -2657,6 +2657,12 @@ table.wp-block-table{
 	.chains-hub-intro p{ font-size:15px; }
 }
 
+/* Blog singles: hero headline, byline + category sit flush left. */
+body.single-post .w3d-single-hero,
+body.single-post .w3d-single-hero .w3d-hero-main{
+	text-align:left;
+}
+
 /* ---------------------------------------------------------------------------
  * TASK ROUND 5: aligned tool + glossary singles.
  * Hero and body share one 720px centered reading lane and the same #0a0e1a
