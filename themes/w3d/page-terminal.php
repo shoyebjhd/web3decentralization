@@ -68,7 +68,7 @@ $data_url = esc_url( get_theme_file_uri( 'assets/w3d-data.json' ) );
 		<div class="w3d-learn-grid w3d-tool-grid" id="w3d-term-grid">
 			<?php foreach ( $tools as $tool_post ) : ?>
 				<div class="w3d-learn-card" data-slug="<?php echo esc_attr( $tool_post->post_name ); ?>" data-title="<?php echo esc_attr( $tool_post->post_title ); ?>">
-					<h3><img class="w3d-term-card-icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/tool-' . $tool_post->post_name . '.svg' ); ?>" alt="" width="40" height="40" loading="lazy" decoding="async"><a href="<?php echo esc_url( get_permalink( $tool_post->ID ) ); ?>"><?php echo esc_html( $tool_post->post_title ); ?></a></h3>
+					<h3><img class="w3d-term-card-icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/tool-' . $tool_post->post_name . '.svg?v=rebrand2' ); ?>" alt="" width="40" height="40" loading="lazy" decoding="async"><a href="<?php echo esc_url( get_permalink( $tool_post->ID ) ); ?>"><?php echo esc_html( $tool_post->post_title ); ?></a></h3>
 					<p><?php echo esc_html( w3d_excerpt_chars( $tool_post->post_excerpt ? $tool_post->post_excerpt : $tool_post->post_content, 120 ) ); ?></p>
 					<p class="w3d-card-meta"><?php esc_html_e( 'W3D Terminal &middot; MIT licensed &middot; interactive', 'w3d' ); ?></p>
 					<p class="w3d-btn-wrap"><button type="button" class="w3d-btn w3d-term-open" data-slug="<?php echo esc_attr( $tool_post->post_name ); ?>"><?php esc_html_e( 'Open in shell', 'w3d' ); ?></button></p>
@@ -105,7 +105,7 @@ var useXterm = !!window.Terminal;
 if (useXterm){
   var term = new Terminal({
     cursorBlink: true, fontFamily: 'ui-monospace, Menlo, Consolas, monospace', fontSize: 14,
-    theme: { background: '#0b0e1a', foreground: '#d5dbe8', cursor: '#14B8A6', selectionBackground: '#14B8A655' }
+    theme: { background: '#0b0e1a', foreground: '#d5dbe8', cursor: '#FF7A00', selectionBackground: '#FF7A0055' }
   });
   term.open(termBox);
   view.write = function(s){ term.write(s); };

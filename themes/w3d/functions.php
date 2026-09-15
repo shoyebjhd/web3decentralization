@@ -588,9 +588,12 @@ function w3d_logo_src() {
 			'post_status'    => 'inherit',
 			'fields'         => 'ids',
 		) );
-		if ( $logos ) {
+if ( $logos ) {
 			$src = wp_get_attachment_url( $logos[0] );
 		}
+	}
+	if ( $src ) {
+		$src = add_query_arg( 'v', 'rebrand2', $src );
 	}
 	return $src;
 }

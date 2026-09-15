@@ -14,7 +14,7 @@ while ( have_posts() ) :
 		<div class="w3d-hero-inner">
 			<div class="w3d-hero-main">
 				<?php w3d_breadcrumbs(); ?>
-				<img class="w3d-tool-icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/tool-' . get_post_field( 'post_name', get_the_ID() ) . '.svg' ); ?>" alt="" width="48" height="48" decoding="async" loading="eager">
+				<img class="w3d-tool-icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/tool-' . get_post_field( 'post_name', get_the_ID() ) . '.svg?v=rebrand2' ); ?>" alt="" width="48" height="48" decoding="async" loading="eager">
 				<p class="w3d-sec-label"><?php esc_html_e( 'W3D Terminal Tool', 'w3d' ); ?></p>
 				<h1 class="w3d-post-title"><?php the_title(); ?></h1>
 			</div>

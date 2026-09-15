@@ -43,7 +43,7 @@ while ( have_posts() ) :
 			<header class="chain-dash-head">
 				<div class="chain-title-row">
 					<div class="chain-title-main">
-						<img class="chain-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/logos/chain-' . get_post_field( 'post_name', get_the_ID() ) . '.svg' ); ?>" alt="" width="64" height="64" decoding="async" loading="eager">
+						<img class="chain-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/logos/chain-' . get_post_field( 'post_name', get_the_ID() ) . '.svg?v=rebrand2' ); ?>" alt="" width="64" height="64" decoding="async" loading="eager">
 						<?php if ( $symbol ) : ?>
 							<span class="chain-ticker"><?php echo esc_html( $symbol ); ?></span>
 						<?php endif; ?>

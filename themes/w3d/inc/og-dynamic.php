@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Dynamic fallback OG image generator (GD).
  *
@@ -32,13 +32,13 @@ function w3d_og_render($title, $badge, $glyph, $glyph_kind)
     }
 
     // top border
-    $teal = imagecolorallocate($im, 20, 184, 166);
-    imagefilledrectangle($im, 0, 0, $W, 4, $teal);
+    $orange = imagecolorallocate($im, 255, 122, 0);
+    imagefilledrectangle($im, 0, 0, $W, 4, $orange);
 
     // left glow (approximation: soft vertical gradient bar next to edge)
     for ($i = 0; $i < 200; $i++) {
         $alpha = round(15 * (1 - $i / 200));
-        $c = imagecolorallocatealpha($im, 20, 184, 166, 127 - round($alpha * 127 / 100));
+        $c = imagecolorallocatealpha($im, 255, 122, 0, 127 - round($alpha * 127 / 100));
         imagefilledellipse($im, 30, 315, 400 - $i, 400 - $i, $c);
     }
 
@@ -50,7 +50,7 @@ function w3d_og_render($title, $badge, $glyph, $glyph_kind)
 
     // header: logo mark + wordmark
     $mdark = imagecolorallocate($im, 10, 14, 26);
-    imagefilledellipse($im, 84, 84, 40, 40, $teal);
+    imagefilledellipse($im, 84, 84, 40, 40, $orange);
     imagettftext($im, 23, 0, 77, 91, $mdark, $sg, 'W');
 
     $white = imagecolorallocate($im, 255, 255, 255);
@@ -79,15 +79,15 @@ function w3d_og_render($title, $badge, $glyph, $glyph_kind)
     }
     if (count($lines) > 2) {
         $lines = array_slice($lines, 0, 2);
-        $dots = $lines[1] . "…";
+        $dots = $lines[1] . "â€¦";
         while (strlen($lines[1]) > 0) {
-            $b = imagettfbbox($font_size, 0, $sg, $lines[1] . "…");
+            $b = imagettfbbox($font_size, 0, $sg, $lines[1] . "â€¦");
             if (($b[2] - $b[0]) <= $maxw) {
                 break;
             }
             $lines[1] = mb_substr($lines[1], 0, -1);
         }
-        $lines[1] = rtrim($lines[1]) . "…";
+        $lines[1] = rtrim($lines[1]) . "â€¦";
     }
 
     $lh = 58;
@@ -100,8 +100,8 @@ function w3d_og_render($title, $badge, $glyph, $glyph_kind)
     }
 
     // badge bottom-left
-    $chip_bg  = imagecolorallocate($im, 19, 42, 34);
-    $chip_rgb = imagecolorallocate($im, 20, 184, 166);
+    $chip_bg  = imagecolorallocate($im, 42, 26, 5);
+    $chip_rgb = imagecolorallocate($im, 255, 122, 0);
     $bf = 15;
     $bb = imagettfbbox($bf, 0, $jm, $badge);
     $bw = ($bb[2] - $bb[0]) + 36;
@@ -119,14 +119,14 @@ function w3d_og_render($title, $badge, $glyph, $glyph_kind)
         // monogram plate
         imagefilledellipse($im, $ix + 40, $iy + 40, 78, 78, imagecolorallocate($im, 15, 18, 31));
         imagesetthickness($im, 2);
-        imageellipse($im, $ix + 40, $iy + 40, 78, 78, $teal);
+        imageellipse($im, $ix + 40, $iy + 40, 78, 78, $orange);
         imagesetthickness($im, 1);
         $gb = imagettfbbox(30, 0, $sg, $glyph);
         imagettftext($im, 30, 0, $ix + 40 - (($gb[2] - $gb[0]) / 2), $iy + 40 + 10, $white, $sg, $glyph);
     } else {
         imagefilledellipse($im, $ix + 40, $iy + 40, 76, 76, imagecolorallocate($im, 15, 18, 31));
         imagesetthickness($im, 2);
-        imageellipse($im, $ix + 40, $iy + 40, 76, 76, $teal);
+        imageellipse($im, $ix + 40, $iy + 40, 76, 76, $orange);
         imagesetthickness($im, 1);
         $gl = imagettfbbox(26, 0, $sg, 'W3D');
         imagettftext($im, 26, 0, $ix + 40 - (($gl[2] - $gl[0]) / 2), $iy + 40 + 9, $white, $sg, 'W3D');
