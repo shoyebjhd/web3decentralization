@@ -83,6 +83,23 @@
 			title.setAttribute('aria-expanded', open ? 'true' : 'false');
 		}
 
+		/* ---------- Footer "Show 12 more" trending pills ---------- */
+		var moreBtn = document.querySelector('.w3d-pills-more');
+		var pillsList = document.getElementById('w3d-trending-pills');
+		if (moreBtn && pillsList) {
+			var setPillsOpen = function (open) {
+				pillsList.classList.toggle('is-open', open);
+				moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+				var label = moreBtn.querySelector('.w3d-pills-more-label');
+				if (label) {
+					label.textContent = open ? 'Show fewer trending topics' : 'Show 12 more trending topics';
+				}
+			};
+			moreBtn.addEventListener('click', function () {
+				setPillsOpen(moreBtn.getAttribute('aria-expanded') !== 'true');
+			});
+		}
+
 		/* ---------- Sticky header state ---------- */
 		var header = document.querySelector('.w3d-header');
 		if (header) {

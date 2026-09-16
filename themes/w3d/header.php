@@ -10,6 +10,9 @@
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="<?php echo esc_url( get_theme_file_uri( 'assets/fonts/inter.woff2' ) ); ?>" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="<?php echo esc_url( get_theme_file_uri( 'assets/fonts/space-grotesk.woff2' ) ); ?>" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="<?php echo esc_url( get_theme_file_uri( 'assets/fonts/jetbrains-mono.woff2' ) ); ?>" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 <?php wp_head(); ?>
 </head>

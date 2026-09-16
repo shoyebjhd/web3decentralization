@@ -49,7 +49,7 @@ $data_url = esc_url( get_theme_file_uri( 'assets/w3d-data.json' ) );
 				<span class="w3d-term-dot w3d-term-dot-green"></span>
 				<span class="w3d-term-shell-title">w3d@terminal:~$</span>
 			</div>
-			<div id="w3d-term" aria-label="<?php esc_attr_e( 'W3D terminal', 'w3d' ); ?>">
+			<div id="w3d-term" role="region" aria-label="<?php esc_attr_e( 'W3D terminal', 'w3d' ); ?>">
 				<div id="w3d-terminal-loading" role="status"><?php esc_html_e( 'Loading 15 tools…', 'w3d' ); ?></div>
 			</div>
 			<noscript><p class="w3d-term-noscript"><?php esc_html_e( 'The interactive shell needs JavaScript. Browse all tools below instead.', 'w3d' ); ?></p></noscript>
@@ -108,6 +108,21 @@ if (useXterm){
     theme: { background: '#0b0e1a', foreground: '#d5dbe8', cursor: '#FF7A00', selectionBackground: '#FF7A0055' }
   });
   term.open(termBox);
+  var hideXtermHelpers = function(){
+    var kids = document.body.children;
+    for (var i = 0; i < kids.length; i++){
+      var el = kids[i];
+      if (el.getAttribute('aria-hidden')) continue;
+      if (!el.className && !el.id && el.offsetWidth > 1000){
+        var s = getComputedStyle(el);
+        if (s.position === 'absolute' && parseInt(s.top, 10) < -1000){ el.setAttribute('aria-hidden', 'true'); }
+      }
+    }
+  };
+  var obs = new MutationObserver(function(){ hideXtermHelpers(); });
+  obs.observe(document.body, { childList: true });
+  hideXtermHelpers();
+  setTimeout(function(){ obs.disconnect(); }, 10000);
   view.write = function(s){ term.write(s); };
   view.writeln = function(s){ term.writeln(s || ''); };
   view.clear = function(){ term.clear(); };
@@ -149,8 +164,17 @@ function run(line){
   pending = pending.then(function(){ return exec(line); }).then(printPrompt);
 }
 
+var SLUG_ALIASES = {
+  'gas-estimator': 'gas-estimator-l2',
+  'impermanent-loss': 'impermanent-loss-calculator',
+  'nakamoto': 'nakamoto-coefficient',
+  'staking': 'staking-rewards-compare',
+  'bridge': 'bridge-risk-score',
+};
+
 function toolBySlug(slug){
   slug = (slug || '').toLowerCase();
+  if (SLUG_ALIASES[slug]) slug = SLUG_ALIASES[slug];
   for (var i = 0; i < DATA.tools.length; i++) if (DATA.tools[i].slug === slug) return DATA.tools[i];
   return null;
 }
@@ -248,7 +272,7 @@ function cmdChain(slug){
 }
 
 function cmdHelp(){
-  println('Commands: help · list · open <slug> · glossary <term> · chain <slug> · clear · about');
+  println('Commands: help · list · open <slug> · glossary <term> · chain <slug> · filter <term> · clear · about');
   println('Tools (' + DATA.tools.length + '):');
   DATA.tools.forEach(function(t){ println('  ' + t.slug + '  — ' + t.title); });
   return Promise.resolve();
@@ -269,6 +293,20 @@ function cmdAbout(){
   return Promise.resolve();
 }
 
+function cmdFilter(query){
+  query = (query || '').trim().toLowerCase();
+  var cards = grid.querySelectorAll('.w3d-learn-card');
+  var matches = 0;
+  cards.forEach(function(card){
+    var hit = !query || (card.getAttribute('data-slug') + ' ' + card.getAttribute('data-title')).toLowerCase().indexOf(query) >= 0;
+    card.style.display = hit ? '' : 'none';
+    if (hit) matches++;
+  });
+  if (filter){ filter.value = query; filter.dataset.top = ''; }
+  println(query ? 'Filter "' + query + '" → ' + matches + ' tool' + (matches === 1 ? '' : 's') + ' shown.' : 'Filter cleared — all ' + cards.length + ' tools shown.');
+  return Promise.resolve();
+}
+
 function exec(line){
   var parts = line.trim().split(/\s+/).filter(Boolean);
   if (!parts.length) return Promise.resolve();
@@ -278,6 +316,7 @@ function exec(line){
   if (c === 'open' || c === 'tool'){ if (!arg){ println('Usage: open <slug>'); return Promise.resolve(); } return openTool(arg.split(/\s+/)[0]); }
   if (c === 'glossary' || c === 'g') return cmdGlossary(arg);
   if (c === 'chain' || c === 'c') return cmdChain(arg.split(/\s+/)[0]);
+  if (c === 'filter') return cmdFilter(arg);
   if (c === 'clear' || c === 'cls'){ view.clear(); return Promise.resolve(); }
   if (c === 'about') return cmdAbout();
   println('Unknown command "' + parts[0] + '". Try "help".');

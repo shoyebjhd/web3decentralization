@@ -115,7 +115,7 @@ function w3d_front_stat( $icon, $num, $label, $sub, $data_count = null ) {
 
 <div class="w3d-page-full">
 
-	<section class="w3d-hero alignfull w3d-reveal" aria-labelledby="w3d-hero-title">
+	<section class="w3d-hero alignfull" aria-labelledby="w3d-hero-title">
 		<span class="w3d-hero-mesh" aria-hidden="true"></span>
 		<div class="w3d-wrap w3d-hero-inner">
 			<p class="w3d-hero-badge">Free, open-source crypto education — no hype, no paywall</p>

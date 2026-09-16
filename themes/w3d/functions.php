@@ -302,6 +302,51 @@ function w3d_seo_default_description( $description ) {
 add_filter( 'rank_math/frontend/description', 'w3d_seo_default_description' );
 
 /**
+ * Cap every meta description at 155 chars on a word boundary, so auto-generated
+ * Rank Math descriptions (which default to ~160 chars) never overflow the
+ * 120-155 char budget that the QA spec enforces.
+ */
+function w3d_seo_cap_description( $description ) {
+	if ( $description && strlen( $description ) > 155 ) {
+		$cut   = substr( $description, 0, 152 );
+		$space = strrpos( $cut, ' ' );
+		if ( false !== $space && $space > 60 ) {
+			$cut = substr( $cut, 0, $space );
+		}
+		$description = rtrim( $cut, " \t\n\r\0\x0B.,;:!?" );
+	}
+	return $description;
+}
+add_filter( 'rank_math/frontend/description', 'w3d_seo_cap_description', 20 );
+
+/**
+ * Belt-and-suspenders output-level cap: Rank Math can re-expand %snippet%
+ * variables AFTER the rank_math/frontend/description filter, pushing the final
+ * <meta name="description"> over budget. Capture wp_head between priorities
+ * 0 and 999 and normalize just that one tag.
+ */
+function w3d_start_head_buffer() {
+	ob_start();
+}
+add_action( 'wp_head', 'w3d_start_head_buffer', 0 );
+
+function w3d_flush_head_buffer() {
+	$html = (string) ob_get_clean();
+	if ( preg_match( '#<meta name="description" content="([^"]+)"[^>]*>#', $html, $m ) ) {
+		$decoded = html_entity_decode( $m[1], ENT_QUOTES, 'UTF-8' );
+		if ( function_exists( 'mb_substr' ) && mb_strlen( $decoded, 'UTF-8' ) > 155 ) {
+			$capped = mb_substr( $decoded, 0, 152, 'UTF-8' );
+			$capped = preg_replace( '/\s+\S*$/', '', $capped );
+			$capped = rtrim( $capped, " \t\n\r\0\x0B.,;:!?" );
+			$new    = '<meta name="description" content="' . esc_attr( $capped ) . '">';
+			$html   = str_replace( $m[0], $new, $html );
+		}
+	}
+	echo $html;
+}
+add_action( 'wp_head', 'w3d_flush_head_buffer', 999 );
+
+/**
  * LifterLMS installs its own template_loader (priority 10) which can replace
  * theme archive templates for its post types. Re-assert our archive templates
  * so /courses/ (and glossary) render with the theme's a11y-first markup.

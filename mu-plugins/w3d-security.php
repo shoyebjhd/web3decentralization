@@ -15,10 +15,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Full Content-Security-Policy.
+ *
+ * Hostinger's hcdn edge rewrites any upstream CSP header to its own default
+ * (`upgrade-insecure-requests`), so the real policy is ALSO emitted as a
+ * `<meta http-equiv="Content-Security-Policy">` tag, which the edge passes
+ * through untouched. Browsers apply the strictest/intersection of both, i.e.
+ * this policy + the edge's HTTPS-upgrade requirement.
+ */
+function w3d_csp_policy() {
+	return
+		"default-src 'self'; " .
+		"script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net; " .
+		"style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; " .
+		"img-src 'self' data: https: blob:; " .
+		"font-src 'self' data:; " .
+		"connect-src 'self' https: wss: blob:; " .
+		"frame-src https:; " .
+		"frame-ancestors 'self'; " .
+		"object-src 'none'; " .
+		"base-uri 'self'; " .
+		"form-action 'self'; " .
+		'upgrade-insecure-requests';
+}
+
 add_filter( 'xmlrpc_enabled', '__return_false' ); // legacy; enforced in .htaccess
 remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'wp_generator' );
+
+add_action(
+	'wp_head',
+	function () {
+		printf(
+			"<meta http-equiv=\"Content-Security-Policy\" content=\"%s\">\n",
+			esc_attr( w3d_csp_policy() )
+		);
+	},
+	1
+);
 
 add_filter(
 	'wp_headers',
@@ -27,6 +63,7 @@ add_filter(
 		$headers['X-Content-Type-Options'] = 'nosniff';
 		$headers['Referrer-Policy']        = 'strict-origin-when-cross-origin';
 		$headers['Permissions-Policy']     = 'camera=(), microphone=(), geolocation=()';
+		$headers['Content-Security-Policy'] = w3d_csp_policy();
 		if ( is_ssl() ) {
 			$headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains';
 		}

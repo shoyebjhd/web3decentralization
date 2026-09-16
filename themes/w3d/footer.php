@@ -51,6 +51,7 @@ $w3d_trending = array(
 
 $w3d_trending = $w3d_home ? $w3d_trending : array_slice( $w3d_trending, 0, 8 );
 $w3d_glossary = array_slice( $w3d_glossary, 0, 8 );
+$w3d_trending_limit = 8;
 ?>
 </main><!-- #w3d-main -->
 
@@ -97,11 +98,16 @@ $w3d_glossary = array_slice( $w3d_glossary, 0, 8 );
 
 		<nav class="w3d-footer-trending" aria-label="<?php esc_attr_e( 'Trending topics', 'w3d' ); ?>">
 			<p class="w3d-footer-title"><?php esc_html_e( 'Trending topics', 'w3d' ); ?></p>
-			<ul class="w3d-foot-pills">
-				<?php foreach ( $w3d_trending as $t ) : ?>
-					<li><a href="<?php echo esc_url( home_url( $t[0] ) ); ?>"><?php echo esc_html( $t[1] ); ?></a></li>
+			<ul class="w3d-foot-pills w3d-pills-extra" id="w3d-trending-pills">
+				<?php foreach ( $w3d_trending as $i => $t ) : ?>
+					<li class="<?php echo $i >= $w3d_trending_limit ? 'w3d-pills-hidden' : ''; // phpcs:ignore WordPress.Security.EscapeOutput ?>"><a href="<?php echo esc_url( home_url( $t[0] ) ); ?>"><?php echo esc_html( $t[1] ); ?></a></li>
 				<?php endforeach; ?>
 			</ul>
+			<?php if ( count( $w3d_trending ) > $w3d_trending_limit ) : ?>
+				<button type="button" class="w3d-pills-more" aria-expanded="false" aria-controls="w3d-trending-pills">
+					<span class="w3d-pills-more-label"><?php esc_html_e( 'Show 12 more trending topics', 'w3d' ); ?></span>
+				</button>
+			<?php endif; ?>
 		</nav>
 
 		<a class="w3d-footer-fork" href="https://github.com/Web3Decentralization/academy" target="_blank" rel="noopener"><?php esc_html_e( 'Fork on GitHub', 'w3d' ); ?></a>
