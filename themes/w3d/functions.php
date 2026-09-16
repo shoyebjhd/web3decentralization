@@ -65,6 +65,133 @@ function w3d_setup() {
 }
 add_action( 'after_setup_theme', 'w3d_setup' );
 
+/**
+ * Customizer: design tokens.
+ *
+ * Defaults equal the shipped :root values, and only changed values are
+ * emitted as a trailing :root override, so a stock install gets zero extra
+ * CSS and keeps the audited contrast/perf exactly as-is.
+ */
+function w3d_customize_section() {
+	return array(
+		'w3d_primary'     => array( '#FF7A00', __( 'Brand primary', 'w3d' ) ),
+		'w3d_bg'          => array( '#0a0e1a', __( 'Page background', 'w3d' ) ),
+		'w3d_bg_card'     => array( '#0f121f', __( 'Card background', 'w3d' ) ),
+		'w3d_surface'     => array( '#151a2c', __( 'Elevated surface', 'w3d' ) ),
+		'w3d_text'        => array( '#d5dbe8', __( 'Body text', 'w3d' ) ),
+		'w3d_text_muted'  => array( '#9aa3b6', __( 'Muted text', 'w3d' ) ),
+	);
+}
+
+function w3d_customize_register( $wp_customize ) {
+	$wp_customize->add_section( 'w3d_theme_options', array(
+		'title'       => __( 'Design Tokens', 'w3d' ),
+		'priority'    => 30,
+		'description' => __( 'Defaults match the shipped design. Only changed values are emitted, so keep defaults to stay untouched.', 'w3d' ),
+	) );
+	foreach ( w3d_customize_section() as $id => $cfg ) {
+		$wp_customize->add_setting( $id, array(
+			'default'           => $cfg[0],
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		) );
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $id, array(
+			'section' => 'w3d_theme_options',
+			'label'   => $cfg[1],
+		) ) );
+	}
+}
+add_action( 'customize_register', 'w3d_customize_register' );
+
+function w3d_hex_to_rgba( $hex, $alpha ) {
+	$hex = ltrim( $hex, '#' );
+	if ( ! preg_match( '/^[0-9a-fA-F]{6}$/', $hex ) ) {
+		return 'rgba(0,0,0,0)';
+	}
+	return sprintf(
+		'rgba(%d,%d,%d,%s)',
+		hexdec( substr( $hex, 0, 2 ) ),
+		hexdec( substr( $hex, 2, 2 ) ),
+		hexdec( substr( $hex, 4, 2 ) ),
+		$alpha
+	);
+}
+
+function w3d_hex_lighten( $hex, $by ) {
+	$hex = ltrim( $hex, '#' );
+	if ( ! preg_match( '/^[0-9a-fA-F]{6}$/', $hex ) ) {
+		return $hex;
+	}
+	$out = '';
+	for ( $i = 0; $i < 6; $i += 2 ) {
+		$out .= sprintf( '%02x', min( 255, hexdec( substr( $hex, $i, 2 ) ) + $by ) );
+	}
+	return '#' . $out;
+}
+
+function w3d_hex_luminance( $hex ) {
+	$hex = ltrim( $hex, '#' );
+	if ( ! preg_match( '/^[0-9a-fA-F]{6}$/', $hex ) ) {
+		return 0.5;
+	}
+	$rgb = array(
+		hexdec( substr( $hex, 0, 2 ) ) / 255,
+		hexdec( substr( $hex, 2, 2 ) ) / 255,
+		hexdec( substr( $hex, 4, 2 ) ) / 255,
+	);
+	foreach ( $rgb as &$c ) {
+		$c = ( $c <= 0.03928 ) ? $c / 12.92 : pow( ( $c + 0.055 ) / 1.055, 2.4 );
+	}
+	return 0.2126 * $rgb[0] + 0.7152 * $rgb[1] + 0.0722 * $rgb[2];
+}
+
+function w3d_customizer_tokens_css() {
+	$map  = array(
+		'w3d_primary'    => '--w3d-primary',
+		'w3d_bg'         => '--w3d-bg',
+		'w3d_bg_card'    => '--w3d-bg-card',
+		'w3d_surface'    => '--w3d-surface',
+		'w3d_text'       => '--w3d-text',
+		'w3d_text_muted' => '--w3d-text-muted',
+	);
+	$defaults = array();
+	foreach ( w3d_customize_section() as $id => $cfg ) {
+		$defaults[ $id ] = $cfg[0];
+	}
+
+	$css = '';
+	foreach ( $map as $id => $var ) {
+		$val = get_theme_mod( $id, $defaults[ $id ] );
+		if ( $val && strtolower( $val ) !== strtolower( $defaults[ $id ] ) ) {
+			$css .= sprintf( '%s:%s; ', $var, $val );
+		}
+	}
+
+	$primary = get_theme_mod( 'w3d_primary', '#FF7A00' );
+	if ( $primary && strtolower( $primary ) !== strtolower( '#FF7A00' ) && preg_match( '/^#[0-9a-fA-F]{6}$/', $primary ) ) {
+		$hover  = w3d_hex_lighten( $primary, 28 );
+		$mid    = w3d_hex_lighten( $primary, 34 );
+		$light  = w3d_hex_lighten( $primary, 72 );
+		$btn_fg = ( w3d_hex_luminance( $primary ) > 0.45 ) ? '#0a0e1a' : '#ffffff';
+		$css   .= sprintf(
+			'--w3d-emerald:%1$s; --w3d-teal:%1$s; --w3d-cyan:%3$s; --w3d-primary-hover:%2$s; --w3d-btn-bg:%1$s; --w3d-btn-fg:%4$s; --w3d-primary-dim:%5$s; --w3d-primary-border:%6$s; --w3d-grad:linear-gradient(120deg,%1$s 0%%,%3$s 45%%,%7$s 100%%); ',
+			$primary,
+			$hover,
+			$mid,
+			$btn_fg,
+			w3d_hex_to_rgba( $primary, .12 ),
+			w3d_hex_to_rgba( $primary, .3 ),
+			$light
+		);
+	}
+
+	if ( '' === $css ) {
+		return;
+	}
+	printf( "<style id=\"w3d-customizer-tokens\">:root{%s}</style>\n", $css );
+}
+add_action( 'wp_head', 'w3d_customizer_tokens_css', 20 );
+
 function w3d_asset_ver( $path ) {
 	$file = get_template_directory() . $path;
 	return file_exists( $file ) ? (string) filemtime( $file ) : '1.0.0';
