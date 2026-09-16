@@ -2819,4 +2819,28 @@ body.single-w3d_tool .w3d-single-hero .w3d-tool-icon{ margin:0 0 14px; }
 	.w3d-btn-hero{ padding:17px 26px; }
 	.w3d-btn{ padding-top:13px; padding-bottom:13px; }
 	.w3d-brand-link{ display:inline-block; padding:12px 10px; margin:-12px -10px; }
+	.w3d-post-card-title a{ display:inline-block; padding:10px 2px; margin:-10px -2px; }
+	a.w3d-card-go{ display:inline-flex; align-items:center; padding:12px 4px; margin:-12px -4px; }
+	.w3d-crumbs a{ display:inline-flex; align-items:center; padding:14px 6px; margin:-14px -6px; }
+	.w3d-pagination a.page-numbers{
+		min-width:48px;
+		height:48px;
+	}
+	.w3d-pagination a.next,
+	.w3d-pagination a.prev{ padding:0 14px; }
+	.glossary-az a{
+		display:inline-flex;
+		align-items:center;
+		justify-content:center;
+		min-width:44px;
+		height:46px;
+		padding:0 10px;
+	}
+	.w3d-gloss{ display:inline-block; padding:3px 1px; margin:-3px -1px; }
+	.w3d-toc li a{ display:block; padding:10px 6px; margin:-4px 0; }
+	.w3d-rel-card h3 a{ display:inline-block; padding:10px 2px; margin:-10px -2px; }
+	.glossary-back a,
+	.w3d-rel-more a{ display:inline-block; padding:11px 4px; margin:-11px -4px; }
+	.llms-lesson-link{ display:inline-flex; align-items:center; min-height:44px; padding:0 14px; }
+	.w3d-footer-disclaimer a{ display:inline-block; padding:5px 3px; margin:-5px -3px; }
 }
