@@ -664,8 +664,8 @@ add_action( 'wp_head', 'w3d_preload_fonts', 4 );
  * Favicon set â€” waveform SVG lives in /terminal/.
  */
 function w3d_favicons() {
-	echo '<link rel="icon" type="image/svg+xml" href="' . esc_url( home_url( '/terminal/favicon.svg' ) ) . '">' . "\n";
-	echo '<link rel="shortcut icon" type="image/svg+xml" href="' . esc_url( home_url( '/terminal/favicon.svg' ) ) . '">' . "\n";
+echo '<link rel="icon" type="image/svg+xml" href="' . esc_url( home_url( '/terminal/favicon.svg?v=orange' ) ) . '">' . "\n";
+	echo '<link rel="shortcut icon" type="image/svg+xml" href="' . esc_url( home_url( '/terminal/favicon.svg?v=orange' ) ) . '">' . "\n";
 }
 add_action( 'wp_head', 'w3d_favicons', 5 );
 
