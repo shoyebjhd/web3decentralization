@@ -1768,7 +1768,7 @@ function w3d_lesson_toc( $content ) {
 	if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
 		return $content;
 	}
-	if ( ! is_singular( array( 'lesson', 'post', 'llms_glossary', 'chain' ) ) || ! in_the_loop() || ! is_main_query() ) {
+	if ( ! is_singular( array( 'lesson', 'post', 'llms_glossary', 'chain', 'w3d_tool' ) ) || ! in_the_loop() || ! is_main_query() ) {
 		return $content;
 	}
 	if ( false !== strpos( $content, 'w3d-toc' ) ) {
@@ -1865,6 +1865,56 @@ function w3d_glossary_faq_jsonld( $data ) {
 	return $data;
 }
 add_filter( 'rank_math/json_ld', 'w3d_glossary_faq_jsonld', 26 );
+
+/**
+ * FAQ JSON-LD for chain, tool, and lesson singulars, parsed from the
+ * on-page .schema-faq-section accordions embedded in content (same markup the
+ * glossary template renders from ACF). Lets enrichment pages carry machine-
+ * readable FAQs without Rank Math blocks or plugins.
+ */
+function w3d_content_faq_jsonld( $data ) {
+	if ( ! is_singular( array( 'chain', 'w3d_tool', 'lesson' ) ) ) {
+		return $data;
+	}
+	foreach ( (array) $data as $node ) {
+		if ( isset( $node['@type'] ) && in_array( 'FAQPage', (array) $node['@type'], true ) ) {
+			return $data;
+		}
+	}
+	$matches = array();
+	if ( ! preg_match_all(
+		'#<div\s+class="[^"]*schema-faq-section[^"]*"[^>]*>\s*'
+		. '<h[23][^>]*class="[^"]*schema-faq-question[^"]*"[^>]*>(.*?)</h[23][^>]*>\s*'
+		. '<div\s+class="[^"]*schema-faq-answer[^"]*"[^>]*>(.*?)</div>#si',
+		get_post_field( 'post_content' ),
+		$matches,
+		PREG_SET_ORDER
+	) ) {
+		return $data;
+	}
+	$entities = array();
+	foreach ( $matches as $m ) {
+		$q = trim( wp_strip_all_tags( $m[1] ) );
+		$a = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( $m[2] ) ) );
+		if ( '' === $q || '' === $a ) {
+			continue;
+		}
+		$entities[] = array(
+			'@type'          => 'Question',
+			'name'           => $q,
+			'acceptedAnswer' => array( '@type' => 'Answer', 'text' => mb_substr( $a, 0, 500 ) ),
+		);
+	}
+	if ( empty( $entities ) ) {
+		return $data;
+	}
+	$data[] = array(
+		'@type'      => 'FAQPage',
+		'mainEntity' => $entities,
+	);
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'w3d_content_faq_jsonld', 25 );
 
 /**
  * W3D Tools CPT + category taxonomy (Terminal rebuild: hybrid model).
