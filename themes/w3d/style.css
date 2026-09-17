@@ -2411,6 +2411,35 @@ table.wp-block-table{
 .w3d-content > .w3d-toc{ max-width:720px; margin-left:auto; margin-right:auto; }
 .w3d-content > .w3d-toc{ margin-bottom:28px; }
 
+/* --- Courses: keep LLMS syllabus on the GLOBAL read width + dark surface
+   (LifterLMS plugin blocks default to its own light styling; strip css is
+   unbundled so we re-paint it to match the dark theme). --------------- */
+.single-course .llms-syllabus-wrapper,
+.single-course .llms-course-meta-list,
+.single-course .llms-syllabus-wrapper{ max-width:var(--w3d-read-w); margin-left:auto; margin-right:auto; }
+.single-course .llms-syllabus-wrapper,
+.single-course .llms-lesson-preview,
+.single-course .llms-lesson-preview-row,
+.single-course .llms-course-meta-list,
+.single-course .llms-syllabus-wrapper .llms-section-title{
+	background:transparent;
+	border:0;
+	border-radius:0;
+	color:var(--w3d-text);
+}
+.single-course .llms-lesson-preview{
+	padding:14px 16px;
+	border:1px solid var(--w3d-border);
+	border-radius:12px;
+	margin-bottom:10px;
+	background:#0f121f;
+}
+.single-course .llms-lesson-preview:hover{ border-color:rgba(255,122,0,.45); background:#151a2c; }
+.single-course .llms-lesson-preview .llms-lesson-link{ color:var(--w3d-text); }
+.single-course .llms-lesson-preview .llms-lesson-preview-label{ color:var(--w3d-dim); }
+.single-course .llms-lesson-preview .llms-lesson-title{ color:#fff; }
+.single-course .llms-lesson-preview .llms-lesson-counter{ color:var(--w3d-emerald-2); }
+
 /* --- Beginner path: timeline cards (TASK 5) ---------------------------- */
 .w3d-path-plan{ max-width:720px; margin:0 auto; }
 .w3d-path-plan h2,
