@@ -1,6 +1,6 @@
 ﻿<?php
 /**
- * W3D â€” standalone theme functions.
+ * W3D — standalone theme functions.
  *
  * Registers the "chain" custom post type + ACF audit fields (moved over
  * from the legacy Astra child theme), wires up self-hosted assets, and
@@ -376,9 +376,9 @@ function w3d_breadcrumbs() {
  */
 function w3d_seo_default_description( $description ) {
 	$curated_archives = array(
-		'course'      => 'Browse all free Web3 & crypto courses â€” Bitcoin, blockchains, DeFi and Web3 fundamentals with lessons, quizzes and live labs. No signup required.',
+		'course'      => 'Browse all free Web3 & crypto courses — Bitcoin, blockchains, DeFi and Web3 fundamentals with lessons, quizzes and live labs. No signup required.',
 		'chain'       => 'Independent blockchain decentralization audits: Nakamoto Coefficient and four-pillar scores for the top 12 networks, recomputed from public data.',
-		'llms_glossary' => 'Plain-language crypto & Web3 glossary â€” every term explained with short, friendly pages: blocks, nodes, forks, stablecoins, rollups and more.',
+		'llms_glossary' => 'Plain-language crypto & Web3 glossary — every term explained with short, friendly pages: blocks, nodes, forks, stablecoins, rollups and more.',
 	);
 	if ( is_post_type_archive() ) {
 		$pt = get_queried_object();
@@ -396,20 +396,20 @@ function w3d_seo_default_description( $description ) {
 	}
 
 	if ( is_singular( 'course' ) ) {
-		return 'Free course: ' . get_the_title() . ' â€” learn Bitcoin, smart contracts, DeFi and Web3 with hands-on lessons, quizzes and live terminal labs from Web3 Decentralization.';
+		return 'Free course: ' . get_the_title() . ' — learn Bitcoin, smart contracts, DeFi and Web3 with hands-on lessons, quizzes and live terminal labs from Web3 Decentralization.';
 	}
 
 	if ( is_singular( 'lesson' ) ) {
-		return 'Free lesson: ' . get_the_title() . ' â€” part of the Web3 Decentralization learning path with plain-English explanations and hands-on labs.';
+		return 'Free lesson: ' . get_the_title() . ' — part of the Web3 Decentralization learning path with plain-English explanations and hands-on labs.';
 	}
 
 	if ( is_page() ) {
 		$title = get_the_title();
-		return $title . ' â€” plain-English Web3 & crypto education from Web3 Decentralization.';
+		return $title . ' — plain-English Web3 & crypto education from Web3 Decentralization.';
 	}
 
 	if ( is_post_type_archive( 'course' ) ) {
-		return 'Browse all free Web3 & crypto courses â€” Bitcoin, blockchains, DeFi and Web3 fundamentals with lessons, quizzes and live labs. No signup required.';
+		return 'Browse all free Web3 & crypto courses — Bitcoin, blockchains, DeFi and Web3 fundamentals with lessons, quizzes and live labs. No signup required.';
 	}
 
 	if ( is_post_type_archive( 'chain' ) ) {
@@ -417,7 +417,7 @@ function w3d_seo_default_description( $description ) {
 	}
 
 	if ( is_post_type_archive( 'llms_glossary' ) ) {
-		return 'Plain-language crypto & Web3 glossary â€” every term explained with short, friendly pages: blocks, nodes, forks, stablecoins, rollups and more.';
+		return 'Plain-language crypto & Web3 glossary — every term explained with short, friendly pages: blocks, nodes, forks, stablecoins, rollups and more.';
 	}
 
 	if ( is_archive() ) {
@@ -661,7 +661,7 @@ function w3d_preload_fonts() {
 add_action( 'wp_head', 'w3d_preload_fonts', 4 );
 
 /**
- * Favicon set â€” waveform SVG lives in /terminal/.
+ * Favicon set — waveform SVG lives in /terminal/.
  */
 function w3d_favicons() {
 echo '<link rel="icon" type="image/svg+xml" href="' . esc_url( home_url( '/terminal/favicon.svg?v=orange' ) ) . '">' . "\n";
@@ -681,7 +681,7 @@ function w3d_reading_progress() {
 add_action( 'wp_body_open', 'w3d_reading_progress' );
 
 /**
- * Drop emoji/embed + oEmbed discovery cruft â€” fewer requests, cleaner head.
+ * Drop emoji/embed + oEmbed discovery cruft — fewer requests, cleaner head.
  */
 function w3d_clean_head() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -816,7 +816,7 @@ function w3d_has_primary_menu() {
 
 /**
  * Char-based excerpt: clip to $length characters at a word boundary,
- * appending an ellipsis â€” never cuts mid-word.
+ * appending an ellipsis — never cuts mid-word.
  */
 function w3d_excerpt_chars( $text, $length = 120 ) {
 	$text = trim( wp_strip_all_tags( (string) $text ) );
@@ -832,7 +832,7 @@ function w3d_excerpt_chars( $text, $length = 120 ) {
 		if ( false !== $pos ) {
 			$cut = mb_substr( $cut, 0, $pos );
 		}
-		return trim( $cut ) . 'â€¦';
+		return trim( $cut ) . '…';
 	}
 
 	if ( strlen( $text ) <= $length ) {
@@ -843,7 +843,7 @@ function w3d_excerpt_chars( $text, $length = 120 ) {
 	if ( false !== $pos ) {
 		$cut = substr( $cut, 0, $pos );
 	}
-	return trim( $cut ) . 'â€¦';
+	return trim( $cut ) . '…';
 }
 
 /**
@@ -1268,7 +1268,7 @@ add_action( 'lifterlms_student_dashboard_header', 'w3d_learner_stats_panel', 5 )
 add_action( 'lifterlms_after_my_account_navigation', 'w3d_learner_stats_panel', 1 );
 
 /**
- * W3D Tutor â€” a zero-cost, curriculum-based study assistant.
+ * W3D Tutor — a zero-cost, curriculum-based study assistant.
  *
  * Matches student questions against a curated list of answers (no external
  * API), suggests next steps, and links straight into lessons, the glossary,
@@ -1288,7 +1288,7 @@ function w3d_tutor_widget() {
 	$help = array(
 		array(
 			'keys'  => array( 'certificate', 'cert', 'degree', 'diploma' ),
-			'answer' => 'You earn a free certificate by finishing a course and passing its final quiz. Each course is free â€” just start it, complete every lesson, take the quiz for a passing score (70%+), and the certificate is awarded to you automatically. You can print, download, or share it from your Student Account.',
+			'answer' => 'You earn a free certificate by finishing a course and passing its final quiz. Each course is free — just start it, complete every lesson, take the quiz for a passing score (70%+), and the certificate is awarded to you automatically. You can print, download, or share it from your Student Account.',
 			'links'  => array( array( 'Browse courses', $home . 'courses/' ) ),
 		),
 		array(
@@ -1298,7 +1298,7 @@ function w3d_tutor_widget() {
 		),
 		array(
 			'keys'  => array( 'analyst', 'path', 'career', 'decentralization analyst' ),
-			'answer' => 'The Certified Decentralization Analyst path builds on the beginner course with deeper coverage of consensus, governance, and on-chain metrics â€” including lessons that walk through real W3D Terminal audits for Bitcoin, Ethereum, and Solana. Finish it and you earn the Decentralization Analyst certificate.',
+			'answer' => 'The Certified Decentralization Analyst path builds on the beginner course with deeper coverage of consensus, governance, and on-chain metrics — including lessons that walk through real W3D Terminal audits for Bitcoin, Ethereum, and Solana. Finish it and you earn the Decentralization Analyst certificate.',
 			'links'  => array( array( 'New analysts start here', $home . 'course/certified-decentralization-analyst/' ), array( 'See the course', $home . 'courses/' ) ),
 		),
 		array(
@@ -1313,12 +1313,12 @@ function w3d_tutor_widget() {
 		),
 		array(
 			'keys'  => array( 'start', 'begin', 'beginner', 'first', 'progress', 'where' ),
-			'answer' => 'Great place to start: the Crypto Fundamentals from Zero course. It takes you from "what is money?" through wallets, Proof of Work vs Proof of Stake, and a hands-on lab where you explore Bitcoin in the Terminal yourself. It is free, takes about 2â€“3 hours, and ends with a certificate-qualifying quiz.',
+			'answer' => 'Great place to start: the Crypto Fundamentals from Zero course. It takes you from "what is money?" through wallets, Proof of Work vs Proof of Stake, and a hands-on lab where you explore Bitcoin in the Terminal yourself. It is free, takes about 2“3 hours, and ends with a certificate-qualifying quiz.',
 			'links'  => array( array( 'Browse courses', $home . 'courses/' ), array( 'See lesson content', $home . 'course/crypto-fundamentals-from-zero/' ) ),
 		),
 		array(
 			'keys'  => array( 'wallet', 'key', 'custody', 'safe' ),
-			'answer' => 'Self-custody means you hold your own private keys. Nobody can freeze or seize your balance â€” but nobody can recover it for you either. Our guides walk through wallets, seed phrases, and safe habits. The short version: hardware wallet for anything significant, paper backup of your seed phrase, and never share it.',
+			'answer' => 'Self-custody means you hold your own private keys. Nobody can freeze or seize your balance — but nobody can recover it for you either. Our guides walk through wallets, seed phrases, and safe habits. The short version: hardware wallet for anything significant, paper backup of your seed phrase, and never share it.',
 			'links'  => array( array( 'Wallet guide', $glossary . 'wallet/' ), array( 'Seed phrase safety', $glossary . 'seed-phrase/' ), array( 'Self-custody', $glossary . 'self-custody/' ) ),
 		),
 		array(
@@ -1328,7 +1328,7 @@ function w3d_tutor_widget() {
 		),
 		array(
 			'keys'  => array( 'defi', 'decentralized finance', 'lend', 'dex' ),
-			'answer' => 'DeFi rebuilds banking as smart contracts: lending, trading, and savings without a bank. The key ideas â€” liquidity pools, stablecoins, DEXs â€” are each covered in the glossary with short, plain-language pages.',
+			'answer' => 'DeFi rebuilds banking as smart contracts: lending, trading, and savings without a bank. The key ideas — liquidity pools, stablecoins, DEXs — are each covered in the glossary with short, plain-language pages.',
 			'links'  => array( array( 'DeFi glossary', $glossary . 'defi/' ), array( 'DEX', $glossary . 'dex/' ), array( 'Stablecoins', $glossary . 'stablecoin/' ) ),
 		),
 	);
@@ -1364,11 +1364,11 @@ function w3d_tutor_widget() {
 			</div>
 			<form class="w3d-tutor-form" autocomplete="off">
 				<label class="screen-reader-text" for="w3d-tutor-q">Ask a question</label>
-				<input type="text" id="w3d-tutor-q" class="w3d-tutor-input" placeholder="Ask about certificates, the terminal, stakingâ€¦" name="q">
+				<input type="text" id="w3d-tutor-q" class="w3d-tutor-input" placeholder="Ask about certificates, the terminal, staking…" name="q">
 				<button type="submit" class="w3d-tutor-send">Ask</button>
 			</form>
 		</div>
-		<div class="w3d-tutor-foot">Curated from the W3D curriculum â€” links to lessons, glossary, and the Terminal.</div>
+		<div class="w3d-tutor-foot">Curated from the W3D curriculum — links to lessons, glossary, and the Terminal.</div>
 		<script>
 		(function () {
 			var root = document.getElementById('w3d-tutor');
@@ -1400,7 +1400,7 @@ function w3d_tutor_widget() {
 					if (q.toLowerCase().indexOf(answers[i].keys[0]) !== -1) { a = answers[i]; break; }
 				}
 				var m = a ? a : match(q);
-				var html = m ? '<p>' + m.answer + '</p>' : '<p>I canâ€™t answer that one yet â€” but your best bet is the glossary or the lessons:</p>';
+				var html = m ? '<p>' + m.answer + '</p>' : '<p>I can’t answer that one yet — but your best bet is the glossary or the lessons:</p>';
 				if (m && m.links.length) {
 					html += '<div class="w3d-tutor-links">';
 					for (var j = 0; j < m.links.length; j++) html += '<a href="' + m.links[j][1] + '">' + m.links[j][0] + '</a>';
@@ -1640,15 +1640,15 @@ function w3d_related_blocks( $content ) {
 		$label   = 'Term usage';
 		$extra  .= '<p class="w3d-rel-more"><a href="' . esc_url( home_url( '/glossary/' ) ) . '">'
 			. esc_html__( 'Browse all glossary terms', 'w3d' )
-			. '</a> Â· <a href="' . esc_url( home_url( '/learn/' ) ) . '">'
+			. '</a> · <a href="' . esc_url( home_url( '/learn/' ) ) . '">'
 			. esc_html__( 'Start a free course', 'w3d' )
 			. '</a></p>';
 	} else {
 		$extra .= '<p class="w3d-chain-study">Study the method behind this audit: '
-			. '<a href="' . esc_url( home_url( '/methodology/' ) ) . '">Methodology</a> Â· '
-			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-infrastructure/' ) ) . '">Infrastructure</a> Â· '
-			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-capital/' ) ) . '">Capital</a> Â· '
-			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-governance/' ) ) . '">Governance</a> Â· '
+			. '<a href="' . esc_url( home_url( '/methodology/' ) ) . '">Methodology</a> · '
+			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-infrastructure/' ) ) . '">Infrastructure</a> · '
+			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-capital/' ) ) . '">Capital</a> · '
+			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-governance/' ) ) . '">Governance</a> · '
 			. '<a href="' . esc_url( home_url( '/lesson/os-pillar-software/' ) ) . '">Software</a></p>';
 		$rel = get_post_meta( $id, '_w3d_chain_terms', true );
 		if ( is_array( $rel ) ) {
@@ -1686,7 +1686,7 @@ add_filter( 'the_content', 'w3d_related_blocks', 30 );
  * NotebookLM video-source block (Phase 4 prep).
  *
  * Appends a hidden, deterministic 3-bullet summary (hook / concept /
- * takeaway) to lesson and glossary pages â€” future feedstock for NotebookLM
+ * takeaway) to lesson and glossary pages — future feedstock for NotebookLM
  * Short Video Overviews. No AI, no API: first/middle/last sentences of the
  * post's own plain text.
  */
