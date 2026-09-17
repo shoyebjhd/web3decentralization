@@ -3,12 +3,12 @@ chain: apt
 name: Aptos
 consensus: AptosBFT (Proof of Stake + Block-STM)
 composite: 49.1
-live_validators: 84
+live_validators: 85
 live_validators_source: aptos-public-fullnode
 live_nakamoto_33: 14
 live_nakamoto_source: computed-live
-live_updated: 2026-09-14T12:22:36.465Z
-lastmod: 2026-09-14
+live_updated: 2026-09-17T05:26:01.435Z
+lastmod: 2026-09-17
 ---
 
 # Aptos Decentralization Audit

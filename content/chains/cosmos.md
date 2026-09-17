@@ -7,8 +7,8 @@ live_validators: 180
 live_validators_source: cosmos.directory
 live_nakamoto_33: 3
 live_nakamoto_source: computed-live
-live_updated: 2026-09-14T12:22:36.465Z
-lastmod: 2026-09-14
+live_updated: 2026-09-17T05:26:01.435Z
+lastmod: 2026-09-17
 ---
 
 # Cosmos Decentralization Audit

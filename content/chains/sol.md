@@ -3,12 +3,12 @@ chain: sol
 name: Solana
 consensus: Proof of History + PoS
 composite: 53.2
-live_validators: 676
+live_validators: 678
 live_validators_source: solana-public-rpc
 live_nakamoto_33: 18
 live_nakamoto_source: computed-live
-live_updated: 2026-09-14T12:22:36.465Z
-lastmod: 2026-09-14
+live_updated: 2026-09-17T05:26:01.435Z
+lastmod: 2026-09-17
 ---
 
 # Solana Decentralization Audit

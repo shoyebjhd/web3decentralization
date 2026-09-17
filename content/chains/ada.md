@@ -3,13 +3,13 @@ chain: ada
 name: Cardano
 consensus: Ouroboros Proof of Stake
 composite: 70.4
-live_validators: 6164
+live_validators: 6165
 live_validators_source: koios.rest
 live_nakamoto_33: 
 live_nakamoto_source: audited
 live_label: illustrative live data — koios pool-registry count; no keyless stake distribution, Nakamoto from audited snapshot
-live_updated: 2026-09-14T12:22:36.465Z
-lastmod: 2026-09-14
+live_updated: 2026-09-17T05:26:01.435Z
+lastmod: 2026-09-17
 ---
 
 # Cardano Decentralization Audit

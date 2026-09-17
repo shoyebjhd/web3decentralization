@@ -3,12 +3,12 @@ chain: near
 name: Near
 consensus: Nightshade Sharding + Doomslug PoS
 composite: 60.3
-live_validators: 416
+live_validators: 417
 live_validators_source: near-public-rpc
-live_nakamoto_33: 8
+live_nakamoto_33: 9
 live_nakamoto_source: computed-live
-live_updated: 2026-09-14T12:22:36.465Z
-lastmod: 2026-09-14
+live_updated: 2026-09-17T05:26:01.435Z
+lastmod: 2026-09-17
 ---
 
 # Near Decentralization Audit
