@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * W3D — standalone theme functions.
  *
