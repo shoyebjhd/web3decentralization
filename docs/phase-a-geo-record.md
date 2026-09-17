@@ -1,5 +1,20 @@
 # A-phase — GEO + index-recovery — COMPLETE (final record, 2026-09-17)
 
+## B-phase — edge geographical probe (2026-09-17) — CLEAN negative
+
+Query: can an AI crawler get a *different stale/BOM'd* variant depending on
+which UA × encoding reaches the edge? Swept all 6 AI UAs × 4 GEO routes
+(/llms.txt /ai.txt /terminal/llms.txt /terminal/ai.txt) + sitemap index, both
+identity and gzip, via `curl --compressed` on the vhost (probe `.temp/audit/`
+artifact is server-side only).
+
+**Result: 40/40 clean.** Every cell 200, `text/plain` (index `text/xml`), first
+3 bytes `23 20` (`# `) / `23 41` (`# A`) / `3c 3f` (`<?`) — no BOM, no stale
+vary variant, bit-identical across UA and gzip. The earlier BOM edge incident
+was a genuine one-off cache-staleness (fixed + recorded in A); it does not
+reproduce today. B-phase is a **clean negative** → recommended close of the
+yellow flag, no cache-busting work needed.
+
 ## Verd beat worth repeating
 
 The content was never the weak link. Sampling `mainnet.md` / `testnet.md` /
