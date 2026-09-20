@@ -2458,6 +2458,19 @@ table.wp-block-table{
 	border-radius:0;
 	color:var(--w3d-text);
 }
+.single-llms_lesson .llms-lesson-sidebar,
+.single-llms_lesson .llms-lesson-video,
+.single-llms_lesson .llms-lesson-navigation,
+.single-llms_course .llms-course-header,
+.single-llms_course .llms-course-info,
+.single-llms_course .llms-section,
+.single-llms_course .llms-relative{
+	background:transparent;
+	border:0;
+	border-radius:0;
+	box-shadow:none;
+	color:var(--w3d-text);
+}
 .single-course .llms-lesson-preview{
 	padding:14px 16px;
 	border:1px solid var(--w3d-border);
