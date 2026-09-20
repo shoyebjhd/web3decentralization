@@ -881,8 +881,8 @@ ul.w3d-sources li a{ font-weight:600; }
    BLOG INDEX / ARCHIVE LISTINGS
    ============================================================ */
 .w3d-blog-intro{ max-width:var(--w3d-read-w); margin:0 auto 40px; }
-.w3d-blog-intro h1, .w3d-blog-intro h2{ font-size:clamp(26px,3.4vw,38px); text-align:center; }
-.w3d-blog-intro p{ font-size:17px; text-align:center; color:var(--w3d-muted); }
+.w3d-blog-intro h1, .w3d-blog-intro h2{ font-size:clamp(26px,3.4vw,38px); text-align:left; }
+.w3d-blog-intro p{ font-size:17px; text-align:left; color:var(--w3d-muted); }
 
 .w3d-posts{ display:grid; gap:20px; }
 .w3d-post-card{
