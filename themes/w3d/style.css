@@ -2478,6 +2478,12 @@ table.wp-block-table{
 	margin-bottom:10px;
 	background:#0f121f;
 }
+.single-course .llms-lesson-preview b,
+.single-course .llms-lesson-preview strong{ color:#fff; }
+.single-course .llms-lesson-preview .llms-lesson-preview-label,
+.single-course .llms-lesson-preview .llms-lesson-counter,
+.single-course .llms-lesson-preview .llms-lesson-preview-title,
+.single-course .llms-lesson-preview .llms-lesson-title{ color:#fff; }
 .single-course .llms-lesson-preview:hover{ border-color:rgba(255,122,0,.45); background:#151a2c; }
 .single-course .llms-lesson-preview .llms-lesson-link{ color:var(--w3d-text); }
 .single-course .llms-lesson-preview .llms-lesson-preview-label{ color:var(--w3d-dim); }
