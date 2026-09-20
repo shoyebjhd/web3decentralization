@@ -238,7 +238,8 @@ function w3d_front_stat( $icon, $num, $label, $sub, $data_count = null ) {
 		</div>
 	</section>
 
-	<section class="w3d-section w3d-reveal" aria-labelledby="w3d-trust-title">
+	<div class="w3d-duo-grid">
+	<section class="w3d-section w3d-reveal w3d-duo-col" aria-labelledby="w3d-trust-title">
 		<div class="w3d-wrap">
 			<div class="w3d-trust">
 				<h2 id="w3d-trust-title">Data, Not Hype.</h2>
@@ -251,7 +252,7 @@ function w3d_front_stat( $icon, $num, $label, $sub, $data_count = null ) {
 		</div>
 	</section>
 
-	<section class="w3d-section w3d-reveal" aria-labelledby="w3d-cta-title">
+	<section class="w3d-section w3d-reveal w3d-duo-col" aria-labelledby="w3d-cta-title">
 		<div class="w3d-wrap">
 			<div class="w3d-cta">
 				<h2 id="w3d-cta-title">Start Mastering Web3 Today</h2>
@@ -263,6 +264,7 @@ function w3d_front_stat( $icon, $num, $label, $sub, $data_count = null ) {
 			</div>
 		</div>
 	</section>
+	</div>
 
 </div>
 
