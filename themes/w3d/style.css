@@ -472,7 +472,7 @@ color:var(--w3d-teal);
 .w3d-crumbs .rank-math-breadcrumb a{ color:var(--w3d-emerald-2); text-decoration-line:underline; text-decoration-thickness:1px; text-decoration-color:rgba(52,211,153,.45); text-underline-offset:2px; }
 .w3d-crumbs .rank-math-breadcrumb a:hover{ color:#FFC24D; }
 .w3d-crumbs .rank-math-breadcrumb .separator{ margin:0 7px; color:var(--w3d-dim); }
-.w3d-page-head{ text-align:center; margin-bottom:30px; }
+.w3d-page-head{ text-align:left; margin-bottom:30px; }
 .w3d-page-head h1.w3d-page-title{ font-size:clamp(28px,4vw,40px); margin:0; }
 
 /* Home content area is full-bleed */
