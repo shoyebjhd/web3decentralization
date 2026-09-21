@@ -728,6 +728,10 @@ background:#FF8C1A;
    ============================================================ */
 .w3d-cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; align-items:stretch; }
 .w3d-cards-topics{ width:100%; grid-template-columns:repeat(2,minmax(0,1fr)); }
+.w3d-cards-start-bento{ width:100%; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.w3d-card-start-feat{ grid-column:span 2; }
+.w3d-card-start-sub{ grid-column:span 1; }
+@media (max-width:760px){ .w3d-cards-start-bento{ grid-template-columns:1fr; } .w3d-card-start-feat,.w3d-card-start-sub{ grid-column:span 1; } }
 @media (max-width:720px){ .w3d-cards-topics{ grid-template-columns:1fr; } }
 .w3d-front .w3d-sec-label, .home .w3d-sec-label{ text-align:left; }
 @media (max-width:640px){ .w3d-cards{ grid-template-columns:1fr; } }
