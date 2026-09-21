@@ -30,6 +30,10 @@ get_header();
 	</div>
 
 	<?php if ( have_posts() ) : ?>
+		<div class="w3d-archive-band" aria-hidden="true">
+			<div class="w3d-archive-band-inner"></div>
+		</div>
+
 		<div class="chains-grid">
 			<?php
 			while ( have_posts() ) :
