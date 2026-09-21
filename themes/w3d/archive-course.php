@@ -19,7 +19,11 @@ get_header();
 
 	<?php if ( have_posts() ) : ?>
 
-		<ul class="w3d-course-grid">
+		<div class="w3d-archive-band" aria-hidden="true">
+		<div class="w3d-archive-band-inner"></div>
+	</div>
+
+	<ul class="w3d-course-grid">
 			<?php
 			while ( have_posts() ) :
 				the_post();
