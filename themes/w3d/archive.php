@@ -31,6 +31,8 @@ $description = get_the_archive_description();
 				?>
 				<article <?php post_class( 'w3d-post-card' ); ?> id="post-<?php the_ID(); ?>">
 
+					<?php w3d_the_featured_art(); ?>
+
 					<?php
 					$cats = get_the_category();
 					if ( ! empty( $cats ) ) :
