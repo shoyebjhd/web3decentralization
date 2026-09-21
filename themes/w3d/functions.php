@@ -14,6 +14,102 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Deterministic seeded PRNG for the procedural featured-art generator.
+ *
+ * Same post ID -> same byte sequence every render, so featured art never
+ * flickers and identical posts always produce identical, stable SVG.
+ *
+ * @param int $seed Seed integer (post ID).
+ * @return int Deterministic hash used to drive the art.
+ */
+function w3d_seed_rng( $seed ) {
+	$seed = (int) $seed;
+	$seed = ( $seed ^ ( $seed >> 15 ) ) + $seed * 0x6D2B79F5;
+	$seed = ( $seed ^ ( $seed >> 13 ) ) * 0x9E3779B1;
+	return ( ( $seed ^ ( $seed >> 16 ) ) * 0x85EBCA77 ) & 0x7FFFFFFF;
+}
+
+/**
+ * Build the procedural featured-art SVG for a post.
+ *
+ * Deterministic, seeded from the post ID: concentric rings + a diagonal
+ * lattice band on the site-black ground with the theme accent #f97316.
+ *
+ * @param int $post_id Post ID (0 = current post).
+ * @return string SVG markup.
+ */
+function w3d_featured_art( $post_id = 0 ) {
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
+	}
+
+	$W       = 1200;
+	$H       = 675;
+	$ground  = '#050505';
+	$accent  = '#f97316';
+	$label   = get_post_field( 'post_title', $post_id );
+	$label   = $label ? $label : 'Web3 Decentralization';
+	$aria    = esc_attr( wp_strip_all_tags( $label ) );
+
+	/* Deterministic RNG driven by the post ID. */
+	$seed = w3d_seed_rng( $post_id );
+	$next = function () use ( &$seed ) {
+		$seed = ( ( $seed * 1664525 + 1013904223 ) & 0x7FFFFFFF );
+		return $seed;
+	};
+
+	/* Concentric rings (seeded center + radii). */
+	$cx    = 40 + $next() % ( $W - 160 );
+	$cy    = 40 + $next() % ( $H - 200 );
+	$rings = '';
+	$ring_settings = array( 0.10, 0.16, 0.22, 0.28, 0.20 );
+	foreach ( $ring_settings as $i => $frac ) {
+		$r = round( $frac * $H );
+		$op = 0.08 + $i * 0.18;
+		if ( $op > 0.95 ) {
+			$op = 0.95;
+		}
+		$rings .= sprintf(
+			'<circle cx="%d" cy="%d" r="%d" fill="none" stroke="%s" stroke-opacity="%.2f" stroke-width="%d"/>',
+			$cx, $cy, $r, $accent, $op, 1
+		);
+	}
+
+	/* Diagonal lattice band (seeded parallel lines). */
+	$band = '';
+	$off  = 60 + $next() % 220;
+	for ( $i = 0; $i < 6; $i++ ) {
+		$x  = $off + $i * 180;
+		$op = 0.5 - $i * 0.06;
+		if ( $op < 0.06 ) {
+			$op = 0.06;
+		}
+		$band .= sprintf(
+			'<line x1="%d" y1="0" x2="%d" y2="%d" stroke="%s" stroke-opacity="%.2f" stroke-width="2"/>',
+			$x, $x + 160, $H, $accent, $op
+		);
+	}
+
+	return sprintf(
+		'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %1$d %2$d" role="img" aria-label="%3$s" preserveAspectRatio="xMidYMid slice" class="w3d-featured-art">'
+		. '<rect width="100%%" height="100%%" fill="%4$s"/>'
+		. '%5$s%6$s'
+		. '<text x="48" y="%7$d" fill="#ffffff" font-family="Inter, sans-serif" font-size="40" font-weight="800" letter-spacing="2">%8$s</text>'
+		. '</svg>',
+		$W, $H, $aria, $ground, $rings, $band, $H - 64, esc_html( $label )
+	);
+}
+
+/**
+ * Echo the procedural featured-art SVG for a post.
+ *
+ * @param int $post_id Post ID (0 = current post).
+ */
+function w3d_the_featured_art( $post_id = 0 ) {
+	echo w3d_featured_art( $post_id );
+}
+
+/**
  * Merge certificate template codes on earned certificates.
  *
  * LifterLMS stores earned `llms_my_certificate` posts from the raw template
