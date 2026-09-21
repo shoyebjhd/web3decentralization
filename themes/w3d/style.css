@@ -600,7 +600,7 @@ background:#FF8C1A;
 }
 
 /* Stats */
-.w3d-stats{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin-top:48px; max-width:800px; margin-left:auto; margin-right:auto; }
+.w3d-stats{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin-top:48px; max-width:none; width:100%; margin-left:auto; margin-right:auto; }
 .w3d-stat-card{
 	display:flex;
 	flex-direction:column;
