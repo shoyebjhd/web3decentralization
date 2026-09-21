@@ -491,17 +491,17 @@
         }
     ],
     "live": {
-        "updated": "2026-09-17T05:26:01.435Z",
+        "updated": "2026-09-21T12:29:30.461Z",
         "chains": {
             "btc": {
-                "validators": 26514,
+                "validators": 25747,
                 "validators_source": "bitnodes",
                 "nakamoto_33": null,
                 "nakamoto_source": "audited",
                 "label": "illustrative live data — reachable nodes, not miners; no stake/Nakamoto concept"
             },
             "sol": {
-                "validators": 678,
+                "validators": 677,
                 "validators_source": "solana-public-rpc",
                 "nakamoto_33": 18,
                 "nakamoto_source": "computed-live"
@@ -514,7 +514,7 @@
                 "label": "illustrative live data — koios pool-registry count; no keyless stake distribution, Nakamoto from audited snapshot"
             },
             "avax": {
-                "validators": 593,
+                "validators": 600,
                 "validators_source": "avax-public-api",
                 "nakamoto_33": 24,
                 "nakamoto_source": "computed-live"
@@ -533,7 +533,7 @@
                 "label": "illustrative live data — Ripple-published UNL validator list; no stake concept"
             },
             "sui": {
-                "validators": 126,
+                "validators": 127,
                 "validators_source": "sui.publicnode",
                 "nakamoto_33": 18,
                 "nakamoto_source": "computed-live"
@@ -545,7 +545,7 @@
                 "nakamoto_source": "computed-live"
             },
             "near": {
-                "validators": 417,
+                "validators": 413,
                 "validators_source": "near-public-rpc",
                 "nakamoto_33": 9,
                 "nakamoto_source": "computed-live"

@@ -1,6 +1,13 @@
 ---
 title: "XRP Ledger Decentralization Audit"
 description: "chain: xrp name: XRP Ledger consensus: XRP LCP (Federated) composite: 43."
+live_validators: 35
+live_validators_source: ripple-official-unl
+live_nakamoto_33: 
+live_nakamoto_source: audited
+live_label: illustrative live data — Ripple-published UNL validator list; no stake concept
+live_updated: 2026-09-21T12:29:30.461Z
+lastmod: 2026-09-21
 ---
 
 # XRP Ledger Decentralization Audit
