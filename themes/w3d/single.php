@@ -52,6 +52,10 @@ while ( have_posts() ) :
 
 	<div class="w3d-wrap w3d-single-body">
 		<div class="w3d-post-layout">
+			<div class="w3d-archive-band" aria-hidden="true">
+				<div class="w3d-archive-band-inner"></div>
+			</div>
+
 			<div class="w3d-content entry-content">
 				<?php echo $main; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- filters already applied by the_content(). ?>
 			</div>

@@ -14,7 +14,8 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 
-	$content_html = (string) get_the_content();
+				$w3d_band_markup = '<div class="w3d-archive-band" aria-hidden="true"><div class="w3d-archive-band-inner"></div></div>';
+				$content_html = (string) get_the_content();
 
 	$acf_def = get_field( 'definition' );
 	if ( empty( $acf_def ) ) {

@@ -37,7 +37,11 @@ while ( have_posts() ) :
 	$has_score = ( '' !== $total && null !== $total );
 	?>
 	<header class="w3d-single-hero w3d-chain-hero">
-		<div class="w3d-hero-inner">
+			<div class="w3d-archive-band" aria-hidden="true">
+				<div class="w3d-archive-band-inner"></div>
+			</div>
+
+			<div class="w3d-hero-inner">
 			<?php w3d_breadcrumbs(); ?>
 
 			<header class="chain-dash-head">

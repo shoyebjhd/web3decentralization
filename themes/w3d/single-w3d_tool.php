@@ -11,7 +11,11 @@ while ( have_posts() ) :
 	the_post();
 	?>
 	<header class="w3d-single-hero">
-		<div class="w3d-hero-inner">
+			<div class="w3d-archive-band" aria-hidden="true">
+				<div class="w3d-archive-band-inner"></div>
+			</div>
+
+			<div class="w3d-hero-inner">
 			<div class="w3d-hero-main">
 				<?php w3d_breadcrumbs(); ?>
 				<img class="w3d-tool-icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/tool-' . get_post_field( 'post_name', get_the_ID() ) . '.svg?v=rebrand2' ); ?>" alt="" width="48" height="48" decoding="async" loading="eager">
