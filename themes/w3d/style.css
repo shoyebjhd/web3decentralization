@@ -626,7 +626,7 @@ background:#FF8C1A;
    ============================================================ */
 .w3d-section{ padding:var(--w3d-space-2xl) 24px; }
 .w3d-section .w3d-sec-label{
-	text-align:center;
+	text-align:left;
 	color:var(--w3d-emerald-2);
 	font-weight:700;
 	text-transform:uppercase;
@@ -686,6 +686,9 @@ background:#FF8C1A;
    TOPIC / GUIDE CARDS
    ============================================================ */
 .w3d-cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; align-items:stretch; }
+.w3d-cards-topics{ width:100%; grid-template-columns:repeat(2,minmax(0,1fr)); }
+@media (max-width:720px){ .w3d-cards-topics{ grid-template-columns:1fr; } }
+.w3d-front .w3d-sec-label, .home .w3d-sec-label{ text-align:left; }
 @media (max-width:640px){ .w3d-cards{ grid-template-columns:1fr; } }
 .w3d-card{
 	display:flex;
