@@ -243,8 +243,17 @@ function w3d_front_stat( $icon, $num, $label, $sub, $data_count = null ) {
 				<?php if ( $latest->have_posts() ) : ?>
 					<?php while ( $latest->have_posts() ) : ?>
 						<?php $latest->the_post(); ?>
-						<article class="w3d-guide-card w3d-reveal">
+						<article class="w3d-guide-card w3d-guide-card w3d-reveal">
 							<a href="<?php the_permalink(); ?>" class="w3d-guide-link">
+								<span class="w3d-guide-feat" aria-hidden="true">
+									<svg viewBox="0 0 120 120" focusable="false" aria-hidden="true">
+										<rect x="14" y="14" width="92" height="92" rx="22" fill="url(#w3d-fg-a)"/>
+										<path d="M34 66 l14-18 10 10 22-26" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".92"/>
+										<defs><linearGradient id="w3d-fg-a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF7A00"/><stop offset="1" stop-color="#FF8C1A"/></linearGradient></defs>
+									</svg>
+								</span>
+								<?php $w3d_g_i++; ?>
+								<span class="w3d-guide-idx" aria-hidden="true"><?php echo esc_html( str_pad( (string) $w3d_g_i, 2, '0', STR_PAD_LEFT ) ); ?></span>
 								<span class="w3d-card-ico" aria-hidden="true"><?php echo w3d_front_icon( 'book' ); ?></span>
 								<span class="w3d-card-cat"><?php $c = get_the_category(); echo esc_html( ! empty( $c ) ? $c[0]->name : 'Guide' ); ?></span>
 								<span class="w3d-guide-title"><?php the_title(); ?></span>
