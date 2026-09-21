@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Sui Decentralization Audit"
 description: "chain: sui name: Sui consensus: Delegated PoS (Mysticeti / Narwhal-Bullshark) composite: 49."
 ---

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Cardano Decentralization Audit"
 description: "chain: ada name: Cardano consensus: Ouroboros Proof of Stake composite: 70."
 ---

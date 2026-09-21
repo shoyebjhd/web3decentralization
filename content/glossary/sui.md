@@ -1,4 +1,4 @@
-﻿---
+---
 title: Sui — Decentralization Score 49.2/100
 slug: sui
 type: glossary

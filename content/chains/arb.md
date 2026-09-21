@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Arbitrum Decentralization Audit"
 description: "chain: arb name: Arbitrum consensus: Optimistic Rollup (L1 Ethereum Settlement + BOLD Fraud Proofs) composite: 62."
 ---

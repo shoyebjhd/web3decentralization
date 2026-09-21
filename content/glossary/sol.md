@@ -1,4 +1,4 @@
-﻿---
+---
 title: Solana — Decentralization Score 53.2/100
 slug: sol
 type: glossary

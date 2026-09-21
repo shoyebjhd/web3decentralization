@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Polygon Decentralization Audit"
 description: "chain: polygon name: Polygon consensus: Proof of Stake (PoS edge-node network) â€” post-CDK multi-chain related: [proof-of-stake, staking, superchain, z..."
 ---

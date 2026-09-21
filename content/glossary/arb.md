@@ -1,4 +1,4 @@
-﻿---
+---
 title: Arbitrum — Decentralization Score 62.7/100
 slug: arb
 type: glossary

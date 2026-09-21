@@ -1,4 +1,4 @@
-﻿---
+---
 title: Avalanche — Decentralization Score 57.2/100
 slug: avax
 type: glossary

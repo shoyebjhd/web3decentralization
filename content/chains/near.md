@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Near Decentralization Audit"
 description: "chain: near name: Near consensus: Nightshade Sharding + Doomslug PoS composite: 60."
 ---

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Avalanche Decentralization Audit"
 description: "chain: avax name: Avalanche consensus: Snowman / Avalanche PoS composite: 57."
 ---

@@ -1,4 +1,4 @@
-﻿---
+---
 title: Polkadot — Decentralization Score 72.6/100
 slug: dot
 type: glossary

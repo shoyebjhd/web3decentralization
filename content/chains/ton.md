@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Toncoin (TON) Decentralization Audit"
 description: "chain: ton name: Toncoin (TON) consensus: Proof of Stake â€” sharded masterchain + workchains related: [proof-of-stake, sharding, validator, layer-1, me..."
 ---

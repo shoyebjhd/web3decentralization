@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Polygon zkEVM Decentralization Audit"
 description: "chain: polygon-zkevm name: Polygon zkEVM consensus: Zero-Knowledge Rollup (validity proof) â€” settles to Ethereum related: [zero-knowledge-proof, zk-ro..."
 ---

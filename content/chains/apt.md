@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Aptos Decentralization Audit"
 description: "chain: apt name: Aptos consensus: AptosBFT (Proof of Stake + Block-STM) composite: 49."
 ---

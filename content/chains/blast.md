@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Blast Decentralization Audit"
 description: "chain: blast name: Blast consensus: Optimistic Rollup (OP Stack) â€” native yield through ETH/RWA staking related: [optimistic-rollup, op-stack, liquid..."
 ---

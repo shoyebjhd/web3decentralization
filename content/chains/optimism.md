@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Optimism Decentralization Audit"
 description: "chain: optimism name: Optimism consensus: Optimistic Rollup (OP Stack) â€” settles to Ethereum related: [optimistic-rollup, op-stack, superchain, sequen..."
 ---

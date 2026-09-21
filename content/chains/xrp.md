@@ -1,4 +1,4 @@
-﻿---
+---
 title: "XRP Ledger Decentralization Audit"
 description: "chain: xrp name: XRP Ledger consensus: XRP LCP (Federated) composite: 43."
 ---

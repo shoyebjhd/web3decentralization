@@ -1,4 +1,4 @@
-﻿---
+---
 title: NEAR — Decentralization Score 60.3/100
 slug: near
 type: glossary

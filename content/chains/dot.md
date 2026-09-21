@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Polkadot Decentralization Audit"
 description: "chain: dot name: Polkadot consensus: NPoS (BABE + GRANDPA) composite: 72."
 ---

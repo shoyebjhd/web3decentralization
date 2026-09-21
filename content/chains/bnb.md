@@ -1,4 +1,4 @@
-﻿---
+---
 title: "BNB Chain Decentralization Audit"
 description: "chain: bnb name: BNB Chain consensus: Proof of Stake Authority (PoSA) â€” validator committee related: [proof-of-stake, validator, staking, exchange, la..."
 ---

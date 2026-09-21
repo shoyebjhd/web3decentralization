@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Solana Decentralization Audit"
 description: "chain: sol name: Solana consensus: Proof of History + PoS composite: 53."
 ---

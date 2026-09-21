@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Ethereum Decentralization Audit"
 description: "chain: eth name: Ethereum consensus: Proof of Stake (Gasper) composite: 80."
 ---

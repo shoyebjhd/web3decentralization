@@ -1,4 +1,4 @@
-﻿---
+---
 title: XRP — Decentralization Score 43.2/100
 slug: xrp
 type: glossary

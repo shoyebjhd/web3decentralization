@@ -1,4 +1,4 @@
-﻿---
+---
 title: Cosmos — Decentralization Score 68/100
 slug: cosmos
 type: glossary

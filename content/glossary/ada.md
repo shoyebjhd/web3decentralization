@@ -1,4 +1,4 @@
-﻿---
+---
 title: Cardano — Decentralization Score 70.4/100
 slug: ada
 type: glossary

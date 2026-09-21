@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Base Decentralization Audit"
 description: "chain: base name: Base consensus: Optimistic Rollup (OP Stack) â€” settles to Ethereum related: [optimistic-rollup, op-stack, superchain, alternation, s..."
 ---

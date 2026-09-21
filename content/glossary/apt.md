@@ -1,4 +1,4 @@
-﻿---
+---
 title: Aptos — Decentralization Score 49.1/100
 slug: apt
 type: glossary

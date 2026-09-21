@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Bitcoin Decentralization Audit"
 description: "chain: btc name: Bitcoin consensus: Nakamoto Proof of Work composite: 84."
 ---

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Cosmos Decentralization Audit"
 description: "chain: cosmos name: Cosmos consensus: CometBFT (Tendermint) PoS composite: 68 live_validators: 180 live_validators_source: cosmos."
 ---
