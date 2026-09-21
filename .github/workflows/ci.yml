@@ -16,6 +16,10 @@ jobs:
         with:
           python-version: "3.12"
 
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
       - name: Run repo validator
         run: python scripts/validate_repo.py
 
