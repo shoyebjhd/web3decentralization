@@ -144,25 +144,45 @@ function w3d_front_stat( $icon, $num, $label, $sub, $data_count = null ) {
 			<h2 id="w3d-chains-title">How Decentralized Are the Top Blockchains?</h2>
 			<p class="w3d-sec-sub">Nakamoto Coefficient and a four-pillar model — infrastructure, capital, governance, and software — scored from live network data in the W3D Terminal.</p>
 
-			<div class="w3d-chains">
+			<div class="w3d-chains w3d-chains-bento">
 				<?php if ( $top_chains->have_posts() ) : ?>
-					<?php while ( $top_chains->have_posts() ) : ?>
-						<?php
-						$top_chains->the_post();
-						$score = (float) get_post_meta( get_the_ID(), 'score_total', true );
+					<?php
+					$w3d_bento_i = 0;
+					while ( $top_chains->have_posts() ) : $top_chains->the_post();
+						$score  = (float) get_post_meta( get_the_ID(), 'score_total', true );
 						$detail = wp_strip_all_tags( get_the_excerpt() );
-						if ( '' === $detail ) {
-							$detail = 'View the full audit';
-						}
-						?>
-						<div class="w3d-chain w3d-reveal">
-							<a href="<?php the_permalink(); ?>">
-								<div class="w3d-top"><span class="w3d-name"><?php the_title(); ?></span><span class="w3d-score"><?php echo esc_html( number_format( $score, $score == (int) $score ? 0 : 1 ) ); ?></span></div>
-								<div class="w3d-bar"><i style="width:<?php echo esc_attr( max( 0, min( 100, $score ) ) ); ?>%"></i></div>
-								<span class="w3d-detail"><?php echo esc_html( wp_trim_words( $detail, 8 ) ); ?> →</span>
-							</a>
-						</div>
-					<?php endwhile; ?>
+						if ( '' === $detail ) { $detail = 'View the full audit'; }
+						if ( 0 === $w3d_bento_i ) : ?>
+							<div class="w3d-chain-feature w3d-reveal">
+								<a href="<?php the_permalink(); ?>">
+									<span class="w3d-feat-label">Decentralization Score</span>
+									<div class="w3d-feat-ring" role="img" aria-label="<?php
+										/* translators: %s: decentralization score */
+										printf( esc_attr__( '%1$s decentralization score: %2$s of 100', 'w3d' ), esc_html( get_the_title() ), esc_html( number_format( $score, $score == (int) $score ? 0 : 1 ) ) );
+									?>">
+										<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+											<circle class="w3d-feat-ring-track" cx="60" cy="60" r="52"></circle>
+											<circle class="w3d-feat-ring-bar" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="<?php echo esc_attr( 326.7 - ( 326.7 * max( 0, min( 100, $score ) ) / 100 ) ); ?>"></circle>
+										</svg>
+										<span class="w3d-feat-ring-num"><?php echo esc_html( number_format( $score, $score == (int) $score ? 0 : 1 ) ); ?></span>
+									</div>
+									<span class="w3d-feat-name"><?php the_title(); ?></span>
+									<span class="w3d-feat-sub"><?php echo esc_html( wp_trim_words( $detail, 7 ) ); ?> →</span>
+								</a>
+							</div>
+						<?php else : ?>
+							<div class="w3d-chain w3d-chain-mini w3d-reveal">
+								<a href="<?php the_permalink(); ?>">
+									<div class="w3d-top"><span class="w3d-name"><?php the_title(); ?></span><span class="w3d-score"><?php echo esc_html( number_format( $score, $score == (int) $score ? 0 : 1 ) ); ?></span></div>
+									<div class="w3d-bar"><i style="width:<?php echo esc_attr( max( 0, min( 100, $score ) ) ); ?>%"></i></div>
+								</a>
+							</div>
+						<?php endif; ?>
+						<?php
+						$w3d_bento_i++;
+						if ( 4 === $w3d_bento_i ) { break; }
+					endwhile;
+					?>
 				<?php endif; ?>
 				<?php wp_reset_postdata(); ?>
 			</div>
