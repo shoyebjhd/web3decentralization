@@ -216,12 +216,13 @@ function w3d_front_stat( $icon, $num, $label, $sub, $data_count = null ) {
 			<h2 id="w3d-topic-title">Jump Straight Into a Topic</h2>
 
 			<div class="w3d-cards w3d-cards-topics">
-				<?php foreach ( $topics as $topic ) : ?>
+				<?php foreach ( $topics as $w3d_ti => $topic ) : ?>
 					<?php
 					$term = get_category_by_slug( $topic['slug'] );
 					$count = $term ? (int) $term->count : 0;
 					?>
 					<a class="w3d-card w3d-card-link w3d-reveal" href="<?php echo esc_url( $topic['href'] ); ?>">
+						<span class="w3d-card-idx" aria-hidden="true"><?php echo esc_html( str_pad( (string) ( $w3d_ti + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></span>
 						<span class="w3d-card-ico" aria-hidden="true"><?php echo w3d_front_icon( $topic['icon'] ); ?></span>
 						<span class="w3d-card-cat"><?php echo esc_html( $count ); ?> guides</span>
 						<span class="w3d-card-title"><?php echo esc_html( $topic['label'] ); ?></span>
