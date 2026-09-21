@@ -204,10 +204,11 @@ function w3d_asset_ver( $path ) {
  * the core block library stylesheet is intentionally not enqueued.
  */
 function w3d_enqueue_assets() {
+	wp_enqueue_style( 'w3d-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap', array(), null );
 	wp_enqueue_style(
 		'w3d-style',
 		get_stylesheet_uri(),
-		array(),
+		array( 'w3d-inter' ),
 		w3d_asset_ver( '/style.css' )
 	);
 
@@ -459,6 +460,46 @@ add_action( 'wp_head', 'w3d_start_head_buffer', 0 );
 
 function w3d_flush_head_buffer() {
 	$html = (string) ob_get_clean();
+
+	// article:* OG tags for singular content when Rank Math hasn't emitted them.
+	$article_time = '';
+	$article_sec  = '';
+	if ( is_singular() ) {
+		$post = get_queried_object();
+		if ( $post instanceof WP_Post ) {
+			if ( ! preg_match( '#property="article:published_time"#', $html ) ) {
+				$time = get_post_time( 'c', true, $post->ID );
+				if ( $time ) {
+					$article_time = '<meta property="article:published_time" content="' . esc_attr( $time ) . '">' . "\n";
+				}
+			}
+			if ( ! preg_match( '#property="article:section"#', $html ) ) {
+				$section = '';
+				if ( 'post' === $post->post_type ) {
+					$cats = get_the_category( $post->ID );
+					if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
+						$section = $cats[0]->name;
+					}
+				} elseif ( 'course' === $post->post_type ) {
+					$section = get_the_title( $post->ID );
+				} elseif ( 'lesson' === $post->post_type ) {
+					if ( function_exists( 'llms_get_post' ) && function_exists( 'llms_get_post_parent_course' ) ) {
+						$course_id = llms_get_post_parent_course( $post->ID );
+						if ( $course_id ) {
+							$section = get_the_title( $course_id );
+						}
+					}
+				}
+				if ( $section ) {
+					$article_sec = '<meta property="article:section" content="' . esc_attr( $section ) . '">' . "\n";
+				}
+			}
+		}
+	}
+	if ( $article_time ) {
+		$html = $article_time . $article_sec . $html;
+	}
+
 	if ( preg_match( '#<meta name="description" content="([^"]+)"[^>]*>#', $html, $m ) ) {
 		$decoded = html_entity_decode( $m[1], ENT_QUOTES, 'UTF-8' );
 		if ( function_exists( 'mb_substr' ) && mb_strlen( $decoded, 'UTF-8' ) > 155 ) {

@@ -44,11 +44,11 @@ Tags: dark, one-column, custom-logo, custom-menu, featured-images, threaded-comm
    ============================================================ */
 :root{
 	/* Colors */
-	--w3d-bg:           #0a0e1a;
-	--w3d-bg-2:         #0b1120;
-	--w3d-bg-card:      #0f121f;
-	--w3d-card:         #0f121f;
-	--w3d-bg-elevated:  #151a2c;
+	--w3d-bg:           #050505;
+	--w3d-bg-2:         #070707;
+	--w3d-bg-card:      #0d0d0d;
+	--w3d-card:         #0d0d0d;
+	--w3d-bg-elevated:  #111111;
 	--w3d-surface:      #151a2c;
 --w3d-surface-2:    #1f150a;
 	--w3d-footer-bg:    #140b04;
@@ -60,18 +60,18 @@ Tags: dark, one-column, custom-logo, custom-menu, featured-images, threaded-comm
 	--w3d-muted:        #9aa3b6;
 	--w3d-text-faint:   #9aa3b6;
 	--w3d-dim:          #9aa3b6;
---w3d-emerald:      #FF7A00;
-	--w3d-emerald-2:    #FF8C1A;
-	--w3d-teal:         #FF7A00;
-	--w3d-teal-dim:     rgba(255,122,0,.15);
-	--w3d-cyan:         #FF9A3D;
-	--w3d-grad:         linear-gradient(120deg,#FF7A00 0%,#FF9A3D 45%,#FFC24D 100%);
-	--w3d-grad-cyan:    linear-gradient(120deg,#FF7A00,#FF8C1A);
-	--w3d-primary:      #FF7A00;
-	--w3d-primary-hover:#FF8C1A;
-	--w3d-primary-dim:  rgba(255,122,0,.12);
-	--w3d-primary-border: rgba(255,122,0,.3);
-	--w3d-primary-glow: 0 0 20px rgba(255,122,0,.15);
+	--w3d-emerald:      #f97316;
+	--w3d-emerald-2:    #ff8a33;
+	--w3d-teal:         #f97316;
+	--w3d-teal-dim:     rgba(249,115,22,.15);
+	--w3d-cyan:         #ff9e4d;
+	--w3d-grad:         linear-gradient(120deg,#f97316 0%,#ff8a33 45%,#ffb066 100%);
+	--w3d-grad-cyan:    linear-gradient(120deg,#f97316,#ff8a33);
+	--w3d-primary:      #f97316;
+	--w3d-primary-hover:#ff8a33;
+	--w3d-primary-dim:  rgba(249,115,22,.12);
+	--w3d-primary-border: rgba(249,115,22,.3);
+	--w3d-primary-glow: 0 0 20px rgba(249,115,22,.15);
 	--w3d-btn-fg:       #0a0e1a;
 	--w3d-btn-bg:       #FF7A00;
 	--w3d-btn-grad:     linear-gradient(135deg,#FF7A00,#E86500);
@@ -114,7 +114,7 @@ Tags: dark, one-column, custom-logo, custom-menu, featured-images, threaded-comm
 	--w3d-glow:         0 0 0 1px rgba(255,122,0,.25), 0 8px 30px -6px rgba(255,122,0,.45);
 
 	/* Layout */
-	--w3d-content-w: 1180px;
+	--w3d-content-w: 1320px;
 	--w3d-read-w:    820px;
 }
 
@@ -2926,3 +2926,81 @@ body.single-w3d_tool .w3d-single-hero .w3d-tool-icon{ margin:0 0 14px; }
 	.llms-lesson-link{ display:inline-flex; align-items:center; min-height:44px; padding:0 14px; }
 	.w3d-footer-disclaimer a{ display:inline-block; padding:5px 3px; margin:-5px -3px; }
 }
+
+/* ============================================================
+   DESIGN SYSTEM LAYER (spec v1 — appended for cascade safety)
+   ------------------------------------------------------------
+   Layout   : container 1320px centered, 24px horiz padding mobile
+   Palette  : bg #050505 · accent #f97316 · headings #FFF ·
+              body #A3A3A3 · borders rgba(255,255,255,.05)
+   Type     : Inter (via Google Fonts — enqueued in functions.php)
+   Aesthetic: Glassmorphism cards + blur, soft hover lift + glow
+   ============================================================ */
+.w3d-ds-sheet,
+.w3d-card,
+.w3d-stat-card,
+.w3d-gloss-card,
+.w3d-rel-card{
+	background:        rgba(255,255,255,.02);
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter:   blur(12px);
+	border:            1px solid rgba(255,255,255,.05);
+	transition:        transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.w3d-ds-sheet:hover,
+.w3d-card:hover,
+.w3d-stat-card:hover,
+.w3d-gloss-card:hover,
+.w3d-rel-card:hover{
+	transform:        translateY(-2px);
+	border-color:     rgba(249,115,22,.45);
+	background:       rgba(255,255,255,.04);
+	box-shadow:       0 10px 28px -6px rgba(249,115,22,.20);
+}
+.w3d-ds-sheet a,
+.w3d-card a,
+.w3d-stat-card a,
+.w3d-gloss-card a,
+.w3d-rel-card a,
+.w3d-btn,
+.w3d-btn-hero{
+	transition:        color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.w3d-btn:hover,
+.w3d-btn-hero:hover{ transform:translateY(-2px); }
+body{ font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif; font-weight:400; }
+h1,h2,h3,h4,h5,h6{ font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif; font-weight:700; letter-spacing:-.02em; line-height:1.25; }
+
+/* ============================================================
+   DESIGN SYSTEM (spec: dark glassmorphism, Inter, orange #f97316)
+   Appended after all component rules so it wins the cascade.
+   ============================================================ */
+:root{
+	--w3d-ds-container: 1320px;
+	--w3d-ds-accent:    #f97316;
+	--w3d-ds-accent-soft: rgba(249,115,22,.1);
+	--w3d-ds-glass-bg:  rgba(255,255,255,0.02);
+	--w3d-ds-border:    rgba(255,255,255,0.05);
+	--w3d-ds-glow:      0 8px 32px rgba(249,115,22,.18);
+}
+body{ font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.75; letter-spacing:.01em; }
+h1,h2,h3,h4,h5,h6{ font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif; letter-spacing:-.02em; line-height:1.15; }
+.w3d-wrap, .w3d-content-w{ max-width:var(--w3d-ds-container,1320px); width:100%; margin-left:auto; margin-right:auto; }
+@media (max-width:640px){ .w3d-wrap{ padding-left:24px; padding-right:24px; } }
+
+/* --- Glass cards --- */
+.w3d-card, .w3d-card-glass, .w3d-stat-card, .w3d-gloss-card{
+	background:var(--w3d-ds-glass-bg) !important;
+	-webkit-backdrop-filter:blur(12px);
+	backdrop-filter:blur(12px);
+	border:1px solid var(--w3d-ds-border) !important;
+}
+.w3d-card-link, .w3d-card-glass, .w3d-stat-card, .w3d-gloss-card{ transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+.w3d-card-link:hover, .w3d-card-glass:hover, .w3d-stat-card:hover, .w3d-gloss-card:hover{
+	transform:translateY(-2px);
+	border-color:var(--w3d-ds-accent) !important;
+	box-shadow:var(--w3d-ds-glow);
+}
+.w3d-btn{ transition:transform .22s ease, background-color .22s ease, box-shadow .22s ease; }
+.w3d-btn:hover{ transform:translateY(-2px); }
+
