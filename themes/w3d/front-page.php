@@ -196,9 +196,9 @@ function w3d_front_stat( $icon, $num, $label, $sub, $data_count = null ) {
 			<p class="w3d-sec-label">Start Here</p>
 			<h2 id="w3d-start-title">New to Crypto? Start With These</h2>
 
-			<div class="w3d-cards">
-				<?php foreach ( $starts as $card ) : ?>
-					<a class="w3d-card w3d-card-link w3d-reveal" href="<?php echo esc_url( $card['href'] ); ?>">
+			<div class="w3d-cards w3d-cards-start">
+				<?php foreach ( $starts as $i => $card ) : ?>
+					<a class="w3d-card w3d-card-link w3d-reveal<?php echo 0 === $i ? ' w3d-card-start-feat' : ( 1 === $i ? ' w3d-card-start-sub' : '' ); ?>" href="<?php echo esc_url( $card['href'] ); ?>">
 						<span class="w3d-card-ico" aria-hidden="true"><?php echo w3d_front_icon( $card['icon'] ); ?></span>
 						<span class="w3d-card-cat"><?php echo esc_html( $card['cat'] ); ?></span>
 						<span class="w3d-card-title"><?php echo esc_html( $card['title'] ); ?></span>
