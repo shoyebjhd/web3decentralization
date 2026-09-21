@@ -46,6 +46,11 @@
 			) );
 			?>
 		</nav>
+
+		<div class="w3d-header-actions">
+			<a class="w3d-actions-login" href="<?php echo esc_url( wp_login_url() ); ?>"><?php esc_html_e( 'Log in', 'w3d' ); ?></a>
+			<a class="w3d-actions-cta" href="<?php echo esc_url( wp_registration_url() ); ?>"><?php esc_html_e( 'Get Started', 'w3d' ); ?></a>
+		</div>
 	</div>
 </header>
 
