@@ -1,23 +1,24 @@
----
+﻿---
 title: "Method: Weights, Limits & Best Practices"
 order: 8
 course: decentralization-analyst
+description: "Before you start citing composite scores, you need to understand how they're."
 ---
 
 Before you start citing composite scores, you need to understand how they're
-built — and their honest limitations. This lesson is the analyst's code of
+built â€” and their honest limitations. This lesson is the analyst's code of
 conduct.
 
 ## The composite formula
 
 ```
-composite = 0.30·infrastructure + 0.25·capital + 0.25·governance + 0.20·software
+composite = 0.30Â·infrastructure + 0.25Â·capital + 0.25Â·governance + 0.20Â·software
 ```
 
 Those weights are a **judgment call**, not a law of physics:
 - Infrastructure gets the most weight because a chain you can't run is
   decentralised in name only.
-- Capital and governance are close behind — they decide *control*.
+- Capital and governance are close behind â€” they decide *control*.
 - Software gets 20%: rare but catastrophic.
 
 Changing the weights changes the ranking. BTC stays top under most
@@ -35,7 +36,7 @@ weightings; XRP and Aptos stay low; the middle (Solana/Sui/Avalanche) shuffles.
 
 ## Best practices when you quote W3D data
 
-1. Link the [methodology](methodology.md) — let people verify the formula.
+1. Link the [methodology](methodology.md) â€” let people verify the formula.
 2. Name the pillar, not just the composite. "BTC 84.8" is a headline;
    "Bitcoin's software pillar is 70 because Core dominates ~95%" is analysis.
 3. Give the date. Data ages fast in this space.
@@ -48,13 +49,13 @@ test. To argue "ETH should be an 82 not an 80.8":
 
 - Point at the specific pillar that's wrong.
 - Bring newer data (validator share, client usage, a governance change).
-- Update the relevant `content/chains/*.md` + `data/chains.csv` in a PR —
+- Update the relevant `content/chains/*.md` + `data/chains.csv` in a PR â€”
   that's the mechanism this repo is built on.
 
 > The final skill of an analyst is *epistemic humility*: knowing exactly which
 > parts of the number are measurement and which are judgment.
 
-**Congratulations — you've completed the Decentralization Analyst path.**
+**Congratulations â€” you've completed the Decentralization Analyst path.**
 Consider earning a certificate on the live site, then teach someone else what
 you learned: the best test of understanding is explaining a Nakamoto
 Coefficient to a friend in one minute.

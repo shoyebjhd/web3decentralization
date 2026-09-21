@@ -1,30 +1,22 @@
----
-chain: near
-name: Near
-consensus: Nightshade Sharding + Doomslug PoS
-composite: 60.3
-live_validators: 417
-live_validators_source: near-public-rpc
-live_nakamoto_33: 9
-live_nakamoto_source: computed-live
-live_updated: 2026-09-17T05:26:01.435Z
-lastmod: 2026-09-17
+﻿---
+title: "Near Decentralization Audit"
+description: "chain: near name: Near consensus: Nightshade Sharding + Doomslug PoS composite: 60."
 ---
 
 # Near Decentralization Audit
 
-Near is a sharded proof-of-stake chain built for giant-scale performance with Nightshade sharding. This audit scores its decentralization across four pillars —
-infrastructure, capital, governance, and software — using the methodology in
+Near is a sharded proof-of-stake chain built for giant-scale performance with Nightshade sharding. This audit scores its decentralization across four pillars â€”
+infrastructure, capital, governance, and software â€” using the methodology in
 [data/methodology.md](../../data/methodology.md).
 
-**Composite decentralization score: 60.3 / 100** · *Sharded validator scaling via Chunk-Only Producers; strong ecosystem DAOs offset by single-client core*
+**Composite decentralization score: 60.3 / 100** Â· *Sharded validator scaling via Chunk-Only Producers; strong ecosystem DAOs offset by single-client core*
 
 ## Four pillars
 
-- **Infrastructure (30%)** — 66/100 · Nakamoto 24 · ~250+ validators; Chunk-Only Producer model lowers barrier to entry across shards
-- **Capital (25%)** — 56/100 · Nakamoto 7 · Broad stake distribution supported by active staking pools and liquid staking protocols
-- **Governance (25%)** — 62/100 · Nakamoto 0 · Progressive decentralization via Community House, NDC (Near Digital Collective), and on-chain voting
-- **Software (20%)** — 55/100 · Nakamoto 1 · Primary Rust `nearcore` codebase with independent RPC nodes and WebAssembly runtimes
+- **Infrastructure (30%)** â€” 66/100 Â· Nakamoto 24 Â· ~250+ validators; Chunk-Only Producer model lowers barrier to entry across shards
+- **Capital (25%)** â€” 56/100 Â· Nakamoto 7 Â· Broad stake distribution supported by active staking pools and liquid staking protocols
+- **Governance (25%)** â€” 62/100 Â· Nakamoto 0 Â· Progressive decentralization via Community House, NDC (Near Digital Collective), and on-chain voting
+- **Software (20%)** â€” 55/100 Â· Nakamoto 1 Â· Primary Rust `nearcore` codebase with independent RPC nodes and WebAssembly runtimes
 
 ## What the score means
 

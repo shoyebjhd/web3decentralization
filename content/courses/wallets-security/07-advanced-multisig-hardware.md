@@ -1,7 +1,8 @@
----
+﻿---
 title: "Advanced Protection: Multisig and Hardware"
 order: 7
 course: wallets-security
+description: "Single-key wallets have a single point of failure: one stolen seed, one $5."
 ---
 
 Single-key wallets have a single point of failure: one stolen seed, one $5
@@ -11,15 +12,15 @@ that failure mode gets engineered away.
 ## Multisig in one paragraph
 
 A 2-of-3 wallet needs any two of three keys to move funds. Lose one key?
-You're fine. One key stolen? Useless alone. Structure it geographically —
-home safe, bank box, trusted person — and no single event (theft, fire,
+You're fine. One key stolen? Useless alone. Structure it geographically â€”
+home safe, bank box, trusted person â€” and no single event (theft, fire,
 coercion) takes your money.
 
 ## Who actually needs multisig
 
 - Holdings you'd be devastated to lose (~5 figures and up).
 - Shared money: couples, business partners, DAOs, treasuries.
-- Anyone who's ever thought "what if someone puts a wrench to my head" —
+- Anyone who's ever thought "what if someone puts a wrench to my head" â€”
   multisig plus a decoy setup is the professional answer.
 
 ## Hardware done right
@@ -28,7 +29,7 @@ coercion) takes your money.
 2. Generate the seed **on the device screen**, never on a computer.
 3. Never type the seed into anything except the device itself during setup.
 4. Keep firmware updated; verify receiving addresses on the device display
-   (this defeats clipboard malware — the device shows truth).
+   (this defeats clipboard malware â€” the device shows truth).
 5. Pair with a passphrase once your backups are proven.
 
 ## The threat model ladder
@@ -38,10 +39,10 @@ coercion) takes your money.
 3. **Life-changing amounts:** 2-of-3 multisig across locations + hardware +
    inheritance docs.
 
-Climb one rung past your comfort zone, not three past your competence —
+Climb one rung past your comfort zone, not three past your competence â€”
 complexity you don't understand is its own risk.
 
 > Security scales with value. Match the vault to the treasure, and practice
 > recovery *before* you need it.
 
-**Next lesson:** recovery and inheritance — planning for the worst day.
+**Next lesson:** recovery and inheritance â€” planning for the worst day.

@@ -1,17 +1,18 @@
----
+﻿---
 title: "Proof of Work vs Proof of Stake"
 order: 7
 course: crypto-fundamentals
+description: "Every blockchain needs [consensus](glossary/consensus.md): a way for thousands."
 ---
 
 Every blockchain needs [consensus](glossary/consensus.md): a way for thousands
 of independent computers to agree on what happened. Today there are two major
-systems — and this one decision says a lot about a network's
+systems â€” and this one decision says a lot about a network's
 [decentralization](glossary/decentralization.md).
 
-## Proof of Work (PoW) — "show the work"
+## Proof of Work (PoW) â€” "show the work"
 
-Miners race to find a number that fits the network's target — actually solving
+Miners race to find a number that fits the network's target â€” actually solving
 a pointless math problem that's expensive in electricity. Whoever wins proposes
 the next block ([mining](glossary/mining.md)).
 
@@ -21,15 +22,15 @@ the next block ([mining](glossary/mining.md)).
 - **Cost:** enormous energy use. That's the famous Bitcoin criticism, and the
   reason PoS was invented.
 
-## Proof of Stake (PoS) — "money at risk"
+## Proof of Stake (PoS) â€” "money at risk"
 
 Validators [stake](glossary/staking.md) real tokens as collateral. They're
 chosen to propose/confirm blocks in proportion to what they've staked and risk
 losing it if they misbehave ("slashing").
 
 - **Security comes from financial cost.** Misbehave and you lose your stake.
-- **Cheap to run** — no racing hardware, just an honest machine.
-- **Cost:** it tends to concentrate power — the biggest pools attract the most
+- **Cheap to run** â€” no racing hardware, just an honest machine.
+- **Cost:** it tends to concentrate power â€” the biggest pools attract the most
   stake, which is a real decentralization question.
 
 ## Which is "more decentralized"?
@@ -41,7 +42,7 @@ Neither, on its own. Everything depends on *distribution*:
 - PoS is decentralized if stake is spread across many independent validators
   (and not one [liquid-staking provider](glossary/liquid-staking.md)).
 
-That's exactly what W3D measures — not "PoW vs PoS" marketing, but who
+That's exactly what W3D measures â€” not "PoW vs PoS" marketing, but who
 actually holds the power. Try it on the
 [decentralization terminal](https://web3decentralization.com/terminal/).
 

@@ -1,12 +1,13 @@
----
+﻿---
 title: "Optimism vs Arbitrum vs Base"
 order: 3
 course: l2-path
+description: "All three settle on Ethereum with fraud-proof security models."
 ---
 
 **Objective:** choose between the three big optimistic L2s on evidence, not tribalism.
 
-All three settle on Ethereum with fraud-proof security models. They differ in operators, governance, and ecosystem bets — which is where your decision lives.
+All three settle on Ethereum with fraud-proof security models. They differ in operators, governance, and ecosystem bets â€” which is where your decision lives.
 
 ## Concept: the real comparison axes
 
@@ -25,12 +26,12 @@ All three settle on Ethereum with fraud-proof security models. They differ in op
 
 ## Safety checklist
 
-- Stage first, brand second — a Stage-1 chain with $10B TVL deserves more caution than its marketing suggests.
+- Stage first, brand second â€” a Stage-1 chain with $10B TVL deserves more caution than its marketing suggests.
 - Know each chain's exit path *before* depositing size.
 - Governance tokens don't equal decentralization; check vote concentration.
 
 ## Related glossary
 
-- [Optimism](glossary/optimism.md) · [Superchain](glossary/superchain.md) · [Sequencer](glossary/sequencer.md)
+- [Optimism](glossary/optimism.md) Â· [Superchain](glossary/superchain.md) Â· [Sequencer](glossary/sequencer.md)
 
 **Next lesson:** blob space and EIP-4844, explained.

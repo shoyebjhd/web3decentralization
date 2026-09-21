@@ -1,5 +1,6 @@
 ---
 title: "The Crypto Security Companion"
+description: "A 2-minute daily checklist for anyone holding crypto. Print it, bookmark it, teach it to a friend."
 ---
 
 A 2-minute daily checklist for anyone holding crypto. Print it, bookmark it,

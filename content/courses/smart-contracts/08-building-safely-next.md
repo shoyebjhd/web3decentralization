@@ -1,7 +1,8 @@
----
+﻿---
 title: "Building Safely and What's Next"
 order: 8
 course: smart-contracts
+description: "Whether you'll ever write Solidity or just want to judge protocols like a."
 ---
 
 Whether you'll ever write Solidity or just want to judge protocols like a
@@ -15,16 +16,16 @@ pro, this closing lesson is the safety doctrine plus the map onward.
    tokens, access control, or math.
 3. **Checks-effects-interactions**, minimal admin powers, timelocks on
    upgrades, pause functions with transparent ownership.
-4. **Audit before mainnet** — then fix findings, freeze code, and re-audit
+4. **Audit before mainnet** â€” then fix findings, freeze code, and re-audit
    the diff. Budget for it like rent.
 5. **Bug bounty from day one.** Paying whitehats is the cheapest security
    spend in the industry.
 
 ## The evaluator's permanent checklist
 
-Verified code · sane holders · no surprise admin powers · locked liquidity ·
-fresh audit with fixed criticals · decentralized oracle · honest
-[tokenomics](glossary/tokenomics.md) · incident history owned publicly.
+Verified code Â· sane holders Â· no surprise admin powers Â· locked liquidity Â·
+fresh audit with fixed criticals Â· decentralized oracle Â· honest
+[tokenomics](glossary/tokenomics.md) Â· incident history owned publicly.
 
 ## Where to go from here
 
@@ -34,12 +35,12 @@ fresh audit with fixed criticals · decentralized oracle · honest
   economic layer, [Decentralization Analyst](../decentralization-analyst/01-decentralization-is-not-a-buzzword.md)
   for auditing networks, the [terminal](https://web3decentralization.com/terminal/)
   for live data.
-- **Contribute:** this whole path is CC-BY — improve a lesson via
+- **Contribute:** this whole path is CC-BY â€” improve a lesson via
   [GitHub](https://github.com/shoyebjhd/web3decentralization) and teach the
   next person.
 
 > You now read contracts the way analysts do: state, permissions, money
 > paths, and failure modes. In an industry running on code nobody reads,
-> that's a superpower. Use it — and share it.
+> that's a superpower. Use it â€” and share it.
 
 **Path complete.** Six learning paths now live. Pick your next one above.

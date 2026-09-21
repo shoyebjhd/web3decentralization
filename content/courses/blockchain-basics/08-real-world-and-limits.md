@@ -1,21 +1,22 @@
----
+﻿---
 title: "Blockchains in the Real World (and Their Limits)"
 order: 8
 course: blockchain-basics
+description: "Beyond speculation, blockchains do a short list of things genuinely well â€”."
 ---
 
-Beyond speculation, blockchains do a short list of things genuinely well —
+Beyond speculation, blockchains do a short list of things genuinely well â€”
 and a long list of things badly. This closing lesson maps both, so you can
 tell signal from slide deck.
 
 ## Where they actually win
 
 - **Censorship-resistant money** (Bitcoin): savings no one can freeze or
-  inflate — the proven use case.
+  inflate â€” the proven use case.
 - **Programmable finance** (Ethereum + L2s): global, permissionless markets
   running 24/7.
 - **Provable ownership** (NFTs, ENS): digital property with real portability.
-- **Transparent treasuries/aid:** every disbursement checkable by anyone —
+- **Transparent treasuries/aid:** every disbursement checkable by anyone â€”
   corruption gets much harder when the ledger is public.
 
 ## Where they honestly lose (today)
@@ -36,7 +37,7 @@ tell signal from slide deck.
 3. What breaks if the chain halts for a day?
 4. Is the token necessary, or is it funding in disguise?
 
-> Blockchains are a tool for removing trusted middlemen — powerful where
+> Blockchains are a tool for removing trusted middlemen â€” powerful where
 > middlemen are the problem, pointless overhead where they aren't. Knowing
 > the difference is the whole course in one sentence.
 

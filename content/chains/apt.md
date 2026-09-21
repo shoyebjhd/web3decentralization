@@ -1,30 +1,22 @@
----
-chain: apt
-name: Aptos
-consensus: AptosBFT (Proof of Stake + Block-STM)
-composite: 49.1
-live_validators: 85
-live_validators_source: aptos-public-fullnode
-live_nakamoto_33: 14
-live_nakamoto_source: computed-live
-live_updated: 2026-09-17T05:26:01.435Z
-lastmod: 2026-09-17
+﻿---
+title: "Aptos Decentralization Audit"
+description: "chain: apt name: Aptos consensus: AptosBFT (Proof of Stake + Block-STM) composite: 49."
 ---
 
 # Aptos Decentralization Audit
 
-Aptos is a Meta-born Move-language chain with parallel execution (AptosBFT). This audit scores its decentralization across four pillars —
-infrastructure, capital, governance, and software — using the methodology in
+Aptos is a Meta-born Move-language chain with parallel execution (AptosBFT). This audit scores its decentralization across four pillars â€”
+infrastructure, capital, governance, and software â€” using the methodology in
 [data/methodology.md](../../data/methodology.md).
 
-**Composite decentralization score: 49.1 / 100** · *High parallel throughput via Block-STM; moderated by institutional capital and enterprise node concentration*
+**Composite decentralization score: 49.1 / 100** Â· *High parallel throughput via Block-STM; moderated by institutional capital and enterprise node concentration*
 
 ## Four pillars
 
-- **Infrastructure (30%)** — 56/100 · Nakamoto 18 · ~145 active validators with high concentration in AWS, GCP, and tier-3 colocation facilities
-- **Capital (25%)** — 45/100 · Nakamoto 3 · High venture capital and foundation token distribution; significant foundation delegation weight
-- **Governance (25%)** — 48/100 · Nakamoto 0 · Aptos Labs and Aptos Foundation drive core AIP (Aptos Improvement Proposal) roadmaps
-- **Software (20%)** — 45/100 · Nakamoto 1 · Single primary production client codebase (Rust-based aptos-core)
+- **Infrastructure (30%)** â€” 56/100 Â· Nakamoto 18 Â· ~145 active validators with high concentration in AWS, GCP, and tier-3 colocation facilities
+- **Capital (25%)** â€” 45/100 Â· Nakamoto 3 Â· High venture capital and foundation token distribution; significant foundation delegation weight
+- **Governance (25%)** â€” 48/100 Â· Nakamoto 0 Â· Aptos Labs and Aptos Foundation drive core AIP (Aptos Improvement Proposal) roadmaps
+- **Software (20%)** â€” 45/100 Â· Nakamoto 1 Â· Single primary production client codebase (Rust-based aptos-core)
 
 ## What the score means
 

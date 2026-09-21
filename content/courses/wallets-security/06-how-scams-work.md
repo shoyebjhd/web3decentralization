@@ -1,10 +1,11 @@
----
+﻿---
 title: "How Crypto Scams Actually Work"
 order: 6
 course: wallets-security
+description: "Scams don't break cryptography â€” they break *you*, at the exact moment."
 ---
 
-Scams don't break cryptography — they break *you*, at the exact moment
+Scams don't break cryptography â€” they break *you*, at the exact moment
 something valuable is one click away. This lesson dissects the five working
 scams of 2026 so you recognize the machinery, not just the costume.
 
@@ -18,7 +19,7 @@ hostile.
 
 ## 2. Fake support (the trust exploit)
 
-"You have a stuck transaction / verification / bonus — our agent will help."
+"You have a stuck transaction / verification / bonus â€” our agent will help."
 Real support never DMs first, never asks for keys, never needs a "refundable
 deposit." Urgency + authority + a small upfront payment = the formula.
 **Defense:** initiate all support contact yourself, on official channels.
@@ -49,8 +50,8 @@ wallets only from official domains; use hardware signing for size.
 
 Every scam answers YES to at least two of: *Did they contact me first? Is it
 urgent? Does it need my keys, an approval, or an upfront payment?* Two yeses
-— walk away, verify elsewhere, come back tomorrow.
+â€” walk away, verify elsewhere, come back tomorrow.
 
 > Scammers sell certainty on a deadline. Safety is the habit of pausing.
 
-**Next lesson:** advanced protection — multisig and hardware done right.
+**Next lesson:** advanced protection â€” multisig and hardware done right.

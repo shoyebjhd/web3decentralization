@@ -1,11 +1,12 @@
----
+﻿---
 title: "The DeFi Safety Playbook"
 order: 8
 course: defi-101
+description: "Everything in this path compresses into one operating system."
 ---
 
 Everything in this path compresses into one operating system. Print this
-lesson. Follow it until it's boring — boring is the goal.
+lesson. Follow it until it's boring â€” boring is the goal.
 
 ## Before any protocol touches your money
 
@@ -27,26 +28,26 @@ Two "don't knows" = don't deposit.
 - **Leverage is a profession:** spot first, always. If you touch perps or
   looping, that's a separate education with preselected tuition (your money).
 - **Exit rehearsed:** know the unwind clicks (unloop, repay, withdraw) before
-  the panic — cascades don't wait for tutorials.
+  the panic â€” cascades don't wait for tutorials.
 
 ## Ongoing hygiene
 
 - Revoke stale token approvals quarterly.
 - Separate wallets: vault (cold), operations (hot), experiments (disposable).
-- Track everything for taxes from day one — explorers forget nothing, and
+- Track everything for taxes from day one â€” explorers forget nothing, and
   neither do tax agencies.
 - Re-read your positions monthly: rates, health factors, unlock calendars.
 
 ## The course in one page
 
-1. DeFi replaces bankers with code — the code is the counterparty.
+1. DeFi replaces bankers with code â€” the code is the counterparty.
 2. Trade on deep liquidity with tight slippage; aggregate for size.
 3. Borrow conservatively against boring collateral; watch health factors.
-4. Stablecoins differ by backing — diversify issuers, discount yield.
+4. Stablecoins differ by backing â€” diversify issuers, discount yield.
 5. Trace every APY to its source; unsourced yield is someone's exit.
 6. Audit the money path; approve sparingly; bridge lightly.
 
-> Congratulations — you understand DeFi better than most participants. The
+> Congratulations â€” you understand DeFi better than most participants. The
 > market pays a premium to the careful and collects it from everyone else.
 > Stay in the first group.
 

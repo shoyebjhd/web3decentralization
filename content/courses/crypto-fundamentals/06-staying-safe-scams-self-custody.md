@@ -1,31 +1,32 @@
----
+﻿---
 title: "Staying Safe: Scams & Self-Custody"
 order: 6
 course: crypto-fundamentals
+description: "Most crypto losses aren't hacks â€” they're social engineering."
 ---
 
-Most crypto losses aren't hacks — they're social engineering. Scammers don't
+Most crypto losses aren't hacks â€” they're social engineering. Scammers don't
 break your wallet; they convince you to hand over your
 [seed phrase](glossary/seed-phrase.md), approve a malicious contract, or send
 crypto to a "support agent." This lesson is the defense playbook.
 
 ## The top scams (2026 edition)
 
-- **Phishing sites** — a look-alike exchange dApp page. You "login," you get
+- **Phishing sites** â€” a look-alike exchange dApp page. You "login," you get
   drained. *Check the exact domain.*
-- **Fake support / DMs** — "you've won / you owe a fee / verify your account,"
+- **Fake support / DMs** â€” "you've won / you owe a fee / verify your account,"
   always on a fake deadline. Real teams never DM you first.
-- **Fake airdrops** — "connect your wallet to claim" ([airdrop](glossary/airdrop.md)
+- **Fake airdrops** â€” "connect your wallet to claim" ([airdrop](glossary/airdrop.md)
   traps). Real airdrops never ask for access.
-- **Rug pulls & honeypots** — tokens you can buy but never sell ([rug pull](glossary/rug-pull.md),
+- **Rug pulls & honeypots** â€” tokens you can buy but never sell ([rug pull](glossary/rug-pull.md),
   [honeypot](glossary/honeypot.md)).
-- **Social-media impersonation** — celebrity/CEO accounts telling you to send
+- **Social-media impersonation** â€” celebrity/CEO accounts telling you to send
   crypto or a bonus. They never do this.
 
 ## The 3 rules that stop 90% of attacks
 
 1. **Nobody legit ever asks for your seed phrase, ever.** Not support, not a
-   dApp, not "verification." If something asks, it's a scam — close it.
+   dApp, not "verification." If something asks, it's a scam â€” close it.
 2. **Slow down when money moves.** Scams manufacture urgency. The five-minute
    pause before sending to an "urgent" address has saved more crypto than all
    the security tools combined.
@@ -44,4 +45,4 @@ crypto to a "support agent." This lesson is the defense playbook.
 > The best "security tool" is a skeptical, unhurried human. Practice being
 > that human.
 
-**Next lesson:** how networks actually run — Proof of Work vs Proof of Stake.
+**Next lesson:** how networks actually run â€” Proof of Work vs Proof of Stake.

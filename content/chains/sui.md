@@ -1,30 +1,22 @@
----
-chain: sui
-name: Sui
-consensus: Delegated PoS (Mysticeti / Narwhal-Bullshark)
-composite: 49.2
-live_validators: 126
-live_validators_source: sui.publicnode
-live_nakamoto_33: 18
-live_nakamoto_source: computed-live
-live_updated: 2026-09-17T05:26:01.435Z
-lastmod: 2026-09-17
+﻿---
+title: "Sui Decentralization Audit"
+description: "chain: sui name: Sui consensus: Delegated PoS (Mysticeti / Narwhal-Bullshark) composite: 49."
 ---
 
 # Sui Decentralization Audit
 
-Sui is an object-centric chain using the Mysticeti consensus for sub-second settlement. This audit scores its decentralization across four pillars —
-infrastructure, capital, governance, and software — using the methodology in
+Sui is an object-centric chain using the Mysticeti consensus for sub-second settlement. This audit scores its decentralization across four pillars â€”
+infrastructure, capital, governance, and software â€” using the methodology in
 [data/methodology.md](../../data/methodology.md).
 
-**Composite decentralization score: 49.2 / 100** · *Ultra-fast object-centric execution; constrained by single-client architecture and validator stake concentration*
+**Composite decentralization score: 49.2 / 100** Â· *Ultra-fast object-centric execution; constrained by single-client architecture and validator stake concentration*
 
 ## Four pillars
 
-- **Infrastructure (30%)** — 54/100 · Nakamoto 14 · ~110 active validators with significant cloud hosting clustering (AWS/GCP/OVH)
-- **Capital (25%)** — 46/100 · Nakamoto 3 · Concentrated early investor allocations and foundation delegation weights
-- **Governance (25%)** — 50/100 · Nakamoto 0 · Mysten Labs & Sui Foundation lead core upgrades and network parameters
-- **Software (20%)** — 45/100 · Nakamoto 1 · Single production client implementation (Rust sui-node)
+- **Infrastructure (30%)** â€” 54/100 Â· Nakamoto 14 Â· ~110 active validators with significant cloud hosting clustering (AWS/GCP/OVH)
+- **Capital (25%)** â€” 46/100 Â· Nakamoto 3 Â· Concentrated early investor allocations and foundation delegation weights
+- **Governance (25%)** â€” 50/100 Â· Nakamoto 0 Â· Mysten Labs & Sui Foundation lead core upgrades and network parameters
+- **Software (20%)** â€” 45/100 Â· Nakamoto 1 Â· Single production client implementation (Rust sui-node)
 
 ## What the score means
 

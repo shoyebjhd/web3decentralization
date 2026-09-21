@@ -1,14 +1,15 @@
----
+﻿---
 title: "Lab: SIM-Swap and Address-Poisoning Defense"
 order: 3
 course: security-advanced
+description: "Attacker ports your number via carrier social engineering â†’ intercepts SMS 2FA â†’ resets email â†’ resets exchange â†’ withdraws."
 ---
 
 **Objective:** close the two non-crypto attack paths that drain the most real users: phone-number takeover and history poisoning.
 
 ## Concept: SIM-swap
 
-Attacker ports your number via carrier social engineering → intercepts SMS 2FA → resets email → resets exchange → withdraws. No malware, no blockchain exploit — pure telecom weakness.
+Attacker ports your number via carrier social engineering â†’ intercepts SMS 2FA â†’ resets email â†’ resets exchange â†’ withdraws. No malware, no blockchain exploit â€” pure telecom weakness.
 
 ## Concept: address poisoning
 
@@ -28,6 +29,6 @@ Attacker sends dust from look-alike addresses (same first/last characters as you
 
 ## Related glossary
 
-- [SIM Swap](glossary/sim-swap.md) · [Address Poisoning](glossary/address-poisoning.md) · [Phishing](glossary/phishing.md)
+- [SIM Swap](glossary/sim-swap.md) Â· [Address Poisoning](glossary/address-poisoning.md) Â· [Phishing](glossary/phishing.md)
 
 **Next lesson:** multisig safe setup lab.

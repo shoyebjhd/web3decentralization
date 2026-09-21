@@ -1,12 +1,13 @@
----
+﻿---
 title: "Decentralization Is Not a Buzzword"
 order: 1
 course: decentralization-analyst
+description: "Every chain claims to be "decentralized." Most aren't, and the word is."
 ---
 
 Every chain claims to be "decentralized." Most aren't, and the word is
 meaningless without a way to measure it. This path turns you into someone who
-can *audit* a network's real distribution of power — using the W3D
+can *audit* a network's real distribution of power â€” using the W3D
 methodology.
 
 ## The core insight
@@ -23,7 +24,7 @@ Decentralization isn't one thing. It's four almost-independent questions:
 A chain can score brilliantly on one pillar and badly on another. Solana has
 ~1,900 validators (great infrastructure count) but heavy cloud concentration
 and concentrated stake. XRP has few default validators but broad ownership.
-"Decentralized" — short answer, always "it depends, on which pillar."
+"Decentralized" â€” short answer, always "it depends, on which pillar."
 
 ## Why W3D uses a composite score
 
@@ -37,7 +38,7 @@ weighted average of the four pillars produces one score per chain
 1. **Assume nothing from marketing.** Token count, "community," and size are
    not decentralization.
 2. **Ask "who can actually do the bad thing?"** Corrupt how many entities to
-   control the chain? (That's the [Nakamoto Coefficient](glossary/nakamoto-coefficient.md) — next lesson.)
+   control the chain? (That's the [Nakamoto Coefficient](glossary/nakamoto-coefficient.md) â€” next lesson.)
 3. **Check the numbers, not the vibes.** The terminal + these audits put
    actual numbers in front of you.
 

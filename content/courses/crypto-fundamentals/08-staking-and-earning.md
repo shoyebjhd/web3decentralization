@@ -1,7 +1,8 @@
----
+﻿---
 title: "Staking & Earning on Your Crypto"
 order: 8
 course: crypto-fundamentals
+description: "you lock up tokens to help secure the network and get paid rewards for doing."
 ---
 
 [Staking](glossary/staking.md) is the Proof-of-Stake way to earn on crypto:
@@ -19,26 +20,26 @@ how PoS networks work.
 
 ## The numbers that matter
 
-- **[APY](glossary/apy.md)** — the advertised yearly return. It's a projection,
+- **[APY](glossary/apy.md)** â€” the advertised yearly return. It's a projection,
   not a promise, and rewards often come in volatile tokens.
-- **Lockup** — many chains make you wait before unstaking. Your money isn't
+- **Lockup** â€” many chains make you wait before unstaking. Your money isn't
   liquid.
-- **Slashing risk** — if your validator misbehaves, part of your stake can be
+- **Slashing risk** â€” if your validator misbehaves, part of your stake can be
   taken. Choose reliable validators.
 
 ## Where beginners actually stake
 
-- **On the exchange** — easiest, but *custodial*. The exchange is the
+- **On the exchange** â€” easiest, but *custodial*. The exchange is the
   validator and holds your keys.
-- **Directly on-chain** — non-custodial, more steps, you pick a validator.
-- **[Liquid staking](glossary/liquid-staking.md)** — stake and get a
+- **Directly on-chain** â€” non-custodial, more steps, you pick a validator.
+- **[Liquid staking](glossary/liquid-staking.md)** â€” stake and get a
   tradeable token in return (like stETH). Very liquid, but concentrates power
-  in one provider — watch what you're actually delegating to.
+  in one provider â€” watch what you're actually delegating to.
 
 ## The honest checklist
 
 - Understand [APY](glossary/apy.md) vs. actual, past earnings.
-- Know the lockup period — can you get out fast?
+- Know the lockup period â€” can you get out fast?
 - Check *who* you're delegating to: solo validators vs. a single giant pool.
   This matters for [decentralization](glossary/decentralization.md) and for
   your risk.
@@ -46,9 +47,9 @@ how PoS networks work.
 
 ## Why it matters beyond yield
 
-Your stake is your *vote* in who gets to secure the network. Where it goes —
-a broad set of independent validators or one dominant pool — directly decides
+Your stake is your *vote* in who gets to secure the network. Where it goes â€”
+a broad set of independent validators or one dominant pool â€” directly decides
 how decentralized the chain really is. You're not just earning; you're
 allocating power.
 
-**Next lesson:** an intro to DeFi — doing finance without banks.
+**Next lesson:** an intro to DeFi â€” doing finance without banks.

@@ -1,29 +1,30 @@
----
+﻿---
 title: "Lending and Borrowing"
 order: 3
 course: defi-101
+description: "DeFi lending pools (Aave, Compound, MakerDAO) let anyone earn interest on."
 ---
 
 DeFi lending pools (Aave, Compound, MakerDAO) let anyone earn interest on
-deposits or borrow against [collateral](glossary/collateral.md) — no credit
+deposits or borrow against [collateral](glossary/collateral.md) â€” no credit
 score, just math. Rates float with supply and demand, visible to everyone.
 
 ## How it works
 
-1. **Lend:** deposit assets → receive interest-bearing tokens tracking your
+1. **Lend:** deposit assets â†’ receive interest-bearing tokens tracking your
    share. Withdraw anytime (if [liquidity](glossary/liquidity.md) allows).
 2. **Borrow:** lock collateral worth more than the loan (over-collateralized),
    draw stablecoins or other assets, pay floating interest.
-3. **Health factor:** the ratio keeping you alive. Fall too low → automatic
+3. **Health factor:** the ratio keeping you alive. Fall too low â†’ automatic
    [liquidation](glossary/liquidation.md), no margin call, no mercy.
 
 ## The numbers that matter
 
 - **LTV (loan-to-value):** how much you can borrow per collateral dollar.
   Lower LTV = safer position.
-- **Liquidation threshold & penalty:** the tripwire and its fee (often 5–15%
+- **Liquidation threshold & penalty:** the tripwire and its fee (often 5â€“15%
   on top of your loss).
-- **Utilization/APY:** high borrowing demand = high lender yield — and thin
+- **Utilization/APY:** high borrowing demand = high lender yield â€” and thin
   exit liquidity.
 
 ## Three beginner-safe patterns
@@ -37,7 +38,7 @@ score, just math. Rates float with supply and demand, visible to everyone.
 
 Borrowing volatile assets, max-LTV positions, and "looping" strategies are
 how portfolios vaporize in a weekend. Cascading liquidations don't negotiate
-— and they cluster exactly when everything else is also crashing.
+â€” and they cluster exactly when everything else is also crashing.
 
 > Lending earns; borrowing rents risk. Keep the rented risk small enough that
 > a bad weekend is a lesson, not an obituary.

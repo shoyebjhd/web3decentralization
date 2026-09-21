@@ -1,24 +1,22 @@
----
-chain: arb
-name: Arbitrum
-consensus: Optimistic Rollup (L1 Ethereum Settlement + BOLD Fraud Proofs)
-composite: 62.7
+﻿---
+title: "Arbitrum Decentralization Audit"
+description: "chain: arb name: Arbitrum consensus: Optimistic Rollup (L1 Ethereum Settlement + BOLD Fraud Proofs) composite: 62."
 ---
 
 # Arbitrum Decentralization Audit
 
-Arbitrum is an Ethereum rollup that settles on Ethereum L1 while running cheap, fast transactions. This audit scores its decentralization across four pillars —
-infrastructure, capital, governance, and software — using the methodology in
+Arbitrum is an Ethereum rollup that settles on Ethereum L1 while running cheap, fast transactions. This audit scores its decentralization across four pillars â€”
+infrastructure, capital, governance, and software â€” using the methodology in
 [data/methodology.md](../../data/methodology.md).
 
-**Composite decentralization score: 62.7 / 100** · *High security inherited from Ethereum L1; Stage 1 rollup with active DAO governance and permissionless fraud proofs*
+**Composite decentralization score: 62.7 / 100** Â· *High security inherited from Ethereum L1; Stage 1 rollup with active DAO governance and permissionless fraud proofs*
 
 ## Four pillars
 
-- **Infrastructure (30%)** — 64/100 · Nakamoto 4 (L1 DA) · Centralized sequencer managed by Offchain Labs; offset by Ethereum L1 data availability and permissionless BOLD validation
-- **Capital (25%)** — 58/100 · Nakamoto 6 · Widely distributed ARB governance token via decentralized community airdrop and active treasury
-- **Governance (25%)** — 68/100 · Nakamoto 0 · Fully on-chain Arbitrum DAO with binding execution; 9/12 multisig Security Council emergency backup
-- **Software (20%)** — 60/100 · Nakamoto 1 · Arbitrum Nitro architecture with multi-language Stylus (Rust, C++) VM support
+- **Infrastructure (30%)** â€” 64/100 Â· Nakamoto 4 (L1 DA) Â· Centralized sequencer managed by Offchain Labs; offset by Ethereum L1 data availability and permissionless BOLD validation
+- **Capital (25%)** â€” 58/100 Â· Nakamoto 6 Â· Widely distributed ARB governance token via decentralized community airdrop and active treasury
+- **Governance (25%)** â€” 68/100 Â· Nakamoto 0 Â· Fully on-chain Arbitrum DAO with binding execution; 9/12 multisig Security Council emergency backup
+- **Software (20%)** â€” 60/100 Â· Nakamoto 1 Â· Arbitrum Nitro architecture with multi-language Stylus (Rust, C++) VM support
 
 ## What the score means
 

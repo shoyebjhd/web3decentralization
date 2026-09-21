@@ -1,17 +1,14 @@
----
-chain: base
-name: Base
-consensus: Optimistic Rollup (OP Stack) — settles to Ethereum
-related: [optimistic-rollup, op-stack, superchain, alternation, sequencer]
-lastmod: 2026-09-13
+﻿---
+title: "Base Decentralization Audit"
+description: "chain: base name: Base consensus: Optimistic Rollup (OP Stack) â€” settles to Ethereum related: [optimistic-rollup, op-stack, superchain, alternation, s..."
 ---
 
 # Base Decentralization Audit
 
-Base is the Coinbase-built Layer 2 — an Optimistic Rollup on the OP Stack that
+Base is the Coinbase-built Layer 2 â€” an Optimistic Rollup on the OP Stack that
 borrows its security from Ethereum and adds faster, cheaper settlement. Because
 it settles disputes and finality back to the L1, its *baseline* decentralization
-inherits Ethereum's — but the question this audit actually answers is where Base
+inherits Ethereum's â€” but the question this audit actually answers is where Base
 stops inheriting and starts deciding for itself.
 
 ## What an L2 inherits vs. decides
@@ -25,7 +22,7 @@ stops inheriting and starts deciding for itself.
 ## Why it matters
 
 Base matters because it's the single biggest on-ramp of *retail* Ethereum L2
-activity — and retail gravity is a decentralization double-edge. More users,
+activity â€” and retail gravity is a decentralization double-edge. More users,
 liquidity, and tooling diversity make the network harder to isolate from a
 governance or regulatory angle; but concentrated sequencer operation by a single
 large actor is exactly the kind of "technically permissionless, practically

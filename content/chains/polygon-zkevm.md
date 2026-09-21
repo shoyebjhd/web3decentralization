@@ -1,15 +1,12 @@
----
-chain: polygon-zkevm
-name: Polygon zkEVM
-consensus: Zero-Knowledge Rollup (validity proof) — settles to Ethereum
-related: [zero-knowledge-proof, zk-rollup, validity-proof, rollup, layer-2]
-lastmod: 2026-09-13
+﻿---
+title: "Polygon zkEVM Decentralization Audit"
+description: "chain: polygon-zkevm name: Polygon zkEVM consensus: Zero-Knowledge Rollup (validity proof) â€” settles to Ethereum related: [zero-knowledge-proof, zk-ro..."
 ---
 
 # Polygon zkEVM Decentralization Audit
 
 Polygon zkEVM is a zero-knowledge rollup that proves its state transitions to
-Ethereum with validity proofs — every batch comes with a cryptographic
+Ethereum with validity proofs â€” every batch comes with a cryptographic
 attestation, so you don't have to *trust* the sequencer's arithmetic, only the
 proof. That choices moves the decentralization question from "can anyone verify"
 to "**who runs the proving + sequencing machinery, and can that be taken over**."
@@ -20,12 +17,12 @@ A zk-rollup's decentralization profile looks different from an optimistic one,
 and it's worth knowing the difference before you read the score:
 
 - **No challenge window.** Unlike optimistic rollups, there's no
-  assume-valid-until-disputed period — validity proofs are sound up front, so
+  assume-valid-until-disputed period â€” validity proofs are sound up front, so
   the "challenger diversity" pillar is defanged; the soft spot shifts to
   *prover concentration* and *who publishes state roots*.
 - **Prover licensing is the new node:** running a full prover is materially
   heavier than running an L2 node, so real-world participation is thinner and
-  more concentrated — a genuine decentralization cost many zk scorecards hide
+  more concentrated â€” a genuine decentralization cost many zk scorecards hide
   behind "no fraud assumptions."
 
 ## What to watch

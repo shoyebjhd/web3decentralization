@@ -1,13 +1,14 @@
----
+﻿---
 title: "Yield, Staking and Farming: Risks First"
 order: 5
 course: defi-101
+description: "Every yield has a source."
 ---
 
 Every yield has a source. Lending interest comes from borrowers;
 [staking](glossary/staking.md) rewards from issuance and fees; farm emissions
 from dilution. This lesson teaches you to trace any [APY](glossary/apy.md)
-back to its source — because unsourced yield is just someone else's exit.
+back to its source â€” because unsourced yield is just someone else's exit.
 
 ## The yield ladder (risk order)
 
@@ -25,7 +26,7 @@ back to its source — because unsourced yield is just someone else's exit.
 
 ## APY literacy
 
-- APY assumes compounding at the current rate — rates move, prices move harder.
+- APY assumes compounding at the current rate â€” rates move, prices move harder.
 - "APY paid in X" means your return is denominated in X's volatility.
 - Distinguish nominal APY from realized return net of gas, IL, and the reward
   token's decline. Screenshots of 1,000% APY are advertisements for risk.

@@ -1,33 +1,34 @@
----
+﻿---
 title: "Consensus Without Bosses"
 order: 4
 course: blockchain-basics
+description: "no referee."
 ---
 
 [Consensus](glossary/consensus.md) is how strangers agree on one history with
 no referee. Every design answers the same attack: what stops someone from
 voting a thousand times ([Sybil](glossary/sybil-attack.md)) or rewriting the
-past? The answers differ — the question never changes.
+past? The answers differ â€” the question never changes.
 
 ## The three families
 
-**Proof of Work** — vote with electricity. Miners burn energy guessing hashes;
+**Proof of Work** â€” vote with electricity. Miners burn energy guessing hashes;
 rewriting history means out-burning everyone ([mining](glossary/mining.md)).
 Security = physical cost. Cost = energy use.
 
-**Proof of Stake** — vote with money at risk. Validators lock
+**Proof of Stake** â€” vote with money at risk. Validators lock
 [stake](glossary/staking.md); misbehavior gets slashed. Security = financial
 cost. Cost = capital concentration ([delegation](glossary/delegation.md)
 pools, liquid staking giants).
 
-**BFT voting** (Tendermint-style) — known validator sets vote in rounds;
+**BFT voting** (Tendermint-style) â€” known validator sets vote in rounds;
 finality is instant once two-thirds agree. Security = honest supermajority.
 Cost = capped, permissioned-ish sets.
 
 ## Forks: what disagreement looks like
 
-When nodes run incompatible rules, history splits — a [fork](glossary/fork.md).
-Soft forks tighten rules compatibly; hard forks break them (Bitcoin → Bitcoin
+When nodes run incompatible rules, history splits â€” a [fork](glossary/fork.md).
+Soft forks tighten rules compatibly; hard forks break them (Bitcoin â†’ Bitcoin
 Cash). Forks are governance made visible: the chain follows whichever rules
 the economic majority enforces.
 

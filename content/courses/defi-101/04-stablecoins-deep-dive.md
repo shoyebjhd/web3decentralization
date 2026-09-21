@@ -1,12 +1,13 @@
----
+﻿---
 title: "Stablecoins Deep Dive"
 order: 4
 course: defi-101
+description: "trading, lending, and saving without [volatility](glossary/volatility.md)."
 ---
 
 [Stablecoins](glossary/stablecoin.md) are DeFi's cash: dollars on-chain for
 trading, lending, and saving without [volatility](glossary/volatility.md).
-But "stable" describes a mechanism, not a guarantee — and mechanisms differ
+But "stable" describes a mechanism, not a guarantee â€” and mechanisms differ
 enormously.
 
 ## The three designs
@@ -15,20 +16,20 @@ enormously.
 |---|---|---|---|
 | Fiat-backed | Dollars/T-bills in custody | USDC, USDT | Custodian freeze, reserve doubt |
 | Crypto-backed | Over-collateralized on-chain | DAI | Collateral crash cascade |
-| Algorithmic | Code + confidence | (UST — collapsed) | Death spiral |
+| Algorithmic | Code + confidence | (UST â€” collapsed) | Death spiral |
 
 ## Due diligence in five questions
 
-1. What exactly backs each token — and who attests it, how often?
+1. What exactly backs each token â€” and who attests it, how often?
 2. Can the issuer freeze my balance? (Most fiat-backed: yes.)
 3. Has it ever [depegged](glossary/depeg.md)? How far, how long, why?
-4. Where does its yield come from — real revenue or token emissions?
+4. Where does its yield come from â€” real revenue or token emissions?
 5. What happens to it if its chain halts for a day?
 
 ## How beginners should use stables
 
 - Hold operating cash and take profits in the most boring, most audited stables.
-- Split across at least two issuers/models — no single point of stable failure.
+- Split across at least two issuers/models â€” no single point of stable failure.
 - Treat 8%+ "stable" yields as risk labels, not gifts: the premium prices
   exactly the dangers above.
 
@@ -42,4 +43,4 @@ the marketing, not the mechanism.
 > Stablecoins are tools, not savings accounts. Diversify issuers, discount
 > yield, and remember every peg is a promise someone must keep.
 
-**Next lesson:** yield, staking, and farming — risks first.
+**Next lesson:** yield, staking, and farming â€” risks first.

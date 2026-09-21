@@ -1,7 +1,8 @@
----
+﻿---
 title: "Sending Crypto Safely"
 order: 5
 course: crypto-fundamentals
+description: "Sending crypto is permanent."
 ---
 
 Sending crypto is permanent. There's no chargeback, no "I sent to the wrong
@@ -10,12 +11,12 @@ transfers safe.
 
 ## The anatomy of a transfer
 
-1. **Address** — the long string of letters/numbers you send to
+1. **Address** â€” the long string of letters/numbers you send to
    ([glossary](glossary/address.md)).
-2. **Network** — which chain carries the transaction. USDT exists on several
+2. **Network** â€” which chain carries the transaction. USDT exists on several
    networks; picking the wrong one can make funds unreachable.
-3. **Fee (gas)** — paid to miners/validators.
-4. **Confirmation** — the transaction lands on the
+3. **Fee (gas)** â€” paid to miners/validators.
+4. **Confirmation** â€” the transaction lands on the
    [blockchain](glossary/blockchain.md) and is permanently recorded.
 
 ## Safety checklist
@@ -26,8 +27,8 @@ transfers safe.
   receiver expects "on Ethereum" can lose it forever.
 - **Start with a tiny "test" transfer**, then the real amount. A few cents of
   fee is cheap insurance.
-- **Check the explorer** after sending — see
-  [block explorers](glossary/block-explorer.md) — to watch it confirm.
+- **Check the explorer** after sending â€” see
+  [block explorers](glossary/block-explorer.md) â€” to watch it confirm.
 - **Never trust a "support agent"** who asks you to send a 'verification'
   payment. Support never needs your crypto.
 
@@ -35,17 +36,17 @@ transfers safe.
 
 Every transaction pays [gas](glossary/gas.md). Busy networks = higher fees;
 simple transfers cost less than complex contract interactions. You can always
-see the fee before confirming — if a transaction's fee looks insane, you can
+see the fee before confirming â€” if a transaction's fee looks insane, you can
 cancel before it's submitted.
 
 ## When things go wrong
 
 - **Sent with tiny fee?** It may take hours or require a resend.
-- **Wrong network?** Sometimes recoverable via recovery tools — never pay a
+- **Wrong network?** Sometimes recoverable via recovery tools â€” never pay a
   stranger to "fix" it for you first.
 - **Wrong address?** Almost always lost. This is why you triple-check.
 
 > Rule of thumb: move slowly, move a test amount first, and always compare the
 > network you're on with the network the recipient expects.
 
-**Next lesson:** staying safe — scams, phishing, and self-custody habits.
+**Next lesson:** staying safe â€” scams, phishing, and self-custody habits.

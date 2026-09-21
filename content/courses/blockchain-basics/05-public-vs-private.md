@@ -1,11 +1,12 @@
----
+﻿---
 title: "Public vs Private vs Permissioned"
 order: 5
 course: blockchain-basics
+description: "Not everything called a "blockchain" is one in the meaningful sense."
 ---
 
 Not everything called a "blockchain" is one in the meaningful sense. The
-dividing lines are who can read, who can write, and who decides the rules —
+dividing lines are who can read, who can write, and who decides the rules â€”
 and most enterprise "blockchains" fail the test that matters.
 
 ## The three kinds
@@ -20,21 +21,21 @@ and most enterprise "blockchains" fail the test that matters.
 ## The honest question
 
 A private chain run by one company is a slow database with cryptographic
-auditing — useful, but it inherits exactly one party's trustworthiness. If a
+auditing â€” useful, but it inherits exactly one party's trustworthiness. If a
 single admin can rewrite history, freeze accounts, and change rules, no hash
 chain changes the power structure. W3D only scores public networks, for this
 reason.
 
 ## "Enterprise blockchain" decoder
 
-- "Private blockchain for supply chain" → shared database with receipts.
+- "Private blockchain for supply chain" â†’ shared database with receipts.
   Fine, but not censorship-resistant and not trustless.
-- "Consortium of 10 banks" → better than one bank, still a club that can
+- "Consortium of 10 banks" â†’ better than one bank, still a club that can
   collude or exclude.
-- Marketing that says "blockchain" without saying *who validates* → assume
+- Marketing that says "blockchain" without saying *who validates* â†’ assume
   the answer is embarrassing.
 
-> The word to interrogate is never "blockchain." It's "who decides" — readers,
+> The word to interrogate is never "blockchain." It's "who decides" â€” readers,
 > writers, and rule-makers, named by name.
 
 **Next lesson:** tokens, coins, and standards.

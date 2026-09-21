@@ -1,35 +1,36 @@
----
+﻿---
 title: "Hot vs Cold Wallets: Choosing Your Setup"
 order: 2
 course: wallets-security
+description: "A [hot wallet](glossary/hot-wallet.md) lives online (phone app, browser."
 ---
 
 A [hot wallet](glossary/hot-wallet.md) lives online (phone app, browser
 extension). A [cold wallet](glossary/cold-wallet.md) lives offline (hardware
-device, paper). You don't pick one — you run a *system* with both, split by
+device, paper). You don't pick one â€” you run a *system* with both, split by
 purpose and amount.
 
 ## The standard setup (used by careful holders everywhere)
 
-- **Hot wallet — "checking account."** Small balance for daily use, dApps,
+- **Hot wallet â€” "checking account."** Small balance for daily use, dApps,
   small trades. Accept the risk; limit the damage.
-- **Cold wallet — "savings vault."** Everything else, offline, touched rarely.
-  A hardware wallet ($50–200) is the default recommendation.
-- **Exchange — "on-ramp only."** Buy there, withdraw promptly. Never store
+- **Cold wallet â€” "savings vault."** Everything else, offline, touched rarely.
+  A hardware wallet ($50â€“200) is the default recommendation.
+- **Exchange â€” "on-ramp only."** Buy there, withdraw promptly. Never store
   long-term.
 
 ## Choosing a hot wallet
 
 Pick one with: open-source code, a large user base, no custodial control
 (you hold the seed phrase), and hardware-wallet support for later. Write down
-the seed phrase *before* funding it — that order matters.
+the seed phrase *before* funding it â€” that order matters.
 
 ## Choosing a hardware wallet
 
 The two established makers have decade-long track records; buy **only from
 the manufacturer**, never secondhand or from marketplaces (tampered devices
 exist). During setup, the device generates the seed phrase on its own screen
-— if any website shows you the words instead, it's a scam.
+â€” if any website shows you the words instead, it's a scam.
 
 ## The amounts rule of thumb
 
@@ -38,7 +39,7 @@ exist). During setup, the device generates the seed phrase on its own screen
 - Whatever the amount: never keep on an exchange what you can't afford to
   lose to someone else's bankruptcy.
 
-> Two wallets, two jobs. Money you move vs money you keep — different tools,
+> Two wallets, two jobs. Money you move vs money you keep â€” different tools,
 > different risks, different habits.
 
 **Next lesson:** setting up your first wallet, step by step.

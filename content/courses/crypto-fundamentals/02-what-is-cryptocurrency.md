@@ -1,7 +1,8 @@
----
+﻿---
 title: "What Is Cryptocurrency?"
 order: 2
 course: crypto-fundamentals
+description: "Bitcoin was the first **cryptocurrency**: digital money that doesn't need a."
 ---
 
 Bitcoin was the first **cryptocurrency**: digital money that doesn't need a
@@ -16,8 +17,8 @@ moved with [cryptography](glossary/cryptography.md) instead of a bank teller.
 | Who holds the record? | One bank | Thousands of independent computers |
 | Can your account be frozen? | Yes | Only if someone controls your keys |
 | Who can send? | Anyone approved by the bank | Anyone who signs a transaction |
-| Limits? | Bank's rules, borders | Code — 21M Bitcoin, ever |
-| Reversals? | Yes (chargebacks) | No — permanent, forever |
+| Limits? | Bank's rules, borders | Code â€” 21M Bitcoin, ever |
+| Reversals? | Yes (chargebacks) | No â€” permanent, forever |
 
 ## The three things to know first
 
@@ -26,15 +27,15 @@ moved with [cryptography](glossary/cryptography.md) instead of a bank teller.
 2. **Your keys are your power.** Whoever holds the
    [private key](glossary/private-key.md) controls the coins. No password
    reset exists.
-3. **Price ≠ value.** Crypto is famously [volatile](glossary/volatility.md);
+3. **Price â‰  value.** Crypto is famously [volatile](glossary/volatility.md);
    the technology and the speculation are two different conversations.
 
 ## Why it matters
 
 Cryptocurrency is the *first* practical application of
-[decentralization](glossary/decentralization.md) — money no single company or
+[decentralization](glossary/decentralization.md) â€” money no single company or
 government controls. Whether that's good or risky depends on your perspective,
 but understanding it is the foundation of everything else in Web3.
 
-**Next lesson:** wallets, keys, and seed phrases — the tools that let you hold
+**Next lesson:** wallets, keys, and seed phrases â€” the tools that let you hold
 and spend crypto safely.

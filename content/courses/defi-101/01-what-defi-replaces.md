@@ -1,10 +1,11 @@
----
+﻿---
 title: "What DeFi Replaces"
 order: 1
 course: defi-101
+description: "Every bank service â€” swapping currency, lending, borrowing, earning interest â€”."
 ---
 
-Every bank service — swapping currency, lending, borrowing, earning interest —
+Every bank service â€” swapping currency, lending, borrowing, earning interest â€”
 exists because strangers need a trusted middleman. [DeFi](glossary/defi.md)
 replaces each middleman with a [smart contract](glossary/smart-contract.md):
 the rules are public code, execution is automatic, and access needs no
@@ -21,7 +22,7 @@ permission.
 
 ## What's genuinely better
 
-- **Access:** anyone with internet and a wallet — no application, no minimums,
+- **Access:** anyone with internet and a wallet â€” no application, no minimums,
   no business hours, no borders.
 - **Transparency:** every position, rate, and reserve is on-chain and auditable
   in real time. No quarterly reports; the ledger *is* the report.
@@ -40,10 +41,10 @@ permission.
 ## The mindset for this path
 
 Treat every protocol as guilty until its code, audits, and economics check
-out — and size every position so that being wrong doesn't end you. DeFi
+out â€” and size every position so that being wrong doesn't end you. DeFi
 rewards the careful and taxes everyone else automatically.
 
 > Banks ask "who are you?" DeFi asks "what does the code say?" Both questions
-> can cost you money — only one of them tells you the rules up front.
+> can cost you money â€” only one of them tells you the rules up front.
 
 **Next lesson:** DEX trading masterclass.

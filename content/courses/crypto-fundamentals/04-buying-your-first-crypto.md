@@ -1,13 +1,14 @@
----
+﻿---
 title: "Buying Your First Crypto"
 order: 4
 course: crypto-fundamentals
+description: "To buy crypto with regular money you almost always use an."
 ---
 
 To buy crypto with regular money you almost always use an
-[exchange](glossary/exchange.md) — a platform like Coinbase, Binance, Bybit or
-Kraken. The process is: sign up, verify (KYC), deposit fiat, buy, and then —
-if you want real ownership — move it to your own wallet.
+[exchange](glossary/exchange.md) â€” a platform like Coinbase, Binance, Bybit or
+Kraken. The process is: sign up, verify (KYC), deposit fiat, buy, and then â€”
+if you want real ownership â€” move it to your own wallet.
 
 ## The two paths
 
@@ -19,11 +20,11 @@ if you want real ownership — move it to your own wallet.
 **Decentralized exchange (DEX) or peer-to-peer:**
 - No signup, trade from your own wallet.
 - Harder to fund with fiat.
-- No custody — but full responsibility for security.
+- No custody â€” but full responsibility for security.
 
 ## The 5-step safe buy
 
-1. **Choose a real exchange** from a search you trust — phishing sites copy
+1. **Choose a real exchange** from a search you trust â€” phishing sites copy
    exchange names and steal logins.
 2. **Sign up + KYC.** This is why the site asks for an ID.
 3. **Deposit** money (bank transfer or card).
@@ -36,7 +37,7 @@ if you want real ownership — move it to your own wallet.
 - Keeping everything on the exchange "for convenience."
 - Falling for "send me crypto to unlock your deposit" scams (never real).
 - Buying on unverified copycat websites.
-- Not checking *network* and *fee* before withdrawing — sending the wrong
+- Not checking *network* and *fee* before withdrawing â€” sending the wrong
   network can destroy funds.
 
 > A simple rule: your first buy should be boring. Use a major exchange, a

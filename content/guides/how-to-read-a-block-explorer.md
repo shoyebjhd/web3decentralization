@@ -1,5 +1,6 @@
 ---
 title: "How to Read a Block Explorer"
+description: "A block explorer is the public window into any blockchain. This beginner walkthrough reads transactions, blocks, hashes, and gas on-chain."
 ---
 
 A [block explorer](glossary/block-explorer.md) is how you verify everything

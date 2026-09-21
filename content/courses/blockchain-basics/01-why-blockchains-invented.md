@@ -2,6 +2,7 @@
 title: "Why Blockchains Were Invented"
 order: 1
 course: blockchain-basics
+description: "Lesson 1 of Blockchain Basics: why trusted banks fail, the double-spend puzzle, and the open-consensus record that made Bitcoin possible."
 ---
 
 Bitcoin didn't appear because someone loved puzzles. It appeared because

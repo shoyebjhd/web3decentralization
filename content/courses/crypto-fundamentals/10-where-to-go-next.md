@@ -1,7 +1,8 @@
----
+﻿---
 title: "Where to Go Next: Your Learning Map"
 order: 10
 course: crypto-fundamentals
+description: "You've built the core of a crypto education: what a."
 ---
 
 You've built the core of a crypto education: what a
@@ -33,7 +34,7 @@ Investigate tokens before touching them. Read
   [volatility](glossary/volatility.md), [tokenomics](glossary/tokenomics.md).
 - **Technology:** smart contracts, [L2s](glossary/layer-2.md),
   [rollups](glossary/rollup.md), [ZK proofs](glossary/zero-knowledge-proof.md).
-- **How it's really run:** take the **Decentralization Analyst** path — you'll
+- **How it's really run:** take the **Decentralization Analyst** path â€” you'll
   learn to score a chain's distributed power the way W3D does.
 
 ## Habits that separate safe learners from victims
@@ -45,10 +46,10 @@ Investigate tokens before touching them. Read
 
 ## Where to go next
 
-- Advanced path: **Decentralization Analyst** — how to audit a network's real
+- Advanced path: **Decentralization Analyst** â€” how to audit a network's real
   distribution of power.
 - Interactive: the [Decentralization Terminal](https://web3decentralization.com/terminal/)
 - Reference: the [methodology](methodology.md)-driven [chain audits](../chains/README.md)
 
-> Congratulations — you're no longer a beginner. The next risk isn't
+> Congratulations â€” you're no longer a beginner. The next risk isn't
 > ignorance; it's overconfidence. Stay skeptical, stay unhurried.

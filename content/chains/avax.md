@@ -1,30 +1,22 @@
----
-chain: avax
-name: Avalanche
-consensus: Snowman / Avalanche PoS
-composite: 57.2
-live_validators: 593
-live_validators_source: avax-public-api
-live_nakamoto_33: 24
-live_nakamoto_source: computed-live
-live_updated: 2026-09-17T05:26:01.435Z
-lastmod: 2026-09-17
+﻿---
+title: "Avalanche Decentralization Audit"
+description: "chain: avax name: Avalanche consensus: Snowman / Avalanche PoS composite: 57."
 ---
 
 # Avalanche Decentralization Audit
 
-Avalanche is an EVM-compatible chain using the novel Avalanche consensus for fast finality. This audit scores its decentralization across four pillars —
-infrastructure, capital, governance, and software — using the methodology in
+Avalanche is an EVM-compatible chain using the novel Avalanche consensus for fast finality. This audit scores its decentralization across four pillars â€”
+infrastructure, capital, governance, and software â€” using the methodology in
 [data/methodology.md](../../data/methodology.md).
 
-**Composite decentralization score: 57.2 / 100** · *Subnet flexibility; primary network still hyperscaler-dependent*
+**Composite decentralization score: 57.2 / 100** Â· *Subnet flexibility; primary network still hyperscaler-dependent*
 
 ## Four pillars
 
-- **Infrastructure (30%)** — 62/100 · Nakamoto 28 · ~1,700 validators; meaningful AWS concentration
-- **Capital (25%)** — 55/100 · Nakamoto 5 · Foundation + insider unlocks remain influential
-- **Governance (25%)** — 58/100 · Nakamoto 0 · Off-chain ACPs; subnet sovereignty model
-- **Software (20%)** — 52/100 · Nakamoto 1 · AvalancheGo dominant; coreth EVM client
+- **Infrastructure (30%)** â€” 62/100 Â· Nakamoto 28 Â· ~1,700 validators; meaningful AWS concentration
+- **Capital (25%)** â€” 55/100 Â· Nakamoto 5 Â· Foundation + insider unlocks remain influential
+- **Governance (25%)** â€” 58/100 Â· Nakamoto 0 Â· Off-chain ACPs; subnet sovereignty model
+- **Software (20%)** â€” 52/100 Â· Nakamoto 1 Â· AvalancheGo dominant; coreth EVM client
 
 ## What the score means
 

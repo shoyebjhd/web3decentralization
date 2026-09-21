@@ -1,10 +1,11 @@
----
+﻿---
 title: "Walkthrough: A Simple Storage Contract"
 order: 3
 course: smart-contracts
+description: "No coding experience needed â€” read this like a recipe."
 ---
 
-No coding experience needed — read this like a recipe. This is the classic
+No coding experience needed â€” read this like a recipe. This is the classic
 first contract (Solidity, Ethereum's main language), storing one number
 anyone can read but only the owner can change.
 
@@ -31,21 +32,21 @@ contract SimpleStorage {
 - **State variables** (`favoriteNumber`, `owner`) live on-chain permanently.
   Writing them costs [gas](glossary/gas.md); the chain stores them forever.
 - **constructor** runs once at deployment, recording the deployer as owner.
-- **`store`** changes state — costs gas, needs a signed
+- **`store`** changes state â€” costs gas, needs a signed
   [transaction](glossary/transaction.md), and rejects non-owners.
 - **`retrieve`** is `view` (read-only): free, instant, no transaction needed.
 
 ## The three lessons hidden here
 
 1. **Reads are free, writes cost.** Browsing contracts costs nothing; changing
-   anything costs gas — the economic spam filter.
+   anything costs gas â€” the economic spam filter.
 2. **Permissions are just `require` statements.** "Only owner" is one line of
-   code — and forgetting it has caused hundred-million-dollar hacks.
+   code â€” and forgetting it has caused hundred-million-dollar hacks.
 3. **Everything is visible.** The code (if verified), every call, every
-   stored value — all public on an explorer. Privacy must be designed in; it
+   stored value â€” all public on an explorer. Privacy must be designed in; it
    is never default.
 
 > You can now read the skeleton of every contract: state, permissions, and
 > which functions cost money. That's 80% of contract literacy.
 
-**Next lesson:** tokens as contracts — ERC-20 anatomy.
+**Next lesson:** tokens as contracts â€” ERC-20 anatomy.

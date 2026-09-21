@@ -1,9 +1,6 @@
----
-chain: blast
-name: Blast
-consensus: Optimistic Rollup (OP Stack) — native yield through ETH/RWA staking
-related: [optimistic-rollup, op-stack, liquid-staking, yield, layer-2]
-lastmod: 2026-09-13
+﻿---
+title: "Blast Decentralization Audit"
+description: "chain: blast name: Blast consensus: Optimistic Rollup (OP Stack) â€” native yield through ETH/RWA staking related: [optimistic-rollup, op-stack, liquid..."
 ---
 
 # Blast Decentralization Audit
@@ -11,7 +8,7 @@ lastmod: 2026-09-13
 Blast is an Optimistic Rollup on Ethereum with a differentiator: it routes
 bridged ETH and stablecoins into yield-bearing positions (ETH liquid staking and
 USDB-backed RWAs), so *idle* assets earn rather than idle. The audit question is
-the almost-hidden second half of that pitch — when the base asset it-sells is
+the almost-hidden second half of that pitch â€” when the base asset it-sells is
 *yield*, the security and decentralization of the yield path becomes part of the
 chain's own trust surface, not an afterthought.
 
@@ -26,7 +23,7 @@ decentralization, because it turns an L2 into a vault:
   now chain-level decentralization questions.
 - **OP-Stack base layer.** Same optimistic rollup architecture (sequencer +
   fault-proving window) as Base/Optimism, borrowing security and finality from
-  Ethereum — so the two-pillar reading is "inherits the L1, owns the yield."
+  Ethereum â€” so the two-pillar reading is "inherits the L1, owns the yield."
 
 ## What to watch
 

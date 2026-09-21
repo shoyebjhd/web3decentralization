@@ -1,34 +1,35 @@
----
+﻿---
 title: "Seed Phrase Mastery"
 order: 4
 course: wallets-security
+description: "Your [seed phrase](glossary/seed-phrase.md) recreates every key in your."
 ---
 
 Your [seed phrase](glossary/seed-phrase.md) recreates every key in your
-wallet. Everything else — passwords, apps, devices — is replaceable. The
-words are not. This lesson is about treating 12–24 words like the bearer
+wallet. Everything else â€” passwords, apps, devices â€” is replaceable. The
+words are not. This lesson is about treating 12â€“24 words like the bearer
 asset they are.
 
 ## Storage that actually works
 
 - **Paper, two locations.** Fire-safe at home + a trusted second place (family,
-  safe deposit). Paper rots and burns — accept it and duplicate.
-- **Steel for real amounts.** Metal backup plates ($30–80) survive fire and
+  safe deposit). Paper rots and burns â€” accept it and duplicate.
+- **Steel for real amounts.** Metal backup plates ($30â€“80) survive fire and
   flood. If your holdings would hurt to lose, upgrade from paper.
 - **Never digital.** No photos, no cloud docs, no password managers, no
   encrypted USB "just this once." Every digital copy is a future leak.
 
 ## The five classic ways people lose everything
 
-1. Screenshot synced to cloud → cloud breached → drained.
-2. "Support" asked for the phrase → sent → drained.
-3. Typed into a fake wallet site → drained.
-4. One paper copy lost in a move → house fire → gone.
-5. Told a friend/partner casually → relationship ends → gone.
+1. Screenshot synced to cloud â†’ cloud breached â†’ drained.
+2. "Support" asked for the phrase â†’ sent â†’ drained.
+3. Typed into a fake wallet site â†’ drained.
+4. One paper copy lost in a move â†’ house fire â†’ gone.
+5. Told a friend/partner casually â†’ relationship ends â†’ gone.
 
 ## Advanced: passphrase (the 25th word)
 
-Most good wallets support an extra passphrase appended to the seed — a word
+Most good wallets support an extra passphrase appended to the seed â€” a word
 only in your head. With it, even someone holding your 24 words gets an empty
 wallet. It also means forgetting the passphrase loses everything, so only add
 one when your backup discipline is already solid.

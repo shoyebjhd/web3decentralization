@@ -1,7 +1,8 @@
----
+﻿---
 title: "Reading Contracts and Audits"
 order: 6
 course: defi-101
+description: "You don't need to code to do basic contract due diligence."
 ---
 
 You don't need to code to do basic contract due diligence. Fifteen minutes on
@@ -21,7 +22,7 @@ moves.
 ## Reading an audit (correctly)
 
 A [smart-contract audit](glossary/smart-contract-audit.md) lists findings by
-severity — focus on: how many criticals/highs, were they fixed or merely
+severity â€” focus on: how many criticals/highs, were they fixed or merely
 "acknowledged," and has the code changed since the audit commit? An audit of
 v1 means nothing for the v3 rewrite holding your money now.
 

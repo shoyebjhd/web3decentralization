@@ -1,9 +1,6 @@
----
-chain: ton
-name: Toncoin (TON)
-consensus: Proof of Stake — sharded masterchain + workchains
-related: [proof-of-stake, sharding, validator, layer-1, message]
-lastmod: 2026-09-13
+﻿---
+title: "Toncoin (TON) Decentralization Audit"
+description: "chain: ton name: Toncoin (TON) consensus: Proof of Stake â€” sharded masterchain + workchains related: [proof-of-stake, sharding, validator, layer-1, me..."
 ---
 
 # Toncoin (TON) Decentralization Audit
@@ -13,7 +10,7 @@ sharded proof-of-stake network: a masterchain that finalizes state changes from
 parallel shards (workchains, then shardchains under them), with validators
 staking TON to secure the whole tree. Its decentralization question is whether a
 chain designed for *messaging-scale* throughput can also hold *decentralization
-scale* — and the audit surface is unusually interesting because its adoption
+scale* â€” and the audit surface is unusually interesting because its adoption
 distillery is a single messaging app.
 
 ## Why it matters

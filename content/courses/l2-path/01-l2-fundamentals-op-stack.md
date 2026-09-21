@@ -1,12 +1,13 @@
----
+﻿---
 title: "L2 Fundamentals: The OP Stack Model"
 order: 1
 course: l2-path
+description: "An L2 processes transactions off Ethereum and settles proofs back to it."
 ---
 
 **Objective:** understand what an L2 is, why the OP Stack design won, and what security you actually inherit from Ethereum.
 
-An L2 processes transactions off Ethereum and settles proofs back to it. The [OP Stack](glossary/op-stack.md) made launching such chains a commodity: standard open-source components (execution, batching, proposing, fault proofs) that anyone can deploy — [Base](glossary/base-chain.md), OP Mainnet, and dozens more run it.
+An L2 processes transactions off Ethereum and settles proofs back to it. The [OP Stack](glossary/op-stack.md) made launching such chains a commodity: standard open-source components (execution, batching, proposing, fault proofs) that anyone can deploy â€” [Base](glossary/base-chain.md), OP Mainnet, and dozens more run it.
 
 ## Concept: execution vs settlement vs data
 
@@ -22,11 +23,11 @@ Every rollup splits three jobs: **execute** (run transactions fast off-chain), *
 ## Safety checklist
 
 - Only use official bridge domains (bookmark them).
-- Testnet first, always — real funds only after the full loop works.
+- Testnet first, always â€” real funds only after the full loop works.
 - Verify the L2's stage and upgrade keys on [L2Beat](glossary/l2beat.md) before trusting size to it.
 
 ## Related glossary
 
-- [Layer 2](glossary/layer-2.md) · [Optimistic Rollup](glossary/optimistic-rollup.md) · [OP Stack](glossary/op-stack.md)
+- [Layer 2](glossary/layer-2.md) Â· [Optimistic Rollup](glossary/optimistic-rollup.md) Â· [OP Stack](glossary/op-stack.md)
 
 **Next lesson:** Bridging to Base, step by step.

@@ -1,9 +1,6 @@
----
-chain: polygon
-name: Polygon
-consensus: Proof of Stake (PoS edge-node network) — post-CDK multi-chain
-related: [proof-of-stake, staking, superchain, zk-rollup, validium]
-lastmod: 2026-09-13
+﻿---
+title: "Polygon Decentralization Audit"
+description: "chain: polygon name: Polygon consensus: Proof of Stake (PoS edge-node network) â€” post-CDK multi-chain related: [proof-of-stake, staking, superchain, z..."
 ---
 
 # Polygon Decentralization Audit
@@ -11,7 +8,7 @@ lastmod: 2026-09-13
 Polygon is the name for a family that started as a single PoS sidechain and
 became a *suite*: the Polygon PoS edge network with its own consensus, plus the
 chain-development kit (CDK) that lets anyone spin up their own rollup. Auditing
-"Polygon" today means auditing the suite — and the decentralization profile
+"Polygon" today means auditing the suite â€” and the decentralization profile
 differs meaningfully member to member.
 
 ## The four-pillar map
@@ -31,7 +28,7 @@ differs meaningfully member to member.
 Polygon was the first "Polygon" and then became a template. The reason its
 decentralization matters for readers is transferable: it shows what happens when
 a chain-committee that pitched "decentralization" has to actually survive a
-real network detour, a token migration, and a pivot to rollups — and which
+real network detour, a token migration, and a pivot to rollups â€” and which
 decisions moved the needle (operator offboarding, validator minimums) versus
 which stayed reputational.
 
