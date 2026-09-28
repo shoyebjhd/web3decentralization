@@ -5,8 +5,8 @@ live_validators: 127
 live_validators_source: sui.publicnode
 live_nakamoto_33: 18
 live_nakamoto_source: computed-live
-live_updated: 2026-09-21T12:29:30.461Z
-lastmod: 2026-09-21
+live_updated: 2026-09-28T13:27:50.299Z
+lastmod: 2026-09-28
 ---
 
 # Sui Decentralization Audit
