@@ -1,13 +1,13 @@
 ---
 title: "Cardano Decentralization Audit"
 description: "chain: ada name: Cardano consensus: Ouroboros Proof of Stake composite: 70."
-live_validators: 6165
+live_validators: 6167
 live_validators_source: koios.rest
 live_nakamoto_33: 
 live_nakamoto_source: audited
 live_label: illustrative live data — koios pool-registry count; no keyless stake distribution, Nakamoto from audited snapshot
-live_updated: 2026-09-28T13:27:50.299Z
-lastmod: 2026-09-28
+live_updated: 2026-10-05T14:11:03.241Z
+lastmod: 2026-10-05
 ---
 
 # Cardano Decentralization Audit
