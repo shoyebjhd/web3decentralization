@@ -491,17 +491,17 @@
         }
     ],
     "live": {
-        "updated": "2026-10-05T14:11:03.241Z",
+        "updated": "2026-10-12T15:00:21.971Z",
         "chains": {
             "btc": {
-                "validators": 25386,
+                "validators": 25671,
                 "validators_source": "bitnodes",
                 "nakamoto_33": null,
                 "nakamoto_source": "audited",
                 "label": "illustrative live data — reachable nodes, not miners; no stake/Nakamoto concept"
             },
             "sol": {
-                "validators": 672,
+                "validators": 673,
                 "validators_source": "solana-public-rpc",
                 "nakamoto_33": 18,
                 "nakamoto_source": "computed-live"
@@ -514,9 +514,9 @@
                 "label": "illustrative live data — koios pool-registry count; no keyless stake distribution, Nakamoto from audited snapshot"
             },
             "avax": {
-                "validators": 580,
+                "validators": 585,
                 "validators_source": "avax-public-api",
-                "nakamoto_33": 23,
+                "nakamoto_33": 24,
                 "nakamoto_source": "computed-live"
             },
             "cosmos": {
@@ -533,19 +533,19 @@
                 "label": "illustrative live data — Ripple-published UNL validator list; no stake concept"
             },
             "sui": {
-                "validators": 127,
+                "validators": 126,
                 "validators_source": "sui.publicnode",
                 "nakamoto_33": 18,
                 "nakamoto_source": "computed-live"
             },
             "apt": {
-                "validators": 85,
+                "validators": 84,
                 "validators_source": "aptos-public-fullnode",
-                "nakamoto_33": 14,
+                "nakamoto_33": 13,
                 "nakamoto_source": "computed-live"
             },
             "near": {
-                "validators": 418,
+                "validators": 407,
                 "validators_source": "near-public-rpc",
                 "nakamoto_33": 9,
                 "nakamoto_source": "computed-live"

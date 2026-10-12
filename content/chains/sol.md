@@ -1,12 +1,12 @@
 ---
 title: "Solana Decentralization Audit"
 description: "chain: sol name: Solana consensus: Proof of History + PoS composite: 53."
-live_validators: 672
+live_validators: 673
 live_validators_source: solana-public-rpc
 live_nakamoto_33: 18
 live_nakamoto_source: computed-live
-live_updated: 2026-10-05T14:11:03.241Z
-lastmod: 2026-10-05
+live_updated: 2026-10-12T15:00:21.971Z
+lastmod: 2026-10-12
 ---
 
 # Solana Decentralization Audit

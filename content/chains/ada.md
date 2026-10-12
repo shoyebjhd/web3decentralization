@@ -6,8 +6,8 @@ live_validators_source: koios.rest
 live_nakamoto_33: 
 live_nakamoto_source: audited
 live_label: illustrative live data — koios pool-registry count; no keyless stake distribution, Nakamoto from audited snapshot
-live_updated: 2026-10-05T14:11:03.241Z
-lastmod: 2026-10-05
+live_updated: 2026-10-12T15:00:21.971Z
+lastmod: 2026-10-12
 ---
 
 # Cardano Decentralization Audit
