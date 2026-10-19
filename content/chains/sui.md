@@ -1,12 +1,12 @@
 ---
 title: "Sui Decentralization Audit"
 description: "chain: sui name: Sui consensus: Delegated PoS (Mysticeti / Narwhal-Bullshark) composite: 49."
-live_validators: 126
+live_validators: 125
 live_validators_source: sui.publicnode
 live_nakamoto_33: 18
 live_nakamoto_source: computed-live
-live_updated: 2026-10-12T15:00:21.971Z
-lastmod: 2026-10-12
+live_updated: 2026-10-19T12:44:07.595Z
+lastmod: 2026-10-19
 ---
 
 # Sui Decentralization Audit
