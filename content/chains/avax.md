@@ -1,12 +1,12 @@
 ---
 title: "Avalanche Decentralization Audit"
 description: "chain: avax name: Avalanche consensus: Snowman / Avalanche PoS composite: 57."
-live_validators: 598
+live_validators: 591
 live_validators_source: avax-public-api
-live_nakamoto_33: 25
+live_nakamoto_33: 24
 live_nakamoto_source: computed-live
-live_updated: 2026-10-19T12:44:07.595Z
-lastmod: 2026-10-19
+live_updated: 2026-10-26T12:37:37.240Z
+lastmod: 2026-10-26
 ---
 
 # Avalanche Decentralization Audit

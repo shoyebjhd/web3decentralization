@@ -491,25 +491,25 @@
         }
     ],
     "live": {
-        "updated": "2026-10-19T12:44:07.595Z",
+        "updated": "2026-10-26T12:37:37.240Z",
         "chains": {
             "sol": {
-                "validators": 666,
+                "validators": 665,
                 "validators_source": "solana-public-rpc",
                 "nakamoto_33": 18,
                 "nakamoto_source": "computed-live"
             },
             "ada": {
-                "validators": 6169,
+                "validators": 6170,
                 "validators_source": "koios.rest",
                 "nakamoto_33": null,
                 "nakamoto_source": "audited",
                 "label": "illustrative live data — koios pool-registry count; no keyless stake distribution, Nakamoto from audited snapshot"
             },
             "avax": {
-                "validators": 598,
+                "validators": 591,
                 "validators_source": "avax-public-api",
-                "nakamoto_33": 25,
+                "nakamoto_33": 24,
                 "nakamoto_source": "computed-live"
             },
             "cosmos": {
@@ -526,10 +526,11 @@
                 "label": "illustrative live data — Ripple-published UNL validator list; no stake concept"
             },
             "sui": {
-                "validators": 125,
+                "validators": 0,
                 "validators_source": "sui.publicnode",
-                "nakamoto_33": 18,
-                "nakamoto_source": "computed-live"
+                "nakamoto_33": null,
+                "nakamoto_source": "audited",
+                "label": "illustrative live data — no stake distribution, Nakamoto from audited snapshot"
             },
             "apt": {
                 "validators": 83,
@@ -538,7 +539,7 @@
                 "nakamoto_source": "computed-live"
             },
             "near": {
-                "validators": 395,
+                "validators": 380,
                 "validators_source": "near-public-rpc",
                 "nakamoto_33": 10,
                 "nakamoto_source": "computed-live"
