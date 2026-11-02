@@ -6,8 +6,8 @@ live_validators_source: sui.publicnode
 live_nakamoto_33: 
 live_nakamoto_source: audited
 live_label: illustrative live data — no stake distribution, Nakamoto from audited snapshot
-live_updated: 2026-10-26T12:37:37.240Z
-lastmod: 2026-10-26
+live_updated: 2026-11-02T15:19:29.154Z
+lastmod: 2026-11-02
 ---
 
 # Sui Decentralization Audit

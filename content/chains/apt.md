@@ -5,8 +5,8 @@ live_validators: 83
 live_validators_source: aptos-public-fullnode
 live_nakamoto_33: 14
 live_nakamoto_source: computed-live
-live_updated: 2026-10-26T12:37:37.240Z
-lastmod: 2026-10-26
+live_updated: 2026-11-02T15:19:29.154Z
+lastmod: 2026-11-02
 ---
 
 # Aptos Decentralization Audit

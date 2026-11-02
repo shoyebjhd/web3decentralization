@@ -1,12 +1,12 @@
 ---
 title: "Near Decentralization Audit"
 description: "chain: near name: Near consensus: Nightshade Sharding + Doomslug PoS composite: 60."
-live_validators: 380
+live_validators: 372
 live_validators_source: near-public-rpc
-live_nakamoto_33: 10
+live_nakamoto_33: 9
 live_nakamoto_source: computed-live
-live_updated: 2026-10-26T12:37:37.240Z
-lastmod: 2026-10-26
+live_updated: 2026-11-02T15:19:29.154Z
+lastmod: 2026-11-02
 ---
 
 # Near Decentralization Audit
