@@ -6,8 +6,8 @@ live_validators_source: ripple-official-unl
 live_nakamoto_33: 
 live_nakamoto_source: audited
 live_label: illustrative live data — Ripple-published UNL validator list; no stake concept
-live_updated: 2026-11-02T15:19:29.154Z
-lastmod: 2026-11-02
+live_updated: 2026-11-09T15:46:55.691Z
+lastmod: 2026-11-09
 ---
 
 # XRP Ledger Decentralization Audit
