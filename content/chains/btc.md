@@ -1,13 +1,13 @@
 ---
 title: "Bitcoin Decentralization Audit"
 description: "chain: btc name: Bitcoin consensus: Nakamoto Proof of Work composite: 84."
-live_validators: 20403
+live_validators: 18525
 live_validators_source: bitnodes
 live_nakamoto_33: 
 live_nakamoto_source: audited
 live_label: illustrative live data — reachable nodes, not miners; no stake/Nakamoto concept
-live_updated: 2026-11-09T15:46:55.691Z
-lastmod: 2026-11-09
+live_updated: 2026-11-16T15:22:46.686Z
+lastmod: 2026-11-16
 ---
 
 # Bitcoin Decentralization Audit
