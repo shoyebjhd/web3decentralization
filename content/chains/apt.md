@@ -1,12 +1,12 @@
 ---
 title: "Aptos Decentralization Audit"
 description: "chain: apt name: Aptos consensus: AptosBFT (Proof of Stake + Block-STM) composite: 49."
-live_validators: 82
+live_validators: 81
 live_validators_source: aptos-public-fullnode
-live_nakamoto_33: 14
+live_nakamoto_33: 13
 live_nakamoto_source: computed-live
-live_updated: 2026-11-16T15:22:46.686Z
-lastmod: 2026-11-16
+live_updated: 2026-11-23T17:48:03.147Z
+lastmod: 2026-11-23
 ---
 
 # Aptos Decentralization Audit
